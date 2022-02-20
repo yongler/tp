@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/laughingkid-sg.png" width="200px">
 
 [[github](https://github.com/laughingkid-sg)]
-[[portfolio](team/yongler.md)]
+[[portfolio](team/laughingkid-sg.md)]
 
 * Role: Integration, Developer
 * Responsibilities: Model
@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tanyutao544.png" width="200px">
 
 [[github](https://github.com/tanyutao544)] 
-[[portfolio](team/yongler.md)]
+[[portfolio](team/tanyutao544.md)]
 
 * Role: Testing, Developer
 * Responsibilities: UI, Test
@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/joszx.png" width="200px">
 
 [[github](https://github.com/joszx)]
-[[portfolio](team/yongler.md)]
+[[portfolio](team/joszx.md)]
 
 * Role: Documentation, Deliverables and datelines, Developer
 * Responsibilities: Storage
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/lchokhoe.png" width="200px">
 
 [[github](https://github.com/lchokhoe)]
-[[portfolio](team/yongler.md)]
+[[portfolio](team/lchokhoe.md)]
 
 * Role: Code Quality, Developer
 * Responsibilities: UI, 
