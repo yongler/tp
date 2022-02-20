@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lee Yong Ler
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yongler.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/yongler)]
 [[portfolio](team/yongler.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Scheduling and tracking, Team Lead, Developer
+* Responsibilities: Logic
 
-### Johnny Doe
+### Goh Zheng Teck
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/laughingkid-sg.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/yongler.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/laughingkid-sg)]
 [[portfolio](team/yongler.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Integration, Developer
+* Responsibilities: Model
 
-### James Doe
+### Tan Yu Tao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanyutao544.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/tanyutao544)] 
 [[portfolio](team/yongler.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing, Developer
+* Responsibilities: UI, Test
+
+### Seah Zhi Xuan
+
+<img src="images/joszx.png" width="200px">
+
+[[github](https://github.com/joszx)]
+[[portfolio](team/yongler.md)]
+
+* Role: Documentation, Deliverables and datelines, Developer
+* Responsibilities: Storage
+
+### Lai Chok Hoe
+
+<img src="images/lchokhoe.png" width="200px">
+
+[[github](https://github.com/lchokhoe)]
+[[portfolio](team/yongler.md)]
+
+* Role: Code Quality, Developer
+* Responsibilities: UI, 

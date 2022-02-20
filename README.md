@@ -6,6 +6,7 @@
 * 
   Example usages:
   * Add and list all internship application.
+  * Add contact details linked to the internship application.
   * Add notes associated with each application.
   * Store and load data from hard disk. 
 * The project is an ongoing software project for a desktop application used for managing contact details and internship applications.
