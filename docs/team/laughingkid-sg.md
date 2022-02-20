@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Lee Yong Ler's Project Portfolio Page
+title: Goh Zheng Teck's Project Portfolio Page
 ---
 
 ### Project: SoC InternApply
