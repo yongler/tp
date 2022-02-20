@@ -270,14 +270,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​  | I want to …​                                                        | So that I can…​                                                                |
+|----------|----------|---------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | user     | Add Internship application                                          | Track the company I have applied to.                                           |
+| `* * *`  | user     | View internship application                                         | See the company application details and tasks                                  |
+| `* * *`  | user     | Edit internship application                                         | Edit the details in case I made a mistake during input                         |
+| `* * *`  | user     | Delete internship application                                       | Remove irrelevant companies                                                    |
+| `* * *`  | user     | Store my internship applications                                    | Easily track and review  them                                                  |
+| `* * *`  | user     | View the list of companies I’ve applied/am planning to apply to     | Easily track companies I’ve applied/am applying to                             |
+| `* * *`  | user     | Be able to close the product                                        | Exit when I am done                                                            |
+| `* *`    | user     | Keep track of important dates                                       | Better manage my time and prepare for interviews or assessments                |
+| `* *`    | user     | Keep track of status                                                | Check the currently status of the application                                  |
+| `* *`    | user     | Sort application by companies or other details                      | Filter to what is important to me                                              |
+| `* *`    | new user | View the help page                                                  | Refer to the help page when I need help                                        |
+| `* *`    | user     | Update the status of my internship application                      | I will be able to keep track of the current status and responses to the offers |
+| `*`      | user     | Add question that are related to the internship                     | I know what coding questions to prepare for                                    |
+| `*`      | user     | Learn about internship requirements                                 | I can plan my internship and course structure                                  |
+| `*`      | user     | Learn what is the skillset and/or knowledge expected of a CS intern | I can plan my learning to be a capable intern                                  |
+| `*`      | user     | maintain a journal of my internship                                 | Users who are curious can read and get an idea of what the internship is like  |
 
 *{More to be added}*
 
