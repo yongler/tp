@@ -14,7 +14,7 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
+1. Download the latest `InternApply.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your SIA.
 
@@ -118,7 +118,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 _More features coming soon ..._
 
