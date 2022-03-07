@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.application.exceptions.DuplicateApplicationException;
 import seedu.address.model.application.exceptions.ApplicationNotFoundException;
+import seedu.address.model.application.exceptions.DuplicateApplicationException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueApplicationListTest {
@@ -129,7 +129,8 @@ public class UniqueApplicationListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicationList.setApplications((UniqueApplicationList) null));
+        assertThrows(NullPointerException.class, () -> uniqueApplicationList
+                .setApplications((UniqueApplicationList) null));
     }
 
     @Test
@@ -159,7 +160,8 @@ public class UniqueApplicationListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Application> listWithDuplicateApplications = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList.setApplications(listWithDuplicateApplications));
+        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList
+                .setApplications(listWithDuplicateApplications));
     }
 
     @Test
