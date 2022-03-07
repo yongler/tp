@@ -66,8 +66,8 @@ public class Application {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both applications have the same name.
+     * This defines a weaker notion of equality between two applications.
      */
     public boolean isSameApplication(Application otherApplication) {
         if (otherApplication == this) {
