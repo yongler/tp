@@ -163,7 +163,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Application application) {
             requireNonNull(application);
-            return this.application.isSamePerson(application);
+            return this.application.isSameApplication(application);
         }
     }
 
@@ -176,7 +176,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Application application) {
             requireNonNull(application);
-            return personsAdded.stream().anyMatch(application::isSamePerson);
+            return personsAdded.stream().anyMatch(application::isSameApplication);
         }
 
         @Override

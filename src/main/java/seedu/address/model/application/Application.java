@@ -10,18 +10,23 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Application in InternApply.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Application {
 
     // Identity fields
+    /** Name of the Company */
     private final Name name;
+    /** Company Phone Number */
     private final Phone phone;
+    /** Company Email */
     private final Email email;
 
     // Data fields
+    /** Company Address */
     private final Address address;
+    /** [W.I.P] Will be repurposed in the future */
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -64,7 +69,7 @@ public class Application {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Application otherApplication) {
+    public boolean isSameApplication(Application otherApplication) {
         if (otherApplication == this) {
             return true;
         }
@@ -74,8 +79,8 @@ public class Application {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both applications have the same identity and data fields.
+     * This defines a stronger notion of equality between two applications.
      */
     @Override
     public boolean equals(Object other) {
