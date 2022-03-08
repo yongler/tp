@@ -14,26 +14,27 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.application.Application;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of InternApply data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final InternApplyMemory addressBook;
+    private final InternApplyMemory internApplyMemory;
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given internApplyMemory and userPrefs.
      */
-    public ModelManager(ReadOnlyInternApplyMemory addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyInternApplyMemory internApplyMemory, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(internApplyMemory, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with intern apply memory: " + internApplyMemory
+                + " and user prefs " + userPrefs);
 
-        this.addressBook = new InternApplyMemory(addressBook);
+        this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplications = new FilteredList<>(this.addressBook.getApplicationList());
+        filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
     }
 
     public ModelManager() {
@@ -65,65 +66,65 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getInternApplyMemoryFilePath() {
         return userPrefs.getInternApplyMemoryFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setInternApplyMemoryFilePath(addressBookFilePath);
+    public void setInternApplyMemoryFilePath(Path internApplyMemoryFilePath) {
+        requireNonNull(internApplyMemoryFilePath);
+        userPrefs.setInternApplyMemoryFilePath(internApplyMemoryFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== InternApplyMemory ==========================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyInternApplyMemory addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyInternApplyMemory getAddressBook() {
-        return addressBook;
+    public void setInternApplyMemory(ReadOnlyInternApplyMemory internApplyMemory) {
+        this.internApplyMemory.resetData(internApplyMemory);
     }
 
     @Override
-    public boolean hasPerson(Application application) {
+    public ReadOnlyInternApplyMemory getInternApplyMemory() {
+        return internApplyMemory;
+    }
+
+    @Override
+    public boolean hasApplication(Application application) {
         requireNonNull(application);
-        return addressBook.hasApplication(application);
+        return internApplyMemory.hasApplication(application);
     }
 
     @Override
-    public void deletePerson(Application target) {
-        addressBook.removeApplication(target);
+    public void deleteApplication(Application target) {
+        internApplyMemory.removeApplication(target);
     }
 
     @Override
-    public void addPerson(Application application) {
-        addressBook.addApplication(application);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addApplication(Application application) {
+        internApplyMemory.addApplication(application);
+        updateFilteredApplicationList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Application target, Application editedApplication) {
+    public void setApplication(Application target, Application editedApplication) {
         requireAllNonNull(target, editedApplication);
 
-        addressBook.setApplication(target, editedApplication);
+        internApplyMemory.setApplication(target, editedApplication);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Application List Accessors ========================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Application} backed by the internal list of
+     * {@code versionedInternApplyMemory}
      */
     @Override
-    public ObservableList<Application> getFilteredPersonList() {
+    public ObservableList<Application> getFilteredApplicationList() {
         return filteredApplications;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Application> predicate) {
+    public void updateFilteredApplicationList(Predicate<Application> predicate) {
         requireNonNull(predicate);
         filteredApplications.setPredicate(predicate);
     }
@@ -142,7 +143,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return internApplyMemory.equals(other.internApplyMemory)
                 && userPrefs.equals(other.userPrefs)
                 && filteredApplications.equals(other.filteredApplications);
     }

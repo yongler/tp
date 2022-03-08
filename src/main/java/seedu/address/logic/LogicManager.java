@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAddressBook(model.getInternApplyMemory());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -56,17 +56,17 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyInternApplyMemory getAddressBook() {
-        return model.getAddressBook();
+        return model.getInternApplyMemory();
     }
 
     @Override
     public ObservableList<Application> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+        return model.getFilteredApplicationList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getInternApplyMemoryFilePath();
     }
 
     @Override

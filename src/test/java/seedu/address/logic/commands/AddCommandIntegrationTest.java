@@ -29,8 +29,8 @@ public class AddCommandIntegrationTest {
     public void execute_newPerson_success() {
         Application validApplication = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validApplication);
+        Model expectedModel = new ModelManager(model.getInternApplyMemory(), new UserPrefs());
+        expectedModel.addApplication(validApplication);
 
         assertCommandSuccess(new AddCommand(validApplication), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, validApplication), expectedModel);
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Application applicationInList = model.getAddressBook().getApplicationList().get(0);
+        Application applicationInList = model.getInternApplyMemory().getApplicationList().get(0);
         assertCommandFailure(new AddCommand(applicationInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

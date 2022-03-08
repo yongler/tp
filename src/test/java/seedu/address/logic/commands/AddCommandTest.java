@@ -99,52 +99,52 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getInternApplyMemoryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setInternApplyMemoryFilePath(Path internApplyMemoryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Application application) {
+        public void addApplication(Application application) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyInternApplyMemory newData) {
+        public void setInternApplyMemory(ReadOnlyInternApplyMemory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyInternApplyMemory getAddressBook() {
+        public ReadOnlyInternApplyMemory getInternApplyMemory() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Application application) {
+        public boolean hasApplication(Application application) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Application target) {
+        public void deleteApplication(Application target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Application target, Application editedApplication) {
+        public void setApplication(Application target, Application editedApplication) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Application> getFilteredPersonList() {
+        public ObservableList<Application> getFilteredApplicationList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Application> predicate) {
+        public void updateFilteredApplicationList(Predicate<Application> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Application application) {
+        public boolean hasApplication(Application application) {
             requireNonNull(application);
             return this.application.isSameApplication(application);
         }
@@ -174,19 +174,19 @@ public class AddCommandTest {
         final ArrayList<Application> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Application application) {
+        public boolean hasApplication(Application application) {
             requireNonNull(application);
             return personsAdded.stream().anyMatch(application::isSameApplication);
         }
 
         @Override
-        public void addPerson(Application application) {
+        public void addApplication(Application application) {
             requireNonNull(application);
             personsAdded.add(application);
         }
 
         @Override
-        public ReadOnlyInternApplyMemory getAddressBook() {
+        public ReadOnlyInternApplyMemory getInternApplyMemory() {
             return new InternApplyMemory();
         }
     }
