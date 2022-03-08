@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.InternApplyMemory;
+import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyInternApplyMemory getSampleAddressBook() {
+        InternApplyMemory sampleAb = new InternApplyMemory();
         for (Application sampleApplication : getSamplePersons()) {
             sampleAb.addPerson(sampleApplication);
         }

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.InternApplyMemory;
 import seedu.address.model.application.Application;
 
 /**
@@ -10,13 +10,13 @@ import seedu.address.model.application.Application;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private InternApplyMemory addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new InternApplyMemory();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(InternApplyMemory addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public InternApplyMemory build() {
         return addressBook;
     }
 }

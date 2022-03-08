@@ -12,7 +12,7 @@ import seedu.address.model.application.UniqueApplicationList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class InternApplyMemory implements ReadOnlyInternApplyMemory {
 
     private final UniqueApplicationList persons;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniqueApplicationList();
     }
 
-    public AddressBook() {}
+    public InternApplyMemory() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public InternApplyMemory(ReadOnlyInternApplyMemory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,10 +50,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyInternApplyMemory newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getApplicationList());
     }
 
     //// person-level operations
@@ -102,15 +102,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Application> getPersonList() {
+    public ObservableList<Application> getApplicationList() {
         return persons.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof InternApplyMemory // instanceof handles nulls
+                && persons.equals(((InternApplyMemory) other).persons));
     }
 
     @Override

@@ -19,25 +19,25 @@ import seedu.address.model.application.Application;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final InternApplyMemory addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInternApplyMemory addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new InternApplyMemory(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplications = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplications = new FilteredList<>(this.addressBook.getApplicationList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new InternApplyMemory(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,12 +78,12 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyInternApplyMemory addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyInternApplyMemory getAddressBook() {
         return addressBook;
     }
 

@@ -24,11 +24,11 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final InternApplyMemory addressBook = new InternApplyMemory();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getApplicationList());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        InternApplyMemory newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -49,7 +49,7 @@ public class AddressBookTest {
         Application editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Application> newApplications = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newApplications);
+        InternApplyMemoryStub newData = new InternApplyMemoryStub(newApplications);
 
         assertThrows(DuplicateApplicationException.class, () -> addressBook.resetData(newData));
     }
@@ -80,21 +80,21 @@ public class AddressBookTest {
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getApplicationList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class InternApplyMemoryStub implements ReadOnlyInternApplyMemory {
         private final ObservableList<Application> applications = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Application> applications) {
+        InternApplyMemoryStub(Collection<Application> applications) {
             this.applications.setAll(applications);
         }
 
         @Override
-        public ObservableList<Application> getPersonList() {
+        public ObservableList<Application> getApplicationList() {
             return applications;
         }
     }
