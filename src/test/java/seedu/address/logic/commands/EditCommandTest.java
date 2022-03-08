@@ -85,7 +85,8 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Application applicationInFilteredList = model.getFilteredApplicationList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Application applicationInFilteredList = model.getFilteredApplicationList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
         Application editedApplication = new PersonBuilder(applicationInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -112,7 +113,8 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
-        Application applicationInList = model.getInternApplyMemory().getApplicationList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Application applicationInList = model.getInternApplyMemory().getApplicationList()
+                .get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(applicationInList).build());
 
