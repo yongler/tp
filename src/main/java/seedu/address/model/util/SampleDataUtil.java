@@ -14,10 +14,10 @@ import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InternApplyMemory} with sample data.
  */
 public class SampleDataUtil {
-    public static Application[] getSamplePersons() {
+    public static Application[] getSampleApplications() {
         return new Application[] {
             new Application(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -38,14 +38,15 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
         };
+        // TODO: update the sample applications (currently imported from AB3)
     }
 
-    public static ReadOnlyInternApplyMemory getSampleAddressBook() {
-        InternApplyMemory sampleAb = new InternApplyMemory();
-        for (Application sampleApplication : getSamplePersons()) {
-            sampleAb.addApplication(sampleApplication);
+    public static ReadOnlyInternApplyMemory getSampleInternApplyMemory() {
+        InternApplyMemory sampleIAM = new InternApplyMemory();
+        for (Application sampleApplication : getSampleApplications()) {
+            sampleIAM.addApplication(sampleApplication);
         }
-        return sampleAb;
+        return sampleIAM;
     }
 
     /**
