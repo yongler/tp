@@ -42,11 +42,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyInternApplyMemory getSampleInternApplyMemory() {
-        InternApplyMemory sampleIAM = new InternApplyMemory();
+        InternApplyMemory sampleIam = new InternApplyMemory();
         for (Application sampleApplication : getSampleApplications()) {
-            sampleIAM.addApplication(sampleApplication);
+            sampleIam.addApplication(sampleApplication);
         }
-        return sampleIAM;
+        return sampleIam;
     }
 
     /**
