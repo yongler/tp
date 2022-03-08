@@ -49,10 +49,10 @@ class JsonSerializableAddressBook {
         InternApplyMemory addressBook = new InternApplyMemory();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Application application = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(application)) {
+            if (addressBook.hasApplication(application)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(application);
+            addressBook.addApplication(application);
         }
         return addressBook;
     }

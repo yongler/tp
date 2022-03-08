@@ -43,7 +43,7 @@ public class SampleDataUtil {
     public static ReadOnlyInternApplyMemory getSampleAddressBook() {
         InternApplyMemory sampleAb = new InternApplyMemory();
         for (Application sampleApplication : getSamplePersons()) {
-            sampleAb.addPerson(sampleApplication);
+            sampleAb.addApplication(sampleApplication);
         }
         return sampleAb;
     }

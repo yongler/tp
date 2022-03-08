@@ -9,12 +9,12 @@ import seedu.address.model.application.Application;
 import seedu.address.model.application.UniqueApplicationList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the memory level
+ * Duplicates are not allowed (by .isSameApplication comparison)
  */
 public class InternApplyMemory implements ReadOnlyInternApplyMemory {
 
-    private final UniqueApplicationList persons;
+    private final UniqueApplicationList applications;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
      *   among constructors.
      */
     {
-        persons = new UniqueApplicationList();
+        applications = new UniqueApplicationList();
     }
 
     public InternApplyMemory() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an InternApplyMemory using the Applications in the {@code toBeCopied}
      */
     public InternApplyMemory(ReadOnlyInternApplyMemory toBeCopied) {
         this();
@@ -40,81 +40,82 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the application list with {@code applications}.
+     * {@code applications} must not contain duplicate applications.
      */
-    public void setPersons(List<Application> applications) {
-        this.persons.setApplications(applications);
+    public void setApplications(List<Application> applications) {
+        this.applications.setApplications(applications);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code InternApplyMemory} with {@code newData}.
      */
     public void resetData(ReadOnlyInternApplyMemory newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getApplicationList());
+        setApplications(newData.getApplicationList());
     }
 
-    //// person-level operations
+    //// application-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an application with the same identity as {@code application} exists in InternApply's memory.
      */
-    public boolean hasPerson(Application application) {
+    public boolean hasApplication(Application application) {
         requireNonNull(application);
-        return persons.contains(application);
+        return applications.contains(application);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an application to InternApply's memory.
+     * The application must not already exist in InternApply's memory.
      */
-    public void addPerson(Application p) {
-        persons.add(p);
+    public void addApplication(Application p) {
+        applications.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given application {@code target} in the list with {@code editedApplication}.
+     * {@code target} must exist in InternApply's memory.
+     * The application identity of {@code editedApplication} must not be the same as another existing application in
+     * the address book.
      */
-    public void setPerson(Application target, Application editedApplication) {
+    public void setApplication(Application target, Application editedApplication) {
         requireNonNull(editedApplication);
 
-        persons.setApplication(target, editedApplication);
+        applications.setApplication(target, editedApplication);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code InternApplyMemory}.
+     * {@code key} must exist in InternApply's memory.
      */
-    public void removePerson(Application key) {
-        persons.remove(key);
+    public void removeApplication(Application key) {
+        applications.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return applications.asUnmodifiableObservableList().size() + " applications";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Application> getApplicationList() {
-        return persons.asUnmodifiableObservableList();
+        return applications.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof InternApplyMemory // instanceof handles nulls
-                && persons.equals(((InternApplyMemory) other).persons));
+                && applications.equals(((InternApplyMemory) other).applications));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return applications.hashCode();
     }
 }

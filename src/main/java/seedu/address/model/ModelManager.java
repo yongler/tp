@@ -90,17 +90,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Application application) {
         requireNonNull(application);
-        return addressBook.hasPerson(application);
+        return addressBook.hasApplication(application);
     }
 
     @Override
     public void deletePerson(Application target) {
-        addressBook.removePerson(target);
+        addressBook.removeApplication(target);
     }
 
     @Override
     public void addPerson(Application application) {
-        addressBook.addPerson(application);
+        addressBook.addApplication(application);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setPerson(Application target, Application editedApplication) {
         requireAllNonNull(target, editedApplication);
 
-        addressBook.setPerson(target, editedApplication);
+        addressBook.setApplication(target, editedApplication);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -65,7 +65,7 @@ public class TypicalPersons {
     public static InternApplyMemory getTypicalAddressBook() {
         InternApplyMemory ab = new InternApplyMemory();
         for (Application application : getTypicalPersons()) {
-            ab.addPerson(application);
+            ab.addApplication(application);
         }
         return ab;
     }
