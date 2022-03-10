@@ -68,7 +68,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Application> lastShownList = model.getFilteredPersonList();
+        List<Application> lastShownList = model.getFilteredApplicationList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -77,12 +77,12 @@ public class EditCommand extends Command {
         Application applicationToEdit = lastShownList.get(index.getZeroBased());
         Application editedApplication = createEditedPerson(applicationToEdit, editPersonDescriptor);
 
-        if (!applicationToEdit.isSameApplication(editedApplication) && model.hasPerson(editedApplication)) {
+        if (!applicationToEdit.isSameApplication(editedApplication) && model.hasApplication(editedApplication)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(applicationToEdit, editedApplication);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setApplication(applicationToEdit, editedApplication);
+        model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplication));
     }
 

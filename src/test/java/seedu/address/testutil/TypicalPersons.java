@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.InternApplyMemory;
 import seedu.address.model.application.Application;
 
 /**
@@ -62,10 +62,10 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static InternApplyMemory getTypicalAddressBook() {
+        InternApplyMemory ab = new InternApplyMemory();
         for (Application application : getTypicalPersons()) {
-            ab.addPerson(application);
+            ab.addApplication(application);
         }
         return ab;
     }

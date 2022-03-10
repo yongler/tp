@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.InternApplyMemory;
+import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
@@ -14,10 +14,10 @@ import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InternApplyMemory} with sample data.
  */
 public class SampleDataUtil {
-    public static Application[] getSamplePersons() {
+    public static Application[] getSampleApplications() {
         return new Application[] {
             new Application(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -38,14 +38,15 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
         };
+        // TODO: update the sample applications (currently imported from AB3)
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Application sampleApplication : getSamplePersons()) {
-            sampleAb.addPerson(sampleApplication);
+    public static ReadOnlyInternApplyMemory getSampleInternApplyMemory() {
+        InternApplyMemory sampleIam = new InternApplyMemory();
+        for (Application sampleApplication : getSampleApplications()) {
+            sampleIam.addApplication(sampleApplication);
         }
-        return sampleAb;
+        return sampleIam;
     }
 
     /**

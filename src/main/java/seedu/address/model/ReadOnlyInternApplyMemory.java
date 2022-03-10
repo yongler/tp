@@ -4,14 +4,14 @@ import javafx.collections.ObservableList;
 import seedu.address.model.application.Application;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of InternApply's memory
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyInternApplyMemory {
 
     /**
      * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate applications.
      */
-    ObservableList<Application> getPersonList();
+    ObservableList<Application> getApplicationList();
 
 }
