@@ -31,7 +31,8 @@ public class JsonInternApplyStorageTest {
     }
 
     private java.util.Optional<ReadOnlyInternApplyMemory> readAddressBook(String filePath) throws Exception {
-        return new JsonInternApplyStorage(Paths.get(filePath)).readInternApplyMemory(addToTestDataPathIfNotNull(filePath));
+        return new JsonInternApplyStorage(Paths.get(filePath))
+                .readInternApplyMemory(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
