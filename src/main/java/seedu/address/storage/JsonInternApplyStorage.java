@@ -15,7 +15,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access InternApply data stored as a json file on the hard disk.
  */
 public class JsonInternApplyStorage implements InternApplyStorage {
 
@@ -45,14 +45,14 @@ public class JsonInternApplyStorage implements InternApplyStorage {
     public Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableAddressBook> jsonInternApply = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonInternApply.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonInternApply.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
