@@ -24,19 +24,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns InternApply Memory.
      *
      * @see seedu.address.model.Model#getInternApplyMemory()
      */
-    ReadOnlyInternApplyMemory getAddressBook();
+    ReadOnlyInternApplyMemory getInternApplyMemory();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Application> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of applications */
+    ObservableList<Application> getFilteredApplicationsList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' intern apply file path.
      */
-    Path getAddressBookFilePath();
+    Path getInternApplyFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
