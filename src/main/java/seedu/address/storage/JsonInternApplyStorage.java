@@ -17,32 +17,32 @@ import seedu.address.model.ReadOnlyInternApplyMemory;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonInternApplyStorage implements InternApplyStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonInternApplyStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonInternApplyStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getInternApplyFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyInternApplyMemory> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyInternApplyMemory> readInternApplyMemory() throws DataConversionException {
+        return readInternApplyMemory(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readInternApplyMemory()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyInternApplyMemory> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyInternApplyMemory addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveInternApply(ReadOnlyInternApplyMemory internApplyMemory) throws IOException {
+        saveInternApply(internApplyMemory, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyInternApplyMemory)}.
+     * Similar to {@link #saveInternApply(ReadOnlyInternApplyMemory)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyInternApplyMemory addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveInternApply(ReadOnlyInternApplyMemory internApplyMemory, Path filePath) throws IOException {
+        requireNonNull(internApplyMemory);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(internApplyMemory), filePath);
     }
 
 }

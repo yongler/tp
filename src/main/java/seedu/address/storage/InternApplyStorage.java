@@ -11,36 +11,36 @@ import seedu.address.model.ReadOnlyInternApplyMemory;
 /**
  * Represents a storage for {@link InternApplyMemory}.
  */
-public interface AddressBookStorage {
+public interface InternApplyStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getInternApplyFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyInternApplyMemory}.
+     * Returns InternApply data as a {@link ReadOnlyInternApplyMemory}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyInternApplyMemory> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyInternApplyMemory> readInternApplyMemory() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getInternApplyFilePath()
      */
-    Optional<ReadOnlyInternApplyMemory> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyInternApplyMemory} to the storage.
-     * @param addressBook cannot be null.
+     * @param internApplyMemory cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyInternApplyMemory addressBook) throws IOException;
+    void saveInternApply(ReadOnlyInternApplyMemory internApplyMemory) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyInternApplyMemory)
+     * @see #saveInternApply(ReadOnlyInternApplyMemory)
      */
-    void saveAddressBook(ReadOnlyInternApplyMemory addressBook, Path filePath) throws IOException;
+    void saveInternApply(ReadOnlyInternApplyMemory internApplyMemory, Path filePath) throws IOException;
 
 }
