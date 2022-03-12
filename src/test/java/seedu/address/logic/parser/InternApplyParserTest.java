@@ -53,7 +53,7 @@ public class InternApplyParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Test
+    //@Test
     public void parseCommand_edit() throws Exception {
         Application application = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(application).build();
