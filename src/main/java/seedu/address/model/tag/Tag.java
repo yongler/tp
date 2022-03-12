@@ -8,11 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    public final TagType tagType;
 
     /**
      * Constructs a {@code Tag}.
@@ -23,6 +23,20 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagType = TagType.JOB_SCOPE;
+    }
+
+    /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param tagType A valid tag type.
+     */
+    public Tag(String tagName, TagType tagType) {
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
+        this.tagType = tagType;
     }
 
     /**
@@ -36,7 +50,9 @@ public class Tag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                && tagName.equals(((Tag) other).tagName)
+                && tagType.equals(((Tag) other).tagType)
+                ); // state check
     }
 
     @Override
