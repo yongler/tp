@@ -29,7 +29,8 @@ public interface InternApplyStorage {
     /**
      * @see #getInternApplyFilePath()
      */
-    Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath)
+            throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyInternApplyMemory} to the storage.
