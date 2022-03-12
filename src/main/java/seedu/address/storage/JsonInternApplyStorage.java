@@ -45,8 +45,8 @@ public class JsonInternApplyStorage implements InternApplyStorage {
     public Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonInternApply = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableInternApply> jsonInternApply = JsonUtil.readJsonFile(
+                filePath, JsonSerializableInternApply.class);
         if (!jsonInternApply.isPresent()) {
             return Optional.empty();
         }
@@ -74,7 +74,7 @@ public class JsonInternApplyStorage implements InternApplyStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(internApplyMemory), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableInternApply(internApplyMemory), filePath);
     }
 
 }

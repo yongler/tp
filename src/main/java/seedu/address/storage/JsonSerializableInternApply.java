@@ -14,47 +14,47 @@ import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Application;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable InternApply that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "internapply")
+class JsonSerializableInternApply {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Applications list contains duplicate application(s).";
 
     private final List<JsonAdaptedApplication> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableInternApply} with the given applications.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedApplication> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableInternApply(@JsonProperty("persons") List<JsonAdaptedApplication> applications) {
+        this.persons.addAll(applications);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyInternApplyMemory} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableInternApply}.
      */
-    public JsonSerializableAddressBook(ReadOnlyInternApplyMemory source) {
+    public JsonSerializableInternApply(ReadOnlyInternApplyMemory source) {
         persons.addAll(source.getApplicationList().stream().map(JsonAdaptedApplication::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this intern apply memory into the model's {@code InternApplyMemory} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public InternApplyMemory toModelType() throws IllegalValueException {
-        InternApplyMemory addressBook = new InternApplyMemory();
+        InternApplyMemory internApplyMemory = new InternApplyMemory();
         for (JsonAdaptedApplication jsonAdaptedApplication : persons) {
             Application application = jsonAdaptedApplication.toModelType();
-            if (addressBook.hasApplication(application)) {
+            if (internApplyMemory.hasApplication(application)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addApplication(application);
+            internApplyMemory.addApplication(application);
         }
-        return addressBook;
+        return internApplyMemory;
     }
 
 }
