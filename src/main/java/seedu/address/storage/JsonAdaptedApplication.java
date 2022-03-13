@@ -138,5 +138,4 @@ class JsonAdaptedApplication {
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
                 modelTags, modelJobTitle);
     }
-    
 }
