@@ -1,5 +1,9 @@
 package seedu.address.model.application;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,12 +13,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class InterviewDateTime {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Interview date should be of the format d-mm-yyyy hh:mm and "
-                    + "should only contain numbers and respective separators";
-    public static final String VALIDATION_REGEX =
-            "^([1-9]|([012][0-9])|(3[01]))\\-([0]{0,1}[1-9]|1[012])\\-\\d\\d\\d\\d\\s([0-1]?[0-9]|2?[0-3]):([0-5]\\d)$";
-    public final String value;
+    public static final String FORMAT_DATETIME = "dd-MM-yyyy HH:mm";
+    public static final String MESSAGE_CONSTRAINTS = "Interview date should be of the format "
+            + FORMAT_DATETIME
+            + ", containing only numbers and respective separators";
+
+    public final LocalDateTime value;
 
     /**
      * Constructs a {@code InterviewDateTime}.
@@ -23,20 +27,25 @@ public class InterviewDateTime {
      */
     public InterviewDateTime(String interviewDateTime) {
         requireNonNull(interviewDateTime);
-        checkArgument(isValidPhone(interviewDateTime), MESSAGE_CONSTRAINTS);
-        value = interviewDateTime;
+        checkArgument(isValidDateTime(interviewDateTime), MESSAGE_CONSTRAINTS);
+        value = toLocalDateTime(interviewDateTime);
     }
 
     /**
      * Returns true if a given string is a valid date and time.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidDateTime(String test) {
+        try {
+            LocalDateTime dt = toLocalDateTime(test);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
     }
 
     @Override
@@ -49,6 +58,10 @@ public class InterviewDateTime {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    private static LocalDateTime toLocalDateTime(String input) {
+        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME));
     }
 
 }
