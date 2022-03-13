@@ -11,12 +11,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the interview date and time of an Application in InternApply.
  */
 
-public class InterviewDateTime {
+public class InterviewSlot {
 
     public static final String FORMAT_DATETIME = "dd-MM-yyyy HH:mm";
+    public static final String FORMAT_DATETIME_DISPLAY = "d MMM yyyy HH:mm";
     public static final String MESSAGE_CONSTRAINTS = "Interview date should be of the format "
             + FORMAT_DATETIME
-            + ", containing only numbers and respective separators";
+            + ", containing only numbers and respective separators.";
+    public static  final String MESSAGE_NOT_SET = "Interview date is not set.";
 
     public final LocalDateTime value;
 
@@ -25,10 +27,17 @@ public class InterviewDateTime {
      *
      * @param interviewDateTime A valid interview date and time.
      */
-    public InterviewDateTime(String interviewDateTime) {
+    public InterviewSlot(String interviewDateTime) {
         requireNonNull(interviewDateTime);
         checkArgument(isValidDateTime(interviewDateTime), MESSAGE_CONSTRAINTS);
         value = toLocalDateTime(interviewDateTime);
+    }
+
+    /**
+     * Constructs a {@code InterviewDateTime}.
+     */
+    public InterviewSlot() {
+        value = LocalDateTime.MAX;
     }
 
     /**
@@ -36,16 +45,23 @@ public class InterviewDateTime {
      */
     public static boolean isValidDateTime(String test) {
         try {
-            LocalDateTime dt = toLocalDateTime(test);
+            toLocalDateTime(test);
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
+    public static boolean isNotSet(String test) {
+        return test.equals(LocalDateTime.MAX.format(DateTimeFormatter.
+                ofPattern(InterviewSlot.FORMAT_DATETIME)));
+    }
+
     @Override
     public String toString() {
-        return value.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
+        return !isNotSet(this.value.format(DateTimeFormatter.ofPattern(InterviewSlot.FORMAT_DATETIME)))
+                ? value.format(DateTimeFormatter.ofPattern(FORMAT_DATETIME_DISPLAY))
+                : MESSAGE_NOT_SET;
     }
 
     @Override
@@ -63,5 +79,4 @@ public class InterviewDateTime {
     private static LocalDateTime toLocalDateTime(String input) {
         return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME));
     }
-
 }
