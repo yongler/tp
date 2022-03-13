@@ -1,52 +1,59 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
-    "name" : "Alice Pauline",
+    "name" : "Shopee",
     "phone" : "94351253",
-    "email" : "alice@example.com",
+    "email" : "hr@shopee.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "interviewSlot" : "13-02-2022 16:00",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Benson Meier",
+    "name" : "Garena",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
+    "email" : "sea@garena.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "interviewSlot" : "13-03-2022 16:00",
     "tagged" : [ "owesMoney", "friends" ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Carl Kurz",
+    "name" : "SEA Group",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
+    "email" : "sea@hr.com",
     "address" : "wall street",
+    "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Daniel Meier",
+    "name" : "SEA Talk",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
+    "email" : "sea@hr.com",
     "address" : "10th street",
+    "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Elle Meyer",
+    "name" : "SEA Money",
     "phone" : "9482224",
-    "email" : "werner@example.com",
+    "email" : "sea@hr.com",
     "address" : "michegan ave",
+    "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "Cloud",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
+    "email" : "sea@hr.com",
     "address" : "little tokyo",
+    "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
-    "name" : "George Best",
+    "name" : "Marketplace",
     "phone" : "9482442",
-    "email" : "anna@example.com",
+    "email" : "sea@hr.com",
     "address" : "4th street",
+    "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
   } ]
