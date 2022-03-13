@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERSHIPSLOT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -25,24 +26,24 @@ import seedu.address.model.application.Application;
  */
 public class TypicalPersons {
 
-    public static final Application ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    public static final Application SHOPEE = new PersonBuilder().withName("Shopee")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("hr@shopee.com")
             .withPhone("94351253")
-            .withTags("friends").withJobTitle("Intern").build();
-    public static final Application BENSON = new PersonBuilder().withName("Benson Meier")
+            .withTags("friends").withJobTitle("Intern").withInterviewSlot("13-02-2022 16:00").build();
+    public static final Application GARENA = new PersonBuilder().withName("Garena")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withJobTitle("Intern").build();
-    public static final Application CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Application DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Application ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Application FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Application GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+            .withEmail("sea@garena.com").withPhone("98765432")
+            .withTags("owesMoney", "friends").withJobTitle("Intern").withInterviewSlot("13-03-2022 16:00").build();
+    public static final Application SEAGROUP = new PersonBuilder().withName("SEA Group").withPhone("95352563")
+            .withEmail("sea@hr.com").withAddress("wall street").build();
+    public static final Application SEATALK = new PersonBuilder().withName("SEA Talk").withPhone("87652533")
+            .withEmail("sea@hr.com").withAddress("10th street").withTags("friends").build();
+    public static final Application SEAMONEY = new PersonBuilder().withName("SEA Money").withPhone("9482224")
+            .withEmail("sea@hr.com").withAddress("michegan ave").build();
+    public static final Application SEAFIONA = new PersonBuilder().withName("Cloud").withPhone("9482427")
+            .withEmail("sea@hr.com").withAddress("little tokyo").build();
+    public static final Application SEAMARKETPLACE = new PersonBuilder().withName("Marketplace").withPhone("9482442")
+            .withEmail("sea@hr.com").withAddress("4th street").build();
 
     // Manually added
     public static final Application HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -52,8 +53,8 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Application AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
-            .withJobTitle(VALID_JOBTITLE_AMY).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).withJobTitle(VALID_JOBTITLE_AMY).build();
     public static final Application BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withJobTitle(VALID_JOBTITLE_BOB).build();
@@ -74,6 +75,6 @@ public class TypicalPersons {
     }
 
     public static List<Application> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(SHOPEE, GARENA, SEAGROUP, SEATALK, SEAMONEY, SEAFIONA, SEAMARKETPLACE));
     }
 }
