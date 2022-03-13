@@ -65,7 +65,7 @@ class JsonAdaptedApplication {
         email = source.getEmail().value;
         address = source.getAddress().value;
         interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter
-                .ofPattern(InterviewSlot.FORMAT_DATETIME));
+                .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -73,7 +73,7 @@ class JsonAdaptedApplication {
     }
 
     /**
-     * Converts this Jackson-friendly adapted application object into the model's {@code Application} object.
+     * Converts this JSON-friendly adapted application object into the model's {@code Application} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted application.
      */
@@ -138,5 +138,5 @@ class JsonAdaptedApplication {
         return new Application(modelName, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
                 modelTags, modelJobTitle);
     }
-
+    
 }
