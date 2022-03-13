@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private HBox tags;
+    @FXML
+    private Label jobTitle;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,6 +52,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(application.getAddress().value);
         email.setText(application.getEmail().value);
         tags.getChildren().add(new TagBox(application.getTags()));
+        jobTitle.setText(application.getJobTitle().value);
     }
 
     @Override
