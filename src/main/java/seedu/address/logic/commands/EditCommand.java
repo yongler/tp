@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -22,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -34,18 +37,20 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the application identified "
+            + "by the index number used in the displayed internship application list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_INTERVIEW_SLOT + "[INTERVIEW SLOT (format: "+ InterviewSlot.FORMAT_DATETIME +"] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_INTERVIEW_SLOT + "25-03-2022 13:30";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -104,8 +109,11 @@ public class EditCommand extends Command {
         // TODO: modify EditCommand properly to edit job title.
         JobTitle updatedJobTitle = applicationToEdit.getJobTitle(); // edit command does not allow editing job title
 
-        return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedJobTitle);
+        InterviewSlot updateInterviewSlot = editPersonDescriptor.getInterviewSlot()
+                .orElse(applicationToEdit.getInterviewSlot());
+
+        return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updateInterviewSlot,
+                updatedTags, updatedJobTitle);
     }
 
     @Override
@@ -135,6 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private InterviewSlot interviewSlot;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,13 +158,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setInterviewSlot(toCopy.interviewSlot);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, interviewSlot);
         }
 
         public void setName(Name name) {
@@ -180,6 +190,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public Optional<InterviewSlot> getInterviewSlot() {
+            return Optional.ofNullable(interviewSlot);
+        }
+
+        public void setInterviewSlot(InterviewSlot interviewSlot) {
+            this.interviewSlot = interviewSlot;
         }
 
         public void setAddress(Address address) {
@@ -226,7 +244,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getInterviewSlot().equals(e.getInterviewSlot());
         }
     }
 }

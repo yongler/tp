@@ -14,5 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_APPLICATION_STATUS_TAG = new Prefix("ast/");
     public static final Prefix PREFIX_PRIORITY_TAG = new Prefix("pt/");
-
+    public static final Prefix PREFIX_INTERVIEW_SLOT = new Prefix("idt/");
 }

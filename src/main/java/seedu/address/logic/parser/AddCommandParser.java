@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -50,6 +51,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOBTITLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        InterviewSlot interviewSlot = new InterviewSlot();
+
         if (arePrefixesPresent(argMultimap, PREFIX_PRIORITY_TAG)) {
             Tag priorityTag = ParserUtil.parsePriorityTag(argMultimap.getValue(PREFIX_PRIORITY_TAG).get());
             tagList.add(priorityTag);
@@ -60,7 +63,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             tagList.add(applicationStatusTag);
         }
 
-        Application application = new Application(name, phone, email, address, tagList, jobTitle);
+        Application application = new Application(name, phone, email, address, interviewSlot, tagList, jobTitle);
 
         return new AddCommand(application);
     }
