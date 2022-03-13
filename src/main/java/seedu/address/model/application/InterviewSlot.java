@@ -17,10 +17,10 @@ import java.time.format.DateTimeParseException;
 
 public class InterviewSlot {
 
-    public static final String FORMAT_DATETIME = "dd-MM-yyyy HH:mm";
+    public static final String FORMAT_DATETIME_INPUT = "dd-MM-yyyy HH:mm";
     public static final String FORMAT_DATETIME_DISPLAY = "d MMM yyyy HH:mm";
     public static final String MESSAGE_CONSTRAINTS = "Interview date should be of the format "
-            + FORMAT_DATETIME
+            + FORMAT_DATETIME_INPUT
             + ", containing only numbers and respective separators.";
     public static final String MESSAGE_NOT_SET = "Interview date is not set.";
 
@@ -61,12 +61,19 @@ public class InterviewSlot {
      */
     public static boolean isNotSet(String test) {
         return test.equals(LocalDateTime.MAX.format(DateTimeFormatter
-                .ofPattern(InterviewSlot.FORMAT_DATETIME)));
+                .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT)));
+    }
+
+    /**
+     * Returns the value of interview slot in the input String format as per FORMAT_DATETIME_INPUT.
+     */
+    public String toInputString() {
+        return this.value.format(DateTimeFormatter.ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
     }
 
     @Override
     public String toString() {
-        return !isNotSet(this.value.format(DateTimeFormatter.ofPattern(InterviewSlot.FORMAT_DATETIME)))
+        return !isNotSet(toInputString())
                 ? value.format(DateTimeFormatter.ofPattern(FORMAT_DATETIME_DISPLAY))
                 : MESSAGE_NOT_SET;
     }
@@ -74,8 +81,8 @@ public class InterviewSlot {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+                || (other instanceof InterviewSlot // instanceof handles nulls
+                && this.toInputString().equals(((InterviewSlot) other).toInputString())); // state check
     }
 
     @Override
@@ -84,6 +91,6 @@ public class InterviewSlot {
     }
 
     private static LocalDateTime toLocalDateTime(String input) {
-        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME));
+        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME_INPUT));
     }
 }
