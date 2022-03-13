@@ -11,9 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -107,7 +109,37 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag, TagType.JOB_SCOPE);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code ApplicationStatusTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parseApplicationStatusTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag.toUpperCase(), TagType.APPLICATION_STATUS);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code PriorityTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parsePriorityTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag.toUpperCase(), TagType.PRIORITY);
     }
 
     /**
@@ -120,5 +152,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String jobTitle} into a {@code JobTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code jobTitle} is invalid.
+     */
+    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        String trimmedJobTitle = jobTitle.trim();
+        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
+            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new JobTitle(trimmedJobTitle);
     }
 }
