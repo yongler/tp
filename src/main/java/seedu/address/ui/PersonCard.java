@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label jobTitle;
+    @FXML
+    private Label interviewSlot;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,6 +55,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(application.getName().fullName);
         phone.setText(application.getPhone().value);
         address.setText(application.getAddress().value);
+        interviewSlot.setText(application.getInterviewSlot().toString());
         email.setText(application.getEmail().value);
         application.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
