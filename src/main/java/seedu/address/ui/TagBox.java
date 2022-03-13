@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +12,7 @@ import javafx.scene.layout.HBox;
 import seedu.address.commons.util.Colors;
 import seedu.address.model.tag.Tag;
 
-import java.util.Comparator;
-import java.util.Locale;
-import java.util.Set;
+
 
 public class TagBox extends HBox {
     private static final String FXML = "/view/TagBox.fxml";
@@ -20,7 +20,12 @@ public class TagBox extends HBox {
     @FXML
     private FlowPane tags;
 
-    public TagBox(Set<Tag> tagSet){
+    /**
+     * Contains Set of Tags arranged in order of
+     * Priority, Application Status, General Tag
+     * @param tagSet
+     */
+    public TagBox(Set<Tag> tagSet) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(FXML));
             fxmlLoader.setController(this);
@@ -34,11 +39,16 @@ public class TagBox extends HBox {
             .forEach(tag -> tags.getChildren().add(chooseColor(tag)));
     }
 
-    public Label chooseColor(Tag tag){
+    /**
+     * Chooses the appropriate color for the corresponding tag
+     * @param tag
+     * @return Label with correct color
+     */
+    public Label chooseColor(Tag tag) {
         Label returnTag = new Label(tag.tagName);
-        switch (tag.tagType){
+        switch (tag.tagType) {
         case PRIORITY:
-            switch (tag.tagName.toUpperCase()){
+            switch (tag.tagName.toUpperCase()) {
             case "HIGH":
                 returnTag.setStyle(Colors.RED);
                 break;
@@ -47,6 +57,8 @@ public class TagBox extends HBox {
                 break;
             case "LOW":
                 returnTag.setStyle(Colors.GREEN);
+                break;
+            default:
                 break;
             }
             break;
@@ -66,6 +78,8 @@ public class TagBox extends HBox {
                 break;
             case "ACCEPTED":
                 returnTag.setStyle(Colors.GREEN);
+                break;
+            default:
                 break;
             }
             break;
