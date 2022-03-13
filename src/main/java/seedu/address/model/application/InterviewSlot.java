@@ -1,11 +1,15 @@
 package seedu.address.model.application;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+
+
 
 /**
  * Represents the interview date and time of an Application in InternApply.
@@ -18,7 +22,7 @@ public class InterviewSlot {
     public static final String MESSAGE_CONSTRAINTS = "Interview date should be of the format "
             + FORMAT_DATETIME
             + ", containing only numbers and respective separators.";
-    public static  final String MESSAGE_NOT_SET = "Interview date is not set.";
+    public static final String MESSAGE_NOT_SET = "Interview date is not set.";
 
     public final LocalDateTime value;
 
@@ -52,9 +56,12 @@ public class InterviewSlot {
         }
     }
 
+    /**
+     * Returns true if a given string is a placeholder for an empty date and time.
+     */
     public static boolean isNotSet(String test) {
-        return test.equals(LocalDateTime.MAX.format(DateTimeFormatter.
-                ofPattern(InterviewSlot.FORMAT_DATETIME)));
+        return test.equals(LocalDateTime.MAX.format(DateTimeFormatter
+                .ofPattern(InterviewSlot.FORMAT_DATETIME)));
     }
 
     @Override

@@ -37,7 +37,8 @@ public class Application {
      * Every field must be present and not null.
      */
     public Application(Name name, Phone phone, Email email, Address address, InterviewSlot interviewSlot,
-                       Set<Tag> tags, JobTitle jobTitle) {requireAllNonNull(name, phone, email, address, tags);
+        Set<Tag> tags, JobTitle jobTitle) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;

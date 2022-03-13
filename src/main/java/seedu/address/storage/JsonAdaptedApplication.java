@@ -64,8 +64,8 @@ class JsonAdaptedApplication {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter.
-                ofPattern(InterviewSlot.FORMAT_DATETIME));
+        interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter
+                .ofPattern(InterviewSlot.FORMAT_DATETIME));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
