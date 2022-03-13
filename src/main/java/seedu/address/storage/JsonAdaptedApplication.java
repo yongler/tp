@@ -113,11 +113,16 @@ class JsonAdaptedApplication {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+
         final Address modelAddress = new Address(address);
 
         if (interviewSlot == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     InterviewSlot.class.getSimpleName()));
+        }
+
+        if (!InterviewSlot.isValidDateTime(interviewSlot)) {
+            throw new IllegalValueException(InterviewSlot.MESSAGE_CONSTRAINTS);
         }
 
         final InterviewSlot modelInterviewSlot = InterviewSlot.isNotSet(interviewSlot)

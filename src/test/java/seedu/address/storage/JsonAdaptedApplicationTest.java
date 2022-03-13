@@ -122,7 +122,7 @@ public class JsonAdaptedApplicationTest {
                 new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_INTEVIEWSLOT,
                         VALID_TAGS, VALID_JOBTITLE);
         String expectedMessage = InterviewSlot.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalArgumentException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
