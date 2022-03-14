@@ -102,7 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void addApplication(Application application) {
         internApplyMemory.addApplication(application);
-        updateFilteredApplicationList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
     }
 
     @Override
