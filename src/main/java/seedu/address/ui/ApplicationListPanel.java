@@ -13,9 +13,9 @@ import seedu.address.model.application.Application;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class ApplicationListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ApplicationListPanel.class);
 
     @FXML
     private ListView<Application> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Application> applicationList) {
+    public ApplicationListPanel(ObservableList<Application> applicationList) {
         super(FXML);
         personListView.setItems(applicationList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
