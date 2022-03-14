@@ -30,7 +30,7 @@ import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing application in InternApply.
  */
 public class EditCommand extends Command {
 
@@ -51,23 +51,23 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_INTERVIEW_SLOT + "25-03-2022 13:30";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditApplicationDescriptor editApplicationDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the application in the filtered application list to edit
+     * @param editApplicationDescriptor details to edit the application with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditApplicationDescriptor editApplicationDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editApplicationDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editApplicationDescriptor = new EditApplicationDescriptor(editApplicationDescriptor);
     }
 
     @Override
@@ -80,35 +80,35 @@ public class EditCommand extends Command {
         }
 
         Application applicationToEdit = lastShownList.get(index.getZeroBased());
-        Application editedApplication = createEditedPerson(applicationToEdit, editPersonDescriptor);
+        Application editedApplication = createEditedPerson(applicationToEdit, editApplicationDescriptor);
 
         if (!applicationToEdit.isSameApplication(editedApplication) && model.hasApplication(editedApplication)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICATION);
         }
 
         model.setApplication(applicationToEdit, editedApplication);
-        model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplication));
+        model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICATION_SUCCESS, editedApplication));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Application} with the details of {@code applicationToEdit}
      * edited with {@code editPersonDescriptor}.
      */
     private static Application createEditedPerson(Application applicationToEdit,
-                                                  EditPersonDescriptor editPersonDescriptor) {
+                                                  EditApplicationDescriptor editApplicationDescriptor) {
         assert applicationToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(applicationToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(applicationToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(applicationToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(applicationToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(applicationToEdit.getTags());
+        Name updatedName = editApplicationDescriptor.getName().orElse(applicationToEdit.getName());
+        Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
+        Email updatedEmail = editApplicationDescriptor.getEmail().orElse(applicationToEdit.getEmail());
+        Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
+        Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
 
         // TODO: modify EditCommand properly to edit job title.
         JobTitle updatedJobTitle = applicationToEdit.getJobTitle(); // edit command does not allow editing job title
 
-        InterviewSlot updateInterviewSlot = editPersonDescriptor.getInterviewSlot()
+        InterviewSlot updateInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
 
         return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updateInterviewSlot,
@@ -130,14 +130,14 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editApplicationDescriptor.equals(e.editApplicationDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the application with. Each non-empty field value will replace the
+     * corresponding field value of the application.
      */
-    public static class EditPersonDescriptor {
+    public static class EditApplicationDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -145,13 +145,13 @@ public class EditCommand extends Command {
         private InterviewSlot interviewSlot;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditApplicationDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditApplicationDescriptor(EditApplicationDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -232,12 +232,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditApplicationDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditApplicationDescriptor e = (EditApplicationDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
