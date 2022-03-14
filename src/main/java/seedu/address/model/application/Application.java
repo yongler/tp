@@ -30,17 +30,21 @@ public class Application {
     private final Set<Tag> tags = new HashSet<>();
     /** Job Title */
     private final JobTitle jobTitle;
+    /** Interview Slot */
+    private final InterviewSlot interviewSlot;
 
     /**
      * Every field must be present and not null.
      */
-    public Application(Name name, Phone phone, Email email, Address address, Set<Tag> tags, JobTitle jobTitle) {
+    public Application(Name name, Phone phone, Email email, Address address, InterviewSlot interviewSlot,
+        Set<Tag> tags, JobTitle jobTitle) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.interviewSlot = interviewSlot;
         this.jobTitle = jobTitle;
     }
 
@@ -70,6 +74,10 @@ public class Application {
 
     public JobTitle getJobTitle() {
         return jobTitle;
+    }
+
+    public InterviewSlot getInterviewSlot() {
+        return interviewSlot;
     }
 
     /**
@@ -105,32 +113,37 @@ public class Application {
                 && otherApplication.getEmail().equals(getEmail())
                 && otherApplication.getAddress().equals(getAddress())
                 && otherApplication.getTags().equals(getTags())
-                && otherApplication.getJobTitle().equals(getJobTitle());
+                && otherApplication.getJobTitle().equals(getJobTitle())
+                && otherApplication.getInterviewSlot().equals(getInterviewSlot());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, jobTitle);
+        return Objects.hash(name, phone, email, address, tags, jobTitle, interviewSlot);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Job Title: ")
+                .append(getJobTitle())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Interview Slot: ")
+                .append(getInterviewSlot());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append("; Job Title: ").append(getJobTitle());
+
         return builder.toString();
     }
 

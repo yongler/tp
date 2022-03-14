@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     private HBox tags;
     @FXML
     private Label jobTitle;
+    @FXML
+    private Label interviewSlot;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -50,6 +52,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(application.getName().fullName);
         phone.setText(application.getPhone().value);
         address.setText(application.getAddress().value);
+        interviewSlot.setText(application.getInterviewSlot().toString());
         email.setText(application.getEmail().value);
         tags.getChildren().add(new TagBox(application.getTags()));
         jobTitle.setText(application.getJobTitle().value);

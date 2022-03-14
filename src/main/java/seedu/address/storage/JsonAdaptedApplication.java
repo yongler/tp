@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -29,6 +31,7 @@ class JsonAdaptedApplication {
     private final String phone;
     private final String email;
     private final String address;
+    private final String interviewSlot;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String jobTitle;
 
@@ -39,12 +42,14 @@ class JsonAdaptedApplication {
 
     public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("address") String address,
+                                  @JsonProperty("interviewSlot") String interviewSlot,
                                   @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                                   @JsonProperty("jobTitle") String jobTitle) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.interviewSlot = interviewSlot;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -59,6 +64,8 @@ class JsonAdaptedApplication {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter
+                .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -66,7 +73,7 @@ class JsonAdaptedApplication {
     }
 
     /**
-     * Converts this Jackson-friendly adapted application object into the model's {@code Application} object.
+     * Converts this JSON-friendly adapted application object into the model's {@code Application} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted application.
      */
@@ -106,19 +113,34 @@ class JsonAdaptedApplication {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+
         final Address modelAddress = new Address(address);
+
+        if (interviewSlot == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    InterviewSlot.class.getSimpleName()));
+        }
+
+        if (!InterviewSlot.isValidDateTime(interviewSlot)) {
+            throw new IllegalValueException(InterviewSlot.MESSAGE_CONSTRAINTS);
+        }
+
+        final InterviewSlot modelInterviewSlot = InterviewSlot.isNotSet(interviewSlot)
+                ? new InterviewSlot()
+                : new InterviewSlot(interviewSlot);
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
         if (jobTitle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JobTitle.class.getSimpleName()));
         }
+
         if (!JobTitle.isValidJobTitle(jobTitle)) {
             throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
-        return new Application(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelJobTitle);
+        return new Application(modelName, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
+                modelTags, modelJobTitle);
     }
-
 }

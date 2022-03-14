@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -96,6 +97,27 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+    /**
+     * Parses a {@code String interviewSlot} into an {@code Interview Slot}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewSlot} is invalid.
+     */
+    public static InterviewSlot parseInterviewSlot(String interviewSlot) throws ParseException {
+        requireNonNull(interviewSlot);
+        String trimmedInterviewSlot = interviewSlot.trim();
+
+        if (trimmedInterviewSlot.isEmpty()) {
+            return new InterviewSlot();
+        }
+
+        if (!InterviewSlot.isValidDateTime(trimmedInterviewSlot)) {
+            throw new ParseException(InterviewSlot.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewSlot(trimmedInterviewSlot);
+    }
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.

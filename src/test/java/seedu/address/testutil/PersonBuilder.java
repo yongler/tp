@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -20,12 +23,15 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_INTERVIEWSLOT = LocalDateTime.MAX.format(DateTimeFormatter
+            .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOBTITLE = "Intern";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private InterviewSlot interviewSlot;
     private Address address;
     private Set<Tag> tags;
     private JobTitle jobTitle;
@@ -38,6 +44,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        interviewSlot = new InterviewSlot(DEFAULT_INTERVIEWSLOT);
         tags = new HashSet<>();
         jobTitle = new JobTitle(DEFAULT_JOBTITLE);
     }
@@ -50,6 +57,7 @@ public class PersonBuilder {
         phone = applicationToCopy.getPhone();
         email = applicationToCopy.getEmail();
         address = applicationToCopy.getAddress();
+        interviewSlot = applicationToCopy.getInterviewSlot();
         tags = new HashSet<>(applicationToCopy.getTags());
         jobTitle = applicationToCopy.getJobTitle();
     }
@@ -79,6 +87,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code InterviewSlot} of the {@code Application} that we are building.
+     */
+    public PersonBuilder withInterviewSlot(String interviewSlot) {
+        this.interviewSlot = new InterviewSlot(interviewSlot);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -103,7 +119,7 @@ public class PersonBuilder {
     }
 
     public Application build() {
-        return new Application(name, phone, email, address, tags, jobTitle);
+        return new Application(name, phone, email, address, interviewSlot, tags, jobTitle);
     }
 
 }
