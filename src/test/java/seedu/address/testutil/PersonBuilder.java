@@ -28,7 +28,6 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOBTITLE = "Intern";
 
-
     private Name name;
     private Phone phone;
     private Email email;
@@ -36,7 +35,6 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private JobTitle jobTitle;
-
 
     /**
      * Creates a {@code PersonBuilder} with the default details.

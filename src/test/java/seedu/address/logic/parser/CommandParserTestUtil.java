@@ -16,7 +16,6 @@ public class CommandParserTestUtil {
      */
     public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
         try {
-
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
