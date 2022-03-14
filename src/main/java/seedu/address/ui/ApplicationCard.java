@@ -7,11 +7,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.application.Application;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of an {@code Application}.
  */
 public class ApplicationCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ApplicationListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
