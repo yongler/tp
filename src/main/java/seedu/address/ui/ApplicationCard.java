@@ -9,7 +9,7 @@ import seedu.address.model.application.Application;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ApplicationCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Application application, int displayedIndex) {
+    public ApplicationCard(Application application, int displayedIndex) {
         super(FXML);
         this.application = application;
         id.setText(displayedIndex + ". ");
@@ -66,12 +66,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ApplicationCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ApplicationCard card = (ApplicationCard) other;
         return id.getText().equals(card.id.getText())
                 && application.equals(card.application);
     }
