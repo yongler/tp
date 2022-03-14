@@ -43,7 +43,7 @@ public class ApplicationCard extends UiPart<Region> {
     private Label interviewSlot;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates an {@code ApplicationCard} with the given {@code Application} and index to display.
      */
     public ApplicationCard(Application application, int displayedIndex) {
         super(FXML);
