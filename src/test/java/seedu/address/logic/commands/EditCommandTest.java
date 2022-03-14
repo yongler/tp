@@ -36,7 +36,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Application editedApplication = new PersonBuilder().build();
+        Application editedApplication = new PersonBuilder().build(); // build application
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

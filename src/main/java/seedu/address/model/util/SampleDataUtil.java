@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
@@ -20,26 +21,19 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Application[] getSampleApplications() {
         return new Application[] {
-            new Application(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), new JobTitle("Intern")),
-            new Application(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), new JobTitle("Janitor")),
-            new Application(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new JobTitle("Software Engineer")),
-            new Application(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+            new Application(new Name("Shopee"), new Phone("87438807"), new Email("hr@shopee.sg"),
+                new Address("5 Science Park Dr, #06-40"), new InterviewSlot(),
+                getTagSet("friends"), new JobTitle("Software Engineer Intern")),
+            new Application(new Name("Grab Holdings Singapore"), new Phone("99272758"), new Email("hr@grab.sg"),
+                new Address("3 Media Cl, #07-18"), new InterviewSlot(),
+                getTagSet("colleagues", "friends"), new JobTitle("AI Engineer")),
+            new Application(new Name("Microsoft"), new Phone("93210283"), new Email("hr@microsoft.com"),
+                new Address("182 Cecil St, #13-01"), new InterviewSlot(),
+                getTagSet("neighbours"), new JobTitle("Software Engineer Intern")),
+            new Application(new Name("Google Asia Pacific"), new Phone("91031282"), new Email("hr@google.com"),
+                new Address("70 Pasir Panjang Rd, #16-43"), new InterviewSlot("28-03-2022 13:00"),
                 getTagSet("family"), new JobTitle("ML Engineer")),
-            new Application(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), new JobTitle("CEO")),
-            new Application(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), new JobTitle("AI Engineer"))
         };
-        // TODO: update the sample applications (currently imported from AB3)
     }
 
     public static ReadOnlyInternApplyMemory getSampleInternApplyMemory() {
