@@ -14,7 +14,6 @@ import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagType;
 
 /**
  * Contains utility methods for populating {@code InternApplyMemory} with sample data.
