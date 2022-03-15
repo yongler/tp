@@ -12,7 +12,7 @@ import seedu.address.model.application.Application;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Application> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Application> PREDICATE_SHOW_ALL_APPLICATIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

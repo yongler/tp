@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.application.Application;
 
 /**
- * Adds a person to the address book.
+ * Adds an application to InternApply.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an application to InternApply. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -28,21 +28,20 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + PREFIX_JOBTITLE + "JOBTITLE\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_NAME + "Shopee "
+            + PREFIX_PHONE + "87438807 "
+            + PREFIX_EMAIL + "hr@shopee.sg "
+            + PREFIX_ADDRESS + "5 Science Park Dr, #06-40 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_JOBTITLE + "Intern";
+            + PREFIX_JOBTITLE + "Software Engineer Intern";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New application added: %1$s";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply";
 
     private final Application toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Application}
      */
     public AddCommand(Application application) {
         requireNonNull(application);
@@ -54,7 +53,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasApplication(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICATION);
         }
 
         model.addApplication(toAdd);
