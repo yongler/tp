@@ -14,6 +14,7 @@ import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Contains utility methods for populating {@code InternApplyMemory} with sample data.
@@ -23,7 +24,7 @@ public class SampleDataUtil {
         return new Application[] {
             new Application(new Name("Shopee"), new Phone("87438807"), new Email("hr@shopee.sg"),
                 new Address("5 Science Park Dr, #06-40"), new InterviewSlot(),
-                getTagSet("friends"), new JobTitle("Software Engineer Intern")),
+                getTagSet("friends", "HIGH"), new JobTitle("Software Engineer Intern")),
             new Application(new Name("Grab Holdings Singapore"), new Phone("99272758"), new Email("hr@grab.sg"),
                 new Address("3 Media Cl, #07-18"), new InterviewSlot(),
                 getTagSet("colleagues", "friends"), new JobTitle("AI Engineer")),
@@ -52,5 +53,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

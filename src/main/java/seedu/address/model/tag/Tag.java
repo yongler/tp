@@ -22,8 +22,26 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
-        this.tagType = TagType.JOB_SCOPE;
+        switch(tagName.toUpperCase()) {
+        case "HIGH":
+        case "MEDIUM":
+        case "LOW":
+            this.tagName = tagName;
+            this.tagType = TagType.PRIORITY;
+            break;
+        case "NOTAPPLIED":
+        case "APPLIED":
+        case "INTERVIEWED":
+        case "REJECTED":
+        case "ACCEPTED":
+            this.tagName = tagName;
+            this.tagType = TagType.APPLICATION_STATUS;
+            break;
+        default:
+            this.tagName = tagName;
+            this.tagType = TagType.JOB_SCOPE;
+            break;
+        }
     }
 
     /**
