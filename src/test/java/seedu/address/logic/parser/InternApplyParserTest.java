@@ -25,9 +25,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditApplicationDescriptorBuilder;
 import seedu.address.testutil.ApplicationBuilder;
 import seedu.address.testutil.ApplicationUtil;
+import seedu.address.testutil.EditApplicationDescriptorBuilder;
+
 
 public class InternApplyParserTest {
 
@@ -59,7 +60,8 @@ public class InternApplyParserTest {
         Application application = new ApplicationBuilder().build();
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(application).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_APPLICATION.getOneBased() + " " + ApplicationUtil.getEditApplicationDescriptorDetails(descriptor));
+                + INDEX_FIRST_APPLICATION.getOneBased() + " "
+                + ApplicationUtil.getEditApplicationDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_APPLICATION, descriptor), command);
     }
 

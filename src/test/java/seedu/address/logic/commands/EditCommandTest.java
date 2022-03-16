@@ -2,17 +2,17 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicationAtIndex;
+import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_APPLICATION;
-import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +24,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
-import seedu.address.testutil.EditApplicationDescriptorBuilder;
 import seedu.address.testutil.ApplicationBuilder;
+import seedu.address.testutil.EditApplicationDescriptorBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -87,7 +88,8 @@ public class EditCommandTest {
 
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
-        Application editedApplication = new ApplicationBuilder(applicationInFilteredList).withName(VALID_NAME_GARENA).build();
+        Application editedApplication = new ApplicationBuilder(applicationInFilteredList)
+                .withName(VALID_NAME_GARENA).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION,
                 new EditApplicationDescriptorBuilder().withName(VALID_NAME_GARENA).build());
 
@@ -124,7 +126,8 @@ public class EditCommandTest {
     @Test
     public void execute_invalidApplicationIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicationList().size() + 1);
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_GARENA).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withName(VALID_NAME_GARENA).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);

@@ -32,7 +32,8 @@ public class ApplicationTest {
         assertFalse(GRAB.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedGrab = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
+        Application editedGrab = new ApplicationBuilder(GRAB)
+                .withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
                 .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL).build();
         assertTrue(GRAB.isSameApplication(editedGrab));
 

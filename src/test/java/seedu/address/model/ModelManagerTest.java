@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.LAZADA;
 import static seedu.address.testutil.TypicalApplications.GRAB;
+import static seedu.address.testutil.TypicalApplications.LAZADA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,7 +95,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        InternApplyMemory internApplyMemory = new InternApplyMemoryBuilder().withApplication(GRAB).withApplication(LAZADA).build();
+        InternApplyMemory internApplyMemory = new InternApplyMemoryBuilder().withApplication(GRAB)
+                .withApplication(LAZADA).build();
         InternApplyMemory differentInternApplyMemory = new InternApplyMemory();
         UserPrefs userPrefs = new UserPrefs();
 

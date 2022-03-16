@@ -1,15 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 
@@ -41,7 +41,8 @@ public class TypicalApplications {
             .withEmail("sea@hr.com").withAddress("michegan ave").build();
     public static final Application SEAFIONA = new ApplicationBuilder().withName("Cloud").withPhone("9482427")
             .withEmail("sea@hr.com").withAddress("little tokyo").build();
-    public static final Application SEAMARKETPLACE = new ApplicationBuilder().withName("Marketplace").withPhone("9482442")
+    public static final Application SEAMARKETPLACE = new ApplicationBuilder()
+            .withName("Marketplace").withPhone("9482442")
             .withEmail("sea@hr.com").withAddress("4th street").build();
 
     // Manually added
@@ -51,10 +52,12 @@ public class TypicalApplications {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Application's details found in {@code CommandTestUtil}
-    public static final Application SHOPEE = new ApplicationBuilder().withName(VALID_NAME_SHOPEE).withPhone(VALID_PHONE_SHOPEE)
+    public static final Application SHOPEE = new ApplicationBuilder()
+            .withName(VALID_NAME_SHOPEE).withPhone(VALID_PHONE_SHOPEE)
             .withEmail(VALID_EMAIL_SHOPEE).withAddress(VALID_ADDRESS_SHOPEE)
             .withTags(VALID_TAG_FRIEND).withJobTitle(VALID_JOBTITLE_SHOPEE).build();
-    public static final Application GARENA = new ApplicationBuilder().withName(VALID_NAME_GARENA).withPhone(VALID_PHONE_GARENA)
+    public static final Application GARENA = new ApplicationBuilder()
+            .withName(VALID_NAME_GARENA).withPhone(VALID_PHONE_GARENA)
             .withEmail(VALID_EMAIL_GARENA).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL, VALID_TAG_FRIEND)
             .withJobTitle(VALID_JOBTITLE_GARENA).build();
 
