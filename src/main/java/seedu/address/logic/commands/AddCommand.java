@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Shopee "
-            + PREFIX_JOBTITLE + "Software Engineer Intern"
+            + PREFIX_JOBTITLE + "Software Engineer Intern "
             + PREFIX_PHONE + "87438807 "
             + PREFIX_EMAIL + "hr@shopee.sg "
             + PREFIX_ADDRESS + "5 Science Park Dr, #06-40 "
