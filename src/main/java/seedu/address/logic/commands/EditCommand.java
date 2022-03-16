@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -41,6 +42,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_JOBTITLE + "JOB TITLE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -100,18 +102,15 @@ public class EditCommand extends Command {
         assert applicationToEdit != null;
 
         Name updatedName = editApplicationDescriptor.getName().orElse(applicationToEdit.getName());
+        JobTitle updatedJobTitle = editApplicationDescriptor.getJobTitle().orElse(applicationToEdit.getJobTitle());
         Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
         Email updatedEmail = editApplicationDescriptor.getEmail().orElse(applicationToEdit.getEmail());
         Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
         Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
-
-        // TODO: modify EditCommand properly to edit job title.
-        JobTitle updatedJobTitle = applicationToEdit.getJobTitle(); // edit command does not allow editing job title
-
-        InterviewSlot updateInterviewSlot = editApplicationDescriptor.getInterviewSlot()
+        InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
 
-        return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updateInterviewSlot,
+        return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInterviewSlot,
                 updatedTags, updatedJobTitle);
     }
 
@@ -139,6 +138,7 @@ public class EditCommand extends Command {
      */
     public static class EditApplicationDescriptor {
         private Name name;
+        private JobTitle jobTitle;
         private Phone phone;
         private Email email;
         private Address address;
@@ -153,6 +153,7 @@ public class EditCommand extends Command {
          */
         public EditApplicationDescriptor(EditApplicationDescriptor toCopy) {
             setName(toCopy.name);
+            setJobTitle(toCopy.jobTitle);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -164,7 +165,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, interviewSlot);
+            return CollectionUtil.isAnyNonNull(name, jobTitle, phone, email, address, tags, interviewSlot);
         }
 
         public void setName(Name name) {
@@ -173,6 +174,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setJobTitle(JobTitle jobTitle) {
+            this.jobTitle = jobTitle;
+        }
+
+        public Optional<JobTitle> getJobTitle() {
+            return Optional.ofNullable(jobTitle);
         }
 
         public void setPhone(Phone phone) {
@@ -191,12 +200,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public Optional<InterviewSlot> getInterviewSlot() {
-            return Optional.ofNullable(interviewSlot);
-        }
-
         public void setInterviewSlot(InterviewSlot interviewSlot) {
             this.interviewSlot = interviewSlot;
+        }
+
+        public Optional<InterviewSlot> getInterviewSlot() {
+            return Optional.ofNullable(interviewSlot);
         }
 
         public void setAddress(Address address) {
@@ -240,6 +249,7 @@ public class EditCommand extends Command {
             EditApplicationDescriptor e = (EditApplicationDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getJobTitle().equals(e.getJobTitle())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
