@@ -20,17 +20,17 @@ import seedu.address.model.InternApplyMemory;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 
 public class JsonInternApplyStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonInternApplyStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readInternApplyMemory_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readInternApplyMemory(null));
     }
 
-    private java.util.Optional<ReadOnlyInternApplyMemory> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyInternApplyMemory> readInternApplyMemory(String filePath) throws Exception {
         return new JsonInternApplyStorage(Paths.get(filePath))
                 .readInternApplyMemory(addToTestDataPathIfNotNull(filePath));
     }
@@ -43,69 +43,69 @@ public class JsonInternApplyStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readInternApplyMemory("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readInternApplyMemory("notJsonFormatInternApplyMemory.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readInternApplyMemory_invalidApplicationInternApplyMemory_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readInternApplyMemory("invalidApplicationInternApplyMemory.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readInternApplyMemory_invalidAndValidApplicationInternApplyMemory_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readInternApplyMemory("invalidAndValidApplicationInternApplyMemory.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readAndSaveInternApplyMemory_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempInternApplyMemory.json");
         InternApplyMemory original = getTypicalInternApplyMemory();
-        JsonInternApplyStorage jsonAddressBookStorage = new JsonInternApplyStorage(filePath);
+        JsonInternApplyStorage jsonInternApplyStorage = new JsonInternApplyStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveInternApply(original, filePath);
-        ReadOnlyInternApplyMemory readBack = jsonAddressBookStorage.readInternApplyMemory(filePath).get();
+        jsonInternApplyStorage.saveInternApply(original, filePath);
+        ReadOnlyInternApplyMemory readBack = jsonInternApplyStorage.readInternApplyMemory(filePath).get();
         assertEquals(original, new InternApplyMemory(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addApplication(HOON);
         original.removeApplication(GRAB);
-        jsonAddressBookStorage.saveInternApply(original, filePath);
-        readBack = jsonAddressBookStorage.readInternApplyMemory(filePath).get();
+        jsonInternApplyStorage.saveInternApply(original, filePath);
+        readBack = jsonInternApplyStorage.readInternApplyMemory(filePath).get();
         assertEquals(original, new InternApplyMemory(readBack));
 
         // Save and read without specifying file path
         original.addApplication(IDA);
-        jsonAddressBookStorage.saveInternApply(original); // file path not specified
-        readBack = jsonAddressBookStorage.readInternApplyMemory().get(); // file path not specified
+        jsonInternApplyStorage.saveInternApply(original); // file path not specified
+        readBack = jsonInternApplyStorage.readInternApplyMemory().get(); // file path not specified
         assertEquals(original, new InternApplyMemory(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveInternApplyMemory_nullInternApplyMemory_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveInternApplyMemory(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code internApplyMemory} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyInternApplyMemory addressBook, String filePath) {
+    private void saveInternApplyMemory(ReadOnlyInternApplyMemory internApplyMemory, String filePath) {
         try {
             new JsonInternApplyStorage(Paths.get(filePath))
-                    .saveInternApply(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveInternApply(internApplyMemory, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new InternApplyMemory(), null));
+    public void saveInternApplyMemory_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveInternApplyMemory(new InternApplyMemory(), null));
     }
 }
