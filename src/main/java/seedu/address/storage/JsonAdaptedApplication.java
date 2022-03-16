@@ -140,7 +140,7 @@ class JsonAdaptedApplication {
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
-        return new Application(modelName, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
-                modelTags, modelJobTitle);
+        return new Application(modelName, modelJobTitle, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
+                modelTags);
     }
 }
