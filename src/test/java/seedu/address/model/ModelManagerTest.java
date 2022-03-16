@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.InternApplyMemoryBuilder;
 
 public class ModelManagerTest {
 
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        InternApplyMemory addressBook = new AddressBookBuilder().withPerson(SHOPEE).withPerson(GARENA).build();
+        InternApplyMemory addressBook = new InternApplyMemoryBuilder().withApplication(SHOPEE).withApplication(GARENA).build();
         InternApplyMemory differentAddressBook = new InternApplyMemory();
         UserPrefs userPrefs = new UserPrefs();
 
