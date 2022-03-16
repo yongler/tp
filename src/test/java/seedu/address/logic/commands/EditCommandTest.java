@@ -50,16 +50,16 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredApplicationList().size());
-        Application lastApplication = model.getFilteredApplicationList().get(indexLastPerson.getZeroBased());
+        Index indexLastApplication = Index.fromOneBased(model.getFilteredApplicationList().size());
+        Application lastApplication = model.getFilteredApplicationList().get(indexLastApplication.getZeroBased());
 
-        ApplicationBuilder personInList = new ApplicationBuilder(lastApplication);
-        Application editedApplication = personInList.withName(VALID_NAME_GARENA).withPhone(VALID_PHONE_GARENA)
+        ApplicationBuilder applicationInList = new ApplicationBuilder(lastApplication);
+        Application editedApplication = applicationInList.withName(VALID_NAME_GARENA).withPhone(VALID_PHONE_GARENA)
                 .withTags(VALID_TAG_LOCAL).build();
 
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_GARENA)
                 .withPhone(VALID_PHONE_GARENA).withTags(VALID_TAG_LOCAL).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastApplication, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS, editedApplication);
 
@@ -100,7 +100,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateApplicationUnfilteredList_failure() {
         Application firstApplication = model.getFilteredApplicationList().get(INDEX_FIRST_APPLICATION.getZeroBased());
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(firstApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_APPLICATION, descriptor);
@@ -109,10 +109,10 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateApplicationFilteredList_failure() {
         showApplicationAtIndex(model, INDEX_FIRST_APPLICATION);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit application in filtered list into a duplicate in intern apply memory
         Application applicationInList = model.getInternApplyMemory().getApplicationList()
                 .get(INDEX_SECOND_APPLICATION.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_APPLICATION,
@@ -122,7 +122,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidApplicationIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicationList().size() + 1);
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_GARENA).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -132,13 +132,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of intern apply memory
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidApplicationIndexFilteredList_failure() {
         showApplicationAtIndex(model, INDEX_FIRST_APPLICATION);
         Index outOfBoundIndex = INDEX_SECOND_APPLICATION;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of intern apply memory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInternApplyMemory().getApplicationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
