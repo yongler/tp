@@ -26,7 +26,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newApplication_success() {
         Application validApplication = new ApplicationBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInternApplyMemory(), new UserPrefs());
@@ -37,7 +37,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateApplication_throwsCommandException() {
         Application applicationInList = model.getInternApplyMemory().getApplicationList().get(0);
         assertCommandFailure(new AddCommand(applicationInList), model, AddCommand.MESSAGE_DUPLICATE_APPLICATION);
     }
