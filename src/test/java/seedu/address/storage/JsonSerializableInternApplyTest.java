@@ -41,7 +41,7 @@ public class JsonSerializableInternApplyTest {
     public void toModelType_duplicateApplications_throwsIllegalValueException() throws Exception {
         JsonSerializableInternApply dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableInternApply.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableInternApply.MESSAGE_DUPLICATE_PERSON,
+        assertThrows(IllegalValueException.class, JsonSerializableInternApply.MESSAGE_DUPLICATE_APPLICATION,
                 dataFromFile::toModelType);
     }
 
