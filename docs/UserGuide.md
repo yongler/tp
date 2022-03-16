@@ -91,6 +91,26 @@ Shows a list of all applications in SoC InternApply.
 
 Format: `list`
 
+### Editing an application : `edit`
+
+Edits an existing application in SoC InternApply.
+
+Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... \
+[pt/PRIORITY_TAG] [ast/APPLICATION STATUS_TAG]`
+- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed peron 
+list. The index **must be a positive integer** 1, 2, 3, ...
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing `TAG`'s, the existing tags of the application will be removed.
+- You can remove all the person's `TAG`'s by typing `t/` without specifying any tags after it.
+- You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
+
+Examples:
+- `edit 1 e/SoCStudent@example.com n/John Doe` Edits the email and name of the 1st application to be 
+`SoCStudent@example.com` and `John Doe` respectively.
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview
+date time.
+
 ### Deleting a person : `delete`
 
 Deletes the specified application from SoC InternApply.
