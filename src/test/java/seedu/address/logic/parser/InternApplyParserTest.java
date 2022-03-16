@@ -53,6 +53,7 @@ public class InternApplyParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST_APPLICATION), command);
     }
 
+    //TODO: Fix @Test parseCommand_edit()
     //@Test
     public void parseCommand_edit() throws Exception {
         Application application = new ApplicationBuilder().build();
