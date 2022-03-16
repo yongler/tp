@@ -46,19 +46,6 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        switch(tagName.toUpperCase()) {
-        case "HIGH":
-        case "MEDIUM":
-        case "LOW":
-            return new Tag(tagName, TagType.PRIORITY);
-        case "NOT_APPLIED":
-        case "APPLIED":
-        case "INTERVIEWED":
-        case "REJECTED":
-        case "ACCEPTED":
-            return new Tag(tagName, TagType.APPLICATION_STATUS);
-        default:
-            return new Tag(tagName);
-        }
+        return new Tag(tagName);
     }
 }
