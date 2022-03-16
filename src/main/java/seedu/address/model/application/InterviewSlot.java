@@ -42,16 +42,13 @@ public class InterviewSlot {
     /**
      * Returns true if a given string is a valid date and time.
      */
-    public static boolean isValidDateTime(String test) {
-        if (test.length() == 16) {
-            try {
-                toLocalDateTime(test);
-                return true;
-            } catch (DateTimeParseException e) {
-                return false;
-            }
+    public static boolean isValidDateTime(String input) {
+        try {
+            toLocalDateTime(input);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
-        return false;
     }
 
     // TODO: Fix February parsing issue.

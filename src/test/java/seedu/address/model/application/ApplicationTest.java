@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERSHIPSLOT_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
@@ -87,7 +87,7 @@ public class ApplicationTest {
         assertFalse(GRAB.equals(editedGrab));
 
         //different interview slot -> return false
-        editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_INTERSHIPSLOT_GARENA).build();
+        editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_INTERVIEW_SLOT_GARENA).build();
         assertFalse(GRAB.equals(editedGrab));
 
         // different tags -> returns false

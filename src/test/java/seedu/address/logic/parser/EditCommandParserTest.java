@@ -22,8 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERSHIPSLOT_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERSHIPSLOT_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
@@ -124,7 +124,7 @@ public class EditCommandParserTest {
 
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_SHOPEE)
                 .withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_SHOPEE).withAddress(VALID_ADDRESS_SHOPEE)
-                .withInterviewSlot(VALID_INTERSHIPSLOT_SHOPEE)
+                .withInterviewSlot(VALID_INTERVIEW_SLOT_SHOPEE)
                 .withTags(VALID_TAG_LOCAL, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -167,7 +167,7 @@ public class EditCommandParserTest {
 
         // interview slot
         userInput = targetIndex.getOneBased() + INTERVIEWSLOT_DESC_GARENA;
-        descriptor = new EditApplicationDescriptorBuilder().withInterviewSlot(VALID_INTERSHIPSLOT_GARENA).build();
+        descriptor = new EditApplicationDescriptorBuilder().withInterviewSlot(VALID_INTERVIEW_SLOT_GARENA).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

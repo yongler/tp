@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_GARENA = "22222222";
     public static final String VALID_EMAIL_SHOPEE = "shopee@example.com";
     public static final String VALID_EMAIL_GARENA = "garena@example.com";
-    public static final String VALID_INTERSHIPSLOT_SHOPEE = "02-12-2030 13:00";
-    public static final String VALID_INTERSHIPSLOT_GARENA = "02-12-2035 13:00";
+    public static final String VALID_INTERVIEW_SLOT_SHOPEE = "02-12-2030 13:00";
+    public static final String VALID_INTERVIEW_SLOT_GARENA = "02-12-2035 13:00";
     public static final String VALID_ADDRESS_SHOPEE = "Block 312, Shopee Street 1";
     public static final String VALID_ADDRESS_GARENA = "Block 123, Garena Street 3";
     public static final String VALID_TAG_LOCAL = "local";
@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_GARENA = " " + PREFIX_EMAIL + VALID_EMAIL_GARENA;
     public static final String ADDRESS_DESC_SHOPEE = " " + PREFIX_ADDRESS + VALID_ADDRESS_SHOPEE;
     public static final String ADDRESS_DESC_GARENA = " " + PREFIX_ADDRESS + VALID_ADDRESS_GARENA;
-    public static final String INTERVIEWSLOT_DESC_SHOPEE = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERSHIPSLOT_SHOPEE;
-    public static final String INTERVIEWSLOT_DESC_GARENA = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERSHIPSLOT_GARENA;
+    public static final String INTERVIEWSLOT_DESC_SHOPEE = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERVIEW_SLOT_SHOPEE;
+    public static final String INTERVIEWSLOT_DESC_GARENA = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERVIEW_SLOT_GARENA;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_LOCAL = " " + PREFIX_TAG + VALID_TAG_LOCAL;
     public static final String JOBTITLE_DESC_SHOPEE = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_SHOPEE;
