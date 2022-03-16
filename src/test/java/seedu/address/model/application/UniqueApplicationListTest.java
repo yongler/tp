@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.application.exceptions.ApplicationNotFoundException;
 import seedu.address.model.application.exceptions.DuplicateApplicationException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicationBuilder;
 
 public class UniqueApplicationListTest {
 
@@ -42,7 +42,7 @@ public class UniqueApplicationListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicationList.add(SHOPEE);
-        Application editedAlice = new PersonBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueApplicationList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniqueApplicationListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueApplicationList.add(SHOPEE);
-        Application editedAlice = new PersonBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueApplicationList.setApplication(SHOPEE, editedAlice);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();

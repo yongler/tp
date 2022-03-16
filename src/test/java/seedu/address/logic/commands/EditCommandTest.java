@@ -25,7 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicationBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -36,7 +36,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Application editedApplication = new PersonBuilder().build(); // build application
+        Application editedApplication = new ApplicationBuilder().build(); // build application
         EditApplicationDescriptor descriptor = new EditPersonDescriptorBuilder(editedApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -53,7 +53,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredApplicationList().size());
         Application lastApplication = model.getFilteredApplicationList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastApplication);
+        ApplicationBuilder personInList = new ApplicationBuilder(lastApplication);
         Application editedApplication = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -87,7 +87,7 @@ public class EditCommandTest {
 
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_PERSON.getZeroBased());
-        Application editedApplication = new PersonBuilder(applicationInFilteredList).withName(VALID_NAME_BOB).build();
+        Application editedApplication = new ApplicationBuilder(applicationInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 

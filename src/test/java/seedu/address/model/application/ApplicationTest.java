@@ -13,13 +13,13 @@ import static seedu.address.testutil.TypicalPersons.SHOPEE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicationBuilder;
 
 public class ApplicationTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Application application = new PersonBuilder().build();
+        Application application = new ApplicationBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> application.getTags().remove(0));
     }
 
@@ -32,28 +32,28 @@ public class ApplicationTest {
         assertFalse(SHOPEE.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedAlice = new PersonBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(SHOPEE.isSameApplication(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
         assertFalse(SHOPEE.isSameApplication(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Application editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Application editedBob = new ApplicationBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameApplication(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new ApplicationBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameApplication(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Application aliceCopy = new PersonBuilder(SHOPEE).build();
+        Application aliceCopy = new ApplicationBuilder(SHOPEE).build();
         assertTrue(SHOPEE.equals(aliceCopy));
 
         // same object -> returns true
@@ -69,23 +69,23 @@ public class ApplicationTest {
         assertFalse(SHOPEE.equals(BOB));
 
         // different name -> returns false
-        Application editedAlice = new PersonBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(SHOPEE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(SHOPEE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(SHOPEE.equals(editedAlice));
     }
 }

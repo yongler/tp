@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicationBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -27,7 +27,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Application validApplication = new PersonBuilder().build();
+        Application validApplication = new ApplicationBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInternApplyMemory(), new UserPrefs());
         expectedModel.addApplication(validApplication);
