@@ -26,7 +26,7 @@ public class JsonSerializableInternApplyTest {
         JsonSerializableInternApply dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableInternApply.class).get();
         InternApplyMemory addressBookFromFile = dataFromFile.toModelType();
-        InternApplyMemory typicalPersonsAddressBook = TypicalApplications.getTypicalAddressBook();
+        InternApplyMemory typicalPersonsAddressBook = TypicalApplications.getTypicalInternApplyMemory();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

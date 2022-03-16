@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.HOON;
 import static seedu.address.testutil.TypicalApplications.IDA;
 import static seedu.address.testutil.TypicalApplications.SHOPEE;
-import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,7 +64,7 @@ public class JsonInternApplyStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        InternApplyMemory original = getTypicalAddressBook();
+        InternApplyMemory original = getTypicalInternApplyMemory();
         JsonInternApplyStorage jsonAddressBookStorage = new JsonInternApplyStorage(filePath);
 
         // Save in new file and read back

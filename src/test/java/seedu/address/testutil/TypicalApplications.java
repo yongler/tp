@@ -65,7 +65,7 @@ public class TypicalApplications {
     /**
      * Returns an {@code InternApplyMemory} with all the typical applications.
      */
-    public static InternApplyMemory getTypicalAddressBook() {
+    public static InternApplyMemory getTypicalInternApplyMemory() {
         InternApplyMemory iam = new InternApplyMemory();
         for (Application application : getTypicalApplications()) {
             iam.addApplication(application);
