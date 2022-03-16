@@ -27,7 +27,7 @@ import seedu.address.model.application.Application;
 import seedu.address.model.application.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditApplicationDescriptorBuilder;
 import seedu.address.testutil.ApplicationBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ApplicationUtil;
 
 public class InternApplyParserTest {
 
@@ -36,7 +36,7 @@ public class InternApplyParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Application application = new ApplicationBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(application));
+        AddCommand command = (AddCommand) parser.parseCommand(ApplicationUtil.getAddCommand(application));
         assertEquals(new AddCommand(application), command);
     }
 
@@ -58,7 +58,7 @@ public class InternApplyParserTest {
         Application application = new ApplicationBuilder().build();
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(application).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ApplicationUtil.getEditApplicationDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
