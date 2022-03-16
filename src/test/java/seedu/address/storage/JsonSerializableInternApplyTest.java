@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.InternApplyMemory;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalApplications;
 
 public class JsonSerializableInternApplyTest {
 
@@ -26,7 +26,7 @@ public class JsonSerializableInternApplyTest {
         JsonSerializableInternApply dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableInternApply.class).get();
         InternApplyMemory addressBookFromFile = dataFromFile.toModelType();
-        InternApplyMemory typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        InternApplyMemory typicalPersonsAddressBook = TypicalApplications.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

@@ -21,9 +21,9 @@ import seedu.address.model.InternApplyMemory;
 import seedu.address.model.application.Application;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Application} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalApplications {
 
     public static final Application SHOPEE = new ApplicationBuilder().withName("Shopee")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("hr@shopee.com")
@@ -50,7 +50,7 @@ public class TypicalPersons {
     public static final Application IDA = new ApplicationBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Application's details found in {@code CommandTestUtil}
     public static final Application AMY = new ApplicationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withTags(VALID_TAG_FRIEND).withJobTitle(VALID_JOBTITLE_AMY).build();
@@ -60,20 +60,20 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalApplications() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code InternApplyMemory} with all the typical applications.
      */
     public static InternApplyMemory getTypicalAddressBook() {
-        InternApplyMemory ab = new InternApplyMemory();
-        for (Application application : getTypicalPersons()) {
-            ab.addApplication(application);
+        InternApplyMemory iam = new InternApplyMemory();
+        for (Application application : getTypicalApplications()) {
+            iam.addApplication(application);
         }
-        return ab;
+        return iam;
     }
 
-    public static List<Application> getTypicalPersons() {
+    public static List<Application> getTypicalApplications() {
         return new ArrayList<>(Arrays.asList(SHOPEE, GARENA, SEAGROUP, SEATALK, SEAMONEY, SEAFIONA, SEAMARKETPLACE));
     }
 }

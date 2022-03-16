@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.GARENA;
-import static seedu.address.testutil.TypicalPersons.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GARENA;
+import static seedu.address.testutil.TypicalApplications.SHOPEE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

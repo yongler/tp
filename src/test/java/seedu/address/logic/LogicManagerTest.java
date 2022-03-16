@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalApplications.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
