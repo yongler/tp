@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
 
 /**
  * Adds an application to InternApply.
@@ -33,7 +35,9 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "87438807 "
             + PREFIX_EMAIL + "hr@shopee.sg "
             + PREFIX_ADDRESS + "5 Science Park Dr, #06-40 "
-            + PREFIX_TAG + "friends ";
+            + PREFIX_TAG + "Software Engineering "
+            + PREFIX_JOBTITLE + "Software Engineer Intern";
+
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply";
