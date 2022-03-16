@@ -1,27 +1,27 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SHOPEE;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOCAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -101,7 +101,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_LOCAL, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_SHOPEE + VALID_PHONE_SHOPEE,
+        assertParseFailure(parser, "1"
+                        + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_SHOPEE + VALID_PHONE_SHOPEE,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -136,7 +137,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_APPLICATION;
         String userInput = targetIndex.getOneBased() + NAME_DESC_SHOPEE;
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_SHOPEE).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withName(VALID_NAME_SHOPEE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -173,7 +175,8 @@ public class EditCommandParserTest {
                 + PHONE_DESC_GARENA + ADDRESS_DESC_GARENA + EMAIL_DESC_GARENA + TAG_DESC_LOCAL;
 
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withPhone(VALID_PHONE_GARENA)
-                .withEmail(VALID_EMAIL_GARENA).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_FRIEND, VALID_TAG_LOCAL)
+                .withEmail(VALID_EMAIL_GARENA).withAddress(VALID_ADDRESS_GARENA)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_LOCAL)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -185,7 +188,8 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_APPLICATION;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_GARENA;
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withPhone(VALID_PHONE_GARENA).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withPhone(VALID_PHONE_GARENA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

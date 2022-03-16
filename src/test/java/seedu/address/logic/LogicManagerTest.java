@@ -73,7 +73,8 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonInternApplyStorageIoExceptionThrowingStub
         JsonInternApplyStorage addressBookStorage =
-                new JsonInternApplyStorageIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInternApplyStorage.json"));
+                new JsonInternApplyStorageIoExceptionThrowingStub(temporaryFolder
+                        .resolve("ioExceptionInternApplyStorage.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);

@@ -46,7 +46,8 @@ public class InternApplyMemoryTest {
     @Test
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationException() {
         // Two applications with the same identity fields
-        Application editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        Application editedGrab = new ApplicationBuilder(GRAB)
+                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         List<Application> newApplications = Arrays.asList(GRAB, editedGrab);
         InternApplyMemoryStub newData = new InternApplyMemoryStub(newApplications);
@@ -73,7 +74,8 @@ public class InternApplyMemoryTest {
     @Test
     public void hasApplication_applicationWithSameIdentityFieldsInInternApplyMemory_returnsTrue() {
         internApplyMemory.addApplication(GRAB);
-        Application editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        Application editedGrab = new ApplicationBuilder(GRAB)
+                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         assertTrue(internApplyMemory.hasApplication(editedGrab));
     }

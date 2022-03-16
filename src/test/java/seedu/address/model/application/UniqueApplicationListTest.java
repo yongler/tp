@@ -42,7 +42,8 @@ public class UniqueApplicationListTest {
     @Test
     public void contains_applicationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicationList.add(GRAB);
-        Application editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        Application editedGrab = new ApplicationBuilder(GRAB)
+                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         assertTrue(uniqueApplicationList.contains(editedGrab));
     }
@@ -85,7 +86,8 @@ public class UniqueApplicationListTest {
     @Test
     public void setApplication_editedApplicationHasSameIdentity_success() {
         uniqueApplicationList.add(GRAB);
-        Application editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        Application editedGrab = new ApplicationBuilder(GRAB)
+                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         uniqueApplicationList.setApplication(GRAB, editedGrab);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();

@@ -155,8 +155,8 @@ public class JsonAdaptedApplicationTest {
 
     @Test
     public void toModelType_nullJobTitle_throwsIllegalValueException() {
-        JsonAdaptedApplication application = new JsonAdaptedApplication(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_INTEVIEWSLOT, VALID_TAGS, null);
+        JsonAdaptedApplication application = new JsonAdaptedApplication(VALID_NAME,
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_INTEVIEWSLOT, VALID_TAGS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, JobTitle.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, application::toModelType);
     }

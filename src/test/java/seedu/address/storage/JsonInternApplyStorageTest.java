@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.HOON;
 import static seedu.address.testutil.TypicalApplications.IDA;
-import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.io.IOException;
@@ -53,12 +53,14 @@ public class JsonInternApplyStorageTest {
 
     @Test
     public void readInternApplyMemory_invalidApplicationInternApplyMemory_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternApplyMemory("invalidApplicationInternApplyMemory.json"));
+        assertThrows(DataConversionException.class, () ->
+                readInternApplyMemory("invalidApplicationInternApplyMemory.json"));
     }
 
     @Test
     public void readInternApplyMemory_invalidAndValidApplicationInternApplyMemory_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternApplyMemory("invalidAndValidApplicationInternApplyMemory.json"));
+        assertThrows(DataConversionException.class, () ->
+                readInternApplyMemory("invalidAndValidApplicationInternApplyMemory.json"));
     }
 
     @Test
