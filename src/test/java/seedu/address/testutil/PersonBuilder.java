@@ -21,32 +21,32 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_JOBTITLE = "Intern";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_INTERVIEWSLOT = LocalDateTime.MAX.format(DateTimeFormatter
             .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_JOBTITLE = "Intern";
 
     private Name name;
+    private JobTitle jobTitle;
     private Phone phone;
     private Email email;
-    private InterviewSlot interviewSlot;
     private Address address;
+    private InterviewSlot interviewSlot;
     private Set<Tag> tags;
-    private JobTitle jobTitle;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         interviewSlot = new InterviewSlot(DEFAULT_INTERVIEWSLOT);
         tags = new HashSet<>();
-        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
     }
 
     /**
@@ -54,12 +54,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Application applicationToCopy) {
         name = applicationToCopy.getName();
+        jobTitle = applicationToCopy.getJobTitle();
         phone = applicationToCopy.getPhone();
         email = applicationToCopy.getEmail();
         address = applicationToCopy.getAddress();
         interviewSlot = applicationToCopy.getInterviewSlot();
         tags = new HashSet<>(applicationToCopy.getTags());
-        jobTitle = applicationToCopy.getJobTitle();
     }
 
     /**
@@ -67,6 +67,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code JobTitle} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withJobTitle(String jobTitle) {
+        this.jobTitle = new JobTitle(jobTitle);
         return this;
     }
 
@@ -110,16 +118,8 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code JobTitle} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withJobTitle(String jobTitle) {
-        this.jobTitle = new JobTitle(jobTitle);
-        return this;
-    }
-
     public Application build() {
-        return new Application(name, phone, email, address, interviewSlot, tags, jobTitle);
+        return new Application(name, jobTitle, phone, email, address, interviewSlot, tags);
     }
 
 }

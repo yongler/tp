@@ -110,8 +110,8 @@ public class EditCommand extends Command {
         InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
 
-        return new Application(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInterviewSlot,
-                updatedTags, updatedJobTitle);
+        return new Application(updatedName, updatedJobTitle, updatedPhone, updatedEmail, updatedAddress,
+                updatedInterviewSlot, updatedTags);
     }
 
     @Override
