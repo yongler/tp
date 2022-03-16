@@ -19,7 +19,7 @@ import seedu.address.model.application.Application;
 @JsonRootName(value = "internapply")
 class JsonSerializableInternApply {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Applications list contains duplicate application(s).";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "Applications list contains duplicate application(s).";
 
     private final List<JsonAdaptedApplication> persons = new ArrayList<>();
 
@@ -51,7 +51,7 @@ class JsonSerializableInternApply {
         for (JsonAdaptedApplication jsonAdaptedApplication : persons) {
             Application application = jsonAdaptedApplication.toModelType();
             if (internApplyMemory.hasApplication(application)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPLICATION);
             }
             internApplyMemory.addApplication(application);
         }

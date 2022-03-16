@@ -1,17 +1,17 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
-    "name" : "Shopee",
+    "name" : "Grab",
     "phone" : "94351253",
-    "email" : "hr@shopee.com",
+    "email" : "hr@grab.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "interviewSlot" : "13-02-2022 16:00",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
   }, {
-    "name" : "Garena",
+    "name" : "Lazada",
     "phone" : "98765432",
-    "email" : "sea@garena.com",
+    "email" : "lazada@sg.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "interviewSlot" : "13-03-2022 16:00",
     "tagged" : [ "owesMoney", "friends" ],

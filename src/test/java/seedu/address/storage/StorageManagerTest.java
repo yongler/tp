@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.nio.file.Path;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInternApplyStorage addressBookStorage = new JsonInternApplyStorage(getTempFilePath("ab"));
+        JsonInternApplyStorage internApplyStorage = new JsonInternApplyStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(internApplyStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void internApplyMemoryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonInternApplyStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonInternApplyStorageTest} class.
          */
-        InternApplyMemory original = getTypicalAddressBook();
+        InternApplyMemory original = getTypicalInternApplyMemory();
         storageManager.saveInternApply(original);
         ReadOnlyInternApplyMemory retrieved = storageManager.readInternApplyMemory().get();
         assertEquals(original, new InternApplyMemory(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getInternApplyMemoryFilePath() {
         assertNotNull(storageManager.getInternApplyFilePath());
     }
 

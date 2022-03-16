@@ -15,21 +15,21 @@ import seedu.address.model.application.Application;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Application.
  */
-public class PersonUtil {
+public class ApplicationUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code application}.
      */
     public static String getAddCommand(Application application) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(application);
+        return AddCommand.COMMAND_WORD + " " + getApplicationDetails(application);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code application}'s details.
      */
-    public static String getPersonDetails(Application application) {
+    public static String getApplicationDetails(Application application) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + application.getName().fullName + " ");
         sb.append(PREFIX_PHONE + application.getPhone().value + " ");
@@ -43,9 +43,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditApplicationDescriptor}'s descriptor.
      */
-    public static String getEditPersonDescriptorDetails(EditApplicationDescriptor descriptor) {
+    public static String getEditApplicationDescriptorDetails(EditApplicationDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

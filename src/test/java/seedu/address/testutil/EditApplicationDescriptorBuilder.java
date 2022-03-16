@@ -13,24 +13,24 @@ import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditApplicationDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditApplicationDescriptorBuilder {
 
     private EditApplicationDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditApplicationDescriptorBuilder() {
         descriptor = new EditApplicationDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditApplicationDescriptor descriptor) {
+    public EditApplicationDescriptorBuilder(EditApplicationDescriptor descriptor) {
         this.descriptor = new EditApplicationDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditApplicationDescriptor} with fields containing {@code application}'s details
      */
-    public EditPersonDescriptorBuilder(Application application) {
+    public EditApplicationDescriptorBuilder(Application application) {
         descriptor = new EditApplicationDescriptor();
         descriptor.setName(application.getName());
         descriptor.setPhone(application.getPhone());
@@ -41,42 +41,42 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditApplicationDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditApplicationDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditApplicationDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditApplicationDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
+    public EditApplicationDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditApplicationDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditApplicationDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;

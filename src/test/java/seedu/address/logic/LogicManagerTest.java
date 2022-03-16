@@ -3,13 +3,13 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_SHOPEE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalApplications.SHOPEE;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,7 +31,7 @@ import seedu.address.model.application.Application;
 import seedu.address.storage.JsonInternApplyStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicationBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInternApplyStorage addressBookStorage =
-                new JsonInternApplyStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonInternApplyStorage internApplyStorage =
+                new JsonInternApplyStorage(temporaryFolder.resolve("internapplymemory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(internApplyStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -71,18 +71,18 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonInternApplyStorageIoExceptionThrowingStub
         JsonInternApplyStorage addressBookStorage =
-                new JsonInternApplyIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonInternApplyStorageIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInternApplyStorage.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + JOBTITLE_DESC_AMY;
-        Application expectedApplication = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_SHOPEE + PHONE_DESC_SHOPEE + EMAIL_DESC_SHOPEE
+                + ADDRESS_DESC_SHOPEE + JOBTITLE_DESC_SHOPEE;
+        Application expectedApplication = new ApplicationBuilder(SHOPEE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplication(expectedApplication);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -90,7 +90,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredApplicationList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredApplicationsList().remove(0));
     }
 
@@ -150,8 +150,8 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonInternApplyIoExceptionThrowingStub extends JsonInternApplyStorage {
-        private JsonInternApplyIoExceptionThrowingStub(Path filePath) {
+    private static class JsonInternApplyStorageIoExceptionThrowingStub extends JsonInternApplyStorage {
+        private JsonInternApplyStorageIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
