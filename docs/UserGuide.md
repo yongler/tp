@@ -26,7 +26,7 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern` : Adds an application with company named `grab` to SIA.
+   * **`add`**`add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering` : Adds an application with company named `Shopee` to SIA.
 
    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
@@ -77,11 +77,11 @@ Format: `help`
 
 Adds an application to SoC InternApply.
 
-Format: `add n/<NAME_OF_COMPANY> p/<PHONE_NUMBER> a/<ADDRESS> j/<JOB_TITLE> e/<EMAIL> [t/<TAGS] [pt/<PRIORITY_TAG] [ast/<APPLICATION_STATUS_TAG]`
+Format: `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-**Note:** `[t/<TAGS]`, `[pt/<PRIORITY_TAG]` and `[ast/<APPLICATION_STATUS_TAG]` are optional. 
-* For `[pt/<PRIORITY_TAG]`, user input can be any of: `HIGH`, `MEDIUM`, `LOW`
-* For `[ast/<APPLICATION_STATUS_TAG]`, user input can be any of: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`
+**Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional. 
+* For `[pt/PRIORITY_TAG]`, user input can be any of: `HIGH`, `MEDIUM`, `LOW`
+* For `[ast/APPLICATION_STATUS_TAG]`, user input can be any of: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`
 * For the above 2 statements, the inputs are case-insensitive, i.e. `Applied`, `APPLIED` or `applied` are all accepted.
 
 Examples:
@@ -100,8 +100,7 @@ Edits an existing application in SoC InternApply.
 
 Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... \
 [pt/PRIORITY_TAG] [ast/APPLICATION STATUS_TAG]`
-- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed peron 
-list. The index **must be a positive integer** 1, 2, 3, ...
+- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed peron list. The index **must be a positive integer** 1, 2, 3, ...
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing `TAG`'s, the existing tags of the application will be removed.
@@ -109,10 +108,8 @@ list. The index **must be a positive integer** 1, 2, 3, ...
 - You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
 
 Examples:
-- `edit 1 e/SoCStudent@example.com n/John Doe` Edits the email and name of the 1st application to be 
-`SoCStudent@example.com` and `John Doe` respectively.
-- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview
-date time.
+- `edit 1 e/SoCStudent@example.com n/John Doe` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `John Doe` respectively.
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
 
 ### Deleting a person : `delete`
 
