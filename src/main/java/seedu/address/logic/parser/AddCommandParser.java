@@ -22,6 +22,7 @@ import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
+import seedu.address.model.tag.ApplicationStatusTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,9 +55,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         InterviewSlot interviewSlot = new InterviewSlot();
 
         if (arePrefixesPresent(argMultimap, PREFIX_PRIORITY_TAG)) {
-            Tag priorityTag = ParserUtil.parsePriorityTag(argMultimap.getValue(PREFIX_PRIORITY_TAG).get());
+            Tag priorityTag = ParserUtil.parsePriorityTag(
+                    argMultimap.getValue(PREFIX_PRIORITY_TAG).get());
             tagList.add(priorityTag);
         }
+
         if (arePrefixesPresent(argMultimap, PREFIX_APPLICATION_STATUS_TAG)) {
             Tag applicationStatusTag = ParserUtil.parseApplicationStatusTag(
                     argMultimap.getValue(PREFIX_APPLICATION_STATUS_TAG).get());

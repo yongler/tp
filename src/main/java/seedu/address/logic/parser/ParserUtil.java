@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Email;
@@ -15,6 +17,8 @@ import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagType;
 
@@ -146,6 +150,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+
         return new Tag(trimmedTag, TagType.JOB_SCOPE);
     }
 
@@ -157,11 +162,15 @@ public class ParserUtil {
      */
     public static Tag parseApplicationStatusTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().toUpperCase();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag.toUpperCase(), TagType.APPLICATION_STATUS);
+        if (!ApplicationStatusTagType.contains(trimmedTag)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_APPLICATION_STATUS_TAG));
+        }
+        return new Tag(trimmedTag, TagType.APPLICATION_STATUS);
     }
 
     /**
@@ -172,11 +181,15 @@ public class ParserUtil {
      */
     public static Tag parsePriorityTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().toUpperCase();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag.toUpperCase(), TagType.PRIORITY);
+        if (!PriorityTagType.contains(trimmedTag)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCommand.MESSAGE_PRIORITY_TAG));
+        }
+        return new Tag(trimmedTag, TagType.PRIORITY);
     }
 
     /**
