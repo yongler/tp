@@ -43,12 +43,16 @@ public class InterviewSlot {
      * Returns true if a given string is a valid date and time.
      */
     public static boolean isValidDateTime(String test) {
-        try {
-            toLocalDateTime(test);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
+        if (test.length() == 16) {
+            try {
+
+                toLocalDateTime(test);
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
         }
+        return false;
     }
 
     /**

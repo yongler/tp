@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
@@ -69,6 +70,14 @@ public class EditApplicationDescriptorBuilder {
      */
     public EditApplicationDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code InterviewSlot} of the {@code EditApplicationDescriptor} that we are building.
+     */
+    public EditApplicationDescriptorBuilder withInterviewSlot(String interviewSlot) {
+        descriptor.setInterviewSlot(new InterviewSlot(interviewSlot));
         return this;
     }
 
