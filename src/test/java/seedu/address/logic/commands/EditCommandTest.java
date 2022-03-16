@@ -24,7 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditApplicationDescriptorBuilder;
 import seedu.address.testutil.ApplicationBuilder;
 
 /**
@@ -37,7 +37,7 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Application editedApplication = new ApplicationBuilder().build(); // build application
-        EditApplicationDescriptor descriptor = new EditPersonDescriptorBuilder(editedApplication).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(editedApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS, editedApplication);
@@ -57,7 +57,7 @@ public class EditCommandTest {
         Application editedApplication = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditApplicationDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
@@ -89,7 +89,7 @@ public class EditCommandTest {
                 .get(INDEX_FIRST_PERSON.getZeroBased());
         Application editedApplication = new ApplicationBuilder(applicationInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditApplicationDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICATION_SUCCESS, editedApplication);
 
@@ -102,7 +102,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Application firstApplication = model.getFilteredApplicationList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditApplicationDescriptor descriptor = new EditPersonDescriptorBuilder(firstApplication).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(firstApplication).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICATION);
@@ -116,7 +116,7 @@ public class EditCommandTest {
         Application applicationInList = model.getInternApplyMemory().getApplicationList()
                 .get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder(applicationInList).build());
+                new EditApplicationDescriptorBuilder(applicationInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICATION);
     }
@@ -124,7 +124,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicationList().size() + 1);
-        EditApplicationDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
@@ -142,7 +142,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInternApplyMemory().getApplicationList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditApplicationDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
     }
