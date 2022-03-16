@@ -2,11 +2,11 @@ package seedu.address.model.application;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.BOB;
 import static seedu.address.testutil.TypicalApplications.SHOPEE;
@@ -32,20 +32,20 @@ public class ApplicationTest {
         assertFalse(SHOPEE.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
+                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL).build();
         assertTrue(SHOPEE.isSameApplication(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_GARENA).build();
         assertFalse(SHOPEE.isSameApplication(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Application editedBob = new ApplicationBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Application editedBob = new ApplicationBuilder(BOB).withName(VALID_NAME_GARENA.toLowerCase()).build();
         assertFalse(BOB.isSameApplication(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
+        String nameWithTrailingSpaces = VALID_NAME_GARENA + " ";
         editedBob = new ApplicationBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameApplication(editedBob));
     }
@@ -69,23 +69,23 @@ public class ApplicationTest {
         assertFalse(SHOPEE.equals(BOB));
 
         // different name -> returns false
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_BOB).build();
+        Application editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_GARENA).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_GARENA).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withEmail(VALID_EMAIL_GARENA).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).build();
         assertFalse(SHOPEE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new ApplicationBuilder(SHOPEE).withTags(VALID_TAG_LOCAL).build();
         assertFalse(SHOPEE.equals(editedAlice));
     }
 }

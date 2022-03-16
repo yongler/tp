@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,40 +20,40 @@ public class EditApplicationDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditApplicationDescriptor descriptorWithSameValues = new EditApplicationDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        EditApplicationDescriptor descriptorWithSameValues = new EditApplicationDescriptor(DESC_SHOPEE);
+        assertTrue(DESC_SHOPEE.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertTrue(DESC_SHOPEE.equals(DESC_SHOPEE));
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertFalse(DESC_SHOPEE.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertFalse(DESC_SHOPEE.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertFalse(DESC_SHOPEE.equals(DESC_GARENA));
 
         // different name -> returns false
         EditApplicationDescriptor editedAmy =
-                new EditApplicationDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+                new EditApplicationDescriptorBuilder(DESC_SHOPEE).withName(VALID_NAME_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withPhone(VALID_PHONE_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withEmail(VALID_EMAIL_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withAddress(VALID_ADDRESS_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withTags(VALID_TAG_LOCAL).build();
+        assertFalse(DESC_SHOPEE.equals(editedAmy));
     }
 }

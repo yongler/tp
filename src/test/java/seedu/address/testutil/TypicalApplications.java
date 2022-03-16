@@ -1,17 +1,17 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,12 +51,12 @@ public class TypicalApplications {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Application's details found in {@code CommandTestUtil}
-    public static final Application AMY = new ApplicationBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).withJobTitle(VALID_JOBTITLE_AMY).build();
-    public static final Application BOB = new ApplicationBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withJobTitle(VALID_JOBTITLE_BOB).build();
+    public static final Application AMY = new ApplicationBuilder().withName(VALID_NAME_SHOPEE).withPhone(VALID_PHONE_SHOPEE)
+            .withEmail(VALID_EMAIL_SHOPEE).withAddress(VALID_ADDRESS_SHOPEE)
+            .withTags(VALID_TAG_FRIEND).withJobTitle(VALID_JOBTITLE_SHOPEE).build();
+    public static final Application BOB = new ApplicationBuilder().withName(VALID_NAME_GARENA).withPhone(VALID_PHONE_GARENA)
+            .withEmail(VALID_EMAIL_GARENA).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL, VALID_TAG_FRIEND)
+            .withJobTitle(VALID_JOBTITLE_GARENA).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
