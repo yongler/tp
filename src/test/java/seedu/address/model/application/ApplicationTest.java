@@ -24,7 +24,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameApplication() {
         // same object -> returns true
         assertTrue(GRAB.isSameApplication(GRAB));
 
@@ -69,23 +69,23 @@ public class ApplicationTest {
         assertFalse(GRAB.equals(GARENA));
 
         // different name -> returns false
-        Application editedAlice = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
-        assertFalse(GRAB.equals(editedAlice));
+        Application editedGrab = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
+        assertFalse(GRAB.equals(editedGrab));
 
         // different phone -> returns false
-        editedAlice = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).build();
-        assertFalse(GRAB.equals(editedAlice));
+        editedGrab = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).build();
+        assertFalse(GRAB.equals(editedGrab));
 
         // different email -> returns false
-        editedAlice = new ApplicationBuilder(GRAB).withEmail(VALID_EMAIL_GARENA).build();
-        assertFalse(GRAB.equals(editedAlice));
+        editedGrab = new ApplicationBuilder(GRAB).withEmail(VALID_EMAIL_GARENA).build();
+        assertFalse(GRAB.equals(editedGrab));
 
         // different address -> returns false
-        editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).build();
-        assertFalse(GRAB.equals(editedAlice));
+        editedGrab = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).build();
+        assertFalse(GRAB.equals(editedGrab));
 
         // different tags -> returns false
-        editedAlice = new ApplicationBuilder(GRAB).withTags(VALID_TAG_LOCAL).build();
-        assertFalse(GRAB.equals(editedAlice));
+        editedGrab = new ApplicationBuilder(GRAB).withTags(VALID_TAG_LOCAL).build();
+        assertFalse(GRAB.equals(editedGrab));
     }
 }
