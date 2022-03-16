@@ -85,8 +85,8 @@ Format: `add n/<NAME_OF_COMPANY> p/<PHONE_NUMBER> a/<ADDRESS> j/<JOB_TITLE> e/<E
 * For the above 2 statements, the inputs are case-insensitive, i.e. `Applied`, `APPLIED` or `applied` are all accepted.
 
 Examples:
-* `add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern`
-* `add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern pt/HIGH ast/APPLIED`
+* `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering `
+* `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering pt/HIGH ast/APPLIED`
 
 ### Listing all applications : `list`
 
