@@ -36,24 +36,24 @@ public class EditApplicationDescriptorTest {
         assertFalse(DESC_SHOPEE.equals(DESC_GARENA));
 
         // different name -> returns false
-        EditApplicationDescriptor editedAmy =
+        EditApplicationDescriptor editedShopee =
                 new EditApplicationDescriptorBuilder(DESC_SHOPEE).withName(VALID_NAME_GARENA).build();
-        assertFalse(DESC_SHOPEE.equals(editedAmy));
+        assertFalse(DESC_SHOPEE.equals(editedShopee));
 
         // different phone -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withPhone(VALID_PHONE_GARENA).build();
-        assertFalse(DESC_SHOPEE.equals(editedAmy));
+        editedShopee = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withPhone(VALID_PHONE_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedShopee));
 
         // different email -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withEmail(VALID_EMAIL_GARENA).build();
-        assertFalse(DESC_SHOPEE.equals(editedAmy));
+        editedShopee = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withEmail(VALID_EMAIL_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedShopee));
 
         // different address -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withAddress(VALID_ADDRESS_GARENA).build();
-        assertFalse(DESC_SHOPEE.equals(editedAmy));
+        editedShopee = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withAddress(VALID_ADDRESS_GARENA).build();
+        assertFalse(DESC_SHOPEE.equals(editedShopee));
 
         // different tags -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withTags(VALID_TAG_LOCAL).build();
-        assertFalse(DESC_SHOPEE.equals(editedAmy));
+        editedShopee = new EditApplicationDescriptorBuilder(DESC_SHOPEE).withTags(VALID_TAG_LOCAL).build();
+        assertFalse(DESC_SHOPEE.equals(editedShopee));
     }
 }
