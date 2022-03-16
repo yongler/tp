@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
 
 /**
  * Adds an application to InternApply.
@@ -37,6 +39,12 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply";
+
+    public static final String MESSAGE_APPLICATION_STATUS_TAG = "Application status tag must be : "
+            + ApplicationStatusTagType.getAllTypesInString();
+
+    public static final String MESSAGE_PRIORITY_TAG = "Priority tag must be : "
+            + PriorityTagType.getAllTypesInString();
 
     private final Application toAdd;
 

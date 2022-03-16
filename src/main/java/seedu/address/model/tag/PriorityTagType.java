@@ -1,5 +1,35 @@
 package seedu.address.model.tag;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * A public enumeration class for priority tags.
+ */
 public enum PriorityTagType {
-    HIGH, MEDIUM, LOW
+    HIGH, MEDIUM, LOW;
+
+    /**
+     * Gets all enum values as strings.
+     * @return All enum values as a concatenated string.
+     */
+    public static String getAllTypesInString() {
+        return Stream.of(PriorityTagType.values())
+                .map((tag) -> tag.name())
+                .collect(Collectors.joining(", "));
+    }
+
+    /**
+     * Checks whether the given string is within the enum values.
+     * @param test String to test.
+     * @return True if the string is same as one of the enum values.
+     */
+    public static boolean contains(String test) {
+        for (PriorityTagType pt : PriorityTagType.values()) {
+            if (pt.name().equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
