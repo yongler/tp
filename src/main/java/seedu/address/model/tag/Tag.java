@@ -24,15 +24,21 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         switch(tagName.toUpperCase()) {
         case "HIGH":
+                //Fallthrough
         case "MEDIUM":
+                //Fallthrough
         case "LOW":
             this.tagName = tagName;
             this.tagType = TagType.PRIORITY;
             break;
         case "NOTAPPLIED":
+                //Fallthrough
         case "APPLIED":
+                //Fallthrough
         case "INTERVIEWED":
+                //Fallthrough
         case "REJECTED":
+                //Fallthrough
         case "ACCEPTED":
             this.tagName = tagName;
             this.tagType = TagType.APPLICATION_STATUS;
