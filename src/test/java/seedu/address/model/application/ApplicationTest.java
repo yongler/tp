@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.BOB;
-import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GARENA;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,66 +26,66 @@ public class ApplicationTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(SHOPEE.isSameApplication(SHOPEE));
+        assertTrue(GRAB.isSameApplication(GRAB));
 
         // null -> returns false
-        assertFalse(SHOPEE.isSameApplication(null));
+        assertFalse(GRAB.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
+        Application editedAlice = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
                 .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL).build();
-        assertTrue(SHOPEE.isSameApplication(editedAlice));
+        assertTrue(GRAB.isSameApplication(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_GARENA).build();
-        assertFalse(SHOPEE.isSameApplication(editedAlice));
+        editedAlice = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
+        assertFalse(GRAB.isSameApplication(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Application editedBob = new ApplicationBuilder(BOB).withName(VALID_NAME_GARENA.toLowerCase()).build();
-        assertFalse(BOB.isSameApplication(editedBob));
+        Application editedBob = new ApplicationBuilder(GARENA).withName(VALID_NAME_GARENA.toLowerCase()).build();
+        assertFalse(GARENA.isSameApplication(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_GARENA + " ";
-        editedBob = new ApplicationBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameApplication(editedBob));
+        editedBob = new ApplicationBuilder(GARENA).withName(nameWithTrailingSpaces).build();
+        assertFalse(GARENA.isSameApplication(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Application aliceCopy = new ApplicationBuilder(SHOPEE).build();
-        assertTrue(SHOPEE.equals(aliceCopy));
+        Application aliceCopy = new ApplicationBuilder(GRAB).build();
+        assertTrue(GRAB.equals(aliceCopy));
 
         // same object -> returns true
-        assertTrue(SHOPEE.equals(SHOPEE));
+        assertTrue(GRAB.equals(GRAB));
 
         // null -> returns false
-        assertFalse(SHOPEE.equals(null));
+        assertFalse(GRAB.equals(null));
 
         // different type -> returns false
-        assertFalse(SHOPEE.equals(5));
+        assertFalse(GRAB.equals(5));
 
         // different person -> returns false
-        assertFalse(SHOPEE.equals(BOB));
+        assertFalse(GRAB.equals(GARENA));
 
         // different name -> returns false
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withName(VALID_NAME_GARENA).build();
-        assertFalse(SHOPEE.equals(editedAlice));
+        Application editedAlice = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
+        assertFalse(GRAB.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withPhone(VALID_PHONE_GARENA).build();
-        assertFalse(SHOPEE.equals(editedAlice));
+        editedAlice = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).build();
+        assertFalse(GRAB.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withEmail(VALID_EMAIL_GARENA).build();
-        assertFalse(SHOPEE.equals(editedAlice));
+        editedAlice = new ApplicationBuilder(GRAB).withEmail(VALID_EMAIL_GARENA).build();
+        assertFalse(GRAB.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).build();
-        assertFalse(SHOPEE.equals(editedAlice));
+        editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).build();
+        assertFalse(GRAB.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ApplicationBuilder(SHOPEE).withTags(VALID_TAG_LOCAL).build();
-        assertFalse(SHOPEE.equals(editedAlice));
+        editedAlice = new ApplicationBuilder(GRAB).withTags(VALID_TAG_LOCAL).build();
+        assertFalse(GRAB.equals(editedAlice));
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        Application editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
-        List<Application> newApplications = Arrays.asList(SHOPEE, editedAlice);
+        List<Application> newApplications = Arrays.asList(GRAB, editedAlice);
         InternApplyMemoryStub newData = new InternApplyMemoryStub(newApplications);
 
         assertThrows(DuplicateApplicationException.class, () -> addressBook.resetData(newData));
@@ -61,19 +61,19 @@ public class AddressBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasApplication(SHOPEE));
+        assertFalse(addressBook.hasApplication(GRAB));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addApplication(SHOPEE);
-        assertTrue(addressBook.hasApplication(SHOPEE));
+        addressBook.addApplication(GRAB);
+        assertTrue(addressBook.hasApplication(GRAB));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addApplication(SHOPEE);
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        addressBook.addApplication(GRAB);
+        Application editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         assertTrue(addressBook.hasApplication(editedAlice));
     }

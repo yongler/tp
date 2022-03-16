@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.GARENA;
-import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.LAZADA;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasApplication(SHOPEE));
+        assertFalse(modelManager.hasApplication(GRAB));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addApplication(SHOPEE);
-        assertTrue(modelManager.hasApplication(SHOPEE));
+        modelManager.addApplication(GRAB);
+        assertTrue(modelManager.hasApplication(GRAB));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        InternApplyMemory addressBook = new InternApplyMemoryBuilder().withApplication(SHOPEE).withApplication(GARENA).build();
+        InternApplyMemory addressBook = new InternApplyMemoryBuilder().withApplication(GRAB).withApplication(LAZADA).build();
         InternApplyMemory differentAddressBook = new InternApplyMemory();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = SHOPEE.getName().fullName.split("\\s+");
+        String[] keywords = GRAB.getName().fullName.split("\\s+");
         modelManager.updateFilteredApplicationList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedApplication.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.GARENA;
+import static seedu.address.testutil.TypicalApplications.LAZADA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +28,20 @@ public class JsonAdaptedApplicationTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_JOBTITLE = "J@v@ Developer";
 
-    private static final String VALID_NAME = GARENA.getName().toString();
-    private static final String VALID_PHONE = GARENA.getPhone().toString();
-    private static final String VALID_EMAIL = GARENA.getEmail().toString();
-    private static final String VALID_ADDRESS = GARENA.getAddress().toString();
-    private static final String VALID_INTEVIEWSLOT = GARENA.getInterviewSlot().toInputString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = GARENA.getTags().stream()
+    private static final String VALID_NAME = LAZADA.getName().toString();
+    private static final String VALID_PHONE = LAZADA.getPhone().toString();
+    private static final String VALID_EMAIL = LAZADA.getEmail().toString();
+    private static final String VALID_ADDRESS = LAZADA.getAddress().toString();
+    private static final String VALID_INTEVIEWSLOT = LAZADA.getInterviewSlot().toInputString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = LAZADA.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_JOBTITLE = GARENA.getJobTitle().toString();
+    private static final String VALID_JOBTITLE = LAZADA.getJobTitle().toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedApplication person = new JsonAdaptedApplication(GARENA);
-        assertEquals(GARENA, person.toModelType());
+        JsonAdaptedApplication person = new JsonAdaptedApplication(LAZADA);
+        assertEquals(LAZADA, person.toModelType());
     }
 
     @Test

@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_SHOPEE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.AMY;
+import static seedu.address.testutil.TypicalApplications.SHOPEE;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -82,7 +82,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_SHOPEE + PHONE_DESC_SHOPEE + EMAIL_DESC_SHOPEE
                 + ADDRESS_DESC_SHOPEE + JOBTITLE_DESC_SHOPEE;
-        Application expectedApplication = new ApplicationBuilder(AMY).withTags().build();
+        Application expectedApplication = new ApplicationBuilder(SHOPEE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplication(expectedApplication);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

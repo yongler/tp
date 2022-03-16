@@ -30,8 +30,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalApplications.AMY;
-import static seedu.address.testutil.TypicalApplications.BOB;
+import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GARENA;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +51,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Application expectedApplication = new ApplicationBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Application expectedApplication = new ApplicationBuilder(GARENA).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_GARENA + PHONE_DESC_GARENA + EMAIL_DESC_GARENA
@@ -74,7 +74,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_GARENA + TAG_DESC_FRIEND + JOBTITLE_DESC_GARENA, new AddCommand(expectedApplication));
 
         // multiple tags - all accepted
-        Application expectedApplicationMultipleTags = new ApplicationBuilder(BOB)
+        Application expectedApplicationMultipleTags = new ApplicationBuilder(GARENA)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_LOCAL).build();
         String userInput = NAME_DESC_GARENA + PHONE_DESC_GARENA + EMAIL_DESC_GARENA + ADDRESS_DESC_GARENA
                 + TAG_DESC_LOCAL + TAG_DESC_FRIEND + JOBTITLE_DESC_GARENA;
@@ -90,7 +90,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Application expectedApplication = new ApplicationBuilder(AMY).withTags().build();
+        Application expectedApplication = new ApplicationBuilder(SHOPEE).withTags().build();
         assertParseSuccess(parser, NAME_DESC_SHOPEE + PHONE_DESC_SHOPEE + EMAIL_DESC_SHOPEE + ADDRESS_DESC_SHOPEE
                         + JOBTITLE_DESC_SHOPEE,
                 new AddCommand(expectedApplication));

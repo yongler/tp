@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.HOON;
 import static seedu.address.testutil.TypicalApplications.IDA;
-import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class JsonInternApplyStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addApplication(HOON);
-        original.removeApplication(SHOPEE);
+        original.removeApplication(GRAB);
         jsonAddressBookStorage.saveInternApply(original, filePath);
         readBack = jsonAddressBookStorage.readInternApplyMemory(filePath).get();
         assertEquals(original, new InternApplyMemory(readBack));

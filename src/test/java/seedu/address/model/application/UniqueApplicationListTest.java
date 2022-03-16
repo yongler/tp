@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplications.BOB;
-import static seedu.address.testutil.TypicalApplications.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.GARENA;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,19 +30,19 @@ public class UniqueApplicationListTest {
 
     @Test
     public void contains_personNotInList_returnsFalse() {
-        assertFalse(uniqueApplicationList.contains(SHOPEE));
+        assertFalse(uniqueApplicationList.contains(GRAB));
     }
 
     @Test
     public void contains_personInList_returnsTrue() {
-        uniqueApplicationList.add(SHOPEE);
-        assertTrue(uniqueApplicationList.contains(SHOPEE));
+        uniqueApplicationList.add(GRAB);
+        assertTrue(uniqueApplicationList.contains(GRAB));
     }
 
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueApplicationList.add(SHOPEE);
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        uniqueApplicationList.add(GRAB);
+        Application editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
         assertTrue(uniqueApplicationList.contains(editedAlice));
     }
@@ -54,40 +54,40 @@ public class UniqueApplicationListTest {
 
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniqueApplicationList.add(SHOPEE);
-        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList.add(SHOPEE));
+        uniqueApplicationList.add(GRAB);
+        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList.add(GRAB));
     }
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicationList.setApplication(null, SHOPEE));
+        assertThrows(NullPointerException.class, () -> uniqueApplicationList.setApplication(null, GRAB));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueApplicationList.setApplication(SHOPEE, null));
+        assertThrows(NullPointerException.class, () -> uniqueApplicationList.setApplication(GRAB, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(ApplicationNotFoundException.class, () -> uniqueApplicationList.setApplication(SHOPEE, SHOPEE));
+        assertThrows(ApplicationNotFoundException.class, () -> uniqueApplicationList.setApplication(GRAB, GRAB));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
-        uniqueApplicationList.add(SHOPEE);
-        uniqueApplicationList.setApplication(SHOPEE, SHOPEE);
+        uniqueApplicationList.add(GRAB);
+        uniqueApplicationList.setApplication(GRAB, GRAB);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
-        expectedUniqueApplicationList.add(SHOPEE);
+        expectedUniqueApplicationList.add(GRAB);
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
     }
 
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
-        uniqueApplicationList.add(SHOPEE);
-        Application editedAlice = new ApplicationBuilder(SHOPEE).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+        uniqueApplicationList.add(GRAB);
+        Application editedAlice = new ApplicationBuilder(GRAB).withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
                 .build();
-        uniqueApplicationList.setApplication(SHOPEE, editedAlice);
+        uniqueApplicationList.setApplication(GRAB, editedAlice);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
         expectedUniqueApplicationList.add(editedAlice);
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
@@ -95,18 +95,18 @@ public class UniqueApplicationListTest {
 
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
-        uniqueApplicationList.add(SHOPEE);
-        uniqueApplicationList.setApplication(SHOPEE, BOB);
+        uniqueApplicationList.add(GRAB);
+        uniqueApplicationList.setApplication(GRAB, GARENA);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
-        expectedUniqueApplicationList.add(BOB);
+        expectedUniqueApplicationList.add(GARENA);
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
     }
 
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
-        uniqueApplicationList.add(SHOPEE);
-        uniqueApplicationList.add(BOB);
-        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList.setApplication(SHOPEE, BOB));
+        uniqueApplicationList.add(GRAB);
+        uniqueApplicationList.add(GARENA);
+        assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList.setApplication(GRAB, GARENA));
     }
 
     @Test
@@ -116,13 +116,13 @@ public class UniqueApplicationListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(ApplicationNotFoundException.class, () -> uniqueApplicationList.remove(SHOPEE));
+        assertThrows(ApplicationNotFoundException.class, () -> uniqueApplicationList.remove(GRAB));
     }
 
     @Test
     public void remove_existingPerson_removesPerson() {
-        uniqueApplicationList.add(SHOPEE);
-        uniqueApplicationList.remove(SHOPEE);
+        uniqueApplicationList.add(GRAB);
+        uniqueApplicationList.remove(GRAB);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
     }
@@ -135,9 +135,9 @@ public class UniqueApplicationListTest {
 
     @Test
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
-        uniqueApplicationList.add(SHOPEE);
+        uniqueApplicationList.add(GRAB);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
-        expectedUniqueApplicationList.add(BOB);
+        expectedUniqueApplicationList.add(GARENA);
         uniqueApplicationList.setApplications(expectedUniqueApplicationList);
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
     }
@@ -149,17 +149,17 @@ public class UniqueApplicationListTest {
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
-        uniqueApplicationList.add(SHOPEE);
-        List<Application> applicationList = Collections.singletonList(BOB);
+        uniqueApplicationList.add(GRAB);
+        List<Application> applicationList = Collections.singletonList(GARENA);
         uniqueApplicationList.setApplications(applicationList);
         UniqueApplicationList expectedUniqueApplicationList = new UniqueApplicationList();
-        expectedUniqueApplicationList.add(BOB);
+        expectedUniqueApplicationList.add(GARENA);
         assertEquals(expectedUniqueApplicationList, uniqueApplicationList);
     }
 
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Application> listWithDuplicateApplications = Arrays.asList(SHOPEE, SHOPEE);
+        List<Application> listWithDuplicateApplications = Arrays.asList(GRAB, GRAB);
         assertThrows(DuplicateApplicationException.class, () -> uniqueApplicationList
                 .setApplications(listWithDuplicateApplications));
     }
