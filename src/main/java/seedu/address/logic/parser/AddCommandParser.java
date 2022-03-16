@@ -22,7 +22,6 @@ import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
-import seedu.address.model.tag.ApplicationStatusTagType;
 import seedu.address.model.tag.Tag;
 
 /**

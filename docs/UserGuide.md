@@ -26,7 +26,7 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/Grab j/Software Engineering Intern e/johnd@example.com` : Adds an application with company named `grab` to SIA.
+   * **`add`**`add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern` : Adds an application with company named `grab` to SIA.
 
    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
@@ -77,13 +77,16 @@ Format: `help`
 
 Adds an application to SoC InternApply.
 
-Format: `add <NAME_OF_COMPANY> <JOB_TITLE> <EMAIL> [<STATUS>]`
+Format: `add n/<NAME_OF_COMPANY> p/<PHONE_NUMBER> a/<ADDRESS> j/<JOB_TITLE> e/<EMAIL> [t/<TAGS] [pt/<PRIORITY_TAG] [ast/<APPLICATION_STATUS_TAG]`
 
-**Note:** `[<STATUS>]` is optional. For advanced users SoC InternApply.
+**Note:** `[t/<TAGS]`, `[pt/<PRIORITY_TAG]` and `[ast/<APPLICATION_STATUS_TAG]` are optional. 
+* For `[pt/<PRIORITY_TAG]`, user input can be any of: `HIGH`, `MEDIUM`, `LOW`
+* For `[ast/<APPLICATION_STATUS_TAG]`, user input can be any of: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`
+* For the above 2 statements, the inputs are case-insensitive, i.e. `Applied`, `APPLIED` or `applied` are all accepted.
 
 Examples:
-* `add n/Grab j/Software Engineering Intern e/johnd@example.com`
-* `add n/Singtel j/UIUX Intern e/betsycrowe@example.com s/Applied`
+* `add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern`
+* `add n/Shopee p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering j/Software Engineer Intern pt/HIGH ast/APPLIED`
 
 ### Listing all applications : `list`
 
