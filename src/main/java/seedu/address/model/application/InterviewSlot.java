@@ -45,7 +45,6 @@ public class InterviewSlot {
     public static boolean isValidDateTime(String test) {
         if (test.length() == 16) {
             try {
-
                 toLocalDateTime(test);
                 return true;
             } catch (DateTimeParseException e) {
@@ -54,6 +53,8 @@ public class InterviewSlot {
         }
         return false;
     }
+
+    // TODO: Fix February parsing issue.
 
     /**
      * Returns true if a given string is a placeholder for an empty date and time.

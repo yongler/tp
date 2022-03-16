@@ -49,8 +49,7 @@ public class InterviewSlotTest {
 
         //assertFalse(InterviewSlot.isValidDateTime("30-02-2022 15:30")); // invalid date
         // TODO: Update February parsing issue.
-
-
+        
         // valid interview slot
         assertTrue(InterviewSlot.isValidDateTime("01-01-1995 00:00")); // Midnight
         assertTrue(InterviewSlot.isValidDateTime("30-03-2022 15:00")); //
