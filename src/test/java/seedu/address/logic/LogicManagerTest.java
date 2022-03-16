@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInternApplyStorage addressBookStorage =
-                new JsonInternApplyStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonInternApplyStorage internApplyStorage =
+                new JsonInternApplyStorage(temporaryFolder.resolve("internapplymemory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(internApplyStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -71,9 +71,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup LogicManager with JsonInternApplyStorageIoExceptionThrowingStub
         JsonInternApplyStorage addressBookStorage =
-                new JsonInternApplyIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonInternApplyStorageIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionInternApplyStorage.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -90,7 +90,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredApplicationList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredApplicationsList().remove(0));
     }
 
@@ -150,8 +150,8 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonInternApplyIoExceptionThrowingStub extends JsonInternApplyStorage {
-        private JsonInternApplyIoExceptionThrowingStub(Path filePath) {
+    private static class JsonInternApplyStorageIoExceptionThrowingStub extends JsonInternApplyStorage {
+        private JsonInternApplyStorageIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
