@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.GARENA;
-import static seedu.address.testutil.TypicalPersons.SHOPEE;
+import static seedu.address.testutil.TypicalApplications.LAZADA;
+import static seedu.address.testutil.TypicalApplications.GRAB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.InternApplyMemoryBuilder;
 
 public class ModelManagerTest {
 
@@ -61,47 +61,47 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setInternApplyMemoryFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setInternApplyMemoryFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setInternApplyMemoryFilePath_validPath_setsInternApplyMemoryFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setInternApplyMemoryFilePath(path);
         assertEquals(path, modelManager.getInternApplyMemoryFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasApplication_nullApplication_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasApplication(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasApplication(SHOPEE));
+    public void hasApplication_applicationNotInInternApplyMemory_returnsFalse() {
+        assertFalse(modelManager.hasApplication(GRAB));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addApplication(SHOPEE);
-        assertTrue(modelManager.hasApplication(SHOPEE));
+    public void hasApplication_applicationInInternApplyMemory_returnsTrue() {
+        modelManager.addApplication(GRAB);
+        assertTrue(modelManager.hasApplication(GRAB));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredApplicationList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredApplicationList().remove(0));
     }
 
     @Test
     public void equals() {
-        InternApplyMemory addressBook = new AddressBookBuilder().withPerson(SHOPEE).withPerson(GARENA).build();
-        InternApplyMemory differentAddressBook = new InternApplyMemory();
+        InternApplyMemory internApplyMemory = new InternApplyMemoryBuilder().withApplication(GRAB).withApplication(LAZADA).build();
+        InternApplyMemory differentInternApplyMemory = new InternApplyMemory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(internApplyMemory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(internApplyMemory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,13 +113,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different internApplyMemory -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentInternApplyMemory, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = SHOPEE.getName().fullName.split("\\s+");
+        String[] keywords = GRAB.getName().fullName.split("\\s+");
         modelManager.updateFilteredApplicationList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(internApplyMemory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
@@ -127,6 +127,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setInternApplyMemoryFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(internApplyMemory, differentUserPrefs)));
     }
 }
