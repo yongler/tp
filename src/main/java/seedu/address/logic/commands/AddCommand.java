@@ -11,8 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
-import seedu.address.model.tag.ApplicationStatusTagType;
-import seedu.address.model.tag.PriorityTagType;
 
 /**
  * Adds an application to InternApply.
