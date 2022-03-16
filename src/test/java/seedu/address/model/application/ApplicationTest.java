@@ -32,22 +32,22 @@ public class ApplicationTest {
         assertFalse(GRAB.isSameApplication(null));
 
         // same name, all other attributes different -> returns true
-        Application editedAlice = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
+        Application editedGrab = new ApplicationBuilder(GRAB).withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
                 .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL).build();
-        assertTrue(GRAB.isSameApplication(editedAlice));
+        assertTrue(GRAB.isSameApplication(editedGrab));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
-        assertFalse(GRAB.isSameApplication(editedAlice));
+        editedGrab = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
+        assertFalse(GRAB.isSameApplication(editedGrab));
 
         // name differs in case, all other attributes same -> returns false
-        Application editedBob = new ApplicationBuilder(GARENA).withName(VALID_NAME_GARENA.toLowerCase()).build();
-        assertFalse(GARENA.isSameApplication(editedBob));
+        Application editedGarena = new ApplicationBuilder(GARENA).withName(VALID_NAME_GARENA.toLowerCase()).build();
+        assertFalse(GARENA.isSameApplication(editedGarena));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_GARENA + " ";
-        editedBob = new ApplicationBuilder(GARENA).withName(nameWithTrailingSpaces).build();
-        assertFalse(GARENA.isSameApplication(editedBob));
+        editedGarena = new ApplicationBuilder(GARENA).withName(nameWithTrailingSpaces).build();
+        assertFalse(GARENA.isSameApplication(editedGarena));
     }
 
     @Test
