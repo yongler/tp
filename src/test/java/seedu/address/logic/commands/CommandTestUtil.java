@@ -33,8 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_GARENA = "22222222";
     public static final String VALID_EMAIL_SHOPEE = "shopee@example.com";
     public static final String VALID_EMAIL_GARENA = "garena@example.com";
-    public static final String VALID_INTERSHIPSLOT_SHOPEE = "02-12-2030 13:00";
-    public static final String VALID_INTERSHIPSLOT_GARENA = "02-12-2035 13:00";
+    public static final String VALID_INTERVIEW_SLOT_SHOPEE = "02-12-2030 13:00";
+    public static final String VALID_INTERVIEW_SLOT_GARENA = "02-12-2035 13:00";
     public static final String VALID_ADDRESS_SHOPEE = "Block 312, Shopee Street 1";
     public static final String VALID_ADDRESS_GARENA = "Block 123, Garena Street 3";
     public static final String VALID_TAG_LOCAL = "local";
@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_GARENA = " " + PREFIX_EMAIL + VALID_EMAIL_GARENA;
     public static final String ADDRESS_DESC_SHOPEE = " " + PREFIX_ADDRESS + VALID_ADDRESS_SHOPEE;
     public static final String ADDRESS_DESC_GARENA = " " + PREFIX_ADDRESS + VALID_ADDRESS_GARENA;
-    public static final String INTERVIEW_DESC_SHOPEE = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERSHIPSLOT_SHOPEE;
-    public static final String INTERVIEW_DESC_GARENA = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERSHIPSLOT_GARENA;
+    public static final String INTERVIEWSLOT_DESC_SHOPEE = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERVIEW_SLOT_SHOPEE;
+    public static final String INTERVIEWSLOT_DESC_GARENA = " " + PREFIX_INTERVIEW_SLOT + VALID_INTERVIEW_SLOT_GARENA;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_LOCAL = " " + PREFIX_TAG + VALID_TAG_LOCAL;
     public static final String JOBTITLE_DESC_SHOPEE = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_SHOPEE;
@@ -61,6 +61,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "grab!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_INTERVIESLOT_DESC = " " + PREFIX_INTERVIEW_SLOT + "02-31-2022 16:00";
+    // MM-dd-yyyy HH:mm slot format not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "overseas*"; // '*' not allowed in tags
     public static final String INVALID_JOBTITLE_DESC = " " + PREFIX_JOBTITLE
             + "J@v@ developer"; // '@' not allowed in job title

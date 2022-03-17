@@ -5,8 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.INTERVIEWSLOT_DESC_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.INTERVIEWSLOT_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INTERVIESLOT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -19,11 +22,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_SHOPEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -38,6 +44,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
@@ -46,6 +53,7 @@ import seedu.address.testutil.EditApplicationDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String INTERVIEWSLOT_EMPTY = " " + PREFIX_INTERVIEW_SLOT;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -85,6 +93,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "1" + INVALID_INTERVIESLOT_DESC, InterviewSlot.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -110,10 +119,12 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPLICATION;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_GARENA + TAG_DESC_LOCAL
-                + EMAIL_DESC_SHOPEE + ADDRESS_DESC_SHOPEE + NAME_DESC_SHOPEE + TAG_DESC_FRIEND;
+                + EMAIL_DESC_SHOPEE + ADDRESS_DESC_SHOPEE + INTERVIEWSLOT_DESC_SHOPEE
+                + NAME_DESC_SHOPEE + TAG_DESC_FRIEND;
 
         EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withName(VALID_NAME_SHOPEE)
                 .withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_SHOPEE).withAddress(VALID_ADDRESS_SHOPEE)
+                .withInterviewSlot(VALID_INTERVIEW_SLOT_SHOPEE)
                 .withTags(VALID_TAG_LOCAL, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -151,6 +162,12 @@ public class EditCommandParserTest {
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_SHOPEE;
         descriptor = new EditApplicationDescriptorBuilder().withEmail(VALID_EMAIL_SHOPEE).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // interview slot
+        userInput = targetIndex.getOneBased() + INTERVIEWSLOT_DESC_GARENA;
+        descriptor = new EditApplicationDescriptorBuilder().withInterviewSlot(VALID_INTERVIEW_SLOT_GARENA).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

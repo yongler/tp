@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
@@ -24,12 +25,14 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "L@z@d@";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_INTERVIEWSLOT = "31-02-2020 63:00";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Lazada Singapore";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_INTERVIEWSLOT = "28-02-2020 16:00";
     private static final String VALID_EMAIL = "lazada@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "local";
@@ -100,6 +103,29 @@ public class ParserUtilTest {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parseInterviewSlot_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterviewSlot((String) null));
+    }
+
+    @Test
+    public void parseInterviewSlot_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterviewSlot(INVALID_INTERVIEWSLOT));
+    }
+
+    @Test
+    public void parseInterviewSlot_validValueWithoutWhitespace_returnsInterviewSlot() throws Exception {
+        InterviewSlot expectedInterviewSlot = new InterviewSlot(VALID_INTERVIEWSLOT);
+        assertEquals(expectedInterviewSlot, ParserUtil.parseInterviewSlot(VALID_INTERVIEWSLOT));
+    }
+
+    @Test
+    public void parseInterviewSlot_validValueWithWhitespace_returnsTrimmedInterviewSlot() throws Exception {
+        String interviewSlotWithWhitespace = WHITESPACE + VALID_INTERVIEWSLOT + WHITESPACE;
+        InterviewSlot expectedInterviewSlot = new InterviewSlot(VALID_INTERVIEWSLOT);
+        assertEquals(expectedInterviewSlot, ParserUtil.parseInterviewSlot(interviewSlotWithWhitespace));
     }
 
     @Test
