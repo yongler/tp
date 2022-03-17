@@ -23,10 +23,10 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         String tagNameUpper = tagName.toUpperCase();
-        if(PriorityTagType.contains(tagNameUpper)) {
+        if (PriorityTagType.contains(tagNameUpper)) {
             this.tagName = tagName;
             this.tagType = TagType.PRIORITY;
-        } else if(ApplicationStatusTagType.contains(tagNameUpper)) {
+        } else if (ApplicationStatusTagType.contains(tagNameUpper)) {
             this.tagName = tagName;
             this.tagType = TagType.APPLICATION_STATUS;
         } else {
