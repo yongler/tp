@@ -40,6 +40,7 @@ public class InterviewSlotTest {
 
         // invalid parts
         // TODO: Update February parsing issue.
+        // February has a leap year issue and accepting dates more than 29.
         //assertFalse(InterviewSlot.isValidDateTime("30-02-2022 15:30")); // invalid date
         assertFalse(InterviewSlot.isValidDateTime("30/03/2022 15:30")); // invalid date separator
         assertFalse(InterviewSlot.isValidDateTime("03-30-2022 15:30")); // invalid month
