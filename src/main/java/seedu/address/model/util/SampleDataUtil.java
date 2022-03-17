@@ -24,7 +24,7 @@ public class SampleDataUtil {
 
             new Application(new Name("Shopee"), new JobTitle("Software Engineer Intern"), new Phone("87438807"),
                     new Email("hr@shopee.sg"), new Address("5 Science Park Dr, #06-40"), new InterviewSlot(),
-                    getTagSet("friends", "HIGH", "INTERVIEWED")),
+                    getTagSet("singapore", "HIGH", "INTERVIEWED")),
             new Application(new Name("Grab Holdings Singapore"), new JobTitle("AI Engineer"), new Phone("99272758"),
                     new Email("hr@grab.sg"), new Address("3 Media Cl, #07-18"), new InterviewSlot(),
                     getTagSet("colleagues", "friends", "MEDIUM", "APPLIED")),
@@ -34,7 +34,7 @@ public class SampleDataUtil {
             new Application(new Name("Aftershock PC"), new JobTitle("Data Scientist"), new Phone("63458727"),
                     new Email("corpsales@sg.aftershockpc.com"), new Address("994, Bendemeer Rd, #05-07"),
                     new InterviewSlot("17-04-2022 12:00"),
-                    getTagSet("passion", "HIGH", "NOTAPPLIED")),
+                    getTagSet("passion", "HIGH", "APPLIED")),
             new Application(new Name("Google Asia Pacific"), new JobTitle("ML Engineer"), new Phone("91031282"),
                     new Email("hr@google.com"), new Address("70 Pasir Panjang Rd, #16-43"),
                     new InterviewSlot("28-03-2022 13:00"), getTagSet("family", "LOW", "REJECTED")),
