@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.GRAB;
-import static seedu.address.testutil.TypicalApplications.HOON;
-import static seedu.address.testutil.TypicalApplications.IDA;
+import static seedu.address.testutil.TypicalApplications.MASTERCARD;
+import static seedu.address.testutil.TypicalApplications.VISA;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 
 import java.io.IOException;
@@ -75,14 +75,14 @@ public class JsonInternApplyStorageTest {
         assertEquals(original, new InternApplyMemory(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addApplication(HOON);
+        original.addApplication(VISA);
         original.removeApplication(GRAB);
         jsonInternApplyStorage.saveInternApply(original, filePath);
         readBack = jsonInternApplyStorage.readInternApplyMemory(filePath).get();
         assertEquals(original, new InternApplyMemory(readBack));
 
         // Save and read without specifying file path
-        original.addApplication(IDA);
+        original.addApplication(MASTERCARD);
         jsonInternApplyStorage.saveInternApply(original); // file path not specified
         readBack = jsonInternApplyStorage.readInternApplyMemory().get(); // file path not specified
         assertEquals(original, new InternApplyMemory(readBack));

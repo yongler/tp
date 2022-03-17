@@ -34,22 +34,23 @@ public class TypicalApplications {
             .withEmail("lazada@sg.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withJobTitle("Intern").withInterviewSlot("13-03-2022 16:00").build();
     public static final Application SEAGROUP = new ApplicationBuilder().withName("SEA Group").withPhone("95352563")
-            .withEmail("sea@hr.com").withAddress("wall street").build();
+            .withEmail("sea@hr.com").withAddress("1 Fusionopolis Place, #17-10, Galaxis, 138522").build();
     public static final Application SEATALK = new ApplicationBuilder().withName("SEA Talk").withPhone("87652533")
-            .withEmail("sea@hr.com").withAddress("10th street").withTags("friends").build();
+            .withEmail("sea@hr.com").withAddress("1 Fusionopolis Place, #17-10, Galaxis, 138522")
+            .withTags("friends").build();
     public static final Application SEAMONEY = new ApplicationBuilder().withName("SEA Money").withPhone("9482224")
-            .withEmail("sea@hr.com").withAddress("michegan ave").build();
-    public static final Application SEAFIONA = new ApplicationBuilder().withName("Cloud").withPhone("9482427")
-            .withEmail("sea@hr.com").withAddress("little tokyo").build();
+            .withEmail("sea@hr.com").withAddress("1 Fusionopolis Place, #17-10, Galaxis, 138522").build();
+    public static final Application SEACLOUD = new ApplicationBuilder().withName("Cloud").withPhone("9482427")
+            .withEmail("sea@hr.com").withAddress("77 Robinson Rd, #13-00 Robinson 77, 068896").build();
     public static final Application SEAMARKETPLACE = new ApplicationBuilder()
             .withName("Marketplace").withPhone("9482442")
-            .withEmail("sea@hr.com").withAddress("4th street").build();
+            .withEmail("sea@hr.com").withAddress("77 Robinson Rd, #13-00 Robinson 77, 068896").build();
 
     // Manually added
-    public static final Application HOON = new ApplicationBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Application IDA = new ApplicationBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Application VISA = new ApplicationBuilder().withName("VISA").withPhone("8482424")
+            .withEmail("hello@visa.com.sg").withAddress("71 Robinson Road #08-01, 068895 ").build();
+    public static final Application MASTERCARD = new ApplicationBuilder().withName("MASTER").withPhone("8482131")
+            .withEmail("hr@mastercard.com.sg").withAddress("3 Fraser Street, #17-2128 Duo Tower, 189352").build();
 
     // Manually added - Application's details found in {@code CommandTestUtil}
     public static final Application SHOPEE = new ApplicationBuilder()
@@ -77,6 +78,6 @@ public class TypicalApplications {
     }
 
     public static List<Application> getTypicalApplications() {
-        return new ArrayList<>(Arrays.asList(GRAB, LAZADA, SEAGROUP, SEATALK, SEAMONEY, SEAFIONA, SEAMARKETPLACE));
+        return new ArrayList<>(Arrays.asList(GRAB, LAZADA, SEAGROUP, SEATALK, SEAMONEY, SEACLOUD, SEAMARKETPLACE));
     }
 }

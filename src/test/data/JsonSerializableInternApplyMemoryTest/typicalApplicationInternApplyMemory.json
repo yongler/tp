@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "InternApply save file which contains the same Application values as in TypicalApplications#getTypicalApplications()",
   "persons" : [ {
     "name" : "Grab",
     "phone" : "94351253",
@@ -20,7 +20,7 @@
     "name" : "SEA Group",
     "phone" : "95352563",
     "email" : "sea@hr.com",
-    "address" : "wall street",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
@@ -28,7 +28,7 @@
     "name" : "SEA Talk",
     "phone" : "87652533",
     "email" : "sea@hr.com",
-    "address" : "10th street",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
@@ -36,7 +36,7 @@
     "name" : "SEA Money",
     "phone" : "9482224",
     "email" : "sea@hr.com",
-    "address" : "michegan ave",
+    "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
@@ -44,7 +44,7 @@
     "name" : "Cloud",
     "phone" : "9482427",
     "email" : "sea@hr.com",
-    "address" : "little tokyo",
+    "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
     "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
@@ -52,7 +52,7 @@
     "name" : "Marketplace",
     "phone" : "9482442",
     "email" : "sea@hr.com",
-    "address" : "4th street",
+    "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
     "interviewSlot" : "31-12-+999999999 23:59",
     "tagged" : [ ],
     "jobTitle": "Intern"
