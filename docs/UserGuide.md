@@ -26,7 +26,9 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering` : Adds an application with company named `Shopee` to SIA.
+   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/Software Engineering` : Adds an application with company named `Shopee` to SIA.
+   
+   * **``edit``**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
 
    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
@@ -104,6 +106,8 @@ Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing `TAG`'s, the existing tags of the application will be removed.
+- You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
+- The interview date time, `INTERVIEW_DATE_TIME`, must in the follow format `dd-MM-yyyy HH:mm`.
 - You can remove all the person's `TAG`'s by typing `t/` without specifying any tags after it.
 - You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
 
