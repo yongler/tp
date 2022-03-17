@@ -31,7 +31,7 @@ public class Tag {
             this.tagName = tagName;
             this.tagType = TagType.PRIORITY;
             break;
-        case "NOTAPPLIED":
+        case "NOT_APPLIED":
                 //Fallthrough
         case "APPLIED":
                 //Fallthrough
