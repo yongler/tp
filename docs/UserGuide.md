@@ -150,7 +150,13 @@ _More features coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SoC InternApply home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SoC InternApply home folder. <br>
+
+**Q**: Why can't I edit the application status and/or priority of an existing application? <br>
+**A**: Currently, we do not allow the editing of application status and/or priority. This will be made available in a future version of our application. <br>
+
+**Q**: When I run SoC InternApply for the first time, I do not see any of the sample applications? <br>
+**A**: Please locate where InternApply data is being stored on your hard disk. This will usually be in a folder named `data` found in the root folder of the application. Delete any existing files in that folder and run SoC InternApply again. 
 
 --------------------------------------------------------------------------------------------------------------------
 
