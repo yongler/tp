@@ -22,31 +22,16 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        switch(tagName.toUpperCase()) {
-        case "HIGH":
-                //Fallthrough
-        case "MEDIUM":
-                //Fallthrough
-        case "LOW":
+        String tagNameUpper = tagName.toUpperCase();
+        if (PriorityTagType.contains(tagNameUpper)) {
             this.tagName = tagName;
             this.tagType = TagType.PRIORITY;
-            break;
-        case "NOT_APPLIED":
-                //Fallthrough
-        case "APPLIED":
-                //Fallthrough
-        case "INTERVIEWED":
-                //Fallthrough
-        case "REJECTED":
-                //Fallthrough
-        case "ACCEPTED":
+        } else if (ApplicationStatusTagType.contains(tagNameUpper)) {
             this.tagName = tagName;
             this.tagType = TagType.APPLICATION_STATUS;
-            break;
-        default:
+        } else {
             this.tagName = tagName;
             this.tagType = TagType.JOB_SCOPE;
-            break;
         }
     }
 
