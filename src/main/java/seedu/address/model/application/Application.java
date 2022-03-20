@@ -30,6 +30,8 @@ public class Application {
     private final Address address;
     /** Interview Slot */
     private final InterviewSlot interviewSlot;
+    /** Details of application */
+    private final Details details;
     /** [W.I.P] Will be repurposed in the future */
     private final Set<Tag> tags = new HashSet<>();
 
@@ -37,7 +39,7 @@ public class Application {
      * Every field must be present and not null.
      */
     public Application(Name name, JobTitle jobTitle, Phone phone, Email email, Address address,
-                       InterviewSlot interviewSlot, Set<Tag> tags) {
+                       InterviewSlot interviewSlot, Details details, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.jobTitle = jobTitle;
@@ -46,6 +48,7 @@ public class Application {
         this.address = address;
         this.tags.addAll(tags);
         this.interviewSlot = interviewSlot;
+        this.details = details;
     }
 
     public Name getName() {
@@ -70,6 +73,10 @@ public class Application {
 
     public InterviewSlot getInterviewSlot() {
         return interviewSlot;
+    }
+
+    public Details getDetails() {
+        return details;
     }
 
     /**
@@ -114,13 +121,14 @@ public class Application {
                 && otherApplication.getEmail().equals(getEmail())
                 && otherApplication.getAddress().equals(getAddress())
                 && otherApplication.getInterviewSlot().equals(getInterviewSlot())
+                && otherApplication.getDetails().equals(getDetails())
                 && otherApplication.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, jobTitle, phone, email, address, tags, interviewSlot);
+        return Objects.hash(name, jobTitle, phone, email, address, tags, interviewSlot, details);
     }
 
     @Override
@@ -136,7 +144,9 @@ public class Application {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Interview Slot: ")
-                .append(getInterviewSlot());
+                .append(getInterviewSlot())
+                .append("; Details: ")
+                .append(getDetails());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
