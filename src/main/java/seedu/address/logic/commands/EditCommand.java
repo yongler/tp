@@ -4,25 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.application.Address;
-import seedu.address.model.application.Application;
-import seedu.address.model.application.Email;
-import seedu.address.model.application.InterviewSlot;
-import seedu.address.model.application.JobTitle;
-import seedu.address.model.application.Name;
-import seedu.address.model.application.Phone;
+import seedu.address.model.application.*;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Edits the details of an existing application in InternApply.
@@ -103,7 +95,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
         Email updatedEmail = editApplicationDescriptor.getEmail().orElse(applicationToEdit.getEmail());
         Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
-        Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
+        Set<Tag> updatedTags = editApplicationDescriptor.getTags(applicationToEdit.getTags()).
+                orElse(applicationToEdit.getTags());
         InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
 
@@ -230,6 +223,59 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public Optional<Set<Tag>> getTags(Set<Tag> applicationToEditTags) {
+            // Check if tags is null.
+            if (tags == null) {
+                return Optional.empty();
+            }
+
+            Set<Tag> reconstructedTagSet = new HashSet<>();
+            Predicate<Tag> jobScope = new TagSetContainsTagTypePredicate(TagType.JOB_SCOPE);
+            Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
+            Predicate<Tag> applicationStatus = new TagSetContainsTagTypePredicate(TagType.APPLICATION_STATUS);
+
+            // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a generic tag
+            if (tags.stream().anyMatch(jobScope)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, jobScope);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(jobScope)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet, jobScope);
+                }
+            }
+
+            // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
+            if (tags.stream().anyMatch(priority)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, priority);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(priority)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet, priority);
+                }
+            }
+
+            // Check if tags contains any Tag with TagType.APPLICATION_STATUS; this refers to Application Status tag
+            if (tags.stream().anyMatch(applicationStatus)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, applicationStatus);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(applicationStatus)) {
+                    reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, applicationStatus);
+                }
+            }
+
+            return Optional.of(reconstructedTagSet);
+
+        }
+
+        public Set<Tag> findMatchAndCopy(Set<Tag> source, Set<Tag> destination, Predicate predicate) {
+            Iterator<Tag> temp = source.iterator();
+            while (temp.hasNext()) {
+                Tag tempTag = temp.next();
+                if (tempTag.getTagType() == TagType.JOB_SCOPE) {
+                    destination.add(tempTag);
+                }
+            }
+            return destination;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -252,6 +298,27 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getInterviewSlot().equals(e.getInterviewSlot());
+        }
+    }
+
+    public static class TagSetContainsTagTypePredicate implements Predicate<Tag> {
+
+        private final TagType tagType;
+
+        public TagSetContainsTagTypePredicate(TagType tagType) {
+            this.tagType = tagType;
+        }
+
+        @Override
+        public boolean test(Tag tag) {
+            return tagType == tag.getTagType();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof TagSetContainsTagTypePredicate // instanceof handles nulls
+                    && tagType.equals(((TagSetContainsTagTypePredicate) other).tagType)); // state check
         }
     }
 }
