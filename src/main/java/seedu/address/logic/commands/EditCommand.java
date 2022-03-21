@@ -236,28 +236,31 @@ public class EditCommand extends Command {
 
             // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a generic tag
             if (tags.stream().anyMatch(jobScope)) {
-                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, jobScope);
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
             } else {
                 if (applicationToEditTags.stream().anyMatch(jobScope)) {
-                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet, jobScope);
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.JOB_SCOPE);
                 }
             }
 
             // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
             if (tags.stream().anyMatch(priority)) {
-                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, priority);
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.PRIORITY);
             } else {
                 if (applicationToEditTags.stream().anyMatch(priority)) {
-                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet, priority);
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.PRIORITY);
                 }
             }
 
             // Check if tags contains any Tag with TagType.APPLICATION_STATUS; this refers to Application Status tag
             if (tags.stream().anyMatch(applicationStatus)) {
-                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, applicationStatus);
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.APPLICATION_STATUS);
             } else {
                 if (applicationToEditTags.stream().anyMatch(applicationStatus)) {
-                    reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, applicationStatus);
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.APPLICATION_STATUS);
                 }
             }
 
@@ -265,11 +268,11 @@ public class EditCommand extends Command {
 
         }
 
-        public Set<Tag> findMatchAndCopy(Set<Tag> source, Set<Tag> destination, Predicate predicate) {
+        public Set<Tag> findMatchAndCopy(Set<Tag> source, Set<Tag> destination, TagType tagType) {
             Iterator<Tag> temp = source.iterator();
             while (temp.hasNext()) {
                 Tag tempTag = temp.next();
-                if (tempTag.getTagType() == TagType.JOB_SCOPE) {
+                if (tempTag.getTagType() == tagType) {
                     destination.add(tempTag);
                 }
             }
