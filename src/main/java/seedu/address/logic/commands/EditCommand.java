@@ -1,10 +1,23 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
@@ -12,7 +25,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.application.*;
+import seedu.address.model.application.Address;
+import seedu.address.model.application.Application;
+import seedu.address.model.application.Email;
+import seedu.address.model.application.InterviewSlot;
+import seedu.address.model.application.JobTitle;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagType;
 
@@ -95,8 +114,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
         Email updatedEmail = editApplicationDescriptor.getEmail().orElse(applicationToEdit.getEmail());
         Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
-        Set<Tag> updatedTags = editApplicationDescriptor.getTags(applicationToEdit.getTags()).
-                orElse(applicationToEdit.getTags());
+        Set<Tag> updatedTags = editApplicationDescriptor.getTags(applicationToEdit.getTags())
+                .orElse(applicationToEdit.getTags());
         InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
 
@@ -268,6 +287,10 @@ public class EditCommand extends Command {
 
         }
 
+        /**
+         * Returns a {@code Set<Tag> destination} that contains all the Tags of a particular {@code TagType} found
+         * within a given {@code Set<Tag> source}.
+         */
         public Set<Tag> findMatchAndCopy(Set<Tag> source, Set<Tag> destination, TagType tagType) {
             Iterator<Tag> temp = source.iterator();
             while (temp.hasNext()) {

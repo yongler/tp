@@ -22,7 +22,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagType;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -110,8 +109,8 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Checks for tag of type APPLICATION_STATUS and adds it to created tagSet.
         if (applicationStatusSet.isPresent()) {
-            Tag applicationStatusTag = ParserUtil.
-                    parseApplicationStatusTag(argMultimap.getValue(PREFIX_APPLICATION_STATUS_TAG).get());
+            Tag applicationStatusTag = ParserUtil
+                    .parseApplicationStatusTag(argMultimap.getValue(PREFIX_APPLICATION_STATUS_TAG).get());
             tagSet.add(applicationStatusTag);
         }
 
