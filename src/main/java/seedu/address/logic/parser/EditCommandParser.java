@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -35,7 +36,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_JOBTITLE, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_TAG, PREFIX_PRIORITY_TAG);
 
         Index index;
 
