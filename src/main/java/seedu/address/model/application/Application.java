@@ -121,7 +121,6 @@ public class Application {
                 && otherApplication.getEmail().equals(getEmail())
                 && otherApplication.getAddress().equals(getAddress())
                 && otherApplication.getInterviewSlot().equals(getInterviewSlot())
-                && otherApplication.getDetails().equals(getDetails())
                 && otherApplication.getTags().equals(getTags());
     }
 
