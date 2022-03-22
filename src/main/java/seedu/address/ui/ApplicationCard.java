@@ -41,6 +41,8 @@ public class ApplicationCard extends UiPart<Region> {
     private Label jobTitle;
     @FXML
     private Label interviewSlot;
+    @FXML
+    private Label detail;
 
     /**
      * Creates an {@code ApplicationCard} with the given {@code Application} and index to display.
@@ -56,6 +58,8 @@ public class ApplicationCard extends UiPart<Region> {
         email.setText(application.getEmail().value);
         tags.getChildren().add(new TagBox(application.getTags()));
         jobTitle.setText(application.getJobTitle().value);
+        detail.setText(application.getDetails().detail);
+        cardPane.getChildren().add(detail);
     }
 
     @Override
