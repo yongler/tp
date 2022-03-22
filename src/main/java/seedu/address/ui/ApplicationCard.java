@@ -61,7 +61,7 @@ public class ApplicationCard extends UiPart<Region> {
         email.setText(application.getEmail().value);
         tags.getChildren().add(new TagBox(application.getTags()));
         jobTitle.setText(application.getJobTitle().value);
-        detail.setText(application.getDetails().detail);
+        detail.setText(application.getDetails().details);
         detailScroll.setContent(detail);
         cardPane.getChildren().add(detailScroll);
     }

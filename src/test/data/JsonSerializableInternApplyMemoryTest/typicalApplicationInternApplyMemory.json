@@ -6,6 +6,7 @@
     "email" : "hr@grab.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "interviewSlot" : "13-02-2022 16:00",
+    "details" : "To add details, use the edit command",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
   }, {
@@ -14,6 +15,7 @@
     "email" : "lazada@sg.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "interviewSlot" : "13-03-2022 16:00",
+    "details" : "To add details, use the edit command",
     "tagged" : [ "owesMoney", "friends" ],
     "jobTitle": "Intern"
   }, {
@@ -22,6 +24,7 @@
     "email" : "sea@hr.com",
     "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
@@ -30,6 +33,7 @@
     "email" : "sea@hr.com",
     "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
     "tagged" : [ "friends" ],
     "jobTitle": "Intern"
   }, {
@@ -38,6 +42,7 @@
     "email" : "sea@hr.com",
     "address" : "1 Fusionopolis Place, #17-10, Galaxis, 138522",
     "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
@@ -46,6 +51,7 @@
     "email" : "sea@hr.com",
     "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
     "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
     "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
@@ -54,6 +60,7 @@
     "email" : "sea@hr.com",
     "address" : "77 Robinson Rd, #13-00 Robinson 77, 068896",
     "interviewSlot" : "31-12-+999999999 23:59",
+    "details" : "To add details, use the edit command",
     "tagged" : [ ],
     "jobTitle": "Intern"
   } ]

@@ -7,13 +7,13 @@ public class Details {
     //TODO finalize the default detail format
     public static final String DEFAULT_DETAIL = "To add details, use the edit command";
 
-    public final String detail;
+    public final String details;
 
     /**
      * Constructs a {@code Details}.
      */
     public Details() {
-        detail = DEFAULT_DETAIL;
+        details = DEFAULT_DETAIL;
     }
 
     /**
@@ -23,7 +23,7 @@ public class Details {
      */
     public Details(String detailInput) {
         requireNonNull(detailInput);
-        detail = detailInput;
+        details = detailInput;
     }
 
     /**
@@ -31,5 +31,10 @@ public class Details {
      */
     public static boolean isNotSet(String test) {
         return test.equals(DEFAULT_DETAIL);
+    }
+
+    @Override
+    public String toString() {
+        return details;
     }
 }

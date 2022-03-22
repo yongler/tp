@@ -70,7 +70,7 @@ class JsonAdaptedApplication {
         address = source.getAddress().value;
         interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter
                 .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
-        details = source.getDetails().detail;
+        details = source.getDetails().details;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

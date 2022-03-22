@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Details;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
@@ -27,6 +28,7 @@ public class ApplicationBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_INTERVIEWSLOT = LocalDateTime.MAX.format(DateTimeFormatter
             .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
+    public static final String DEFAULT_DETAILS = "To add details, use the edit command";
 
     private Name name;
     private JobTitle jobTitle;
@@ -34,6 +36,7 @@ public class ApplicationBuilder {
     private Email email;
     private Address address;
     private InterviewSlot interviewSlot;
+    private Details details;
     private Set<Tag> tags;
 
     /**
@@ -46,6 +49,7 @@ public class ApplicationBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         interviewSlot = new InterviewSlot(DEFAULT_INTERVIEWSLOT);
+        details = new Details(DEFAULT_DETAILS);
         tags = new HashSet<>();
     }
 
@@ -59,6 +63,7 @@ public class ApplicationBuilder {
         email = applicationToCopy.getEmail();
         address = applicationToCopy.getAddress();
         interviewSlot = applicationToCopy.getInterviewSlot();
+        details = applicationToCopy.getDetails();
         tags = new HashSet<>(applicationToCopy.getTags());
     }
 
@@ -102,6 +107,14 @@ public class ApplicationBuilder {
     }
 
     /**
+     * Sets the {@code Details} of the {@code Application} that we are building.
+     */
+    public ApplicationBuilder withDetails(String details) {
+        this.details = new Details(details);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Application} that we are building.
      */
     public ApplicationBuilder withPhone(String phone) {
@@ -119,7 +132,7 @@ public class ApplicationBuilder {
 
 
     public Application build() {
-        return new Application(name, jobTitle, phone, email, address, interviewSlot, tags);
+        return new Application(name, jobTitle, phone, email, address, interviewSlot, details, tags);
     }
 
 }
