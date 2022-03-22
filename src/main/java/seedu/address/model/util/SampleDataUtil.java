@@ -39,8 +39,7 @@ public class SampleDataUtil {
             new Application(new Name("Google Asia Pacific"), new JobTitle("ML Engineer"), new Phone("91031282"),
                     new Email("hr@google.com"), new Address("70 Pasir Panjang Rd, #16-43"),
                     new InterviewSlot("28-03-2022 13:00"),
-                    new Details(),getTagSet("family", "LOW", "REJECTED")),
-
+                    new Details(), getTagSet("family", "LOW", "REJECTED")),
         };
     }
 

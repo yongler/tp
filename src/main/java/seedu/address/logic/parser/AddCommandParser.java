@@ -67,7 +67,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             tagList.add(applicationStatusTag);
         }
 
-        Application application = new Application(name, jobTitle, phone, email, address, interviewSlot, detail, tagList);
+        Application application = new Application(name, jobTitle, phone, email, address,
+            interviewSlot, detail, tagList);
 
         return new AddCommand(application);
     }

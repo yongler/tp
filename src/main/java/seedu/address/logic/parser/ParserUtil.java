@@ -138,7 +138,12 @@ public class ParserUtil {
         return new InterviewSlot(trimmedInterviewSlot);
     }
 
-    public static Details parseDetails(String details) throws ParseException {
+    /**
+     * Parses a {@code String details} into an {@code Details}.
+     * Leading and trailing whitespaces will be trimmed
+     * Processes all \n into newline
+     */
+    public static Details parseDetails(String details) {
         requireNonNull(details);
         String trimmedDetails = details.trim();
 

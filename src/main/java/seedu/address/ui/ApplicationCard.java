@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.application.Application;
@@ -42,6 +43,8 @@ public class ApplicationCard extends UiPart<Region> {
     @FXML
     private Label interviewSlot;
     @FXML
+    private ScrollPane detailScroll;
+    @FXML
     private Label detail;
 
     /**
@@ -59,7 +62,8 @@ public class ApplicationCard extends UiPart<Region> {
         tags.getChildren().add(new TagBox(application.getTags()));
         jobTitle.setText(application.getJobTitle().value);
         detail.setText(application.getDetails().detail);
-        cardPane.getChildren().add(detail);
+        detailScroll.setContent(detail);
+        cardPane.getChildren().add(detailScroll);
     }
 
     @Override
