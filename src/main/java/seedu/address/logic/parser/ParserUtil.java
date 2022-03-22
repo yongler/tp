@@ -12,6 +12,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
+import seedu.address.model.application.Details;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
@@ -137,6 +138,17 @@ public class ParserUtil {
         return new InterviewSlot(trimmedInterviewSlot);
     }
 
+    public static Details parseDetails(String details) throws ParseException {
+        requireNonNull(details);
+        String trimmedDetails = details.trim();
+
+        if (trimmedDetails.isEmpty()) {
+            return new Details();
+        } else {
+            String newLineDetails = details.replace("\\n", "\n");
+            return new Details(newLineDetails);
+        }
+    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
