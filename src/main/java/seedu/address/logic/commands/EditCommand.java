@@ -2,19 +2,23 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -30,6 +34,7 @@ import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Edits the details of an existing application in InternApply.
@@ -48,11 +53,14 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_INTERVIEW_SLOT + "[INTERVIEW SLOT (format: " + InterviewSlot.FORMAT_DATETIME_INPUT + "] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PRIORITY_TAG + "PRIORITY_TAG] "
+            + "[" + PREFIX_APPLICATION_STATUS_TAG + "APPLICATION_STATUS_TAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_INTERVIEW_SLOT + "25-03-2022 13:30";
+            + PREFIX_EMAIL + "johndoeinc@privateltd.com "
+            + PREFIX_INTERVIEW_SLOT + "25-03-2022 13:30 "
+            + PREFIX_APPLICATION_STATUS_TAG + "INTERVIEWED";
 
     public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -107,7 +115,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editApplicationDescriptor.getPhone().orElse(applicationToEdit.getPhone());
         Email updatedEmail = editApplicationDescriptor.getEmail().orElse(applicationToEdit.getEmail());
         Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
-        Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
+        Set<Tag> updatedTags = editApplicationDescriptor.getTags(applicationToEdit.getTags())
+                .orElse(applicationToEdit.getTags());
         InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
         Details updatedDetail = editApplicationDescriptor.getDetails().orElse(applicationToEdit.getDetails());
@@ -245,6 +254,66 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public Optional<Set<Tag>> getTags(Set<Tag> applicationToEditTags) {
+            // Check if tags is null.
+            if (tags == null) {
+                return Optional.empty();
+            }
+
+            Set<Tag> reconstructedTagSet = new HashSet<>();
+            Predicate<Tag> jobScope = new TagSetContainsTagTypePredicate(TagType.JOB_SCOPE);
+            Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
+            Predicate<Tag> applicationStatus = new TagSetContainsTagTypePredicate(TagType.APPLICATION_STATUS);
+
+            // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a generic tag
+            if (tags.stream().anyMatch(jobScope)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(jobScope)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.JOB_SCOPE);
+                }
+            }
+
+            // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
+            if (tags.stream().anyMatch(priority)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.PRIORITY);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(priority)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.PRIORITY);
+                }
+            }
+
+            // Check if tags contains any Tag with TagType.APPLICATION_STATUS; this refers to Application Status tag
+            if (tags.stream().anyMatch(applicationStatus)) {
+                reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.APPLICATION_STATUS);
+            } else {
+                if (applicationToEditTags.stream().anyMatch(applicationStatus)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.APPLICATION_STATUS);
+                }
+            }
+
+            return Optional.of(reconstructedTagSet);
+
+        }
+
+        /**
+         * Returns a {@code Set<Tag> destination} that contains all the Tags of a particular {@code TagType} found
+         * within a given {@code Set<Tag> source}.
+         */
+        public Set<Tag> findMatchAndCopy(Set<Tag> source, Set<Tag> destination, TagType tagType) {
+            Iterator<Tag> temp = source.iterator();
+            while (temp.hasNext()) {
+                Tag tempTag = temp.next();
+                if (tempTag.getTagType() == tagType) {
+                    destination.add(tempTag);
+                }
+            }
+            return destination;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -268,6 +337,27 @@ public class EditCommand extends Command {
                     && getTags().equals(e.getTags())
                     && getInterviewSlot().equals(e.getInterviewSlot())
                     && getDetails().equals(e.getDetails());
+        }
+    }
+
+    public static class TagSetContainsTagTypePredicate implements Predicate<Tag> {
+
+        private final TagType tagType;
+
+        public TagSetContainsTagTypePredicate(TagType tagType) {
+            this.tagType = tagType;
+        }
+
+        @Override
+        public boolean test(Tag tag) {
+            return tagType == tag.getTagType();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof TagSetContainsTagTypePredicate // instanceof handles nulls
+                    && tagType.equals(((TagSetContainsTagTypePredicate) other).tagType)); // state check
         }
     }
 }

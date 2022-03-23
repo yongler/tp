@@ -207,6 +207,26 @@ Below is an image of the UI after the changes were made:
     1. The inclusion of a new regex such as `append/` to indicate the users desire to add onto the details field
     2. The creation of a new `command` that handles the appending of changes to the `details` field similar to the above, the command could be named `append`.
 
+### \[Proposed\] Sort feature
+
+#### Proposed Implementation
+
+The proposed sort mechanism is faciliated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
+
+- `SortByDefault` — Sorting the list byCreate date and time **(Default)**
+- `SortByInterview` — Sorting the list by Interview Slot (Scheduled interview date and time)
+- `SortByPrioity` — Sorting the list by Priority (High / Mid / Low)
+- `SortByCompnayName` — Sorting the list by Company Name
+
+The operations are exposed in the `Model` interface as `Model#updateFilteredApplicationList()`.
+
+To enable the logic to know which `comparator` to choose the `InternApplyParser#parseCommand()` will also need to create `ListCommandParser` to enable the `ListCommand` to handle addtional paramters.
+
+{More to be added}
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

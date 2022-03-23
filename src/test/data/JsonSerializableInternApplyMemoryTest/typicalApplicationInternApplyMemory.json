@@ -7,7 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "interviewSlot" : "13-02-2022 16:00",
     "details" : "To add details, use the edit command",
-    "tagged" : [ "friends" ],
+    "tagged" : [ ],
     "jobTitle": "Intern"
   }, {
     "name" : "Lazada",

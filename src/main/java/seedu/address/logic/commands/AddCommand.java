@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,15 +30,19 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PRIORITY_TAG + "PRIORITY_TAG] "
+            + "[" + PREFIX_APPLICATION_STATUS_TAG + "APPLICATION_STATUS_TAG]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Shopee "
             + PREFIX_JOBTITLE + "Software Engineer Intern "
             + PREFIX_PHONE + "87438807 "
             + PREFIX_EMAIL + "hr@shopee.sg "
             + PREFIX_ADDRESS + "5 Science Park Dr, #06-40 "
-            + PREFIX_TAG + "Software Engineering "
-            + PREFIX_JOBTITLE + "Software Engineer Intern";
+            + PREFIX_TAG + "SoftwareEngineering "
+            + PREFIX_TAG + "SingaporeBased "
+            + PREFIX_PRIORITY_TAG + "HIGH "
+            + PREFIX_APPLICATION_STATUS_TAG + "APPLIED";
 
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
