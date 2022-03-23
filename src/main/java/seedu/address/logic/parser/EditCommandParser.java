@@ -3,11 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -35,7 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_JOBTITLE, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_TAG, PREFIX_PRIORITY_TAG,
+                        PREFIX_APPLICATION_STATUS_TAG);
 
         Index index;
 
@@ -68,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .parseInterviewSlot(argMultimap.getValue(PREFIX_INTERVIEW_SLOT).get()));
         }
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editApplicationDescriptor::setTags);
+        parseTagsForEdit(argMultimap).ifPresent(editApplicationDescriptor::setTags);
 
         if (!editApplicationDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -78,18 +81,52 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * Parses {@code ArgumentMultimap argMultimap} into a {@code Set<Tag>} if {@code argMultimap} is non-empty.
+     * If {@code argMultimap} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
+     * Tag includes Tags and PriorityTag.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Tag>> parseTagsForEdit(ArgumentMultimap argMultimap) throws ParseException {
+        Collection<String> genericTagsSet = argMultimap.getAllValues(PREFIX_TAG);
+        Optional<String> priorityTagSet = argMultimap.getValue(PREFIX_PRIORITY_TAG);
+        Optional<String> applicationStatusSet = argMultimap.getValue(PREFIX_APPLICATION_STATUS_TAG);
 
-        if (tags.isEmpty()) {
+        // Checks if argMultimap contains any generic tags, priority tags or application status tag else returns an
+        // empty Optional instance.
+        if (genericTagsSet.isEmpty() && !priorityTagSet.isPresent() && !applicationStatusSet.isPresent()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+
+        // Create tagSet using generic tags if any.
+        // This tagSet can either be empty or non-empty Set<Tag>.
+        Set<Tag> tagSet = ParserUtil.parseTags(parseGenericTagsForEdit(genericTagsSet));
+
+        // Checks for tag of type PRIORITY and adds it to created tagSet.
+        if (priorityTagSet.isPresent()) {
+            Tag priorityTag = ParserUtil.parsePriorityTag(argMultimap.getValue(PREFIX_PRIORITY_TAG).get());
+            tagSet.add(priorityTag);
+        }
+
+        // Checks for tag of type APPLICATION_STATUS and adds it to created tagSet.
+        if (applicationStatusSet.isPresent()) {
+            Tag applicationStatusTag = ParserUtil
+                    .parseApplicationStatusTag(argMultimap.getValue(PREFIX_APPLICATION_STATUS_TAG).get());
+            tagSet.add(applicationStatusTag);
+        }
+
+        return Optional.of(tagSet);
+    }
+
+    /**
+     * Parses {@code Collection<String> genericTags} into a {@code Collection<String>} if {@code genericTags} is
+     * non-empty.
+     * If {@code genericTags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Collection<String>} containing zero tags.
+     */
+    private Collection<String> parseGenericTagsForEdit(Collection<String> genericTags) {
+        assert genericTags != null;
+
+        return genericTags.size() == 1 && genericTags.contains("") ? Collections.emptySet() : genericTags;
     }
 
 }
