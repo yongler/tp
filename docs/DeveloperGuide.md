@@ -211,7 +211,7 @@ Below is an image of the UI after the changes were made:
 
 #### Proposed Implementation
 
-The proposed sort mechanism is faciliated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
+The proposed sort mechanism is facilitated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
 
 - `SortByDefault` — Sorting the list byCreate date and time **(Default)**
 - `SortByInterview` — Sorting the list by Interview Slot (Scheduled interview date and time)
@@ -269,7 +269,86 @@ Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' prior
     * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
 
 
+###  Feature to edit Application Status & Priority Tags
 
+#### Implementation
+
+The feature mechanism is facilitated by `EditCommandParser`, `EditCommand` and `Tag`. It modifies the following operations:
+
+* `EditCommandParser#parse()` — Recognizes the `ast/` and `pt/` prefix to mean editing the Application Status and/or Priority Tag respectively.
+* `EditCommandParser#parseTagsForEdit()` — Parses all recognized `TagType` the user wants to edit into a Tag Set.
+
+Additionally, it implements the following operations:
+
+* `EditCommandParser#parseGenericTagsForEdit()` — Specifically parses Tags with the prefix `t/`.
+* `EditCommand#getTags()` — Identifies and constructs the new Tag Set of the edited application.
+* `EditCommand#findMatchAndCopy()` — Extracts the Tags within a Tag Set matching a specified `TagType`.
+* `EditCommand#TagSetContainsTagTypePredicate` — A static class that tests if a Tag Set contains a specified `TagType`.
+* `Tag#getTagType()` — Returns the `TagType` of a Tag.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application. The application list contains 1 application that has the `Tag` "India", `ApplicationStatusTag` "NOT_APPLIED" and `PriorityTag` "LOW".
+
+Step 2. The user executes `edit 1 t/Singapore ast/APPLIED` to edit the 1st application in the list. The `edit` command calls `EditCommandParser#parse()`, parsing the user inputs.
+
+Step 3. `EditCommandParser#parseTagsForEdit()` is then called to construct a Tag Set containing the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED".
+
+Step 4. `EditCommandParser#parse()` then instantiates a new `EditCommand` with a new `EditApplicationDescriptor` object using the constructed Tag Set.
+
+Step 5. `EditCommand#execute()` is called which calls `EditCommand#createEditedPerson()` to create a new `Application`. While creating the new `Application`, `EditCommand#getTags()` will be called which will construct a new Tag Set by comparing the edited Tag Set and existing Tag Set. Since only the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED" exists in the edited Tag Set, the newly constructed Tag Set will retain the `PriorityTag` "LOW" of the existing Tag Set. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED" and `PriorityTag` "LOW" is created.
+
+Step 6. The created `Application` will then replace the 1st `Application` in the list.
+
+#### Design considerations:
+
+**Aspect: How the feature could be implemented:**
+
+* **Alternative 1 (current choice):** Build on `edit` command.
+    * Pros: Easy to implement.
+    * Cons: Flexibility of dealing with Tags will be impacted.
+
+* **Alternative 2:** An alternative `edittag` command will be implemented.
+    * Pros: Greater flexibility to edit Tags (e.g. `edittag clear t/` would clear all the `Tag` of an existing application).
+    * Cons: We would be writing repeated code since this would be implemented similar to `edit` command albeit with modified behaviour that accepts arguments other than prefixes.
+
+### \[Proposed\] Reminder feature
+
+**Proposed Implementation**
+
+The proposed reminder mechanism would be similar to the implementation of the existing `help` command. It would be facilitated by a `ReminderWindow` that extends `UiPart`. An `ApplicationListPanel` will be used to fill the inner parts of the `ReminderWindow`.
+
+The creation of the reminder list will be facilitated by `Model` using a newly implemented `PREDICATE_SHOW_UPCOMING_APPLICATIONS` to update the application list.
+
+Classes to be implemented are as follows:
+
+* `ReminderCommand` — Extends `Command` class and filters the application list based on the `Application` whose `InterviewSlot` falls within a week of the current local date.
+* `ReminderWindow` — Provides a pop-up window for users to view the upcoming Interviews that they have.
+
+Additionally, the following will be implemented:
+
+* `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS` — Filters the application list such that it only contains applications that have a valid `InterviewSlot` that falls within a week of the current local date.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application. The `ReminderCommand` created and executed automatically which causes a `ReminderWindow` to pop-up with any upcoming Interviews.
+
+Step 2. The user updates an existing application with an `InterviewSlot` that will happen on the next day with respect to the current local date.
+
+Step 3. The user executes `reminder` manually which will create a new `ReminderCommand` that once executed opens up a `ReminderWindow`. Now the application list contained within the `ReminderWindow` will also include the application with the newly updated `InterviewSlot`.
+
+#### Design considerations:
+
+**Aspect: How the contents of the `ReminderWindow` will be displayed:**
+
+* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
+    * Pros: Fit well with the current UI implementation.
+    * Cons: Much more complex to implement.
+
+* **Alternative 2:** A simple text indicating the applications that are upcoming.
+    * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
+    * Cons: Would not communicate the information as easily as a UI implementation.
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
