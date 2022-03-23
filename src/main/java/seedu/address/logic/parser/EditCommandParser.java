@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW_SLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_JOBTITLE, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_TAG, PREFIX_PRIORITY_TAG,
+                        PREFIX_ADDRESS, PREFIX_INTERVIEW_SLOT, PREFIX_DETAILS, PREFIX_TAG, PREFIX_PRIORITY_TAG,
                         PREFIX_APPLICATION_STATUS_TAG);
 
         Index index;
@@ -69,6 +70,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_INTERVIEW_SLOT).isPresent()) {
             editApplicationDescriptor.setInterviewSlot(ParserUtil
                     .parseInterviewSlot(argMultimap.getValue(PREFIX_INTERVIEW_SLOT).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_DETAILS).isPresent()) {
+            editApplicationDescriptor.setDetails(ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS).get()));
         }
 
         parseTagsForEdit(argMultimap).ifPresent(editApplicationDescriptor::setTags);

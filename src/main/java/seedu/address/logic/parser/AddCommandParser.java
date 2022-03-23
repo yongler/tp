@@ -17,6 +17,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Details;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
@@ -51,6 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOBTITLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        Details detail = new Details();
         InterviewSlot interviewSlot = new InterviewSlot();
 
         if (arePrefixesPresent(argMultimap, PREFIX_PRIORITY_TAG)) {
@@ -65,7 +67,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             tagList.add(applicationStatusTag);
         }
 
-        Application application = new Application(name, jobTitle, phone, email, address, interviewSlot, tagList);
+        Application application = new Application(name, jobTitle, phone, email, address,
+            interviewSlot, detail, tagList);
 
         return new AddCommand(application);
     }

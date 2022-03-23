@@ -100,12 +100,14 @@ Format: `list`
 
 Edits an existing application in SoC InternApply.
 
-Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... \`
+Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [d/DETAILS] [t/TAG]... \`
 - Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
 - The interview date time, `INTERVIEW_DATE_TIME`, must in the follow format `dd-MM-yyyy HH:mm`.
+- You can add details to the application by using `d/DETAILS`
+- You can enter new lines in the details by using `\n`
 - You can remove all the application's `TAG`'s by typing `t/` without specifying any tags after it.
 - You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
 - When editing `TAG`'s, the existing tags of the application will be removed.
@@ -113,6 +115,11 @@ Format: `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS
 Examples:
 - `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
 - `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
+- `edit 1 d/Example details \nThis is a newline of the details` Edits the details to be:
+```
+Example details
+This is a newline of the details
+```
 
 ### Deleting an application : `delete`
 

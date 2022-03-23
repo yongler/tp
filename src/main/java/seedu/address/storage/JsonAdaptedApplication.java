@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Details;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
@@ -32,6 +33,7 @@ class JsonAdaptedApplication {
     private final String email;
     private final String address;
     private final String interviewSlot;
+    private final String details;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String jobTitle;
 
@@ -43,6 +45,7 @@ class JsonAdaptedApplication {
     public JsonAdaptedApplication(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("address") String address,
                                   @JsonProperty("interviewSlot") String interviewSlot,
+                                  @JsonProperty("details") String details,
                                   @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                                   @JsonProperty("jobTitle") String jobTitle) {
         this.name = name;
@@ -50,6 +53,7 @@ class JsonAdaptedApplication {
         this.email = email;
         this.address = address;
         this.interviewSlot = interviewSlot;
+        this.details = details;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -66,6 +70,7 @@ class JsonAdaptedApplication {
         address = source.getAddress().value;
         interviewSlot = source.getInterviewSlot().value.format(DateTimeFormatter
                 .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
+        details = source.getDetails().details;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -140,7 +145,16 @@ class JsonAdaptedApplication {
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
+        if (details == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Details.class.getSimpleName()));
+        }
+
+        final Details modelDetails = Details.isNotSet(details)
+            ? new Details()
+            : new Details(details);
+
         return new Application(modelName, modelJobTitle, modelPhone, modelEmail, modelAddress, modelInterviewSlot,
-                modelTags);
+            modelDetails, modelTags);
     }
 }
