@@ -168,11 +168,11 @@ The `class` contains two overloaded `constructors`. One that is used for the def
 
 Detailed below is an example of how the `Details` field is used by the `addCommand` and `editCommand`.
 
-#####addCommand
+##### addCommand
 
 Not much is changed for the `addCommand`, as the user is `not allowed` to type in the regex for adding details. The method instead, uses `Details()` to create a `Details` object with the `default string value`, which is parsed during the creation of the new `application` object.
 
-#####editCommand
+##### editCommand
 
 For the `editCommand`, a `new regex` was created in the `CliSyntax` class `d/` to allow `editCommandParser` to recognize when the user wants to input to the `Details` field. The `editCommand` uses `Details(String details)` constructor instead to create a new `Details` object with the desired changes.
 
@@ -190,7 +190,7 @@ Desired  line in detail
 newline in the details field
 ```
 
-#####UI
+##### UI
 
 To display the new `details` field, modifications to the `applicationCard.java` and `applicationCard.fxml` files had to be made. As the user is able to input any amount of new lines in the details field, the `label` would need to be stored in a `scrollPane` to allow the user to read the details field. Modification to the `minHeight` of the `applicationCard.fxml` as well as the new `label` `maxHeight` was made to properly display of the details field.
 
@@ -198,7 +198,7 @@ Below is an image of the UI after the changes were made:
 
 ![Ui-after-details-update](images/Ui-after-details-update.png)
 
-####Proposed improvements
+#### Proposed improvements
 1. As the colour of each `application card` alternates between each index, changes to the `Ui` have to be made as well to match the alternating colours. To achieve this change, implementing the css style in `DarkTheme.css` file, in particular `List-view` css should be made when implementing changes to the `applicationCard.fxml`
 2. Further consideration can be made to how the user makes changes to the `details` field, as currently the `editCommand` only supports the `replacement` of the `details` field with a new desired input.
 
@@ -222,9 +222,52 @@ The operations are exposed in the `Model` interface as `Model#updateFilteredAppl
 
 To enable the logic to know which `comparator` to choose the `InternApplyParser#parseCommand()` will also need to create `ListCommandParser` to enable the `ListCommand` to handle addtional paramters.
 
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
 {More to be added}
 
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
+### \[Proposed\] Summary bar
+
+Proposed implementation
+
+The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one
+`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
+Each `StatsBox` will hold its relevant text and statistic. Example look:
+
+![SummaryBarExample](images/SummaryBarExample.png)
+
+The `SummaryBar` and `StatsBox` will implement the following operations:
+
+- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
+- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
+
+These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
+
+Below is an example scenario and how the SummaryBar will behave.
+
+Step 1. The user launches the application. The `SummaryBar` will be initialized with statistics related to the current applications loaded from storage.
+
+Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+
+Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+
+<img src="images/SummaryBarExampleScenario.PNG" width="600" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
+
+</div>
+
+#### Design Considerations:
+**Aspect: How update executes:**
+
+* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues when handling large number of applications.
+
+* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
+    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
+    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
+
 
 ###  Feature to edit Application Status & Priority Tags
 
@@ -385,47 +428,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Summary bar
-
-Proposed implementation
-
-The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one 
-`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
-Each `StatsBox` will hold its relevant text and statistic. Example look:
-
-![SummaryBarExample](images/SummaryBarExample.png)
-
-The `SummaryBar` and `StatsBox` will implement the following operations:
-
-- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
-- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
-
-These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
-
-Below is an example scenario and how the SummaryBar will behave.
-
-Step 1. The user launches the application. The `SummaryBar` will be initialized with statistics related to the current applications loaded from storage.
-
-Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
-
-Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
-
-<img src="images/SummaryBarExampleScenario.PNG" width="600" />
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
-
-
-#### Design Considerations:
-**Aspect: How update executes:**
-
-* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues when handling large number of applications.
-
-* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
-    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
-    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
 
 
 --------------------------------------------------------------------------------------------------------------------
