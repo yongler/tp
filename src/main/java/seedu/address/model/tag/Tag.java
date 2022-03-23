@@ -55,6 +55,13 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns type of tag.
+     */
+    public TagType getTagType() {
+        return tagType;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
