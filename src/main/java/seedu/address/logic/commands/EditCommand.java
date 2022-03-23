@@ -27,6 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Details;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
 import seedu.address.model.application.JobTitle;
@@ -118,9 +119,10 @@ public class EditCommand extends Command {
                 .orElse(applicationToEdit.getTags());
         InterviewSlot updatedInterviewSlot = editApplicationDescriptor.getInterviewSlot()
                 .orElse(applicationToEdit.getInterviewSlot());
+        Details updatedDetail = editApplicationDescriptor.getDetails().orElse(applicationToEdit.getDetails());
 
         return new Application(updatedName, updatedJobTitle, updatedPhone, updatedEmail, updatedAddress,
-                updatedInterviewSlot, updatedTags);
+                updatedInterviewSlot, updatedDetail, updatedTags);
     }
 
     @Override
@@ -152,6 +154,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private InterviewSlot interviewSlot;
+        private Details details;
         private Set<Tag> tags;
 
         public EditApplicationDescriptor() {}
@@ -168,13 +171,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setInterviewSlot(toCopy.interviewSlot);
+            setDetails(toCopy.details);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, jobTitle, phone, email, address, tags, interviewSlot);
+            return CollectionUtil.isAnyNonNull(name, jobTitle, phone, email, address, tags, interviewSlot, details);
         }
 
         public void setName(Name name) {
@@ -223,6 +227,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setDetails(Details details) {
+            this.details = details;
+        }
+
+        public Optional<Details> getDetails() {
+            return Optional.ofNullable(details);
         }
 
         /**
@@ -323,7 +335,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getInterviewSlot().equals(e.getInterviewSlot());
+                    && getInterviewSlot().equals(e.getInterviewSlot())
+                    && getDetails().equals(e.getDetails());
         }
     }
 

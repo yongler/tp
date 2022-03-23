@@ -154,6 +154,59 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Details field
+
+#### Design Considerations
+
+For our application, the chosen method of input is `CLI` (command line input), as such the length of each command needs to be considered in the design of features. To keep the add command as user-friendly as possible, the `Details` field is designed to be set to a default value for the `addCommand`. Input of the `Details` field is instead handled by the `editCommand`.
+
+#### Implementation
+
+The `Details` field for the application is abstracted into its own class much like the other fields stored by the `application`. The `Details` field stores one `private final String details` that stores the users desired input, and one constant variable which is the default value stores on creation.
+
+The `class` contains two overloaded `constructors`. One that is used for the default creation of the object which does not take in any parameters and one that requires a String input as a parameter for creation.
+
+Detailed below is an example of how the `Details` field is used by the `addCommand` and `editCommand`.
+
+#####addCommand
+
+Not much is changed for the `addCommand`, as the user is `not allowed` to type in the regex for adding details. The method instead, uses `Details()` to create a `Details` object with the `default string value`, which is parsed during the creation of the new `application` object.
+
+#####editCommand
+
+For the `editCommand`, a `new regex` was created in the `CliSyntax` class `d/` to allow `editCommandParser` to recognize when the user wants to input to the `Details` field. The `editCommand` uses `Details(String details)` constructor instead to create a new `Details` object with the desired changes.
+
+A new method `detailsParser` in the `ParserUtil` class to parse the details made by the user which is parsed to the `Details` constructor was also created. This method also has the job of trimming leading and trailing whitespaces, as well as interpreting the user desired string of input. 
+
+An example of how the parser works is:
+
+1. User inputs the command `edit 1 d/Desired line in detail \nnewline in the details field`
+2. The command is parsed through the `editCommandParser` where the regex `d/` is detected to indicate the desire to modify the details field
+3. The string `Desired line in detail \nnewline in the details field` is parsed to the `editCommand` through the `parseDetails` method, where all `\n` are detected and replaced with a newline
+4. The `editCommand` is executed and the change to the application details field is made
+5. The `details` field is then displayed by the `UI` as:
+```
+Desired  line in detail
+newline in the details field
+```
+
+#####UI
+
+To display the new `details` field, modifications to the `applicationCard.java` and `applicationCard.fxml` files had to be made. As the user is able to input any amount of new lines in the details field, the `label` would need to be stored in a `scrollPane` to allow the user to read the details field. Modification to the `minHeight` of the `applicationCard.fxml` as well as the new `label` `maxHeight` was made to properly display of the details field.
+
+Below is an image of the UI after the changes were made:
+
+![Ui-after-details-update](images/Ui-after-details-update.png)
+
+####Proposed improvements
+1. As the colour of each `application card` alternates between each index, changes to the `Ui` have to be made as well to match the alternating colours. To achieve this change, implementing the css style in `DarkTheme.css` file, in particular `List-view` css should be made when implementing changes to the `applicationCard.fxml`
+2. Further consideration can be made to how the user makes changes to the `details` field, as currently the `editCommand` only supports the `replacement` of the `details` field with a new desired input.
+
+    Proposed changes could be:
+
+    1. The inclusion of a new regex such as `append/` to indicate the users desire to add onto the details field
+    2. The creation of a new `command` that handles the appending of changes to the `details` field similar to the above, the command could be named `append`.
+
 ### \[Proposed\] Sort feature
 
 #### Proposed Implementation
@@ -172,6 +225,7 @@ To enable the logic to know which `comparator` to choose the `InternApplyParser#
 {More to be added}
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
 
 ### \[Proposed\] Undo/redo feature
 

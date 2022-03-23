@@ -5,6 +5,7 @@
     "email": "alice@vmware.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "interviewSlot" : "13-03-2022 13:00",
+    "details" : "To add details, use the edit command",
     "tagged": [ "friends" ],
     "jobTitle": "Intern"
   }, {
@@ -13,6 +14,7 @@
     "email": "hi@vmware.com",
     "address": "4th street",
     "interviewSlot" : "13-03-2022 13:00",
+    "details" : "To add details, use the edit command",
     "jobTitle": "Intern"
   } ]
 }
