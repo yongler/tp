@@ -271,9 +271,9 @@ Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' prior
 
 ###  Feature to edit Application Status & Priority Tags
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed feature mechanism is facilitated by `EditCommandParser`, `EditCommand` and `Tag`. It modifies the following operations:
+The feature mechanism is facilitated by `EditCommandParser`, `EditCommand` and `Tag`. It modifies the following operations:
 
 * `EditCommandParser#parse()` — Recognizes the `ast/` and `pt/` prefix to mean editing the Application Status and/or Priority Tag respectively.
 * `EditCommandParser#parseTagsForEdit()` — Parses all recognized `TagType` the user wants to edit into a Tag Set.
