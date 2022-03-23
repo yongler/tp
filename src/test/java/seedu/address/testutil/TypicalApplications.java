@@ -27,10 +27,12 @@ public class TypicalApplications {
 
     public static final Application GRAB = new ApplicationBuilder().withName("Grab").withPhone("94351253")
             .withEmail("hr@grab.com").withAddress("123, Jurong West Ave 6, #08-111")
-            .withInterviewSlot("13-02-2022 16:00").withJobTitle("Intern").withDetails("To add details, use the edit command").build();
+            .withInterviewSlot("13-02-2022 16:00").withJobTitle("Intern")
+            .withDetails("To add details, use the edit command").build();
     public static final Application LAZADA = new ApplicationBuilder().withName("Lazada").withPhone("98765432")
             .withEmail("lazada@sg.com").withAddress("311, Clementi Ave 2, #02-25").withInterviewSlot("13-03-2022 16:00")
-            .withTags("owesMoney", "friends").withJobTitle("Intern").withDetails("To add details, use the edit command").build();
+            .withTags("owesMoney", "friends").withJobTitle("Intern")
+            .withDetails("To add details, use the edit command").build();
     public static final Application SEAGROUP = new ApplicationBuilder().withName("SEA Group").withPhone("95352563")
             .withEmail("sea@hr.com").withAddress("1 Fusionopolis Place, #17-10, Galaxis, 138522").withJobTitle("Intern")
             .build();
