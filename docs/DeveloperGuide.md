@@ -259,7 +259,7 @@ Step 6. The created `Application` will then replace the 1st `Application` in the
 
 #### Design considerations:
 
-**Aspect: How the feature could be implmented:**
+**Aspect: How the feature could be implemented:**
 
 * **Alternative 1 (current choice):** Build on `edit` command.
     * Pros: Easy to implement.
@@ -286,6 +286,26 @@ Additionally, the following will be implemented:
 
 * `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS` — Filters the application list such that it only contains applications that have a valid `InterviewSlot` that falls within a week of the current local date.
 
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application. The `ReminderCommand` created and executed automatically which causes a `ReminderWindow` to pop-up with any upcoming Interviews.
+
+Step 2. The user updates an existing application with an `InterviewSlot` that will happen on the next day with respect to the current local date.
+
+Step 3. The user executes `reminder` manually which will create a new `ReminderCommand` that once executed opens up a `ReminderWindow`. Now the application list contained within the `ReminderWindow` will also include the application with the newly updated `InterviewSlot`.
+
+#### Design considerations:
+
+**Aspect: How the contents of the `ReminderWindow` will be displayed:**
+
+* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
+    * Pros: Fit well with the current UI implementation.
+    * Cons: Much more complex to implement.
+
+* **Alternative 2:** A simple text indicating the applications that are upcoming.
+    * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
+    * Cons: Would not communicate the information as easily as a UI implementation.
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
