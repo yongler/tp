@@ -154,7 +154,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Sort feature
+
+The proposed sort mechanism is faciliated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
+
+- `SortByDefault` — Sorting the list byCreate date and time **(Default)**
+- `SortByInterview` — Sorting the list by Interview Slot (Scheduled interview date and time)
+- `SortByPrioity` — Sorting the list by Priority (High / Mid / Low)
+- `SortByCompnayName` — Sorting the list by Company Name
+
+The operations are exposed in the `Model` interface as `Model#updateFilteredApplicationList()`.
+
+To enable the logic to know which `comparator` to choose the `InternApplyParser#parseCommand()` will also need to create `ListCommandParser` to enable the `ListCommand` to handle addtional paramters.
+
+{More to be added}
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
 ### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+
 
 #### Proposed Implementation
 
