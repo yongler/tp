@@ -234,9 +234,46 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Summary bar
 
-_{Explain here how the data archiving feature will be implemented}_
+Proposed implementation
+
+The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one 
+`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
+Each `StatsBox` will hold its relevant text and statistic. Example look:
+
+![SummaryBarExample](images/SummaryBarExample.png)
+
+The `SummaryBar` and `StatsBox` will implement the following operations:
+
+- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
+- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
+
+These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
+
+Below is an example scenario and how the SummaryBar will behave.
+
+Step 1. The user launches the application. The `SummaryBar` will be initialized with statistics related to the current applications loaded from storage.
+
+Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+
+Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+
+<img src="images/SummaryBarExampleScenario.PNG" width="600" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
+
+
+#### Design Considerations:
+**Aspect: How update executes:**
+
+* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues when handling large number of applications.
+
+* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
+    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
+    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
 
 
 --------------------------------------------------------------------------------------------------------------------
