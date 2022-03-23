@@ -156,6 +156,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### \[Proposed\] Sort feature
 
+#### Proposed Implementation
+
 The proposed sort mechanism is faciliated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
 
 - `SortByDefault` — Sorting the list byCreate date and time **(Default)**
@@ -172,10 +174,6 @@ To enable the logic to know which `comparator` to choose the `InternApplyParser#
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 ### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-
 
 #### Proposed Implementation
 
