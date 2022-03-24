@@ -348,7 +348,43 @@ Step 3. The user executes `reminder` manually which will create a new `ReminderC
 * **Alternative 2:** A simple text indicating the applications that are upcoming.
     * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
     * Cons: Would not communicate the information as easily as a UI implementation.
-    
+
+### \[Proposed\] Find/filter feature
+
+**Proposed Implementation**
+
+The proposed reminder mechanism would be similar to the implementation of the existing `find` command. It would be facilitated by the existing command but with more `Predicate` parameters to find the applications based on different fields such as: name, phone, email, tags.
+
+The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed.
+
+Classes to be implemented are as follows:
+
+* `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input. 
+* `EmailContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Email` contains the numbers typed in user input.
+* `ApplicationStatustagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `ApplicationStatustag` contains the numbers typed in user input.
+* `PrioritytagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Prioritytag` contains the numbers typed in user input.'
+
+
+Given below is an example usage scenario and how the find command behaves at each step.
+
+Step 1. The user launches the application. All internship applications are showed by default.
+
+Step 2. The user uses the find command to find applications with the `HIGH` priority tag.
+
+Step 3. The user sees all and only the applications that have the `HIGH` priority tag.  
+
+#### Design considerations:
+
+**Aspect: How the contents of the find command will be displayed:**
+
+* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `UI` with the filtered application list.
+    * Pros: Fit well with the current UI implementation.
+    * Cons: -
+
+
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
