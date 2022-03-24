@@ -362,7 +362,7 @@ Classes to be implemented are as follows:
 * `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input. 
 * `EmailContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Email` contains the numbers typed in user input.
 * `ApplicationStatustagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `ApplicationStatustag` contains the numbers typed in user input.
-* `PrioritytagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Prioritytag` contains the numbers typed in user input.'
+* `PrioritytagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Prioritytag` contains the numbers typed in user input.
 
 
 Given below is an example usage scenario and how the find command behaves at each step.
