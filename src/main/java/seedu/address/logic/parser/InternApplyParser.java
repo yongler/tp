@@ -15,7 +15,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,8 +67,7 @@ public class InternApplyParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case ReminderCommand.COMMAND_WORD:
-            return new ReminderCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
