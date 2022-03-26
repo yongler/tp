@@ -113,6 +113,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        reminderWindow.fillInnerParts(logic);
         applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
         applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
 
@@ -175,6 +176,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 

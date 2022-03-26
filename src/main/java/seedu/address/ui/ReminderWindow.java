@@ -3,28 +3,34 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
 
 /**
  * Controller for reminder window
  */
 public class ReminderWindow extends UiPart<Stage> {
-    public static final String USERGUIDE_URL = "There is no URL; This is not the help window.";
-    public static final String REMINDER_MESSAGE = "This will be the reminder message";
+    public static final String REMINDER_MESSAGE = "Here are your upcoming interviews!";
 
     private static final Logger logger = LogsCenter.getLogger(ReminderWindow.class);
     private static final String FXML = "ReminderWindow.fxml";
 
-    @FXML
-    private Button copyButton;
+    // Independent Ui parts residing in this Ui container
+    private ApplicationListPanel applicationListPanel;
+    private ResultDisplay resultDisplay;
 
     @FXML
     private Label reminderMessage;
+
+    @FXML
+    private StackPane applicationListPanelPlaceholder;
+
+    @FXML
+    private StackPane resultDisplayPlaceholder;
+
 
     /**
      * Creates a new ReminderWindow.
@@ -89,14 +95,11 @@ public class ReminderWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Fills up all the placeholders of this window.
      */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    void fillInnerParts(Logic logic) {
+        applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
+        applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
     }
 
 }
