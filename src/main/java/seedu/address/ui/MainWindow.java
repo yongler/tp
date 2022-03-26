@@ -128,6 +128,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Startup behavior of this window.
+     */
+    public void init() throws CommandException, ParseException {
+        executeCommand("reminder");
+    }
+
+    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
