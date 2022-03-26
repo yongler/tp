@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Reminds the user of all upcoming applications within a weeks time.
+ */
 public class ReminderCommand extends Command{
 
     public final static String COMMAND_WORD = "reminder";
