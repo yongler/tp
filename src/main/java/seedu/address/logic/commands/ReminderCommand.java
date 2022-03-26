@@ -7,9 +7,8 @@ import seedu.address.model.Model;
 /**
  * Reminds the user of all upcoming applications within a weeks time.
  */
-public class ReminderCommand extends Command{
-
-    public final static String COMMAND_WORD = "reminder";
+public class ReminderCommand extends Command {
+    public static final String COMMAND_WORD = "reminder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds you of your upcoming interviews."
