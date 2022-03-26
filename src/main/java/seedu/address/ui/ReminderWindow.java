@@ -98,7 +98,7 @@ public class ReminderWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts(Logic logic) {
-        applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
+        applicationListPanel = new ApplicationListPanel(logic.getUpcomingApplicationsList());
         applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
     }
 

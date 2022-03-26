@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 
 public class ReminderCommand extends Command{
@@ -16,7 +17,9 @@ public class ReminderCommand extends Command{
     public static final String SHOWING_REMINDER_MESSAGE = "Opened reminder window.";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        model.updateUpcomingApplicationList(Model.PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY);
         return new CommandResult(SHOWING_REMINDER_MESSAGE, false, true, false);
     }
 }

@@ -2,6 +2,8 @@ package seedu.address.model.application;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -98,6 +100,20 @@ public class Application {
 
         return otherApplication != null
                 && otherApplication.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the InterviewSlot of this application falls within a week of the local of the local machine else
+     * returns false.
+     * If the InterviewSlot of this application is not currently set, this will return false.
+     */
+    public boolean isUpcomingInterview() {
+        // Checks if the InterviewSlot of this application is the default InterviewSlot
+        if (this.interviewSlot.equals(new InterviewSlot())) {
+            return false;
+        }
+
+        return this.interviewSlot.isUpcoming();
     }
 
     /**
