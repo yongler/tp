@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private ApplicationListPanel applicationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        reminderWindow = new ReminderWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -152,6 +155,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the reminder window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -180,6 +195,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowReminder()) {
+                handleReminder();
             }
 
             if (commandResult.isExit()) {
