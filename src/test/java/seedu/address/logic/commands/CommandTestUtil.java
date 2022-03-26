@@ -117,11 +117,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        InternApplyMemory expectedAddressBook = new InternApplyMemory(actualModel.getInternApplyMemory());
+        InternApplyMemory expectedInternApplyMemory = new InternApplyMemory(actualModel.getInternApplyMemory());
         List<Application> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicationList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getInternApplyMemory());
+        assertEquals(expectedInternApplyMemory, actualModel.getInternApplyMemory());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicationList());
     }
     /**
