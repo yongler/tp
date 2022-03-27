@@ -24,11 +24,14 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Grab", "Lazada")));
-        assertParseSuccess(parser, "Grab Lazada", expectedFindCommand);
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Grab")));
+        assertParseSuccess(parser, "find n/Grab", expectedFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Grab \n \t Lazada  \t", expectedFindCommand);
+        // multiple parameters for same keywords, last taken
+        assertParseSuccess(parser, " find n/Lazada n/Grab", expectedFindCommand);
+
+        // multiple different keywords, first taken
+        assertParseSuccess(parser, " find n/Grab t/overseas", expectedFindCommand);
     }
 
 }

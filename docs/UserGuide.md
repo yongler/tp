@@ -6,7 +6,7 @@ title: User Guide
 SoC InternApply (SIA) is a **desktop app for managing applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SIA can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,17 +24,19 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all applications.
+    * **`list`** : Lists all applications.
 
-   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering` : Adds an application with company named `Shopee` to SIA.
-   
-   * **``edit``**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
+    * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering` : Adds an application with company named `Shopee` to SIA.
 
-   * **`delete`**`3` : Deletes the 3rd application shown in the current list.
+    * **``edit``**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
 
-   * **`clear`** : Deletes all applications.
+    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
-   * **`exit`** : Exits the app.
+    * **`find`**`n/shopee` : Find all applications that contain the word "shopee" in its name.
+
+    * **`clear`** : Deletes all applications.
+
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -80,7 +82,7 @@ Adds an application to SoC InternApply.
 
 Format: `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-**Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional. 
+**Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional.
 * For `[pt/PRIORITY_TAG]`, user input can be any of: `HIGH`, `MEDIUM`, `LOW`
 * For `[ast/APPLICATION_STATUS_TAG]`, user input can be any of: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`
 * For the above 2 statements, the inputs are case-insensitive, i.e. `Applied`, `APPLIED` or `applied` are all accepted.
@@ -135,6 +137,25 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd application.
 
+### Finding application(s) : `find`
+
+Find existing applications in SoC InternApply.
+
+Format: `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`
+- Finds the applications with the fields containing keywords given in the input.
+- Keywords are case-insensitive.
+- Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
+- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`
+
+Examples:
+- `find n/shopee` finds and displays all applications with "shopee" in its name.
+- `find j/ML` finds and displays all applications with "ML" in its job title.
+- `find pt/HIGH` finds and displays all applications with "HIGH" in its priority tag.
+- `find ast/applied` finds and displays all applications with "applied" in its application status. (note that it is case-insensitive)
+- `find t/overseas` finds and displays all applications with "overseas" in its tags.
+- `find t/overseas t/USA` finds and displays all applications with "overseas" and "USA" in its tags.
+
+
 ### Clearing all applications : `clear`
 
 Clears all applications from SoC InternApply.
@@ -164,7 +185,7 @@ _More features coming soon ..._
 **A**: Currently, we do not allow the editing of application status and/or priority. This will be made available in a future version of our application. <br>
 
 **Q**: When I run SoC InternApply for the first time, I do not see any of the sample applications? <br>
-**A**: Please locate where InternApply data is being stored on your hard disk. This will usually be in a folder named `data` found in the root folder of the application. Delete any existing files in that folder and run SoC InternApply again. 
+**A**: Please locate where InternApply data is being stored on your hard disk. This will usually be in a folder named `data` found in the root folder of the application. Delete any existing files in that folder and run SoC InternApply again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -173,9 +194,10 @@ _More features coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-    **Add** | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
+**Add** | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
 **List** | `list`
 **Edit** | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g, `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> e.g., `find n/shopee`
 **Clear** | `clear`
 **Exit** | `exit`

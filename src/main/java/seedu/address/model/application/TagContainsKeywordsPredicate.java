@@ -1,10 +1,11 @@
 package seedu.address.model.application;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Application}'s {@code Tag} matches any of the keywords given.

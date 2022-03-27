@@ -1,22 +1,30 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS_TAG;
-
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.application.*;
-import seedu.address.model.tag.ApplicationStatusTagType;
-import seedu.address.model.tag.PriorityTagType;
-import seedu.address.model.tag.Tag;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.application.JobTitle;
+import seedu.address.model.application.JobTitleContainsKeywordsPredicate;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.NameContainsKeywordsPredicate;
+import seedu.address.model.application.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
+import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
