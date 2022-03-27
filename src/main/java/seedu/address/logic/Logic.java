@@ -33,6 +33,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of applications */
     ObservableList<Application> getFilteredApplicationsList();
 
+    /** Returns an unmodifiable view of the upcoming list of applications */
+    ObservableList<Application> getUpcomingApplicationsList();
+
     /**
      * Returns the user prefs' intern apply file path.
      */

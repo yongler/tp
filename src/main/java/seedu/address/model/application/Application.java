@@ -112,6 +112,20 @@ public class Application {
     }
 
     /**
+     * Returns true if the InterviewSlot of this application falls within a week of the local of the local machine else
+     * returns false.
+     * If the InterviewSlot of this application is not currently set, this will return false.
+     */
+    public boolean isUpcomingInterview() {
+        // Checks if the InterviewSlot of this application is the default InterviewSlot
+        if (this.interviewSlot.equals(new InterviewSlot())) {
+            return false;
+        }
+
+        return this.interviewSlot.isUpcoming();
+    }
+
+    /**
      * Returns true if both applications have the same identity and data fields.
      * This defines a stronger notion of equality between two applications.
      */

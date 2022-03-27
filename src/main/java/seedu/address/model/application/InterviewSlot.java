@@ -66,10 +66,30 @@ public class InterviewSlot {
     }
 
     /**
+     * Returns true if the interview slot is within a week of the current local date of the local machine.
+     */
+    public boolean isUpcoming() {
+        // The current date of the local machine
+        LocalDateTime today = LocalDateTime.now();
+
+        // Calculate the date a week from the current date of the local machine
+        LocalDateTime nextWeek = today.plusDays(7);
+
+        return this.value.isAfter(today) && this.value.isBefore(nextWeek);
+    }
+
+    /**
      * Returns the value of interview slot in the input String format as per FORMAT_DATETIME_INPUT.
      */
     public String toInputString() {
         return this.value.format(DateTimeFormatter.ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT));
+    }
+
+    /**
+     * Returns the value of interview slot in the form of {@code LocalDateTime}.
+     */
+    public LocalDateTime getInterviewSlot() {
+        return value;
     }
 
     @Override

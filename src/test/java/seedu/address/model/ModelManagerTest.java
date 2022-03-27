@@ -94,6 +94,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUpcomingApplicationsList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUpcomingApplicationList().remove(0));
+    }
+
+    @Test
     public void equals() {
         InternApplyMemory internApplyMemory = new InternApplyMemoryBuilder().withApplication(GRAB)
                 .withApplication(LAZADA).build();
