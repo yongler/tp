@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
 
@@ -85,4 +86,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
+
+    void setFilteredApplicationList(FilteredList<Application> filteredApplications);
 }
