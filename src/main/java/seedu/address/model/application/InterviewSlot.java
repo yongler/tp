@@ -61,6 +61,10 @@ public class InterviewSlot {
                 .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT)));
     }
 
+    public LocalDateTime getValue() {
+        return this.value;
+    }
+
     /**
      * Returns the value of interview slot in the input String format as per FORMAT_DATETIME_INPUT.
      */

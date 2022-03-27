@@ -5,8 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -77,6 +79,15 @@ public class Application {
 
     public Details getDetails() {
         return details;
+    }
+
+    public Optional<PriorityTag> getPriorityTag() {
+        for (Tag tag: tags) {
+            if (tag instanceof PriorityTag) {
+                return Optional.of((PriorityTag) tag);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
