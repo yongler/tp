@@ -14,6 +14,13 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Application> PREDICATE_SHOW_ALL_APPLICATIONS = unused -> true;
 
+    /** {@code Predicate} that returns true if the application's interview slot falls with a week of the local date on
+     * the local machine.
+     */
+    Predicate<Application> PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY = application -> {
+        return application.isUpcomingInterview();
+    };
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -85,4 +92,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
+
+    /** Returns an unmodifiable view of the upcoming application list */
+    ObservableList<Application> getUpcomingApplicationList();
+
+    /**
+     * Updates the upcoming applications list using the given {@code predicate}
+     */
+    void updateUpcomingApplicationList(Predicate<Application> predicate);
 }

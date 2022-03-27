@@ -112,16 +112,17 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the intern apply memory, filtered application list and
+     * selected application in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        InternApplyMemory expectedAddressBook = new InternApplyMemory(actualModel.getInternApplyMemory());
+        InternApplyMemory expectedInternApplyMemory = new InternApplyMemory(actualModel.getInternApplyMemory());
         List<Application> expectedFilteredList = new ArrayList<>(actualModel.getFilteredApplicationList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getInternApplyMemory());
+        assertEquals(expectedInternApplyMemory, actualModel.getInternApplyMemory());
         assertEquals(expectedFilteredList, actualModel.getFilteredApplicationList());
     }
     /**
