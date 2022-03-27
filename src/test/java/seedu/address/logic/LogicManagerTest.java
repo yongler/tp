@@ -95,6 +95,11 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredApplicationsList().remove(0));
     }
 
+    @Test
+    public void getUpcomingApplicationList_modifyList_throwsUnsupportedOperationsException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getUpcomingApplicationsList().remove(0));
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
