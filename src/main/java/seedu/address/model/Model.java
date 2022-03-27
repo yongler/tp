@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * The API of the Model component.
@@ -85,4 +86,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
+
+    ObservableList<SummaryBox> getSummaryBoxList();
+
+    void updateSummaryBoxList();
 }

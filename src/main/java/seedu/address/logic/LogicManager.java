@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 import seedu.address.storage.Storage;
 
 /**
@@ -62,6 +63,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Application> getFilteredApplicationsList() {
         return model.getFilteredApplicationList();
+    }
+
+    @Override
+    public ObservableList<SummaryBox> getSummaryBoxList() {
+        return model.getSummaryBoxList();
     }
 
     @Override

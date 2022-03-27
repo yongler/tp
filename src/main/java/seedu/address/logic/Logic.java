@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * API of the Logic component
@@ -32,6 +33,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of applications */
     ObservableList<Application> getFilteredApplicationsList();
+
+    /** Returns an unmodifiable view of the list of summary boxes */
+    ObservableList<SummaryBox> getSummaryBoxList();
 
     /**
      * Returns the user prefs' intern apply file path.

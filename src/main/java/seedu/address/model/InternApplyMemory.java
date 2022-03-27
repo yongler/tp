@@ -2,11 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.UniqueApplicationList;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * Wraps all data at the memory level
@@ -15,6 +19,7 @@ import seedu.address.model.application.UniqueApplicationList;
 public class InternApplyMemory implements ReadOnlyInternApplyMemory {
 
     private final UniqueApplicationList applications;
+    private ArrayList<SummaryBox> summaryBoxes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +30,7 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
      */
     {
         applications = new UniqueApplicationList();
+        summaryBoxes = new ArrayList<>();
     }
 
     public InternApplyMemory() {}
@@ -35,6 +41,7 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     public InternApplyMemory(ReadOnlyInternApplyMemory toBeCopied) {
         this();
         resetData(toBeCopied);
+        initSummaryBoxes();
     }
 
     //// list overwrite operations
@@ -105,6 +112,15 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     @Override
     public ObservableList<Application> getApplicationList() {
         return applications.asUnmodifiableObservableList();
+    }
+
+    private void initSummaryBoxes() {
+        summaryBoxes.add(new SummaryBox("Total Applications", 0, applications.getSize()));
+
+    }
+
+    public ArrayList<SummaryBox> getSummaryBoxes() {
+        return summaryBoxes;
     }
 
     @Override

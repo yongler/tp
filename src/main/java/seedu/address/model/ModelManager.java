@@ -7,11 +7,14 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
+import seedu.address.model.summarybar.SummaryList;
 
 /**
  * Represents the in-memory model of InternApply data.
@@ -22,6 +25,8 @@ public class ModelManager implements Model {
     private final InternApplyMemory internApplyMemory;
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
+    private final SummaryList summaryList;
+    private final ObservableList<Application> applications;
 
     /**
      * Initializes a ModelManager with the given internApplyMemory and userPrefs.
@@ -35,6 +40,8 @@ public class ModelManager implements Model {
         this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
+        summaryList = new SummaryList(this.internApplyMemory.getSummaryBoxes());
+        applications = FXCollections.observableList(this.internApplyMemory.getApplicationList());
     }
 
     public ModelManager() {
@@ -128,6 +135,27 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredApplications.setPredicate(predicate);
     }
+
+    //========== Summary Box List Accessors ===============================================================
+
+    @Override
+    public ObservableList<SummaryBox> getSummaryBoxList() {
+        return summaryList.getObservableList();
+    }
+
+    @Override
+    public void updateSummaryBoxList() {
+        summaryList.update(getTotalApplications());
+    }
+
+    private int getTotalApplications() {
+        int count = 0;
+        for (Application application : applications) {
+            count++;
+        }
+        return count;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
