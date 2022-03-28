@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -40,8 +41,8 @@ public class ModelManager implements Model {
         this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
-        summaryList = new SummaryList(this.internApplyMemory.getSummaryBoxes());
         applications = FXCollections.observableList(this.internApplyMemory.getApplicationList());
+        summaryList = new SummaryList(applications);
     }
 
     public ModelManager() {
@@ -145,17 +146,8 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSummaryBoxList() {
-        summaryList.update(getTotalApplications());
+        summaryList.update(applications);
     }
-
-    private int getTotalApplications() {
-        int count = 0;
-        for (Application application : applications) {
-            count++;
-        }
-        return count;
-    }
-
 
     @Override
     public boolean equals(Object obj) {

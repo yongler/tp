@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Optional;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -39,7 +41,11 @@ public class SummaryCard extends UiPart<Region> {
         super(FXML);
         this.summaryBox = summaryBox;
         name.setText(summaryBox.getName());
-        currApplications.setText(String.valueOf(summaryBox.getCurrApplications()));
+        if (summaryBox.getCurrApplications().isEmpty()) {
+            currApplications.setText("");
+        } else {
+            currApplications.setText(summaryBox.getCurrApplications().get() + "/");
+        }
         totalApplications.setText(String.valueOf(summaryBox.getTotalApplications()));
     }
 

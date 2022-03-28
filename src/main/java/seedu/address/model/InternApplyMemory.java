@@ -19,7 +19,6 @@ import seedu.address.model.summarybar.SummaryBox;
 public class InternApplyMemory implements ReadOnlyInternApplyMemory {
 
     private final UniqueApplicationList applications;
-    private ArrayList<SummaryBox> summaryBoxes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,7 +29,6 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
      */
     {
         applications = new UniqueApplicationList();
-        summaryBoxes = new ArrayList<>();
     }
 
     public InternApplyMemory() {}
@@ -41,7 +39,6 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     public InternApplyMemory(ReadOnlyInternApplyMemory toBeCopied) {
         this();
         resetData(toBeCopied);
-        initSummaryBoxes();
     }
 
     //// list overwrite operations
@@ -112,15 +109,6 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     @Override
     public ObservableList<Application> getApplicationList() {
         return applications.asUnmodifiableObservableList();
-    }
-
-    private void initSummaryBoxes() {
-        summaryBoxes.add(new SummaryBox("Total Applications", 0, applications.getSize()));
-
-    }
-
-    public ArrayList<SummaryBox> getSummaryBoxes() {
-        return summaryBoxes;
     }
 
     @Override
