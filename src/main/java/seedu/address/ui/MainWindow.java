@@ -117,6 +117,9 @@ public class MainWindow extends UiPart<Stage> {
         applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
         applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
 
+        summaryListPanel = new SummaryListPanel(logic.getSummaryBoxList());
+        summaryListPanelPlaceholder.getChildren().add(summaryListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -125,9 +128,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        summaryListPanel = new SummaryListPanel(logic.getSummaryBoxList());
-        summaryListPanelPlaceholder.getChildren().add(summaryListPanel.getRoot());
     }
 
     /**

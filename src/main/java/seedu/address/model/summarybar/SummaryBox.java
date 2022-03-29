@@ -28,9 +28,6 @@ public abstract class SummaryBox {
 
     public abstract Optional<Integer> getCurrApplications();
 
-    public abstract void update(int[] summaryInfo);
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

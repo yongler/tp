@@ -12,10 +12,4 @@ public class TotalApplicationsBox extends SummaryBox {
     public Optional<Integer> getCurrApplications() {
         return Optional.empty();
     }
-
-    @Override
-    public void update(int[] summaryInfo) {
-        int totalApplications = summaryInfo[SummaryList.TOTAL_APPLICATIONS_INDEX];
-        super.setTotalApplications(totalApplications);
-    }
 }

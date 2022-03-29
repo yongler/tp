@@ -4,12 +4,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class TagSummaryBox extends SummaryBox {
-    private int id;
     private int currApplications;
 
-    TagSummaryBox(String name, int currApplications, int totalApplications, int id) {
+    TagSummaryBox(String name, int currApplications, int totalApplications) {
         super(name, totalApplications);
-        this.id = id;
         this.currApplications = currApplications;
     }
 
@@ -18,11 +16,6 @@ public class TagSummaryBox extends SummaryBox {
         return Optional.of(currApplications);
     }
 
-    @Override
-    public void update(int[] summaryInfo) {
-        currApplications = summaryInfo[id];
-        super.setTotalApplications(summaryInfo[SummaryList.TOTAL_APPLICATIONS_INDEX]);
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -30,12 +23,11 @@ public class TagSummaryBox extends SummaryBox {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         TagSummaryBox that = (TagSummaryBox) o;
-        return id == that.id
-                && currApplications == that.currApplications;
+        return currApplications == that.currApplications;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, currApplications);
+        return Objects.hash(super.hashCode(), currApplications);
     }
 }

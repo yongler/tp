@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -27,7 +26,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
     private final SummaryList summaryList;
-    private final ObservableList<Application> applications;
 
     /**
      * Initializes a ModelManager with the given internApplyMemory and userPrefs.
@@ -41,8 +39,7 @@ public class ModelManager implements Model {
         this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
-        applications = FXCollections.observableList(this.internApplyMemory.getApplicationList());
-        summaryList = new SummaryList(applications);
+        summaryList = new SummaryList(this.internApplyMemory.getApplicationList());
     }
 
     public ModelManager() {
@@ -146,7 +143,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSummaryBoxList() {
-        summaryList.update(applications);
+        summaryList.update(internApplyMemory.getApplicationList());
     }
 
     @Override

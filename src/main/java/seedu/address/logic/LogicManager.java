@@ -45,6 +45,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = internApplyParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        model.updateSummaryBoxList();
 
         try {
             storage.saveInternApply(model.getInternApplyMemory());

@@ -1,5 +1,6 @@
 package seedu.address.model.summarybar;
 
+import java.util.Optional;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -34,15 +35,15 @@ public class SummaryList {
 
         summaryList.add(new TotalApplicationsBox("Total", totalApplications));
         summaryList.add(new TagSummaryBox("High Priority", getTotalTagApplications(HIGH_PRIORITY_TAG),
-                totalApplications, TOTAL_HIGH_PRIORITY_APPLICATIONS_INDEX));
+                totalApplications));
         summaryList.add(new TagSummaryBox("Medium Priority", getTotalTagApplications(MEDIUM_PRIORITY_TAG),
-                totalApplications, TOTAL_MEDIUM_PRIORITY_APPLICATIONS_INDEX));
+                totalApplications));
         summaryList.add(new TagSummaryBox("Low Priority", getTotalTagApplications(LOW_PRIORITY_TAG),
-                totalApplications, TOTAL_LOW_PRIORITY_APPLICATIONS_INDEX));
+                totalApplications));
         summaryList.add(new TagSummaryBox("Applied", getTotalTagApplications(APPLIED_STATUS_TAG),
-                totalApplications, TOTAL_APPLIED_APPLICATIONS_INDEX));
+                totalApplications));
         summaryList.add(new TagSummaryBox("Not Applied", getTotalTagApplications(NOT_APPLIED_STATUS_TAG),
-                totalApplications, TOTAL_NOT_APPLIED_APPLICATIONS_INDEX));
+                totalApplications));
     }
 
     public ObservableList<SummaryBox> getObservableList() {
@@ -58,8 +59,13 @@ public class SummaryList {
         summaryInfo[TOTAL_LOW_PRIORITY_APPLICATIONS_INDEX] = getTotalTagApplications(LOW_PRIORITY_TAG);
         summaryInfo[TOTAL_APPLIED_APPLICATIONS_INDEX] = getTotalTagApplications(APPLIED_STATUS_TAG);
         summaryInfo[TOTAL_NOT_APPLIED_APPLICATIONS_INDEX] = getTotalTagApplications(NOT_APPLIED_STATUS_TAG);
-        for (SummaryBox summaryBox : summaryList) {
-            summaryBox.update(summaryInfo);
+
+        String totalApplicationsBoxName = summaryList.get(TOTAL_APPLICATIONS_INDEX).getName();
+        summaryList.set(0, new TotalApplicationsBox(totalApplicationsBoxName, getTotalApplications()));
+
+        for (int i = 1; i<summaryList.size(); i++) {
+            String currSummaryBoxName = summaryList.get(i).getName();
+            summaryList.set(i, new TagSummaryBox(currSummaryBoxName, summaryInfo[i], getTotalApplications()));
         }
     }
 
@@ -77,4 +83,6 @@ public class SummaryList {
         }
         return count;
     }
+
+
 }
