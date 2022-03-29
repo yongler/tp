@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Represents an Application in InternApply.
@@ -81,10 +81,10 @@ public class Application {
         return details;
     }
 
-    public Optional<PriorityTag> getPriorityTag() {
+    public Optional<Tag> getPriorityTag() {
         for (Tag tag: tags) {
-            if (tag instanceof PriorityTag) {
-                return Optional.of((PriorityTag) tag);
+            if (tag.tagType.equals(TagType.PRIORITY)) {
+                return Optional.of(tag);
             }
         }
         return Optional.empty();
