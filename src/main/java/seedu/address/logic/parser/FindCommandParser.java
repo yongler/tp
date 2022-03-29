@@ -150,7 +150,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public Collection<String> checkNotEmptyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         if (tags.isEmpty() || (tags.size() == 1 && tags.iterator().next().isEmpty())) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Tag.MESSAGE_CANNOT_BE_EMPTY);
         }
         for (String tagName : tags) {
             if (!Tag.isValidTagName(tagName)) {
