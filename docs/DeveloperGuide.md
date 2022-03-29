@@ -12,6 +12,35 @@ title: Developer Guide
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+This project is adapted from `AddressBook3` and makes use of a few of its features. `InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+
+### This developer guide is intended for users who:
+- Want to `develop` this project further
+- Want to `adapt` this project for their own purpose
+- Are interested in how the `features` are implemented
+
+### How to use this guide
+For any user who wants to work on the code, you are highly encouraged to clone our `team repository` [here](https://github.com/AY2122S2-CS2103T-T11-3/tp)
+to your own `github` repository for referencing.
+
+- Users who want to develop the project further
+
+1. You can start with reading through the implementation of the features to get familiar with the code base.
+
+2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
+3. You can alternatively help in cleaning up the code base by spotting
+bugs and raising them as issues to our team repository. 
+
+4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
+
+
+- Users who want to adapt this project or are interested in the features
+
+1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
+2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
