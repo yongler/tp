@@ -87,7 +87,9 @@ public interface Model {
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
 
+    /** Returns a modifiable view of the list of summary boxes */
     ObservableList<SummaryBox> getSummaryBoxList();
 
+    /** Updates the list of summary boxes */
     void updateSummaryBoxList();
 }

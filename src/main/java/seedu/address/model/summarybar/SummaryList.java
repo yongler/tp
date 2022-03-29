@@ -8,6 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.application.Application;
 import seedu.address.model.tag.Tag;
 
+/**
+ * A list of SummaryBoxes that keeps track of their respective indices and tags.
+ *
+ */
 public class SummaryList {
 
     private static final int SUMMARY_INFO_SIZE = 6;
@@ -28,6 +32,11 @@ public class SummaryList {
     private ObservableList<SummaryBox> summaryList;
     private ObservableList<Application> applications;
 
+    /**
+     * Constructs a SummaryList from the given list of applications.
+     *
+     * @param applications The list of applications to get the relevant statistics for the SummaryBoxes to hold.
+     */
     public SummaryList(ObservableList<Application> applications) {
         this.applications = applications;
         summaryList = FXCollections.observableArrayList();
@@ -50,6 +59,12 @@ public class SummaryList {
         return summaryList;
     }
 
+    /**
+     * Updates the SummaryList by replacing each SummaryBox with a new one holding the updated statistics passed from
+     * the given list of applications.
+     *
+     * @param applications The given list of applications to get statistics from.
+     */
     public void update(ObservableList<Application> applications) {
         this.applications = applications;
         int[] summaryInfo = new int[SUMMARY_INFO_SIZE];
@@ -73,6 +88,12 @@ public class SummaryList {
         return applications.size();
     }
 
+    /**
+     * Gets the number of applications with the given tagName.
+     *
+     * @param tagName The given tagName of the applications search for and count.
+     * @return
+     */
     private int getTotalTagApplications(String tagName) {
         int count = 0;
         Tag toFind = new Tag(tagName);

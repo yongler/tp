@@ -34,7 +34,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of applications */
     ObservableList<Application> getFilteredApplicationsList();
 
-    /** Returns an unmodifiable view of the list of summary boxes */
+    /** Returns a modifiable view of the list of summary boxes */
     ObservableList<SummaryBox> getSummaryBoxList();
 
     /**
