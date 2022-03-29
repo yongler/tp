@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-SoC InternApply (SIA) is a **desktop app for managing applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SIA can get your contact management tasks done faster than traditional GUI apps.
+SoC InternApply (SIA) is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SIA can get your internship application management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,21 +14,29 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `InternApply.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
+2. Download the latest `internapply.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your SIA.
+3. Copy the file to the folder you want to use as the _home folder_ for your SIA.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the jar file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/MainWindowUi.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Another window should appear similar to the below. Note that this window **would contain any upcoming interviews you have in a weeks time**.<br>
+   ![Ui](images/ReminderWindowUi.png)
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
+   * **`help`** : Shows a message explaining how to access the help page.
+    
    * **`list`** : Lists all applications.
 
-   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering` : Adds an application with company named `Shopee` to SIA.
+   * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
+
+   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
    
-   * **``edit``**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
+   * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
+
+   * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
 
    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
@@ -36,7 +44,7 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,6 +60,18 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Grab SG t/local` or as `n/Grab SG`.
 
+* For `[pt/PRIORITY_TAG]`, user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
+  e.g `pt/HIGH` can be used to set priority of an application to `HIGH`
+
+* For `[ast/APPLICATION_STATUS_TAG]`, user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
+  e.g. `ast/INTERVIEWED` can be used to set application status of an application to `INTERVIEWED`
+
+* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]`, the inputs are case-insensitive<br>
+  e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
+
+* For `[t/TAG]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9.<br> 
+  e.g. `t/Based In Singapore` is not allowed, `t/BasedInSingapore` is allowed.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/local`, `t/local t/NUS` etc.
 
@@ -59,9 +79,9 @@ SoC InternApply (SIA) is a **desktop app for managing applications, optimized fo
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `j/Software Engineer j/Data Scientist`, only `j/Data Scientist` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `reminder`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -78,13 +98,9 @@ Format: `help`
 
 Adds an application to SoC InternApply.
 
-Format: `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
+Format: `add n/NAME_OF_COMPANY j/JOB_TITLE p/PHONE_NUMBER a/ADDRESS e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
 **Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional. 
-* For `[pt/PRIORITY_TAG]`, user input can be any of: `HIGH`, `MEDIUM`, `LOW`
-* For `[ast/APPLICATION_STATUS_TAG]`, user input can be any of: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`
-* For the above 2 statements, the inputs are case-insensitive, i.e. `Applied`, `APPLIED` or `applied` are all accepted.
-* For `[pt/PRIORITY_TAG]`, only alphanumeric inputs are allowed, i.e. Only the characters A-Z, a-z, 0-9
 
 Examples:
 * `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering `
@@ -95,6 +111,12 @@ Examples:
 Shows a list of all applications in SoC InternApply.
 
 Format: `list`
+
+### Listing applications with upcoming interviews: `reminder`
+
+Shows a list of applications with upcoming interviews, falling within a week from now, in SoC InternApply.
+
+Format: `reminder`
 
 ### Editing an application : `edit`
 
@@ -173,8 +195,9 @@ _More features coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-    **Add** | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
 **List** | `list`
+**Reminder**| `reminder`
+**Add** | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
 **Edit** | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> e.g, `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
