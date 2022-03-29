@@ -37,8 +37,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                 return new ListCommand();
             }
         } else {
-            String sortingField = sortingArgs[0];
-            String orderBy = sortingArgs[1];
+            String sortingField = sortingArgs[0].toLowerCase();
+            String orderBy = sortingArgs[1].toUpperCase();
 
             if (validateOrderBy(orderBy)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
