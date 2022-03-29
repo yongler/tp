@@ -90,6 +90,15 @@ public class Application {
         return Optional.empty();
     }
 
+    public Optional<Tag> getApplicationStatusTag() {
+        for (Tag tag: tags) {
+            if (tag.tagType.equals(TagType.APPLICATION_STATUS)) {
+                return Optional.of(tag);
+            }
+        }
+        return Optional.empty();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
