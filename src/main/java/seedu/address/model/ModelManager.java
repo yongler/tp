@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final InternApplyMemory internApplyMemory;
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
+    private final FilteredList<Application> upcomingApplications;
 
     /**
      * Initializes a ModelManager with the given internApplyMemory and userPrefs.
@@ -35,6 +36,9 @@ public class ModelManager implements Model {
         this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
+
+        // Placeholder value for upcomingApplications is a copy of filteredApplications
+        upcomingApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
     }
 
     public ModelManager() {
@@ -116,7 +120,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Application} backed by the internal list of
-     * {@code versionedInternApplyMemory}
+     * {@code filteredApplication}
      */
     @Override
     public ObservableList<Application> getFilteredApplicationList() {
@@ -127,6 +131,23 @@ public class ModelManager implements Model {
     public void updateFilteredApplicationList(Predicate<Application> predicate) {
         requireNonNull(predicate);
         filteredApplications.setPredicate(predicate);
+    }
+
+    //=========== Upcoming Application List Accessors ========================================================
+
+    /**
+     * Returns an unmodifiable view of the list of upcoming {@code Application} backed by the internal list of
+     * {@code upcomingApplication}
+     */
+    @Override
+    public ObservableList<Application> getUpcomingApplicationList() {
+        return upcomingApplications;
+    }
+
+    @Override
+    public void updateUpcomingApplicationList(Predicate<Application> predicate) {
+        requireNonNull(predicate);
+        upcomingApplications.setPredicate(predicate);
     }
 
     @Override
