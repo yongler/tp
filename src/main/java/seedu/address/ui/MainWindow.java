@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private ApplicationListPanel applicationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
     private SummaryListPanel summaryListPanel;
 
     @FXML
@@ -70,6 +71,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        reminderWindow = new ReminderWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -114,6 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        reminderWindow.fillInnerParts(logic);
         applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
         applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
 
@@ -128,6 +132,13 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Startup behavior of this window.
+     */
+    public void init() throws CommandException, ParseException {
+        executeCommand("reminder");
     }
 
     /**
@@ -159,6 +170,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the reminder window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -167,6 +190,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 
@@ -187,6 +211,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowReminder()) {
+                handleReminder();
             }
 
             if (commandResult.isExit()) {

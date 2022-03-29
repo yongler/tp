@@ -67,6 +67,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Application> getUpcomingApplicationsList() {
+        return model.getUpcomingApplicationList();
+    }
+
+    @Override
     public ObservableList<SummaryBox> getSummaryBoxList() {
         return model.getSummaryBoxList();
     }

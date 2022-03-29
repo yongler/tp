@@ -44,8 +44,12 @@ public abstract class SummaryBox {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SummaryBox that = (SummaryBox) o;
         return totalApplications == that.totalApplications
                 && Objects.equals(name, that.name);

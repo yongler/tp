@@ -35,9 +35,9 @@
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
         <Label fx:id="interviewSlot" styleClass="cell_small_label" text="\$interviewSlot" />
       </VBox>
-      <ScrollPane fx:id="detailScroll" maxHeight="145.0" minWidth="400" styleClass="pane-with-border" hbarPolicy="NEVER">
+      <ScrollPane fx:id="detailScroll" maxHeight="145.0" minWidth="400" maxWidth="400" styleClass="pane-with-border" hbarPolicy="NEVER">
         <content>
-          <Label fx:id="detail" alignment="TOP_LEFT" styleClass="detail-label" minWidth="400" minHeight="145" wrapText="true"/>
+          <Label fx:id="detail" alignment="TOP_LEFT" styleClass="detail-label" minWidth="380" maxWidth="380" minHeight="145" wrapText="true"/>
         </content>
       </ScrollPane>
     </children>

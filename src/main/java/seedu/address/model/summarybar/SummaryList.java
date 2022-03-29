@@ -1,8 +1,5 @@
 package seedu.address.model.summarybar;
 
-import java.util.Optional;
-import java.util.Set;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.application.Application;
@@ -14,14 +11,14 @@ import seedu.address.model.tag.Tag;
  */
 public class SummaryList {
 
-    private static final int SUMMARY_INFO_SIZE = 6;
-
     public static final int TOTAL_APPLICATIONS_INDEX = 0;
     public static final int TOTAL_HIGH_PRIORITY_APPLICATIONS_INDEX = 1;
     public static final int TOTAL_MEDIUM_PRIORITY_APPLICATIONS_INDEX = 2;
     public static final int TOTAL_LOW_PRIORITY_APPLICATIONS_INDEX = 3;
     public static final int TOTAL_APPLIED_APPLICATIONS_INDEX = 4;
     public static final int TOTAL_NOT_APPLIED_APPLICATIONS_INDEX = 5;
+
+    private static final int SUMMARY_INFO_SIZE = 6;
 
     private static final String HIGH_PRIORITY_TAG = "HIGH";
     private static final String MEDIUM_PRIORITY_TAG = "MEDIUM";
@@ -78,7 +75,7 @@ public class SummaryList {
         String totalApplicationsBoxName = summaryList.get(TOTAL_APPLICATIONS_INDEX).getName();
         summaryList.set(0, new TotalApplicationsBox(totalApplicationsBoxName, getTotalApplications()));
 
-        for (int i = 1; i<summaryList.size(); i++) {
+        for (int i = 1; i < summaryList.size(); i++) {
             String currSummaryBoxName = summaryList.get(i).getName();
             summaryList.set(i, new TagSummaryBox(currSummaryBoxName, summaryInfo[i], getTotalApplications()));
         }

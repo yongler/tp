@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -12,10 +13,44 @@ title: Developer Guide
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+This project is adapted from `AddressBook3` and makes use of a few of its features. `InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+
+### This developer guide is intended for users who:
+- Want to `develop` this project further
+- Want to `adapt` this project for their own purpose
+- Are interested in how the `features` are implemented
+
+### How to use this guide
+For any user who wants to work on the code, you are highly encouraged to clone our `team repository` [here](https://github.com/AY2122S2-CS2103T-T11-3/tp)
+to your own `github` repository for referencing.
+
+- Users who want to develop the project further
+
+1. You can start with reading through the implementation of the features to get familiar with the code base.
+
+2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
+3. You can alternatively help in cleaning up the code base by spotting
+bugs and raising them as issues to our team repository. 
+
+4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
+
+
+- Users who want to adapt this project or are interested in the features
+
+1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
+2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +102,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+[Go To TOC](#table-of-contents)
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +120,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+[Go To TOC](#table-of-contents)
 
 ### Logic component
 
@@ -113,6 +152,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[Go To TOC](#table-of-contents)
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -132,6 +173,7 @@ The `Model` component,
 
 </div>
 
+[Go To TOC](#table-of-contents)
 
 ### Storage component
 
@@ -148,11 +190,15 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+[Go To TOC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Details field
 
@@ -207,6 +253,10 @@ Below is an image of the UI after the changes were made:
     1. The inclusion of a new regex such as `append/` to indicate the users desire to add onto the details field
     2. The creation of a new `command` that handles the appending of changes to the `details` field similar to the above, the command could be named `append`.
 
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### \[Proposed\] Sort feature
 
 #### Proposed Implementation
@@ -225,6 +275,10 @@ To enable the logic to know which `comparator` to choose the `InternApplyParser#
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 {More to be added}
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### \[Proposed\] Summary bar
 
@@ -312,6 +366,10 @@ Step 6. The created `Application` will then replace the 1st `Application` in the
     * Pros: Greater flexibility to edit Tags (e.g. `edittag clear t/` would clear all the `Tag` of an existing application).
     * Cons: We would be writing repeated code since this would be implemented similar to `edit` command albeit with modified behaviour that accepts arguments other than prefixes.
 
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### \[Proposed\] Reminder feature
 
 **Proposed Implementation**
@@ -349,6 +407,10 @@ Step 3. The user executes `reminder` manually which will create a new `ReminderC
     * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
     * Cons: Would not communicate the information as easily as a UI implementation.
 
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### \[Proposed\] Find/filter feature
 
 **Proposed Implementation**
@@ -381,8 +443,9 @@ Step 3. The user sees all and only the applications that have the `HIGH` priorit
     * Pros: Fit well with the current UI implementation.
     * Cons: -
 
+[Go To TOC](#table-of-contents)
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### \[Proposed\] Undo/redo feature
@@ -465,6 +528,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -518,6 +582,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | maintain a journal of my internship                                 | Users who are curious can read and get an idea of what the internship is like  |
 
 *{More to be added}*
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Use cases
 
@@ -593,6 +661,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+[Go To TOC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -645,3 +715,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[Go To TOC](#table-of-contents)
