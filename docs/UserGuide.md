@@ -40,7 +40,7 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
    Some example commands you can try:
    * **`help`** : Shows a message explaining how to access the help page.
     
-   * **`list`** : Lists all applications.
+   * **`list`**`name desc` : Sort all applications base on company name in descending order. 
 
    * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
 
@@ -153,14 +153,37 @@ Feedback message:
 This application already exists in InternApply
 ```
 
-
 [Go To TOC](#table-of-contents)
 
-### Listing all applications : `list`
+### Listing all applications in a sorted manner : `list`
 
-Shows a list of all applications in SoC InternApply.
+Sorts the list of all application in SoC InternApply base on the provided paramters.
 
-Format: `list`
+Format: `list [sorting paramter] [order by]`
+
+Sorting paramters: 
+- `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
+- `interview` : Sort by interview date of applications starting with the latest earliest date.
+- `piroity` : Sort by piroity in the following order - HIGH, MEDIUM, LOW.
+- `status` : Sort by status in the following order - ACCEPTED, REJECTED, INTERVIEWED, APPLIE and NOT_APPLIED.
+
+* If optional fields (i.e. interview date and time, piroirty, status) do not exist in that certain application, that application will be move to the bottom of the sorting order. If there is more than one of such application, it will be sorted alphabeticaly.
+
+Order by:
+- `asc` : Order by ascending.
+- `desc` : Order by descending (reverse order of ascending).
+
+Examples:
+* `list interview desc`
+* `list name desc`, running this will output:
+```
+Sorted applications by name order by desc.
+```
+> 💡 The `list` command also works without paramters. It will reverted to the last sorted paramter and order used by the user. This is used after using the `find` feature to list out all applications. 
+
+> ⚠️ Applications are originally sorted in  a chonological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
+
+> ❗ Sorting will not apply to newly added or newly edited applications. Please re-run the `list` coomand with the respective paramters to sort as per you like.
 
 
 [Go To TOC](#table-of-contents)
@@ -277,9 +300,6 @@ InternApply data are saved in the hard disk automatically after any command that
 
 [Go To TOC](#table-of-contents)
 
-### Extra features
-_More features coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -308,7 +328,7 @@ Action | Format, Examples
 [**Exit**](exiting-the-program) | `exit`
 [**Find**](finding-application(s)) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
 [**Help**](viewing-help) | `help`
-[**List**](listing-all-applications) | `list`
+[**List**](listing-all-applications) | `list [sorting paramter] [order by]`
 [**Reminder**](listing-applications-with-upcoming-interviews)| `reminder`
 
 

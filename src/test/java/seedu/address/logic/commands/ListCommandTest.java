@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showApplicationAtIndex;
+import static seedu.address.logic.commands.ListCommand.MESSAGE_NO_CHANGE_FULL;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 
@@ -28,12 +29,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, MESSAGE_NO_CHANGE_FULL,
+                expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showApplicationAtIndex(model, INDEX_FIRST_APPLICATION);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, MESSAGE_NO_CHANGE_FULL,
+                expectedModel);
     }
 }
