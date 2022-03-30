@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SHOPEE;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_SHOPEE;
+import static seedu.address.logic.commands.ListCommand.MESSAGE_NO_CHANGE_FULL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.SHOPEE;
 
@@ -66,7 +67,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, MESSAGE_NO_CHANGE_FULL, model);
     }
 
     @Test
