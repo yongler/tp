@@ -32,11 +32,11 @@ public class SampleDataUtil {
                     new Email("hr@shopee.sg"),
                     new Address("5 Science Park Dr, #06-40"),
                     new InterviewSlot(today.minusDays(7).format(formatter)),
-                    new Details("Applied 2 weeks ago, waiting for a response.\n" +
-                            "OMG! They replied! Will be interviewed this week!\n" +
-                            "Preparing for the interview with Alice and Bob.\n" +
-                            "Interview done, waiting for response...\n" +
-                            "I GOT IN~"),
+                    new Details("Applied 2 weeks ago, waiting for a response.\n"
+                            + "OMG! They replied! Will be interviewed this week!\n"
+                            + "Preparing for the interview with Alice and Bob.\n"
+                            + "Interview done, waiting for response...\n"
+                            + "I GOT IN~"),
                     getTagSet("BasedInSingapore", "HIGH", "ACCEPTED")),
             new Application(new Name("Grab Holdings Singapore"),
                     new JobTitle("AI Engineer"),
@@ -44,8 +44,8 @@ public class SampleDataUtil {
                     new Email("hr@grab.sg"),
                     new Address("3 Media Cl, #07-18"),
                     new InterviewSlot(today.plusDays(1).format(formatter)),
-                    new Details("Alice and Bob was interested in this company so they asked me to join in." +
-                            " Hopefully all goes well and I get accepted (The interview was really tough)..."),
+                    new Details("Alice and Bob was interested in this company so they asked me to join in."
+                            + " Hopefully all goes well and I get accepted (The interview was really tough)..."),
                     getTagSet( "WithFriends", "MEDIUM", "INTERVIEWED")),
             new Application(new Name("Microsoft"),
                     new JobTitle("Software Engineer Intern"),
@@ -53,11 +53,11 @@ public class SampleDataUtil {
                     new Email("hr@microsoft.com"),
                     new Address("182 Cecil St, #13-01"),
                     new InterviewSlot(today.plusDays(7).format(formatter)),
-                    new Details("Microsoft interview preparations:\n" +
-                            "1. Work on LeetCode\n" +
-                            "2. Look for tips on the internet\n" +
-                            "3. Make sure to dress smartly for the interview\n" +
-                            "4. Do your best!"),
+                    new Details("Microsoft interview preparations:\n"
+                            + "1. Work on LeetCode\n"
+                            + "2. Look for tips on the internet\n"
+                            + "3. Make sure to dress smartly for the interview\n"
+                            + "4. Do your best!"),
                     getTagSet("DreamJob", "HIGH", "APPLIED")),
             new Application(new Name("Aftershock PC"),
                     new JobTitle("Data Scientist"),
