@@ -23,19 +23,24 @@ public class ApplicationStatusComparator implements Comparator<Application> {
 
     private int getStatusRanking(Optional<Tag> t) {
         if (t.isEmpty()) {
-            return 1;
-        } else if (t.get().toString().equals(NOT_APPLIED.toString())) {
-            return 2;
-        } else if (t.get().toString().equals(APPLIED.toString())) {
-            return 3;
-        } else if (t.get().toString().equals(INTERVIEWED.toString())) {
-            return 4;
-        } else if (t.get().toString().equals(REJECTED.toString())) {
-            return 5;
-        } else if (t.get().toString().equals(ACCEPTED.toString())) {
             return 6;
+        } else if (t.get().toString().equals(NOT_APPLIED.toString())) {
+            return 5;
+        } else if (t.get().toString().equals(APPLIED.toString())) {
+            return 4;
+        } else if (t.get().toString().equals(INTERVIEWED.toString())) {
+            return 3;
+        } else if (t.get().toString().equals(REJECTED.toString())) {
+            return 2;
+        } else if (t.get().toString().equals(ACCEPTED.toString())) {
+            return 1;
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
     }
 }

@@ -39,4 +39,9 @@ public class PriorityComparator implements Comparator<Application> {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

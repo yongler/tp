@@ -12,4 +12,9 @@ public class InterviewSlotComparator implements Comparator<Application> {
     public int compare(Application o1, Application o2) {
         return o1.getInterviewSlot().getValue().compareTo(o2.getInterviewSlot().getValue());
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

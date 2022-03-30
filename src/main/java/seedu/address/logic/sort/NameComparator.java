@@ -12,4 +12,9 @@ public class NameComparator implements Comparator<Application> {
     public int compare(Application o1, Application o2) {
         return o1.getName().toString().compareTo(o2.getName().toString());
     }
+
+    @Override
+    public String toString() {
+        return COMMAND_WORD;
+    }
 }

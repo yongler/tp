@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.ListCommand.COMMAND_ORDER_WORD_DESCEN
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.sort.ApplicationStatusComparator;
 import seedu.address.logic.sort.InterviewSlotComparator;
 import seedu.address.logic.sort.NameComparator;
 import seedu.address.logic.sort.PriorityComparator;
@@ -48,6 +49,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                 return new ListCommand(new InterviewSlotComparator(), orderBy);
             } else if (sortingField.equals(PriorityComparator.COMMAND_WORD)) {
                 return new ListCommand(new PriorityComparator(), orderBy);
+            } else if (sortingField.equals(ApplicationStatusComparator.COMMAND_WORD)) {
+                return new ListCommand(new ApplicationStatusComparator(), orderBy);
             }
         }
 

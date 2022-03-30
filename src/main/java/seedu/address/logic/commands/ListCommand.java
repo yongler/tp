@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 import java.util.Comparator;
 import java.util.Optional;
 
+import seedu.address.logic.sort.ApplicationStatusComparator;
 import seedu.address.logic.sort.InterviewSlotComparator;
 import seedu.address.logic.sort.NameComparator;
 import seedu.address.logic.sort.PriorityComparator;
@@ -23,15 +24,19 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_ORDER_WORD_DESCENDING = "DESC";
 
-    public static final String MESSAGE_SUCCESS = "Listed filtered applications";
-    // TODO: Update it to variable as per edit
+    public static final String MESSAGE_SUCCESS = "Sorted applications by %1$s";
+
+    public static final String MESSAGE_NO_CHANGE = "last sorted method.";
+
+    public static final String MESSAGE_NO_CHANGE_FULL = String.format(MESSAGE_SUCCESS, MESSAGE_NO_CHANGE);
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Show a sorted list of all applications with the given sort parameter.\n"
             + "Parameters: [parameter "
                 + NameComparator.COMMAND_WORD.toUpperCase() + "|"
                 + InterviewSlotComparator.COMMAND_WORD.toUpperCase() + "|"
-                + PriorityComparator.COMMAND_WORD.toUpperCase() + "] "
+                + PriorityComparator.COMMAND_WORD.toUpperCase() + "|"
+                + ApplicationStatusComparator.COMMAND_WORD.toUpperCase() + "] "
             + "[order " + COMMAND_ORDER_WORD_ASCENDING + "|" + COMMAND_ORDER_WORD_DESCENDING + "] \n"
             + "Example: " + COMMAND_WORD + " INTERVIEW " + COMMAND_ORDER_WORD_DESCENDING + "\n"
             + "Note: Using list without parameters will revert to the last sorted.";
@@ -60,6 +65,12 @@ public class ListCommand extends Command {
         requireNonNull(model);
         sortingComparator.ifPresent(applicationComparator -> model.sortApplications(applicationComparator, orderBy));
         model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, outputMsg()));
+    }
+
+    private String outputMsg() {
+        return sortingComparator.map(applicationComparator -> String.format(
+                "%s order by %s.", applicationComparator, orderBy.toLowerCase()))
+                .orElse(MESSAGE_NO_CHANGE);
     }
 }
