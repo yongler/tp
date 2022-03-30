@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -38,6 +39,14 @@ public class InternApplyMemory implements ReadOnlyInternApplyMemory {
     }
 
     //// list overwrite operations
+    /**
+     * Replaces the order of the application list with {@code c} and order by {@code orderBy}.
+     * */
+    public void sortApplications(Comparator<Application> c, String orderBy) {
+        requireNonNull(c);
+        requireNonNull(orderBy);
+        this.applications.sort(c, orderBy);
+    }
 
     /**
      * Replaces the contents of the application list with {@code applications}.
