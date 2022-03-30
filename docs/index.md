@@ -5,7 +5,7 @@ title: InternApply
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-3/tp/branch/master/graph/badge.svg?token=OPX1FSESUJ)](https://codecov.io/gh/AY2122S2-CS2103T-T11-3/tp)
-![Ui](images/Ui.png)
+![Ui](images/MainWindowUi.png)
 
 **InternApply is a desktop application for managing your internship application.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

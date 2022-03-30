@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     new InterviewSlot(today.plusDays(1).format(formatter)),
                     new Details("Alice and Bob was interested in this company so they asked me to join in."
                             + " Hopefully all goes well and I get accepted (The interview was really tough)..."),
-                    getTagSet( "WithFriends", "MEDIUM", "INTERVIEWED")),
+                    getTagSet("WithFriends", "MEDIUM", "INTERVIEWED")),
             new Application(new Name("Microsoft"),
                     new JobTitle("Software Engineer Intern"),
                     new Phone("93210283"),

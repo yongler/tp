@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ReminderWindow reminderWindow;
+    private SummaryListPanel summaryListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane summaryListPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -116,6 +120,9 @@ public class MainWindow extends UiPart<Stage> {
         reminderWindow.fillInnerParts(logic);
         applicationListPanel = new ApplicationListPanel(logic.getFilteredApplicationsList());
         applicationListPanelPlaceholder.getChildren().add(applicationListPanel.getRoot());
+
+        summaryListPanel = new SummaryListPanel(logic.getSummaryBoxList());
+        summaryListPanelPlaceholder.getChildren().add(summaryListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

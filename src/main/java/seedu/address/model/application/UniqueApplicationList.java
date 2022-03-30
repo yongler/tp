@@ -121,6 +121,13 @@ public class UniqueApplicationList implements Iterable<Application> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the size of the list.
+     */
+    public int getSize() {
+        return internalList.size();
+    }
+
     @Override
     public Iterator<Application> iterator() {
         return internalList.iterator();

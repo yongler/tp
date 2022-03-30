@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * The API of the Model component.
@@ -102,5 +103,13 @@ public interface Model {
      */
     void updateUpcomingApplicationList(Predicate<Application> predicate);
 
+    /** Sorts the list of applications */
     void sortApplications(Comparator<Application> c, String orderBy);
+
+    /** Returns a modifiable view of the list of summary boxes */
+    ObservableList<SummaryBox> getSummaryBoxList();
+
+    /** Updates the list of summary boxes */
+    void updateSummaryBoxList();
+
 }
