@@ -56,7 +56,7 @@ public class TagBox extends HBox {
                 returnTag.setStyle(Colors.ORANGE);
                 break;
             case "LOW":
-                returnTag.setStyle(Colors.GREEN);
+                returnTag.setStyle(Colors.YELLOW_ORANGE);
                 break;
             default:
                 break;
@@ -74,10 +74,10 @@ public class TagBox extends HBox {
                 returnTag.setStyle(Colors.YELLOW);
                 break;
             case "REJECTED":
-                returnTag.setStyle(Colors.RED);
+                returnTag.setStyle(Colors.PURPLE);
                 break;
             case "ACCEPTED":
-                returnTag.setStyle(Colors.GREEN);
+                returnTag.setStyle(Colors.LIGHT_GREEN);
                 break;
             default:
                 break;
