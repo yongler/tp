@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -115,8 +116,15 @@ public class ModelManager implements Model {
     @Override
     public void setApplication(Application target, Application editedApplication) {
         requireAllNonNull(target, editedApplication);
-
         internApplyMemory.setApplication(target, editedApplication);
+    }
+
+    //=========== Sorting Application List Accessors ========================================================
+    @Override
+    public void sortApplications(Comparator<Application> c, String orderBy) {
+        requireNonNull(c);
+        requireNonNull(orderBy);
+        internApplyMemory.sortApplications(c, orderBy);
     }
 
     //=========== Filtered Application List Accessors ========================================================

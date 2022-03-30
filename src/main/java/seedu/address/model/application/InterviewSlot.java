@@ -61,6 +61,10 @@ public class InterviewSlot {
                 .ofPattern(InterviewSlot.FORMAT_DATETIME_INPUT)));
     }
 
+    public LocalDateTime getValue() {
+        return this.value;
+    }
+
     /**
      * Returns true if the interview slot is within a week of the current local date of the local machine.
      */

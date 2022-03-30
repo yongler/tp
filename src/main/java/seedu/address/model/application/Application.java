@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagType;
 
 /**
  * Represents an Application in InternApply.
@@ -77,6 +79,24 @@ public class Application {
 
     public Details getDetails() {
         return details;
+    }
+
+    public Optional<Tag> getPriorityTag() {
+        for (Tag tag: tags) {
+            if (tag.tagType.equals(TagType.PRIORITY)) {
+                return Optional.of(tag);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Tag> getApplicationStatusTag() {
+        for (Tag tag: tags) {
+            if (tag.tagType.equals(TagType.APPLICATION_STATUS)) {
+                return Optional.of(tag);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
