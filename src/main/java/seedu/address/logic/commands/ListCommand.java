@@ -46,6 +46,7 @@ public class ListCommand extends Command {
 
     /**
      * Creates a ListCommand with the previous sorting order.
+     * Notes: the {@code sortingComparator} and {@code orderBy} are just placeholder values.
      */
     public ListCommand() {
         sortingComparator = Optional.empty();

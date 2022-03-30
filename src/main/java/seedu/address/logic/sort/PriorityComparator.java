@@ -14,6 +14,12 @@ public class PriorityComparator implements Comparator<Application> {
     private static final String PRIORITY_HIGH = "[" + PriorityTagType.HIGH + "]";
     private static final String PRIORITY_LOW = "[" + PriorityTagType.LOW + "]";
 
+    /**
+     * Compares the two application's priority field. Returns a negative integer, zero, or a positive integer as
+     * the first argument is less than, equal to, or greater than the second base on alphanumeric order.
+     * The default order from ascending to descend is as follows HIGH, MEDIUM, LOW.
+     * An empty tag will be considered as the lowest ranking, ranked below LOW.
+     * */
     @Override
     public int compare(Application o1, Application o2) {
         Optional<Tag> p1 = o1.getPriorityTag();

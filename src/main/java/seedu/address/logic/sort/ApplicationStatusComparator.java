@@ -21,6 +21,13 @@ public class ApplicationStatusComparator implements Comparator<Application> {
         return getStatusRanking(o1.getApplicationStatusTag()) - getStatusRanking(o2.getApplicationStatusTag());
     }
 
+    /**
+     * Compares the two application's status tag field. Returns a negative integer, zero, or a positive integer as
+     * the first argument is less than, equal to, or greater than the second base on alphanumeric order.
+     * The default order from ascending to descend is as follows ACCEPTED, REJECTED, INTERVIEWED, APPLIE and
+     * NOT_APPLIED.
+     * An empty tag will be considered as the lowest ranking, ranked below NOT_APPLIED.
+     * */
     private int getStatusRanking(Optional<Tag> t) {
         if (t.isEmpty()) {
             return 6;
