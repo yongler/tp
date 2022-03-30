@@ -103,6 +103,7 @@ public interface Model {
      */
     void updateUpcomingApplicationList(Predicate<Application> predicate);
 
+    /** Sorts the list of applications */
     void sortApplications(Comparator<Application> c, String orderBy);
 
     /** Returns a modifiable view of the list of summary boxes */
@@ -110,4 +111,5 @@ public interface Model {
 
     /** Updates the list of summary boxes */
     void updateSummaryBoxList();
+
 }
