@@ -184,7 +184,10 @@ public class Application {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+
+            for (Tag tag: tags) {
+                builder.append(tag).append(" ");
+            }
         }
 
         return builder.toString();
