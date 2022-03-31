@@ -11,9 +11,6 @@ public class PriorityComparator implements Comparator<Application> {
 
     public static final String COMMAND_WORD = "priority";
 
-    private static final String PRIORITY_HIGH = "[" + PriorityTagType.HIGH + "]";
-    private static final String PRIORITY_LOW = "[" + PriorityTagType.LOW + "]";
-
     /**
      * Compares the two application's priority field. Returns a negative integer, zero, or a positive integer as
      * the first argument is less than, equal to, or greater than the second base on alphanumeric order.
@@ -22,27 +19,21 @@ public class PriorityComparator implements Comparator<Application> {
      * */
     @Override
     public int compare(Application o1, Application o2) {
-        Optional<Tag> p1 = o1.getPriorityTag();
-        Optional<Tag> p2 = o2.getPriorityTag();
+        int compareResult = getPriorityRanking(o1.getPriorityTag()) - getPriorityRanking(o2.getPriorityTag());
+        return compareResult == 0
+                ? o1.getName().toString().compareTo(o2.getName().toString())
+                : -compareResult;
+    }
 
-        if (p1.isPresent() && p2.isEmpty()) {
+    private int getPriorityRanking(Optional<Tag> t) {
+        if (t.isEmpty()) {
+            return 0;
+        } else if (t.get().toString().equals(PriorityTagType.LOW.toString())) {
             return 1;
-        } else if (p1.isEmpty() && p2.isPresent()) {
-            return -1;
-        } else if (p1.isEmpty()) {
-            return o1.getName().toString().compareTo(o2.getName().toString());
+        } else if (t.get().toString().equals(PriorityTagType.MEDIUM.toString())) {
+            return 2;
         } else {
-            if (p1.get().toString().equals(p2.get().toString())) {
-                return o1.getName().toString().compareTo(o2.getName().toString());
-            } else if (p1.get().toString().equals(PRIORITY_HIGH)) {
-                return 1;
-            } else if (p2.get().toString().equals(PRIORITY_HIGH)) {
-                return -1;
-            } else if (p2.get().toString().equals(PRIORITY_LOW)) {
-                return 1;
-            } else {
-                return -1;
-            }
+            return 3;
         }
     }
 
