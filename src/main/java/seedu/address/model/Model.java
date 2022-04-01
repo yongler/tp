@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 
 /**
  * The API of the Model component.
@@ -17,9 +19,7 @@ public interface Model {
     /** {@code Predicate} that returns true if the application's interview slot falls with a week of the local date on
      * the local machine.
      */
-    Predicate<Application> PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY = application -> {
-        return application.isUpcomingInterview();
-    };
+    Predicate<Application> PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY = Application::isUpcomingInterview;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -93,11 +93,23 @@ public interface Model {
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
 
-    /** Returns an unmodifiable view of the upcoming application list */
+
+    /** Returns an unmodifiable view of the upcoming application list
+     */
     ObservableList<Application> getUpcomingApplicationList();
 
     /**
      * Updates the upcoming applications list using the given {@code predicate}
      */
     void updateUpcomingApplicationList(Predicate<Application> predicate);
+
+    /** Sorts the list of applications */
+    void sortApplications(Comparator<Application> c, String orderBy);
+
+    /** Returns a modifiable view of the list of summary boxes */
+    ObservableList<SummaryBox> getSummaryBoxList();
+
+    /** Updates the list of summary boxes */
+    void updateSummaryBoxList();
+
 }

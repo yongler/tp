@@ -1,7 +1,7 @@
 [![Java CI](https://github.com/AY2122S2-CS2103T-T11-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-3/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-3/tp/branch/master/graph/badge.svg?token=OPX1FSESUJ)](https://codecov.io/gh/AY2122S2-CS2103T-T11-3/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/MainWindowUi.png)
 
 * This is SoC InternApply <br>
 * 

@@ -3,11 +3,14 @@ package seedu.address.model.application;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.application.exceptions.ApplicationNotFoundException;
 import seedu.address.model.application.exceptions.DuplicateApplicationException;
 
@@ -28,6 +31,18 @@ public class UniqueApplicationList implements Iterable<Application> {
     private final ObservableList<Application> internalList = FXCollections.observableArrayList();
     private final ObservableList<Application> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    /**
+     * Sort the application list according to the given sorting argument.
+     * */
+    public void sort(Comparator<Application> c, String orderBy) {
+        requireNonNull(c);
+        requireNonNull(orderBy);
+        if (orderBy.equals(ListCommand.COMMAND_ORDER_WORD_ASCENDING)) {
+            internalList.sort(c);
+        } else {
+            internalList.sort(Collections.reverseOrder(c));
+        }
+    }
 
     /**
      * Returns true if the list contains an equivalent application as the given argument.
@@ -104,6 +119,13 @@ public class UniqueApplicationList implements Iterable<Application> {
      */
     public ObservableList<Application> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Returns the size of the list.
+     */
+    public int getSize() {
+        return internalList.size();
     }
 
     @Override

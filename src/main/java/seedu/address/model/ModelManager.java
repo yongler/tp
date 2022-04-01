@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
+import seedu.address.model.summarybar.SummaryList;
 
 /**
  * Represents the in-memory model of InternApply data.
@@ -23,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Application> filteredApplications;
     private final FilteredList<Application> upcomingApplications;
+    private final SummaryList summaryList;
 
     /**
      * Initializes a ModelManager with the given internApplyMemory and userPrefs.
@@ -36,9 +40,9 @@ public class ModelManager implements Model {
         this.internApplyMemory = new InternApplyMemory(internApplyMemory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
-
         // Placeholder value for upcomingApplications is a copy of filteredApplications
         upcomingApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
+        summaryList = new SummaryList(this.internApplyMemory.getApplicationList());
     }
 
     public ModelManager() {
@@ -112,8 +116,15 @@ public class ModelManager implements Model {
     @Override
     public void setApplication(Application target, Application editedApplication) {
         requireAllNonNull(target, editedApplication);
-
         internApplyMemory.setApplication(target, editedApplication);
+    }
+
+    //=========== Sorting Application List Accessors ========================================================
+    @Override
+    public void sortApplications(Comparator<Application> c, String orderBy) {
+        requireNonNull(c);
+        requireNonNull(orderBy);
+        internApplyMemory.sortApplications(c, orderBy);
     }
 
     //=========== Filtered Application List Accessors ========================================================
@@ -148,6 +159,18 @@ public class ModelManager implements Model {
     public void updateUpcomingApplicationList(Predicate<Application> predicate) {
         requireNonNull(predicate);
         upcomingApplications.setPredicate(predicate);
+    }
+
+    //============ Summary Box List Accessors ===============================================================
+
+    @Override
+    public ObservableList<SummaryBox> getSummaryBoxList() {
+        return summaryList.getObservableList();
+    }
+
+    @Override
+    public void updateSummaryBoxList() {
+        summaryList.update(internApplyMemory.getApplicationList());
     }
 
     @Override

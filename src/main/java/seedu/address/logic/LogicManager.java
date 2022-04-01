@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 import seedu.address.storage.Storage;
 
 /**
@@ -44,6 +45,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = internApplyParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        model.updateSummaryBoxList();
 
         try {
             storage.saveInternApply(model.getInternApplyMemory());
@@ -67,6 +69,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Application> getUpcomingApplicationsList() {
         return model.getUpcomingApplicationList();
+    }
+
+    @Override
+    public ObservableList<SummaryBox> getSummaryBoxList() {
+        return model.getSummaryBoxList();
     }
 
     @Override

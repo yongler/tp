@@ -242,7 +242,7 @@ To display the new `details` field, modifications to the `applicationCard.java` 
 
 Below is an image of the UI after the changes were made:
 
-![Ui-after-details-update](images/Ui-after-details-update.png)
+![Ui-after-details-update](images/Ui.png)
 
 #### Proposed improvements
 1. As the colour of each `application card` alternates between each index, changes to the `Ui` have to be made as well to match the alternating colours. To achieve this change, implementing the css style in `DarkTheme.css` file, in particular `List-view` css should be made when implementing changes to the `applicationCard.fxml`

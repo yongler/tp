@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyInternApplyMemory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.application.Application;
+import seedu.address.model.summarybar.SummaryBox;
 import seedu.address.testutil.ApplicationBuilder;
 
 public class AddCommandTest {
@@ -156,6 +158,21 @@ public class AddCommandTest {
 
         @Override
         public void updateUpcomingApplicationList(Predicate<Application> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortApplications(Comparator<Application> c, String orderBy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<SummaryBox> getSummaryBoxList() {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void updateSummaryBoxList() {
             throw new AssertionError("This method should not be called.");
         }
     }
