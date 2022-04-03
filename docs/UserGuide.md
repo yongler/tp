@@ -38,25 +38,25 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
    ![Ui](images/ReminderWindowUi.png)
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
+   
+   * **`clear`** : Deletes all applications.
+
+   * **`delete`**`3` : Deletes the 3rd application shown in the current list.
+
+   * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
+
+   * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
+
+   * **`exit`** : Exits the app.
+
+   * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
+
    * **`help`** : Shows a message explaining how to access the help page.
     
    * **`list`**`name desc` : Sort all applications base on company name in descending order. 
 
    * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
-
-   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
-   
-   * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
-
-   * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
-
-   * **`delete`**`3` : Deletes the 3rd application shown in the current list.
-
-   * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
-
-   * **`clear`** : Deletes all applications.
-
-   * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -112,23 +112,6 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 [Go To TOC](#table-of-contents)
 
-### Viewing help: `help`
-
-This command displays a message explaining how to access the help page. 
-
-**Format:** `help`
-
-**Example usages:** 
-
-`help`
-
-**Expected outcome:**
-
-A popup window showing a link to the help page, as shown below.
-![helpMessage](images/helpMessage.png)
-
-[Go To TOC](#table-of-contents)
-
 ### Adding an application: `add`
 
 Adds an application to SoC InternApply.
@@ -159,6 +142,113 @@ This application already exists in InternApply
 
 [Go To TOC](#table-of-contents)
 
+### Clearing all applications: `clear`
+
+Clears all applications from SoC InternApply.
+
+**Format:** `clear`
+
+[Go To TOC](#table-of-contents)
+
+### Deleting an application: `delete`
+
+Deletes the specified application from SoC InternApply.
+
+**Format:** `delete INDEX`
+
+* Deletes the application at the specified `INDEX`.
+* The index refers to the index number shown in the displayed application list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Example usages:**
+* `list` followed by `delete 2` deletes the 2nd application.
+
+**Expected outcome:**
+
+The previous 2nd application is removed from the storage and a new list of applications is shown.
+
+[Go To TOC](#table-of-contents)
+
+### Editing an application: `edit`
+
+Edits an existing application in SoC InternApply.
+
+**Format:** `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [d/DETAILS] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
+
+**CAUTION:** The `edit` command might overwrite your existing application data.
+<br>
+- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
+- The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
+- You can add details to the application by using `d/DETAILS`
+- You can enter new lines in the details by using `\n`
+
+- You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
+- When editing the `TAG` field, if `t/` is given without any input, the existing tags will be reused and not deleted.
+
+**Example usages and expected outcomes:**
+- `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
+- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
+
+- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`
+
+e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
+
+```
+This company requires a preliminary coding round. 
+I should practice more on HackerRank
+```
+
+[Go To TOC](#table-of-contents)
+
+### Exiting the program: `exit`
+
+Exits the program.
+
+**Format:** `exit`
+
+[Go To TOC](#table-of-contents)
+
+### Finding application(s): `find`
+
+Finds existing applications in SoC InternApply.
+
+**Format:** `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`
+- Finds the applications with the fields containing keywords given in the input.
+- Keywords are case-insensitive.
+- Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
+- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`
+
+**Example usages and expected outcomes:**
+- `find n/shopee` finds and displays all applications with "Shopee" in its name.
+- `find j/ML` finds and displays all applications with "ML" in its job title.
+- `find pt/HIGH` finds and displays all applications with "HIGH" in its priority tag.
+- `find ast/applied` finds and displays all applications with "applied" in its application status. (note that it is case-insensitive)
+- `find t/overseas` finds and displays all applications with "overseas" in its tags.
+- `find t/overseas t/USA` finds and displays all applications with "overseas" or "USA" in its tags.
+
+[Go To TOC](#table-of-contents)
+
+### Viewing help: `help`
+
+This command displays a message explaining how to access the help page. 
+
+**Format:** `help`
+
+**Example usages:** 
+
+`help`
+
+**Expected outcome:**
+
+A popup window showing a link to the help page, as shown below.
+![helpMessage](images/helpMessage.png)
+
+[Go To TOC](#table-of-contents)
+
 ### Listing all applications in a sorted manner: `list`
 
 Sorts the list of all application in SoC InternApply base on the provided parameters.
@@ -168,7 +258,7 @@ Sorts the list of all application in SoC InternApply base on the provided parame
 Sorting parameters: 
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
-- `piroity` : Sort by priority in the following order - HIGH, MEDIUM, LOW.
+- `priority` : Sort by priority in the following order - HIGH, MEDIUM, LOW.
 - `status` : Sort by status in the following order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
 
 * If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be moved to the bottom of the sorting order. If there is more than one of such application, it will be sorted alphabetically.
@@ -210,96 +300,6 @@ A new window pops up, showing a list of applications with upcoming interviews wi
 
 [Go To TOC](#table-of-contents)
 
-### Editing an application: `edit`
-
-Edits an existing application in SoC InternApply.
-
-**Format:** `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [d/DETAILS] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
-
-**CAUTION:** The `edit` command might overwrite your existing application data. 
- <br>
-- Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
-- You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
-- The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
-- You can add details to the application by using `d/DETAILS`
-- You can enter new lines in the details by using `\n`
-
-- You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
-- When editing the `TAG` field, if `t/` is given without any input, the existing tags will be reused and not deleted. 
-
-**Example usages and expected outcomes:** 
-- `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
-- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
-- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
-
-- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`
-
-e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added: 
-
-```
-This company requires a preliminary coding round. 
-I should practice more on HackerRank
-```
-
-[Go To TOC](#table-of-contents)
-
-### Deleting an application: `delete`
-
-Deletes the specified application from SoC InternApply.
-
-**Format:** `delete INDEX`
-
-* Deletes the application at the specified `INDEX`.
-* The index refers to the index number shown in the displayed application list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-**Example usages:**
-* `list` followed by `delete 2` deletes the 2nd application.
-
-**Expected outcome:**
-
-The previous 2nd application is removed from the storage and a new list of applications is shown.
-
-[Go To TOC](#table-of-contents)
-
-### Finding application(s): `find`
-
-Find existing applications in SoC InternApply.
-
-**Format:** `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`
-- Finds the applications with the fields containing keywords given in the input.
-- Keywords are case-insensitive.
-- Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
-- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`
-
-**Example usages and expected outcomes:**
-- `find n/shopee` finds and displays all applications with "Shopee" in its name.
-- `find j/ML` finds and displays all applications with "ML" in its job title.
-- `find pt/HIGH` finds and displays all applications with "HIGH" in its priority tag.
-- `find ast/applied` finds and displays all applications with "applied" in its application status. (note that it is case-insensitive)
-- `find t/overseas` finds and displays all applications with "overseas" in its tags.
-- `find t/overseas t/USA` finds and displays all applications with "overseas" or "USA" in its tags.
-
-[Go To TOC](#table-of-contents)
-
-### Clearing all applications: `clear`
-
-Clears all applications from SoC InternApply.
-
-**Format:** `clear`
-
-[Go To TOC](#table-of-contents)
-
-### Exiting the program: `exit`
-
-Exits the program.
-
-**Format:** `exit`
-
-[Go To TOC](#table-of-contents)
-
 ### Saving the data
 
 InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -328,8 +328,8 @@ InternApply data are saved in the hard disk automatically after any command that
 Action | Format, Examples
 --------|------------------
 [**Add**](#adding-an-application-add) | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br><br>  e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
-[**Delete**](#deleting-an-application-delete) | `delete INDEX`<br> <br> e.g., `delete 3`
 [**Clear**](#clearing-all-applications-clear) | `clear`
+[**Delete**](#deleting-an-application-delete) | `delete INDEX`<br> <br> e.g., `delete 3`
 [**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g, `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`
 [**Exit**](#exiting-the-program-exit) | `exit`
 [**Find**](#finding-applications-find) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
