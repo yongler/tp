@@ -60,6 +60,15 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 7. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: WARNING about modifying local files:**<br>
+We are not liable for any data loss, by the user when modifying data stored in the JSON save file.
+Edit at your own risk of losing data.
+
+
+</div>
+
 [Go To TOC](#table-of-contents) 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -182,11 +191,11 @@ Edits an existing application in SoC InternApply.
 - Existing values will be updated to the input values.
 - You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
 - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
-- You can add details to the application by using `d/DETAILS`
-- You can enter new lines in the details by using `\n`
-
 - You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
-- When editing the `TAG` field, if `t/` is given without any input, the existing tags will be reused and not deleted.
+- - You can add details to the application by using `d/DETAILS`
+- You can enter new lines in the details by using `\n`
+- You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
+- When editing the `TAG` field, if `t/` is given without any input general tags will be removed
 
 **Example usages and expected outcomes:**
 - `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
