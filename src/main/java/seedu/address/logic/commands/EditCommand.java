@@ -265,20 +265,18 @@ public class EditCommand extends Command {
             Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
             Predicate<Tag> applicationStatus = new TagSetContainsTagTypePredicate(TagType.APPLICATION_STATUS);
 
-            // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a generic tag
+            // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a Generic tag
             if (tags.stream().anyMatch(jobScope)) {
+                // Mechanism that copies EditApplicationDescriptor's Generic tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
-            } else {
-                if (applicationToEditTags.stream().anyMatch(jobScope)) {
-                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
-                            TagType.JOB_SCOPE);
-                }
             }
 
             // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
             if (tags.stream().anyMatch(priority)) {
+                // Mechanism that copies EditApplicationDescriptor's Priority tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.PRIORITY);
             } else {
+                // Mechanism that copies existing Priority tag to the new Edit Application
                 if (applicationToEditTags.stream().anyMatch(priority)) {
                     reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
                             TagType.PRIORITY);
@@ -287,8 +285,10 @@ public class EditCommand extends Command {
 
             // Check if tags contains any Tag with TagType.APPLICATION_STATUS; this refers to Application Status tag
             if (tags.stream().anyMatch(applicationStatus)) {
+                // Mechanism that copies EditApplicationDescriptor's Application Status tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.APPLICATION_STATUS);
             } else {
+                // Mechanism that copies existing Application Status tag to the new Edit Application
                 if (applicationToEditTags.stream().anyMatch(applicationStatus)) {
                     reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
                             TagType.APPLICATION_STATUS);
