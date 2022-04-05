@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric and not be empty";
+    public static final String TAG_NAME_CONSTRAINTS = "Tag name should not be a priority or application status type";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]+$";
 
     public final String tagName;
@@ -53,6 +54,13 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string matches priority or application status tag name
+     */
+    public static boolean isPriorityApplicationStatus(String test) {
+        return (PriorityTagType.contains(test) || ApplicationStatusTagType.contains(test));
     }
 
     /**
