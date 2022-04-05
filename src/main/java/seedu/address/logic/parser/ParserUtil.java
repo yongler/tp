@@ -167,6 +167,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (Tag.isPriorityApplicationStatus(tag)) {
+            throw new ParseException(Tag.TAG_NAME_CONSTRAINTS);
+        }
 
         return new Tag(trimmedTag, TagType.JOB_SCOPE);
     }
@@ -219,5 +222,6 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+
     }
 }
