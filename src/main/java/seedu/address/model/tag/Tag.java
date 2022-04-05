@@ -60,7 +60,7 @@ public class Tag {
      * Returns true if a given string matches priority or application status tag name
      */
     public static boolean isPriorityApplicationStatus(String test) {
-        return (PriorityTagType.contains(test) || ApplicationStatusTagType.contains(test));
+        return (PriorityTagType.contains(test.toUpperCase()) || ApplicationStatusTagType.contains(test.toUpperCase()));
     }
 
     /**
