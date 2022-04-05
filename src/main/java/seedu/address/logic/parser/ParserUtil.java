@@ -168,7 +168,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        if (Tag.isPriorityApplicationStatus(tag.toUpperCase())){
+        if (Tag.isPriorityApplicationStatus(tag)){
             throw new ParseException(Tag.TAG_NAME_CONSTRAINTS);
         }
 
