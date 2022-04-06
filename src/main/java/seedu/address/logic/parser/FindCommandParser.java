@@ -44,17 +44,17 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String keyword = checkNotEmptyName(argMultimap.getValue(PREFIX_NAME).get());
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keyword)));
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keyword.split(" "))));
         }
         if (argMultimap.getValue(PREFIX_JOBTITLE).isPresent()) {
             String keyword = checkNotEmptyJobTitle(argMultimap.getValue(PREFIX_JOBTITLE).get());
-            return new FindCommand(new JobTitleContainsKeywordsPredicate(Arrays.asList(keyword)));
+            return new FindCommand(new JobTitleContainsKeywordsPredicate(Arrays.asList(keyword.split(" "))));
         }
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             Collection<String> keywords = checkNotEmptyTags(argMultimap.getAllValues(PREFIX_TAG));
             return new FindCommand(new TagContainsKeywordsPredicate(new ArrayList<>(keywords)));
         }
-        if (argMultimap.getValue(PREFIX_PRIORITY_TAG).isPresent()) {
+    if (argMultimap.getValue(PREFIX_PRIORITY_TAG).isPresent()) {
             String keyword = checkNotEmptyPriorityTag(argMultimap.getValue(PREFIX_PRIORITY_TAG).get());
             return new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList(keyword)));
         }
