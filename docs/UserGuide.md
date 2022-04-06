@@ -229,7 +229,7 @@ Finds existing applications in SoC InternApply.
 - Finds the applications with the fields containing keywords given in the input.
 - Keywords are case-insensitive.
 - Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
-- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`
+- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field (in the sequence of [n/NAME], [j/JOB_TITLE], [t/TAG]..., [pt/PRIORITY_TAG], [ast/APPLICATION_STATUS_TAG]`) will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`, `find j/ML n/shopee` is also the same as `find n/shopee`
 
 **Example usages and expected outcomes:**
 - `find n/shopee` finds and displays all applications with "Shopee" in its name.
