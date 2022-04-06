@@ -30,7 +30,7 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 3. Copy the file to the folder you want to use as the _root folder_ for your SIA (e.g. you can save it in your desktop or downloads folder). <br>
    **Note:** There will be data (your internship applications) stored into this same folder, but it would not take up much space.
 
-4. Double-click the jar file to start the app. The GUI similar to the diagram below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+4. Double-click the jar file to start the app. The GUI similar to the diagram below should appear in a few seconds. Note how the app contains some sample data. Do note that for Linux OS, you may have to enable double-click to run JAR files first!<br><br>
 
    ![Ui](images/MainWindowUi.png)
 

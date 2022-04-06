@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.*;
 
 
 /**
@@ -21,6 +21,9 @@ public class TagContainsKeywordsPredicate implements Predicate<Application> {
     public boolean test(Application application) {
         StringBuilder builder = new StringBuilder();
         for (Tag tag : application.getTags()) {
+            if (PriorityTagType.contains(tag.toString()) || ApplicationStatusTagType.contains(tag.toString())) {
+                continue;
+            }
             builder.append(tag.toString());
             builder.append(" ");
         }
