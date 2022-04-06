@@ -39,7 +39,6 @@ public class InterviewSlotTest {
         assertFalse(InterviewSlot.isValidDateTime("30-03-2022 1530")); // missing minutes separator
 
         // invalid parts
-
         assertFalse(InterviewSlot.isValidDateTime("30-02-2022 15:30")); // invalid date
         assertFalse(InterviewSlot.isValidDateTime("30/03/2022 15:30")); // invalid date separator
         assertFalse(InterviewSlot.isValidDateTime("03-30-2022 15:30")); // invalid month
