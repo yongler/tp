@@ -115,7 +115,13 @@ Edit at your own risk of losing data.
 * For `[j/JobTitle]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br> 
   e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
+**:information_source: Notes about duplicate applications:**<br>
 
+* Duplicate applications are not allowed.
+
+* Applications are considered duplicates if they have the same name, job title and optional tags.
+
+* Refer to FAQ for adding multiple applications to the same job.
 
 </div>
 
@@ -327,6 +333,10 @@ InternApply data are saved in the hard disk automatically after any command that
 **Q**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
 **A**: Refer to the 1st QnA to locate the `data` folder. Delete any existing files in the `data` folder and run SoC InternApply again.
 
+**Q**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
+**A**: <br>
+Option 1: Using edit, you can simply reuse the existing application with updated information. <br>
+Option 2: If you are looking to keep the existing application and it's information untouched, then we suggest including an additional "t/NthAttempt" to differentiate your new application and the existing application. This will not violate our duplication clause while also allowing you to keep information on your existing application.
 
 [Go To TOC](#table-of-contents)
 
