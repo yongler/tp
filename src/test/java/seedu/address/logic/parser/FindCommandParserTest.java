@@ -10,10 +10,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.application.*;
+import seedu.address.model.application.JobTitle;
+import seedu.address.model.application.JobTitleContainsKeywordsPredicate;
+import seedu.address.model.application.Name;
+import seedu.address.model.application.NameContainsKeywordsPredicate;
+import seedu.address.model.application.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.ApplicationStatusTag;
 import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
+
 
 public class FindCommandParserTest {
 
@@ -39,11 +44,11 @@ public class FindCommandParserTest {
         FindCommand expectedFindApplicationStatusTagCommand =
                 new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("APPLIED")));
 
-        String nameArray[] = new String[] {"Grab", "Shopee" };
+        String[] nameArray = new String[]{"Grab", "Shopee"};
         FindCommand expectedFindCommandWithTwoNamesKeyword =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameArray)));
 
-        String jobTitleArray[] = new String[] {"Software", "Engineering"};
+        String[] jobTitleArray = new String[]{"Software", "Engineering"};
         FindCommand expectedFindCommandWithTwoJobTitleKeyword =
                 new FindCommand(new JobTitleContainsKeywordsPredicate(Arrays.asList(jobTitleArray)));
 
