@@ -8,7 +8,6 @@ import seedu.address.model.tag.ApplicationStatusTagType;
 import seedu.address.model.tag.PriorityTagType;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Tests that a {@code Application}'s {@code Tag} matches any of the keywords given.
  */
