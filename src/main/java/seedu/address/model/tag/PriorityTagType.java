@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 public enum PriorityTagType {
     HIGH, MEDIUM, LOW;
 
+    //Solution below adapted from https://stackoverflow.com/questions/1104975/a-for-loop-to-iterate-over-an-enum-in-java
     /**
      * Gets all enum values as strings.
      * @return All enum values as a concatenated string.
@@ -19,6 +20,7 @@ public enum PriorityTagType {
                 .collect(Collectors.joining(", "));
     }
 
+    //Solution below adapted from https://stackoverflow.com/questions/1104975/a-for-loop-to-iterate-over-an-enum-in-java
     /**
      * Checks whether the given string is within the enum values.
      * @param test String to test.

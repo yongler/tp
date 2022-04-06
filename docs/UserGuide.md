@@ -5,13 +5,13 @@ title: User Guide
 
 SoC InternApply (SIA) is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SIA can get your internship application management tasks done faster than traditional GUI apps.
 
-With SoC InternApply, you can easily add an application, edit it later on if there are any changes needed, find the applications based on keywords and also sort them based on priority, interview date and much more! All while not having to worry about saving or storing your applications as this is done internally and automatically by SoC InternApply. 
+With SoC InternApply, you can easily add an application, edit it later on if there are any changes needed, find the applications based on keywords and also sort them based on priority, interview date and much more! All while not having to worry about saving or storing your applications as this is done internally and automatically by SoC InternApply.
 
 Ultimately, with SoC InternApply, you can worry less about the administrative tasks and focus more on preparing for the interviews themselves!
 
 ## Table of Contents
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
@@ -23,12 +23,12 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. You can download it from [this website](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html). 
+1. Ensure you have Java `11` or above installed in your Computer. You can download it from [this website](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `internapply.jar` from [here](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _root folder_ for your SIA (e.g. you can save it in your desktop or downloads folder). <br>
-**Note:** There will be data (your internship applications) stored into this same folder, but it would not take up much space.
+   **Note:** There will be data (your internship applications) stored into this same folder, but it would not take up much space.
 
 4. Double-click the jar file to start the app. The GUI similar to the diagram below should appear in a few seconds. Note how the app contains some sample data.<br><br>
 
@@ -38,25 +38,25 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
    ![Ui](images/ReminderWindowUi.png)
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-   * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
-   
-   * **`clear`** : Deletes all applications.
+    * **`add`**`n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering pt/LOW ast/NOT_APPLIED` : Adds an application with company named `Shopee` to SIA.
 
-   * **`delete`**`3` : Deletes the 3rd application shown in the current list.
+    * **`clear`** : Deletes all applications.
 
-   * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
+    * **`delete`**`3` : Deletes the 3rd application shown in the current list.
 
-   * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
+    * **`edit`** `1 d/Thank you for using SIA!` : Update the details to `Thank you for using SIA!` for the first application on the list.
 
-   * **`exit`** : Exits the app.
+    * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
 
-   * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
+    * **`exit`** : Exits the app.
 
-   * **`help`** : Shows a message explaining how to access the help page.
-    
-   * **`list`**`name desc` : Sort all applications base on company name in descending order. 
+    * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
 
-   * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
+    * **`help`** : Shows a message explaining how to access the help page.
+
+    * **`list`**`name desc` : Sort all applications base on company name in descending order.
+
+    * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -69,7 +69,7 @@ Edit at your own risk of losing data.
 
 </div>
 
-[Go To TOC](#table-of-contents) 
+[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ Edit at your own risk of losing data.
 
 **:information_source: Notes about the input format:**<br>
 
-* For `[t/TAG]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9.<br> 
+* For `[t/TAG]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9.<br>
   e.g. `t/Based In Singapore` is not allowed, `t/BasedInSingapore` is allowed.
 
 * For `[pt/PRIORITY_TAG]`, user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
@@ -112,7 +112,7 @@ Edit at your own risk of losing data.
 * For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]`, the inputs are case-insensitive<br>
   e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
 
-* For `[j/JobTitle]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br> 
+* For `[j/JobTitle]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 
@@ -226,10 +226,10 @@ Exits the program.
 Finds existing applications in SoC InternApply.
 
 **Format:** `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`
-- Finds the applications with the fields containing keywords given in the input.
+- Finds the applications with the fields containing keywords given in the input (partial keywords accepted as well).
 - Keywords are case-insensitive.
 - Parameters are only expected once (except tags). e.g. `find n/shopee n/grab` is equivalent to `find n/grab`, the last occurrence of the parameter will be taken.
-- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field (in the sequence of [n/NAME], [j/JOB_TITLE], [t/TAG]..., [pt/PRIORITY_TAG], [ast/APPLICATION_STATUS_TAG]`) will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`, `find j/ML n/shopee` is also the same as `find n/shopee`
+- If more than 1 different fields are given, i.e. `find n/shopee j/ML`, only the first field (in the sequence of [n/NAME], [j/JOB_TITLE], [t/TAG]..., [pt/PRIORITY_TAG], [ast/APPLICATION_STATUS_TAG]) will be processed, i.e. `find n/shopee j/ML` is the same as `find n/shopee`, `find j/ML n/shopee` is also the same as `find n/shopee`
 
 **Example usages and expected outcomes:**
 - `find n/shopee` finds and displays all applications with "Shopee" in its name.
@@ -243,11 +243,11 @@ Finds existing applications in SoC InternApply.
 
 ### Viewing help: `help`
 
-This command displays a message explaining how to access the help page. 
+This command displays a message explaining how to access the help page.
 
 **Format:** `help`
 
-**Example usages:** 
+**Example usages:**
 
 `help`
 
@@ -264,7 +264,7 @@ Sorts the list of all application in SoC InternApply base on the provided parame
 
 **Format:** `list [sorting paramter] [order by]`
 
-Sorting parameters: 
+Sorting parameters:
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
 - `priority` : Sort by priority in the following order - HIGH, MEDIUM, LOW.
@@ -279,12 +279,12 @@ Order by:
 Examples:
 * `list interview desc`
 * `list name desc`, running this will output:
-<br>
+  <br>
 ```
 Sorted applications by name order by desc.
 ```
 
-> 💡 The `list` command also works without parameters. It will be reverted to the last sorted parameter and order used by the user. This is used after using the `find` feature to list out all applications. 
+> 💡 The `list` command also works without parameters. It will be reverted to the last sorted parameter and order used by the user. This is used after using the `find` feature to list out all applications.
 
 > ⚠️ Applications are originally sorted in  a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
 
