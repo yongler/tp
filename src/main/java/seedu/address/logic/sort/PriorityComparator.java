@@ -20,8 +20,9 @@ public class PriorityComparator implements Comparator<Application> {
     @Override
     public int compare(Application o1, Application o2) {
         int compareResult = getPriorityRanking(o1.getPriorityTag()) - getPriorityRanking(o2.getPriorityTag());
+        NameComparator nameComparator = new NameComparator();
         return compareResult == 0
-                ? o1.getName().toString().compareTo(o2.getName().toString())
+                ? nameComparator.compare(o1, o2)
                 : compareResult;
     }
 
