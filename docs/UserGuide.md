@@ -94,7 +94,7 @@ Edit at your own risk of losing data.
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `j/Software Engineer j/Data Scientist`, only `j/Data Scientist` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `reminder`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `reminder`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 

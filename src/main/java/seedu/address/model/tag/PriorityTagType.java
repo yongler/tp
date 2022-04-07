@@ -15,10 +15,6 @@ public enum PriorityTagType {
         this.priorityRanking = priorityRanking;
     }
 
-    public int getPriorityRanking() {
-        return this.priorityRanking;
-    }
-
     /**
      * Gets all enum values as strings.
      * @return All enum values as a concatenated string.
@@ -41,5 +37,9 @@ public enum PriorityTagType {
             }
         }
         return false;
+    }
+
+    public int getPriorityRanking() {
+        return this.priorityRanking;
     }
 }

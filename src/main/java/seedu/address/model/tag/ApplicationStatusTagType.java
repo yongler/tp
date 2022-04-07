@@ -7,7 +7,14 @@ import java.util.stream.Stream;
  * A public enumeration class for application status tags.
  */
 public enum ApplicationStatusTagType {
-    NOT_APPLIED, APPLIED, INTERVIEWED, REJECTED, ACCEPTED;
+    NOT_APPLIED(0), APPLIED(1), INTERVIEWED(2),
+    REJECTED(3), ACCEPTED(4);
+
+    private final int statusRanking;
+
+    ApplicationStatusTagType(int statusRanking) {
+        this.statusRanking = statusRanking;
+    }
 
     /**
      * Gets all enum values as strings.
@@ -31,5 +38,9 @@ public enum ApplicationStatusTagType {
             }
         }
         return false;
+    }
+
+    public int getStatusRanking() {
+        return this.statusRanking;
     }
 }
