@@ -17,12 +17,13 @@ public class InterviewSlotComparator implements Comparator<Application> {
     public int compare(Application o1, Application o2) {
         LocalDateTime app1 = o1.getInterviewSlot().getValue();
         LocalDateTime app2 = o1.getInterviewSlot().getValue();
+        NameComparator nameComparator = new NameComparator();
         if (app1.isAfter(app2)) {
             return 1;
         } else if (app1.isBefore(app2)) {
             return -1;
         } else {
-            return o1.getName().toString().compareTo(o2.getName().toString());
+            return nameComparator.compare(o1, o2);
         }
     }
 
