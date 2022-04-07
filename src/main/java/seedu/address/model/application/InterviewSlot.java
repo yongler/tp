@@ -6,13 +6,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+
 /**
  * Represents the interview date and time of an Application in InternApply.
  */
 
 public class InterviewSlot {
 
-    public static final String FORMAT_DATETIME_INPUT = "dd-MM-yyyy HH:mm";
+    public static final String FORMAT_DATETIME_INPUT = "dd-MM-uuuu HH:mm";
     public static final String FORMAT_DATETIME_DISPLAY = "d MMM yyyy HH:mm";
     public static final String MESSAGE_CONSTRAINTS = "Interview date should be of the format "
             + FORMAT_DATETIME_INPUT
@@ -50,8 +52,6 @@ public class InterviewSlot {
             return false;
         }
     }
-
-    // TODO: Fix February parsing issue.
 
     /**
      * Returns true if a given string is a placeholder for an empty date and time.
@@ -112,6 +112,7 @@ public class InterviewSlot {
     }
 
     private static LocalDateTime toLocalDateTime(String input) {
-        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME_INPUT));
+        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME_INPUT)
+                .withResolverStyle(ResolverStyle.STRICT));
     }
 }

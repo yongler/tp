@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -168,6 +167,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (Tag.isPriorityApplicationStatus(tag)) {
+            throw new ParseException(Tag.TAG_NAME_CONSTRAINTS);
+        }
 
         return new Tag(trimmedTag, TagType.JOB_SCOPE);
     }
@@ -215,13 +217,11 @@ public class ParserUtil {
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        if (tags.equals(Collections.emptySet())) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+
     }
 }

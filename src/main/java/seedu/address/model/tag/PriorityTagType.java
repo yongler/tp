@@ -7,7 +7,13 @@ import java.util.stream.Stream;
  * A public enumeration class for priority tags.
  */
 public enum PriorityTagType {
-    HIGH, MEDIUM, LOW;
+    HIGH(3), MEDIUM(2), LOW(1);
+
+    private final int priorityRanking;
+
+    PriorityTagType(int priorityRanking) {
+        this.priorityRanking = priorityRanking;
+    }
 
     /**
      * Gets all enum values as strings.
@@ -31,5 +37,9 @@ public enum PriorityTagType {
             }
         }
         return false;
+    }
+
+    public int getPriorityRanking() {
+        return this.priorityRanking;
     }
 }
