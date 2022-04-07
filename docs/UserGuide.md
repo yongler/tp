@@ -121,6 +121,12 @@ Edit at your own risk of losing data.
 
 * Applications are considered duplicates if they have the same name, job title and optional tags.
 
+* Name, job title and optional tags are case-sensitive.
+  e.g. The name `Shopee` is considered different from `shopee`.
+
+* Ordering of optional tags do not matter.
+  e.g. `tag1`, `tag2`, `tag3` is considered the same as `tag3`, `tag1`, `tag2`.
+
 * Refer to FAQ for adding multiple applications to the same job.
 
 </div>
