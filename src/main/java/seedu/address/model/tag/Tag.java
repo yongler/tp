@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric and not be empty";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Tag names should be alphanumeric, without spaces and not be empty";
     public static final String TAG_NAME_CONSTRAINTS = "Tag name should not be a priority or application status type";
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9_]+$";
 
