@@ -93,6 +93,11 @@ public interface Model {
      */
     void updateFilteredApplicationList(Predicate<Application> predicate);
 
+    /**
+     * Updates the filter of the filtered application list to filter by the previous {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredApplicationList();
 
     /** Returns an unmodifiable view of the upcoming application list
      */
