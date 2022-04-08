@@ -101,8 +101,8 @@ Edit at your own risk of losing data.
 **:information_source: Notes about the input format:**<br>
 * For `[p/Phone]`, a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-* For `[t/TAG]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9.<br>
-  e.g. `t/Based In Singapore` is not allowed, `t/BasedInSingapore` is allowed.
+* For `[t/TAG]...`, only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
+  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
 
 * For `[pt/PRIORITY_TAG]`, user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
   e.g `pt/HIGH` can be used to set priority of an application to `HIGH`
