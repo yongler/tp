@@ -29,11 +29,11 @@
           <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         </HBox>
         <HBox fx:id="tags" />
-        <Label fx:id="jobTitle" styleClass="cell_small_label" text="\$jobTitle" />
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-        <Label fx:id="interviewSlot" styleClass="cell_small_label" text="\$interviewSlot" />
+        <Label fx:id="jobTitle" styleClass="cell_small_label" text="\$jobTitle" wrapText="true"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+        <Label fx:id="interviewSlot" styleClass="cell_small_label" text="\$interviewSlot" wrapText="true"/>
       </VBox>
       <ScrollPane fx:id="detailScroll" maxHeight="145.0" minWidth="400" maxWidth="400" styleClass="pane-with-border" hbarPolicy="NEVER">
         <content>
