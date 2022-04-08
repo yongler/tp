@@ -85,6 +85,7 @@ public class EditCommandTest {
     @Test
     public void execute_filteredList_success() {
         showApplicationAtIndex(model, INDEX_FIRST_APPLICATION);
+        model.updateFilteredApplicationList(Model.PREDICATE_SHOW_ALL_APPLICATIONS);
 
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
