@@ -264,12 +264,12 @@ public class EditCommand extends Command {
 
             Set<Tag> reconstructedTagSet = new HashSet<>();
 
-            Predicate<Tag> removeGenericTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
-                    tag.getTagName().toUpperCase().equals("REMOVETAGS");
-            Predicate<Tag> removePriorityTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
-                    tag.getTagName().toUpperCase().equals("REMOVEPRIORITY");
-            Predicate<Tag> removeApplicationStatusTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
-                    tag.getTagName().toUpperCase().equals("REMOVESTATUS");
+            Predicate<Tag> removeGenericTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE)
+                    && tag.getTagName().toUpperCase().equals("REMOVETAGS");
+            Predicate<Tag> removePriorityTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE)
+                    && tag.getTagName().toUpperCase().equals("REMOVEPRIORITY");
+            Predicate<Tag> removeApplicationStatusTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE)
+                    && tag.getTagName().toUpperCase().equals("REMOVESTATUS");
 
             Predicate<Tag> jobScope = new TagSetContainsTagTypePredicate(TagType.JOB_SCOPE);
             Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
@@ -279,9 +279,9 @@ public class EditCommand extends Command {
             if (tags.stream().anyMatch(removeGenericTags)) {
                 // Mechanism that removes all Generic tags from the existing Application
                 reconstructedTagSet = findMatchAndCopy(emptyTagSet, reconstructedTagSet, TagType.JOB_SCOPE);
-            } else if (tags.stream().anyMatch(jobScope) &&
-                    tags.stream().noneMatch(removePriorityTags) &&
-                    tags.stream().noneMatch(removeApplicationStatusTags)) {
+            } else if (tags.stream().anyMatch(jobScope)
+                    && tags.stream().noneMatch(removePriorityTags)
+                    && tags.stream().noneMatch(removeApplicationStatusTags)) {
                 // Mechanism that copies EditApplicationDescriptor's Generic tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
             } else {
