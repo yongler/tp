@@ -16,6 +16,8 @@ import seedu.address.logic.sort.PriorityComparator;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
+    public static final ListCommand SORT_NONE = new ListCommand();
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns a ListCommand object for execution.
@@ -25,18 +27,13 @@ public class ListCommandParser implements Parser<ListCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) /* Handles default list */ {
-            return new ListCommand();
+            return SORT_NONE;
         }
 
         String[] sortingArgs = trimmedArgs.split("\\s+");
 
         if (sortingArgs.length == 1) {
-            String keyword = sortingArgs[0];
-            if (keyword.equals(COMMAND_ORDER_WORD_DESCENDING)) {
-                return new ListCommand(null, COMMAND_ORDER_WORD_DESCENDING);
-            } else if (keyword.equals(COMMAND_ORDER_WORD_ASCENDING)) {
-                return new ListCommand();
-            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         } else {
             String sortingField = sortingArgs[0].toLowerCase();
             String orderBy = sortingArgs[1].toUpperCase();

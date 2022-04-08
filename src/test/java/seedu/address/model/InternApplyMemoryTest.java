@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.sort.NameComparator;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.exceptions.DuplicateApplicationException;
 import seedu.address.testutil.ApplicationBuilder;
@@ -101,4 +103,16 @@ public class InternApplyMemoryTest {
         }
     }
 
+    @Test
+    public void sortApplication_nullPointerException() {
+        assertThrows(NullPointerException.class, () -> internApplyMemory.sortApplications(new NameComparator(), null));
+        assertThrows(NullPointerException.class, () -> internApplyMemory.sortApplications(null,
+                ListCommand.COMMAND_ORDER_WORD_ASCENDING));
+    }
+
+    @Test
+    public void sortApplication_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> internApplyMemory.sortApplications(new NameComparator(),
+                "abc"));
+    }
 }

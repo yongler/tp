@@ -15,6 +15,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.sort.NameComparator;
 import seedu.address.model.application.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InternApplyMemoryBuilder;
 
@@ -96,6 +98,19 @@ public class ModelManagerTest {
     @Test
     public void getUpcomingApplicationsList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getUpcomingApplicationList().remove(0));
+    }
+
+    @Test
+    public void sortApplication_nullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.sortApplications(new NameComparator(), null));
+        assertThrows(NullPointerException.class, () -> modelManager.sortApplications(null,
+                ListCommand.COMMAND_ORDER_WORD_ASCENDING));
+    }
+
+    @Test
+    public void sortApplication_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.sortApplications(new NameComparator(),
+                "abc"));
     }
 
     @Test
