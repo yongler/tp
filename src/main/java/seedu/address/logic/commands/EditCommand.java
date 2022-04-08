@@ -260,15 +260,28 @@ public class EditCommand extends Command {
                 return Optional.empty();
             }
 
+            Set<Tag> emptyTagSet = new HashSet<>();
+
             Set<Tag> reconstructedTagSet = new HashSet<>();
+            Predicate<Tag> removeGenericTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
+                    tag.getTagName().toUpperCase().equals("REMOVE");
             Predicate<Tag> jobScope = new TagSetContainsTagTypePredicate(TagType.JOB_SCOPE);
             Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
             Predicate<Tag> applicationStatus = new TagSetContainsTagTypePredicate(TagType.APPLICATION_STATUS);
 
             // Check if tags contains any Tag with TagType.JOB_SCOPE; this refers to a Generic tag
-            if (tags.stream().anyMatch(jobScope)) {
+            if (tags.stream().anyMatch(removeGenericTags)) {
+                // Mechanism that removes all Generic tags from the existing Application
+                reconstructedTagSet = findMatchAndCopy(emptyTagSet, reconstructedTagSet, TagType.JOB_SCOPE);
+            } else if (tags.stream().anyMatch(jobScope)) {
                 // Mechanism that copies EditApplicationDescriptor's Generic tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
+            } else {
+                // Mechanism that copies existing Generic tag to the new Edit Application
+                if (applicationToEditTags.stream().anyMatch(priority)) {
+                    reconstructedTagSet = findMatchAndCopy(applicationToEditTags, reconstructedTagSet,
+                            TagType.JOB_SCOPE);
+                }
             }
 
             // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
