@@ -104,7 +104,9 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateApplicationUnfilteredList_failure() {
         Application firstApplication = model.getFilteredApplicationList().get(INDEX_FIRST_APPLICATION.getZeroBased());
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(firstApplication).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withName(firstApplication.getName().fullName).withJobTitle(firstApplication.getJobTitle().value)
+                .withTags("REMOVETAGS").build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_APPLICATION, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICATION);
