@@ -63,7 +63,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply.";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "A duplicate application with the same name, job title "
+            + "and optional tags already exists in InternApply";
 
     private final Index index;
     private final EditApplicationDescriptor editApplicationDescriptor;

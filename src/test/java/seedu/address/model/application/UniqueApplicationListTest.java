@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.GARENA;
@@ -43,7 +44,7 @@ public class UniqueApplicationListTest {
     public void contains_applicationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicationList.add(GRAB);
         Application editedGrab = new ApplicationBuilder(GRAB)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+                .withAddress(VALID_ADDRESS_GARENA).withPhone(VALID_PHONE_GARENA)
                 .build();
         assertTrue(uniqueApplicationList.contains(editedGrab));
     }
