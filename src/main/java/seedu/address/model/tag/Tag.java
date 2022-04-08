@@ -71,6 +71,13 @@ public class Tag {
         return tagType;
     }
 
+    /**
+     * Returns tag name.
+     */
+    public String getTagName() {
+        return tagName;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
