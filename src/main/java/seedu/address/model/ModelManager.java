@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final FilteredList<Application> filteredApplications;
     private final FilteredList<Application> upcomingApplications;
     private final SummaryList summaryList;
+    private Predicate<Application> currentFilter;
 
     /**
      * Initializes a ModelManager with the given internApplyMemory and userPrefs.
@@ -43,6 +44,8 @@ public class ModelManager implements Model {
         // Placeholder value for upcomingApplications is a copy of filteredApplications
         upcomingApplications = new FilteredList<>(this.internApplyMemory.getApplicationList());
         summaryList = new SummaryList(this.internApplyMemory.getApplicationList());
+        // Placeholder value for currentFilter is just the default filter to show all applications
+        currentFilter = PREDICATE_SHOW_ALL_APPLICATIONS;
     }
 
     public ModelManager() {
@@ -142,6 +145,12 @@ public class ModelManager implements Model {
     public void updateFilteredApplicationList(Predicate<Application> predicate) {
         requireNonNull(predicate);
         filteredApplications.setPredicate(predicate);
+        this.currentFilter = predicate;
+    }
+
+    @Override
+    public void updateFilteredApplicationList() {
+        updateFilteredApplicationList(this.currentFilter);
     }
 
     //=========== Upcoming Application List Accessors ========================================================
