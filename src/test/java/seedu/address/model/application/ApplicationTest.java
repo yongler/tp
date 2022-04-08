@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_SLOT_GARENA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
@@ -32,14 +33,22 @@ public class ApplicationTest {
         // null -> returns false
         assertFalse(GRAB.isSameApplication(null));
 
-        // same name, all other attributes different -> returns true
-        Application editedGrab = new ApplicationBuilder(GRAB)
+        // same name, job title and no tags, all other attributes different -> returns true
+        Application editedGrab = new ApplicationBuilder(GRAB).withJobTitle(GRAB.getJobTitle().toString())
                 .withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL).build();
+                .withAddress(VALID_ADDRESS_GARENA).build();
         assertTrue(GRAB.isSameApplication(editedGrab));
 
         // different name, all other attributes same -> returns false
         editedGrab = new ApplicationBuilder(GRAB).withName(VALID_NAME_GARENA).build();
+        assertFalse(GRAB.isSameApplication(editedGrab));
+
+        // different job title, all other attributes same -> returns false
+        editedGrab = new ApplicationBuilder(GRAB).withJobTitle(VALID_JOBTITLE_GARENA).build();
+        assertFalse(GRAB.isSameApplication(editedGrab));
+
+        // different tags, all other attributes same -> returns false
+        editedGrab = new ApplicationBuilder(GRAB).withTags(VALID_TAG_LOCAL).build();
         assertFalse(GRAB.isSameApplication(editedGrab));
 
         // name differs in case, all other attributes same -> returns false

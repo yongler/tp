@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
@@ -47,7 +47,7 @@ public class InternApplyMemoryTest {
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationException() {
         // Two applications with the same identity fields
         Application editedGrab = new ApplicationBuilder(GRAB)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+                .withAddress(VALID_ADDRESS_GARENA).withPhone(VALID_PHONE_GARENA)
                 .build();
         List<Application> newApplications = Arrays.asList(GRAB, editedGrab);
         InternApplyMemoryStub newData = new InternApplyMemoryStub(newApplications);
@@ -75,7 +75,7 @@ public class InternApplyMemoryTest {
     public void hasApplication_applicationWithSameIdentityFieldsInInternApplyMemory_returnsTrue() {
         internApplyMemory.addApplication(GRAB);
         Application editedGrab = new ApplicationBuilder(GRAB)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+                .withAddress(VALID_ADDRESS_GARENA).withPhone(VALID_PHONE_GARENA)
                 .build();
         assertTrue(internApplyMemory.hasApplication(editedGrab));
     }
