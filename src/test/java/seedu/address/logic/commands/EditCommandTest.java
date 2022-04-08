@@ -85,6 +85,7 @@ public class EditCommandTest {
     @Test
     public void execute_filteredList_success() {
         showApplicationAtIndex(model, INDEX_FIRST_APPLICATION);
+        model.updateFilteredApplicationList(Model.PREDICATE_SHOW_ALL_APPLICATIONS);
 
         Application applicationInFilteredList = model.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
@@ -104,7 +105,9 @@ public class EditCommandTest {
     @Test
     public void execute_duplicateApplicationUnfilteredList_failure() {
         Application firstApplication = model.getFilteredApplicationList().get(INDEX_FIRST_APPLICATION.getZeroBased());
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder(firstApplication).build();
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder()
+                .withName(firstApplication.getName().fullName).withJobTitle(firstApplication.getJobTitle().value)
+                .withTags("REMOVETAGS").build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_APPLICATION, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICATION);

@@ -20,20 +20,18 @@ public class PriorityComparator implements Comparator<Application> {
     @Override
     public int compare(Application o1, Application o2) {
         int compareResult = getPriorityRanking(o1.getPriorityTag()) - getPriorityRanking(o2.getPriorityTag());
+        NameComparator nameComparator = new NameComparator();
         return compareResult == 0
-                ? o1.getName().toString().compareTo(o2.getName().toString())
-                : -compareResult;
+                ? nameComparator.compare(o1, o2)
+                : compareResult;
     }
 
     private int getPriorityRanking(Optional<Tag> t) {
         if (t.isEmpty()) {
             return 0;
-        } else if (t.get().toString().equals(PriorityTagType.LOW.toString())) {
-            return 1;
-        } else if (t.get().toString().equals(PriorityTagType.MEDIUM.toString())) {
-            return 2;
         } else {
-            return 3;
+            PriorityTagType priorityTagType = PriorityTagType.valueOf(t.get().toString());
+            return priorityTagType.getPriorityRanking();
         }
     }
 

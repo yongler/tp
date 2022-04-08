@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_GARENA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_GARENA;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.GRAB;
 import static seedu.address.testutil.TypicalApplications.getTypicalInternApplyMemory;
@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.sort.NameComparator;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.exceptions.DuplicateApplicationException;
 import seedu.address.testutil.ApplicationBuilder;
@@ -47,7 +49,7 @@ public class InternApplyMemoryTest {
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationException() {
         // Two applications with the same identity fields
         Application editedGrab = new ApplicationBuilder(GRAB)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+                .withAddress(VALID_ADDRESS_GARENA).withPhone(VALID_PHONE_GARENA)
                 .build();
         List<Application> newApplications = Arrays.asList(GRAB, editedGrab);
         InternApplyMemoryStub newData = new InternApplyMemoryStub(newApplications);
@@ -75,7 +77,7 @@ public class InternApplyMemoryTest {
     public void hasApplication_applicationWithSameIdentityFieldsInInternApplyMemory_returnsTrue() {
         internApplyMemory.addApplication(GRAB);
         Application editedGrab = new ApplicationBuilder(GRAB)
-                .withAddress(VALID_ADDRESS_GARENA).withTags(VALID_TAG_LOCAL)
+                .withAddress(VALID_ADDRESS_GARENA).withPhone(VALID_PHONE_GARENA)
                 .build();
         assertTrue(internApplyMemory.hasApplication(editedGrab));
     }
@@ -101,4 +103,16 @@ public class InternApplyMemoryTest {
         }
     }
 
+    @Test
+    public void sortApplication_nullPointerException() {
+        assertThrows(NullPointerException.class, () -> internApplyMemory.sortApplications(new NameComparator(), null));
+        assertThrows(NullPointerException.class, () -> internApplyMemory.sortApplications(null,
+                ListCommand.COMMAND_ORDER_WORD_ASCENDING));
+    }
+
+    @Test
+    public void sortApplication_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> internApplyMemory.sortApplications(new NameComparator(),
+                "abc"));
+    }
 }

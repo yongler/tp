@@ -46,7 +46,8 @@ public class AddCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New application added: %1$s";
-    public static final String MESSAGE_DUPLICATE_APPLICATION = "This application already exists in InternApply";
+    public static final String MESSAGE_DUPLICATE_APPLICATION = "A duplicate application with the same name, job title "
+            + "and optional tags already exists in InternApply";
 
     public static final String MESSAGE_APPLICATION_STATUS_TAG = "Application status tag must be : "
             + ApplicationStatusTagType.getAllTypesInString();

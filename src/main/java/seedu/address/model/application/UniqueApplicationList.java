@@ -39,8 +39,10 @@ public class UniqueApplicationList implements Iterable<Application> {
         requireNonNull(orderBy);
         if (orderBy.equals(ListCommand.COMMAND_ORDER_WORD_ASCENDING)) {
             internalList.sort(c);
-        } else {
+        } else if (orderBy.equals(ListCommand.COMMAND_ORDER_WORD_DESCENDING)) {
             internalList.sort(Collections.reverseOrder(c));
+        } else {
+            throw new UnsupportedOperationException("Invalid sorting order.");
         }
     }
 

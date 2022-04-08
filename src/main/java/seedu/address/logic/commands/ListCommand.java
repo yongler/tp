@@ -26,9 +26,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Sorted applications by %1$s";
 
-    public static final String MESSAGE_NO_CHANGE = "last sorted method.";
-
-    public static final String MESSAGE_NO_CHANGE_FULL = String.format(MESSAGE_SUCCESS, MESSAGE_NO_CHANGE);
+    public static final String MESSAGE_NO_CHANGE_FULL = "Listed all application(s).";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Show a sorted list of all applications with the given sort parameter.\n"
@@ -66,12 +64,30 @@ public class ListCommand extends Command {
         requireNonNull(model);
         sortingComparator.ifPresent(applicationComparator -> model.sortApplications(applicationComparator, orderBy));
         model.updateFilteredApplicationList(PREDICATE_SHOW_ALL_APPLICATIONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, outputMsg()));
+        return sortingComparator.map(applicationComparator -> new CommandResult(String.format(MESSAGE_SUCCESS,
+                String.format("%s order by %s.", applicationComparator,
+                        orderBy.toLowerCase())))).orElseGet(() -> new CommandResult(MESSAGE_NO_CHANGE_FULL));
     }
 
-    private String outputMsg() {
-        return sortingComparator.map(applicationComparator -> String.format(
-                "%s order by %s.", applicationComparator, orderBy.toLowerCase()))
-                .orElse(MESSAGE_NO_CHANGE);
+    public String getComparatorType() {
+        if (this.sortingComparator.isPresent()) {
+            return sortingComparator.get().toString();
+        } else {
+            return COMMAND_WORD;
+        }
+    }
+
+    public String getOrderBy() {
+        return this.orderBy;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof ListCommand) {
+            ListCommand listCommand = (ListCommand) object;
+            return this.getOrderBy().equals(listCommand.getOrderBy())
+                    && this.getComparatorType().equals(listCommand.getComparatorType());
+        }
+        return false;
     }
 }
