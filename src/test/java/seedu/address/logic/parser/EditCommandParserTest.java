@@ -116,6 +116,17 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_resetTags_failure() {
+        Index targetIndex = INDEX_THIRD_APPLICATION;
+        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+
+        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withTags().build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_APPLICATION;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_GARENA + TAG_DESC_LOCAL
@@ -216,17 +227,6 @@ public class EditCommandParserTest {
         descriptor = new EditApplicationDescriptorBuilder().withPhone(VALID_PHONE_GARENA).withEmail(VALID_EMAIL_GARENA)
                 .withAddress(VALID_ADDRESS_GARENA).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_APPLICATION;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditApplicationDescriptor descriptor = new EditApplicationDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
