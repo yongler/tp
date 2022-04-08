@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.ApplicationStatusTagType;
+import seedu.address.model.tag.PriorityTagType;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Tests that a {@code Application}'s {@code Tag} matches any of the keywords given.
@@ -21,6 +22,9 @@ public class TagContainsKeywordsPredicate implements Predicate<Application> {
     public boolean test(Application application) {
         StringBuilder builder = new StringBuilder();
         for (Tag tag : application.getTags()) {
+            if (PriorityTagType.contains(tag.toString()) || ApplicationStatusTagType.contains(tag.toString())) {
+                continue;
+            }
             builder.append(tag.toString());
             builder.append(" ");
         }
