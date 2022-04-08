@@ -268,6 +268,8 @@ public class EditCommand extends Command {
                     tag.getTagName().toUpperCase().equals("REMOVETAGS");
             Predicate<Tag> removePriorityTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
                     tag.getTagName().toUpperCase().equals("REMOVEPRIORITY");
+            Predicate<Tag> removeApplicationStatusTags = tag -> tag.getTagType().equals(TagType.JOB_SCOPE) &&
+                    tag.getTagName().toUpperCase().equals("REMOVESTATUS");
 
             Predicate<Tag> jobScope = new TagSetContainsTagTypePredicate(TagType.JOB_SCOPE);
             Predicate<Tag> priority = new TagSetContainsTagTypePredicate(TagType.PRIORITY);
@@ -277,7 +279,9 @@ public class EditCommand extends Command {
             if (tags.stream().anyMatch(removeGenericTags)) {
                 // Mechanism that removes all Generic tags from the existing Application
                 reconstructedTagSet = findMatchAndCopy(emptyTagSet, reconstructedTagSet, TagType.JOB_SCOPE);
-            } else if (tags.stream().anyMatch(jobScope) && tags.stream().noneMatch(removePriorityTags)) {
+            } else if (tags.stream().anyMatch(jobScope) &&
+                    tags.stream().noneMatch(removePriorityTags) &&
+                    tags.stream().noneMatch(removeApplicationStatusTags)) {
                 // Mechanism that copies EditApplicationDescriptor's Generic tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.JOB_SCOPE);
             } else {
@@ -290,7 +294,7 @@ public class EditCommand extends Command {
 
             // Check if tags contains any Tag with TagType.PRIORITY; this refers to a Priority tag
             if (tags.stream().anyMatch(removePriorityTags)) {
-                // Mechanism that removes all Generic tags from the existing Application
+                // Mechanism that removes all Priority tags from the existing Application
                 reconstructedTagSet = findMatchAndCopy(emptyTagSet, reconstructedTagSet, TagType.PRIORITY);
             } else if (tags.stream().anyMatch(priority)) {
                 // Mechanism that copies EditApplicationDescriptor's Priority tag to the new Edit Application
@@ -304,7 +308,10 @@ public class EditCommand extends Command {
             }
 
             // Check if tags contains any Tag with TagType.APPLICATION_STATUS; this refers to Application Status tag
-            if (tags.stream().anyMatch(applicationStatus)) {
+            if (tags.stream().anyMatch(removeApplicationStatusTags)) {
+                // Mechanism that removes all Application Status tags from the existing Application
+                reconstructedTagSet = findMatchAndCopy(emptyTagSet, reconstructedTagSet, TagType.APPLICATION_STATUS);
+            } else if (tags.stream().anyMatch(applicationStatus)) {
                 // Mechanism that copies EditApplicationDescriptor's Application Status tag to the new Edit Application
                 reconstructedTagSet = findMatchAndCopy(tags, reconstructedTagSet, TagType.APPLICATION_STATUS);
             } else {
@@ -328,6 +335,10 @@ public class EditCommand extends Command {
             while (temp.hasNext()) {
                 Tag tempTag = temp.next();
                 if (tempTag.getTagName().toUpperCase().equals("REMOVEPRIORITY")) {
+                    // Skips this exact input
+                    continue;
+                }
+                if (tempTag.getTagName().toUpperCase().equals("REMOVESTATUS")) {
                     // Skips this exact input
                     continue;
                 }
