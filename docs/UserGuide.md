@@ -132,7 +132,7 @@ Adds an application to SoC InternApply.
 
 <div markdown="block" class="alert alert-info">
 
-**Note:** For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+**Input Constraints** For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 </div>
@@ -142,7 +142,7 @@ Adds an application to SoC InternApply.
 
 <div markdown="block" class="alert alert-info">
 
-**Note:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+**Input Constraints:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
 </div>
 
@@ -161,7 +161,7 @@ Adds an application to SoC InternApply.
 
 <div markdown="block" class="alert alert-info">
 
-**Notes:** 
+**Input Constraints:** 
 1. Only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9. <br>
 E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed. <br>
 2. User input cannot be any of the inputs for `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` to avoid confusion
@@ -179,7 +179,7 @@ E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allo
 
 <div markdown="block" class="alert alert-info">
     
-**Note:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
+**Input Constraints:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
 
 </div>
 
@@ -265,7 +265,7 @@ Edits an existing application in SoC InternApply.
   - E.G. `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
 <div markdown="block" class="alert alert-info">
   
-**Notes**
+**Input Constraints:**
 * For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 * For `[p/PHONE_NUMBER]`a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
@@ -415,7 +415,7 @@ Sorted applications by name order by desc.
 
 [Go To TOC](#table-of-contents)
 
---
+---
 
 ### Listing applications with upcoming interviews: `reminder`
 
