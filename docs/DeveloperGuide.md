@@ -284,22 +284,26 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Summary bar
+### Summary bar
 
-Proposed implementation
+#### Implementation
 
-The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one
-`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
-Each `StatsBox` will hold its relevant text and statistic. Example look:
+The Summary bar is facilitated by `SummaryList` in the model component. The `SummaryList` will compose of one
+`SummaryBox` per statistic box in the summary bar. The summary bar resides in the `SummaryListPanel` in the UI component. 
+It takes a column on the right of the `ApplicationListPanel` and is populated by `SummaryCard` objects.
+Each `SummaryCard` is associated with a `SummaryBox` that holds its relevant text and statistic. 
 
-![SummaryBarExample](images/SummaryBarExample.png)
+Summary bar UI (highlighted in red):
 
-The `SummaryBar` and `StatsBox` will implement the following operations:
+![SummaryBarExample](images/SummaryBarUI.png)
 
-- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
-- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
+The `SummaryList` implements the following operations:
 
-These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
+- `SummaryList#update()` — Recalculate and update the list of `SummaryBox` objects.
+- `SummaryList#getTotalApplications` — Gets the total number of applications.
+- `SummaryList#getTotalTagApplications` — Gets the total number of applications with a specific tag name.
+
+`SummaryList#update()` will be exposed in the `Model` interface as `Model#updateSummaryBoxList()`.
 
 Below is an example scenario and how the SummaryBar will behave.
 
@@ -307,7 +311,7 @@ Step 1. The user launches the application. The `SummaryBar` will be initialized 
 
 Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
-Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
 <img src="images/SummaryBarExampleScenario.PNG" width="600" />
 
@@ -318,13 +322,13 @@ Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' prior
 #### Design Considerations:
 **Aspect: How update executes:**
 
-* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
+* **Alternative 1 (current choice):** Recalculate and update all `SummaryBox` objects on each command.
     * Pros: Easy to implement.
     * Cons: May have performance issues when handling large number of applications.
 
-* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
-    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
-    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
+* **Alternative 2:** Individual command knows which specific `SummaryBox` to update.
+    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `SummaryBox` for `HIGH` priority tag count).
+    * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
 
 ###  Feature to edit Application Status & Priority Tags
