@@ -11,6 +11,7 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 ## Table of Contents
 * Table of Contents 
+
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -97,28 +98,6 @@ Edit at your own risk of losing data.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `reminder`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-
-**:information_source: Notes about the input format:**<br>
-* For `[p/Phone]` a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
-
-* For `[pt/PRIORITY_TAG]` user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
-  e.g. `pt/HIGH` can be used to set priority of an application to `HIGH`
-
-* For `[ast/APPLICATION_STATUS_TAG]` user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
-  e.g. `ast/INTERVIEWED` can be used to set application status of an application to `INTERVIEWED`
-
-* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` the inputs are case-insensitive<br>
-  e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
-
-* For `[t/TAG]...` only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
-  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
-
-* For `[t/TAG]...` user input cannot be any of the inputs for `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` to avoid confusion.<br>
-  e.g. `t/High` or `t/Accepted` is not allowed.
-
-* For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
-  e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
-
 **:information_source: Notes about duplicate applications:**<br>
 
 * Duplicate applications are not allowed.
@@ -137,14 +116,79 @@ Edit at your own risk of losing data.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Adding an application: `add`
 
 Adds an application to SoC InternApply.
 
 **Format:** `add n/NAME_OF_COMPANY j/JOB_TITLE p/PHONE_NUMBER a/ADDRESS e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-**Note:** `NAME_OF_COMPANY` has to be unique. <br>
-**Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional.
+#### Parameters: <br>
+
+  - NAME_OF_COMPANY:
+    - Name of company you're applying for.
+  - JOB_TITLE:
+    - Title of the job you are applying for.
+
+<div markdown="block" class="alert alert-info">
+
+**Input Constraints** For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+
+</div>
+
+  - PHONE_NUMBER:
+    - Phone number of the company your applying for.<br>
+
+<div markdown="block" class="alert alert-info">
+
+**Input Constraints:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+
+</div>
+
+  - ADDRESS:
+    - Address of the company your applying for.
+  
+
+  - EMAIL:
+    - Email of the company your applying for.
+
+#### Optional Parameters:
+
+  - TAG:
+    - Optional Tag that you can set to separate applications
+    - E.G. t/Application1, t/Application2 <br>
+
+<div markdown="block" class="alert alert-info">
+
+**Input Constraints:** 
+1. Only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9. <br>
+E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed. <br>
+2. User input cannot be any of the inputs for `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` to avoid confusion
+
+</div>
+
+  - PRIORITY_TAG:
+    - Tag indicating the urgency of the application:
+    - `HIGH`,`MEDIUM`,`LOW`
+    
+
+  - APPLICATION_STATUS_TAG:
+    - Tag indicating the status of the application:
+    - `NOT_APPLIED`,`APPLIED`,`INTERVIEWED`,`REJECTED`,`ACCEPTED`<br>
+
+<div markdown="block" class="alert alert-info">
+    
+**Input Constraints:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about duplicate applications:**<br>
+
+An application is considered duplicate if, it's `NAME_OF_COMPANY`, `JOB_TITLE` and `TAG` is identical
+</div>
 
 **Example usages and expected outcomes:**
 * `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering `
@@ -167,6 +211,8 @@ This application already exists in InternApply
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Clearing all applications: `clear`
 
 Clears all applications from SoC InternApply.
@@ -174,6 +220,8 @@ Clears all applications from SoC InternApply.
 **Format:** `clear`
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Deleting an application: `delete`
 
@@ -195,6 +243,8 @@ The previous 2nd application is removed from the storage and a new list of appli
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Editing an application: `edit`
 
 Edits an existing application in SoC InternApply.
@@ -207,36 +257,60 @@ Edits an existing application in SoC InternApply.
 - At least one of the optional fields must be provided.
 - The index inputted must not exceed 2147483647 and must be a natural number.
 - Existing values will be updated to the input values.
-- You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
-- The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
-- You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
-- - You can add details to the application by using `d/DETAILS`
-- You can enter new lines in the details by using `\n`
-- You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
 - You cannot edit an application to become a duplicate of another application. Any attempts will be prevented. Please refer to our Notes about duplicate applications
 
-**Example usages and expected outcomes:**
-- `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
-- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
-- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
-- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
+#### Parameters:
+
+- NAME, JOB_TITLE, PHONE_NUMBER, EMAIL, ADDRESS
+  - For the above fields, all restraints from the add command is applicable.
+  - E.G. `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
+<div markdown="block" class="alert alert-info">
+  
+**Input Constraints:**
+* For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+* For `[p/PHONE_NUMBER]`a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+
+</div>
+  
+- INTERVIEW_DATE_TIME
+  - You can add an interview slot that includes both date and time by using `idt/INTERVIEW_DATE_TIME`
+  - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
+  - You can remove `INTERVIEW_DATE_TIME` by using `idt/` without specifying anything after it. <br>
+  
+- DETAILS
+  - You can add details to the application by using `d/DETAILS`
+  - You can enter new lines in the details input by using `\n`
+  - You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
+  - To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
 ```
 This company requires a preliminary coding round. 
 I should practice more on HackerRank
 ```
+
+- TAGS, PRIORITY_TAG, APPLICATION_STATUS_TAG
+  - You can change the priority or application status of an application by using `pt/High` or `ast/Applied`
+  - The tags are not case-sensitive
+  - Entering `pt/high` when the application priority tag is `high` is permitted but does not change anything
+
+**Example usages and expected outcomes:**
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
+- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
+
+
 #### Advanced Function
 
 Removing Tags from existing application.
 
-**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
+**CAUTION**: While it is possible to use these special Tags while editing other fields of an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
 
-**CAUTION**: While it is possible to use these special Tags well editing an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
+**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
 
 - Removes the Tags from an existing application.
 - `[t/removetags]` will remove all Optional Tags from an application (i.e. Tags with the prefix `t/`).
 - `[t/removepriority]` will remove the Priority Tags from an application (i.e. Tags with the prefix `pt/`).
 - `[t/removestatus]` will remove the Application Status Tags from an application (i.e. Tags with the prefix `ast/`).
-- These special Tags are case-insensitive (i.e. typing `t/ReMOveTagS` would also work). 
+- These special Tags are not case-sensitive (i.e. typing `t/ReMOveTagS` would also work). 
 - These special Tags cannot be used as a valid Optional Tag for your applications.
 - These special Tags can be used in any order, and you can either use 1 of them, a pair of them, or all 3 of them.
 - These special Tags takes precedence over all other Tag inputs. Refer to the Example usage below for reference.
@@ -253,6 +327,8 @@ Removing Tags from existing application.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -260,6 +336,8 @@ Exits the program.
 **Format:** `exit`
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Finding application(s): `find`
 
@@ -281,6 +359,26 @@ Finds existing applications in SoC InternApply.
 - `find t/overseas t/USA` finds and displays all applications with "overseas" or "USA" in its tags.
 
 [Go To TOC](#table-of-contents)
+
+
+### Viewing help: `help`
+
+This command displays a message explaining how to access the help page.
+
+**Format:** `help`
+
+**Example usages:**
+
+`help`
+
+**Expected outcome:**
+
+A popup window showing a link to the help page, as shown below.
+![helpMessage](images/helpMessage.png)
+
+[Go To TOC](#table-of-contents)
+
+---
 
 ### Listing all applications in a sorted manner: `list`
 
@@ -317,6 +415,8 @@ Sorted applications by name order by desc.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Listing applications with upcoming interviews: `reminder`
 
 Shows a list of applications with upcoming interviews, falling within a week from now, in SoC InternApply.
@@ -333,17 +433,23 @@ A new window pops up, showing a list of applications with upcoming interviews wi
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Saving the data
 
 InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Summary bar
 
 The summary bar is automatically updated on successful execution of any command. 
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Viewing help: `help`
 
