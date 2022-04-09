@@ -137,16 +137,21 @@ Adds an application to SoC InternApply.
   - JOB_TITLE:
     - Title of the job you are applying for.
 
+<div markdown="block" class="alert alert-info">
+
 **Note:** For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
+</div>
 
   - PHONE_NUMBER:
     - Phone number of the company your applying for.<br>
-    
+
+<div markdown="block" class="alert alert-info">
 
 **Note:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
+</div>
 
   - ADDRESS:
     - Address of the company your applying for.
@@ -161,11 +166,14 @@ Adds an application to SoC InternApply.
     - Optional Tag that you can set to separate applications
     - E.G. t/Application1, t/Application2 <br>
 
+<div markdown="block" class="alert alert-info">
+
 **Notes:** 
 1. Only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9. <br>
 E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed. <br>
 2. User input cannot be any of the inputs for `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` to avoid confusion
 
+</div>
 
   - PRIORITY_TAG:
     - Tag indicating the urgency of the application:
@@ -175,9 +183,13 @@ E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allo
   - APPLICATION_STATUS_TAG:
     - Tag indicating the status of the application:
     - `NOT_APPLIED`,`APPLIED`,`INTERVIEWED`,`REJECTED`,`ACCEPTED`<br>
+
+<div markdown="block" class="alert alert-info">
     
 **Note:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
-    
+
+</div>
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about duplicate applications:**<br>
 
