@@ -415,7 +415,7 @@ Sorted applications by name order by desc.
 
 [Go To TOC](#table-of-contents)
 
---
+---
 
 ### Listing applications with upcoming interviews: `reminder`
 
