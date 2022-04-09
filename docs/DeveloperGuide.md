@@ -812,6 +812,7 @@ the steps are general enough to be used to test other commands that accept multi
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+
 ### Example: Deleting an application
 
 1. Deleting an application while all applications are being shown
