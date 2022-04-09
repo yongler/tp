@@ -15,7 +15,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-This project is adapted from `AddressBook3` and makes use of a few of its features. `InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
 
 ### This developer guide is intended for users who:
 - Want to `develop` this project further
@@ -155,7 +155,7 @@ How the parsing works:
 [Go To TOC](#table-of-contents)
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -177,13 +177,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both SoC InternApply data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InterApplyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -562,7 +562,7 @@ _{more aspects and alternatives to be added}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage internship applications faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -662,8 +662,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 internship applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -687,7 +685,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample applications. The window size may not be optimum.
 
 1. Saving window preferences
 
