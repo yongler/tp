@@ -97,11 +97,6 @@ Edit at your own risk of losing data.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `reminder`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-
-**:information_source: Notes about the input format:**<br>
-
-
-
 **:information_source: Notes about duplicate applications:**<br>
 
 * Duplicate applications are not allowed.
@@ -132,14 +127,12 @@ Adds an application to SoC InternApply.
 
   - NAME_OF_COMPANY:
     - Name of company you're applying for.
-
-
   - JOB_TITLE:
     - Title of the job you are applying for.
 
 <div markdown="block" class="alert alert-info">
 
-**Note:** For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+**Note:** For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 </div>
@@ -263,40 +256,60 @@ Edits an existing application in SoC InternApply.
 - At least one of the optional fields must be provided.
 - The index inputted must not exceed 2147483647 and must be a natural number.
 - Existing values will be updated to the input values.
+- You cannot edit an application to become a duplicate of another application. Any attempts will be prevented. Please refer to our Notes about duplicate applications
 
 #### Parameters:
 
-- NAME, JOB_TITLE, 
-- You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
-- The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
-- You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
-- - You can add details to the application by using `d/DETAILS`
-- You can enter new lines in the details by using `\n`
-- You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
-- You cannot edit an application to become a duplicate of another application. Any attempts will be prevented. Please refer to our Notes about duplicate applications
+- NAME, JOB_TITLE, PHONE_NUMBER, EMAIL, ADDRESS
+  - For the above fields, all restraints from the add command is applicable.
+  - E.G. `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
+<div markdown="block" class="alert alert-info">
+  
+**Notes**
+* For `[j/JOBTITLE]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+* For `[p/PHONE_NUMBER]`a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-**Example usages and expected outcomes:**
-- `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
-- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
-- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
-- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
+</div>
+  
+- INTERVIEW_DATE_TIME
+  - You can add an interview slot that includes both date and time by using `idt/INTERVIEW_DATE_TIME`
+  - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
+  - You can remove `INTERVIEW_DATE_TIME` by using `idt/` without specifying anything after it. <br>
+  
+- DETAILS
+  - You can add details to the application by using `d/DETAILS`
+  - You can enter new lines in the details input by using `\n`
+  - You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
+  - To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
 ```
 This company requires a preliminary coding round. 
 I should practice more on HackerRank
 ```
+
+- TAGS, PRIORITY_TAG, APPLICATION_STATUS_TAG
+  - You can change the priority or application status of an application by using `pt/High` or `ast/Applied`
+  - The tags are not case-sensitive
+  - Entering `pt/high` when the application priority tag is `high` is permitted but does not change anything
+
+**Example usages and expected outcomes:**
+- `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
+- `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
+
+
 #### Advanced Function
 
 Removing Tags from existing application.
 
-**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
+**CAUTION**: While it is possible to use these special Tags while editing other fields of an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
 
-**CAUTION**: While it is possible to use these special Tags well editing an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
+**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
 
 - Removes the Tags from an existing application.
 - `[t/removetags]` will remove all Optional Tags from an application (i.e. Tags with the prefix `t/`).
 - `[t/removepriority]` will remove the Priority Tags from an application (i.e. Tags with the prefix `pt/`).
 - `[t/removestatus]` will remove the Application Status Tags from an application (i.e. Tags with the prefix `ast/`).
-- These special Tags are case-insensitive (i.e. typing `t/ReMOveTagS` would also work). 
+- These special Tags are not case-sensitive (i.e. typing `t/ReMOveTagS` would also work). 
 - These special Tags cannot be used as a valid Optional Tag for your applications.
 - These special Tags can be used in any order, and you can either use 1 of them, a pair of them, or all 3 of them.
 - These special Tags takes precedence over all other Tag inputs. Refer to the Example usage below for reference.
