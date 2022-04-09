@@ -261,11 +261,45 @@ Below is an image of the UI after the changes were made:
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Interview Slot field
+
+#### Implementation
+
+The `InterviewSlot` field is introduced to the `Application` model. The `InterviewSlot` is abstracted as its own class as per all fields of the `Application` model. Unlike other field classes, the value is stored as a `LocalDateTime`. This is to ensure the integrity of the date and time values stored. 
+
+The field is added and removed from an application using the `idt/` prefix extending the `EditCommand` feature. The `InterviewSlot#toString()` will default `MAX` values to `Interview date is not set.` for applications with no interview date set.
+
+> 💡 The field can only be edited onto an application. Users creating an application using the `add` command will not be able to include the `InterviewSlot` field. This is built with the logic that a newly added application will not have an interview slot yet.
+
+`ParserUtil#parseInterviewSlot()` is use to parse the user input to a `LocalDateTime` value. Instead of using regex to valid the input value, the input is parse directly using `LocalDateTime#parse()` and if an `ParseException()` is thrown the input will be deemed invalid otherwise, valid.
+
+The `Interview Slot` class consist of two constructors:
+- `InterviewSlot()`— Value is defaulted to `MAX` value. This is for newly created applications.
+- `InterviewSlot(String interviewDateTime)` — Value is given as a `String` args then parsed and stored as value.
+
+It uses two dates and time formats:
+- `dd-MM-uuuu HH:mm` — Users are to input values in this format.
+- `d MMM yyyy HH:mm` — Display output format for users to not mixed up months and dates when values are similar.
+
+#### Design considerations:
+
+Aspect: How to parse date and time values:
+- Alternative 1 (current choice): Use the java method and throw parse exception.
+  - Pros: Easy to implement. Reliable.
+  - Cons: Additional overheads may result in performance issues.
+- Alternative 2: Use regex.
+  - Pros: Consistent with all other parsing styles of other fields.
+  - Cons: We must ensure that the implementation of the regex is correct.
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Sort feature (using `list` command)
 
 #### Implementation
 
-The sort feature is an extension of the `list` command. It would be facilitated by the existing command but with additional input parameters to determine the field to sort by and in sorting order. The `ListCommand` will encapsulate the `sortingComparator` and `orderBy` fields. 
+The sort feature is an extension of the `list` command. It would be facilitated by the existing command but with additional input parameters to determine the field to sort by and in sorting order. The `ListCommand` will encapsulate the comparator `sortingComparator` and the ordering `orderBy` as fields. 
 
 The usage of the `list` command will be facilitated by using a newly implemented method `Model#sortApplications()` to update the sorting order of `UniqueApplicationList`.
 
@@ -322,7 +356,7 @@ Step 3. The user uses the `list` command without parameters to make all applicat
 ##### 2. `list` command with parameters <br><br>
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
 Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
-Step 3. The user sees all applications sorted in the given specified order. <br><br>
+Step 3. The user sees all applications sorted in the given specified order. <br>
         
 #### Design considerations 
 <b>Aspect: How the sorting feature called:</b>
