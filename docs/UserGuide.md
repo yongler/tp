@@ -99,20 +99,24 @@ Edit at your own risk of losing data.
 
 
 **:information_source: Notes about the input format:**<br>
+* For `[p/Phone]` a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-* For `[t/TAG]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9.<br>
-  e.g. `t/Based In Singapore` is not allowed, `t/BasedInSingapore` is allowed.
+* For `[pt/PRIORITY_TAG]` user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
+  e.g. `pt/HIGH` can be used to set priority of an application to `HIGH`
 
-* For `[pt/PRIORITY_TAG]`, user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
-  e.g `pt/HIGH` can be used to set priority of an application to `HIGH`
-
-* For `[ast/APPLICATION_STATUS_TAG]`, user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
+* For `[ast/APPLICATION_STATUS_TAG]` user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
   e.g. `ast/INTERVIEWED` can be used to set application status of an application to `INTERVIEWED`
 
-* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]`, the inputs are case-insensitive<br>
+* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` the inputs are case-insensitive<br>
   e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
 
-* For `[j/JobTitle]...`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+* For `[t/TAG]...` only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
+  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
+
+* For `[t/TAG]...` user input cannot be any of the inputs for `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` to avoid confusion.<br>
+  e.g. `t/High` or `t/Accepted` is not allowed.
+
+* For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 **:information_source: Notes about duplicate applications:**<br>
@@ -180,6 +184,7 @@ Deletes the specified application from SoC InternApply.
 * Deletes the application at the specified `INDEX`.
 * The index refers to the index number shown in the displayed application list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The index inputted must not exceed 2147483647 and must be a natural number.
 
 **Example usages:**
 * `list` followed by `delete 2` deletes the 2nd application.
@@ -196,10 +201,11 @@ Edits an existing application in SoC InternApply.
 
 **Format:** `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [d/DETAILS] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-**CAUTION:** The `edit` command might overwrite your existing application data.
+**CAUTION:** The `edit` command will overwrite your existing application data.
 <br>
 - Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
 - At least one of the optional fields must be provided.
+- The index inputted must not exceed 2147483647 and must be a natural number.
 - Existing values will be updated to the input values.
 - You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
 - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
@@ -207,21 +213,43 @@ Edits an existing application in SoC InternApply.
 - - You can add details to the application by using `d/DETAILS`
 - You can enter new lines in the details by using `\n`
 - You  can remove `DETAILS` by typing `d/` without any strings following it, which will revert the field back to the default of `To add details, use the edit command`
-- When editing the `TAG` field, if `t/` is given without any input general tags will be removed
+- You cannot edit an application to become a duplicate of another application. Any attempts will be prevented. Please refer to our Notes about duplicate applications
 
 **Example usages and expected outcomes:**
 - `edit 1 e/SoCStudent@example.com n/NUS Research` Edits the email and name of the 1st application to be `SoCStudent@example.com` and `NUS Research` respectively.
 - `edit 1 t/Singapore ast/APPLIED` Edits the tags and application status tag of the 1st application to Singapore and APPLIED respectively. Since the priority tag is not specified, the 1st application will keep its current priority tag if it had any.
 - `edit 2 j/Intern idt/` Edits the job title of the 2nd application to be `Intern` and clears the existing interview date time.
-
-- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`
-
-e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
-
+- To edit the details of an application, you can follow this format (adding \n to type in a new line): `edit 1 d/Example details \nThis is a newline of the details`<br>e.g.`edit 1 d/This company requires a preliminary coding round.\n I should practice more on HackerRank` will result in this details being added:
 ```
 This company requires a preliminary coding round. 
 I should practice more on HackerRank
 ```
+#### Advanced Function
+
+Removing Tags from existing application.
+
+**Format**: `edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`
+
+**CAUTION**: While it is possible to use these special Tags well editing an existing application in SoC InternApply, we highly recommend not doing so unless you know what you are doing. However, if you wish to do so please refer to the description below beforehand.
+
+- Removes the Tags from an existing application.
+- `[t/removetags]` will remove all Optional Tags from an application (i.e. Tags with the prefix `t/`).
+- `[t/removepriority]` will remove the Priority Tags from an application (i.e. Tags with the prefix `pt/`).
+- `[t/removestatus]` will remove the Application Status Tags from an application (i.e. Tags with the prefix `ast/`).
+- These special Tags are case-insensitive (i.e. typing `t/ReMOveTagS` would also work). 
+- These special Tags cannot be used as a valid Optional Tag for your applications.
+- These special Tags can be used in any order, and you can either use 1 of them, a pair of them, or all 3 of them.
+- These special Tags takes precedence over all other Tag inputs. Refer to the Example usage below for reference.
+- You can still use these special Tags even if the respective Tags do not exist for the specified application. Nothing will happen in this case.
+- If removing any of the Tags from an application causes it to become a duplicate application the command will be invalid. Please refer to our Notes about duplicate applications
+
+**Example usages and expected outcomes**
+
+- `edit 1 t/removetags t/removepriority` Removes all the Optional Tags and the Priority Tag from the 1st application.
+- `edit 1 p/65258719 t/removestatus` Removes the Application Status Tag from the 1st application. Edits the phone number of the 1st application to be `65258719`
+- `edit 1 pt/HIGH t/removepriority` Special Tags takes precedence over all other Tag inputs. Removes the Priority Tag from the 1st application. Ignores the `pt/HIGH` input.
+- `edit 1 t/removestatus t/Singapore t/ExEmployee` Special Tags takes precedence over all other Tag inputs. Removes the Application Status Tag from the 1st application. Ignores the `t/Singapore t/ExEmployee` inputs.
+- `edit 1 t/removestatus` followed by `edit 1 t/removestatus` First removes the Application Status Tag from the 1st application. Then does nothing since there does not exist an Application Status Tag for the 1st application. 
 
 [Go To TOC](#table-of-contents)
 
@@ -344,6 +372,13 @@ InternApply data are saved in the hard disk automatically after any command that
 **A**: <br>
 Option 1: Using edit, you can simply reuse the existing application with updated information. <br>
 Option 2: If you are looking to keep the existing application and it's information untouched, then we suggest including an additional "t/NthAttempt" to differentiate your new application and the existing application. This will not violate our duplication clause while also allowing you to keep information on your existing application.
+
+**Q**: How many applications can SIA track?<br>
+**A**: 2147483647 applications can be tracked.
+
+**Q**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
+**A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
+For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
 
 [Go To TOC](#table-of-contents)
 

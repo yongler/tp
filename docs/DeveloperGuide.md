@@ -688,7 +688,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample applications. The window size is set to launch at a default size that displays all  fields, but can be resized as needed.
 
 1. Saving window preferences
 
@@ -699,22 +699,81 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Testing features
 
-1. Deleting a person while all persons are being shown
+1. Features with one input
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
+the steps are general enough to be used to test other commands that accept a single parameter. <br>
+   1. Test valid input values
+      - E.G. `delete INDEX` <br>
+        Test input: `delete 1` when list has more than 1 application <br>
+        Expected output: Successful execution of the command
+   2. Test invalid input values
+      - E.G.  `delete INDEX` <br> 
+        Test input: `delete 0` or `delete -10` <br>
+        Expected output: error message detailing what went wrong
+   3. Test invalid command input
+       - E.G.  `delete INDEX` <br>
+       Test input: `delet 1` or `delete 2 2` <br>
+       Expected output:  error message detailing what went wrong
+   
+2. Feature with multiple parameters
+    
+   The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
+the steps are general enough to be used to test other commands that accept multiple parameters.
+   
+   
+   2. Test valid input values
+      - E.G. `edit INDEX [Optional parameters]` <br>
+        Test input: `edit 1 n/new name` when list has more than 1 application <br>
+        Expected output: Successful change of application 1 name
+   3. Test invalid input values
+      - E.G.  `edit INDEX [Optional parameters]` <br>
+        Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        Expected output: error message detailing what went wrong
+   4. Test invalid command input
+       - E.G.  `edit INDEX [Optional parameters]` <br>
+         Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+         Expected output: error message detailing what went wrong
+   5. Test multiple parameter combinations
+       - E.G. `edit INDEX [optional parameters]` <br>
+         Test input: `edit 1 n/new name n/actual name` <br>
+         Expected output: error message detailing what went wrong
+         Actual output: command executes
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
+consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
+
+</div>
+### Example: Deleting an application
+
+1. Deleting an application while all applications are being shown
+
+   1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting an application while reminder window is open
+   1. Prerequisites: Have the reminder window open using `reminder` and 
+   set the first applications interview date to be within the next 7 days.
+
+   2. Test case: `delete 1`<br>
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
+      Application is also deleted from reminder window
+
+   3. Test case: `delete 0`<br>
+      Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
+      No changes to the reminder window.
+4. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -724,4 +783,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+</div>
 [Go To TOC](#table-of-contents)
