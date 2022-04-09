@@ -7,7 +7,14 @@ import java.util.stream.Stream;
  * A public enumeration class for application status tags.
  */
 public enum ApplicationStatusTagType {
-    NOT_APPLIED, APPLIED, INTERVIEWED, REJECTED, ACCEPTED;
+    NOT_APPLIED(1), APPLIED(2), INTERVIEWED(3),
+    REJECTED(4), ACCEPTED(5);
+
+    private final int statusRanking;
+
+    ApplicationStatusTagType(int statusRanking) {
+        this.statusRanking = statusRanking;
+    }
 
     //Solution below adapted from https://stackoverflow.com/questions/1104975/a-for-loop-to-iterate-over-an-enum-in-java
     /**
@@ -33,5 +40,9 @@ public enum ApplicationStatusTagType {
             }
         }
         return false;
+    }
+
+    public int getStatusRanking() {
+        return this.statusRanking;
     }
 }

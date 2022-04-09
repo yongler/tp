@@ -99,6 +99,20 @@ public class Application {
         return Optional.empty();
     }
 
+    public Optional<Set<Tag>> getJobScopeTags() {
+        Set<Tag> jobScopeTagSet = new HashSet<>();
+        for (Tag tag: tags) {
+            if (tag.tagType.equals(TagType.JOB_SCOPE)) {
+                jobScopeTagSet.add(tag);
+            }
+        }
+        if (jobScopeTagSet.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(jobScopeTagSet);
+        }
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -117,7 +131,9 @@ public class Application {
         }
 
         return otherApplication != null
-                && otherApplication.getName().equals(getName());
+                && otherApplication.getName().equals(getName())
+                && otherApplication.getJobTitle().equals(getJobTitle())
+                && otherApplication.getJobScopeTags().equals(getJobScopeTags());
     }
 
     /**

@@ -15,7 +15,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-This project is adapted from `AddressBook3` and makes use of a few of its features. `InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
 
 ### This developer guide is intended for users who:
 - Want to `develop` this project further
@@ -125,14 +125,14 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `InternApplyParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -149,41 +149,38 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `InternApplyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternApplyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [Go To TOC](#table-of-contents)
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the InternApply data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
+* stores the currently 'selected' `Application` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a filtered list of `Application` objects (e.g., applications with upcoming `InterviewSlot`) as a separate _upcoming_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed'.
+* stores a `SummaryList` object that contains a list of `SummaryBox` objects which is exposed to the outsiders as an unmodifiable `ObservableList<SummaryBox>` that can be 'observed'.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 [Go To TOC](#table-of-contents)
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both SoC InternApply data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InterApplyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -236,6 +233,13 @@ Desired  line in detail
 newline in the details field
 ```
 
+Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
+![Interactions Inside the Logic Component for the `delete 1` Command](images/EditCommandDetailsDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note2:** The sequence diagram is similar to the delete command, due to InternApply using the command design pattern
+</div>
+
 ##### UI
 
 To display the new `details` field, modifications to the `applicationCard.java` and `applicationCard.fxml` files had to be made. As the user is able to input any amount of new lines in the details field, the `label` would need to be stored in a `scrollPane` to allow the user to read the details field. Modification to the `minHeight` of the `applicationCard.fxml` as well as the new `label` `maxHeight` was made to properly display of the details field.
@@ -280,22 +284,26 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Summary bar
+### Summary bar
 
-Proposed implementation
+#### Implementation
 
-The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one
-`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
-Each `StatsBox` will hold its relevant text and statistic. Example look:
+The Summary bar is facilitated by `SummaryList` in the model component. The `SummaryList` will compose of one
+`SummaryBox` per statistic box in the summary bar. The summary bar resides in the `SummaryListPanel` in the UI component. 
+It takes a column on the right of the `ApplicationListPanel` and is populated by `SummaryCard` objects.
+Each `SummaryCard` is associated with a `SummaryBox` that holds its relevant text and statistic. 
 
-![SummaryBarExample](images/SummaryBarExample.png)
+Summary bar UI (highlighted in red):
 
-The `SummaryBar` and `StatsBox` will implement the following operations:
+![SummaryBarExample](images/SummaryBarUI.png)
 
-- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
-- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
+The `SummaryList` implements the following operations:
 
-These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
+- `SummaryList#update()` — Recalculate and update the list of `SummaryBox` objects.
+- `SummaryList#getTotalApplications` — Gets the total number of applications.
+- `SummaryList#getTotalTagApplications` — Gets the total number of applications with a specific tag name.
+
+`SummaryList#update()` will be exposed in the `Model` interface as `Model#updateSummaryBoxList()`.
 
 Below is an example scenario and how the SummaryBar will behave.
 
@@ -303,7 +311,7 @@ Step 1. The user launches the application. The `SummaryBar` will be initialized 
 
 Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
-Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
 <img src="images/SummaryBarExampleScenario.PNG" width="600" />
 
@@ -314,13 +322,13 @@ Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' prior
 #### Design Considerations:
 **Aspect: How update executes:**
 
-* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
+* **Alternative 1 (current choice):** Recalculate and update all `SummaryBox` objects on each command.
     * Pros: Easy to implement.
     * Cons: May have performance issues when handling large number of applications.
 
-* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
-    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
-    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
+* **Alternative 2:** Individual command knows which specific `SummaryBox` to update.
+    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `SummaryBox` for `HIGH` priority tag count).
+    * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
 
 ###  Feature to edit Application Status & Priority Tags
@@ -555,7 +563,7 @@ _{more aspects and alternatives to be added}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage internship applications faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -655,8 +663,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 internship applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -679,8 +685,8 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample applications. The window size is set to launch at a default size that displays all  fields, but can be resized as needed.
 
 1. Saving window preferences
 
@@ -691,22 +697,81 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Testing features
 
-1. Deleting a person while all persons are being shown
+1. Features with one input
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
+the steps are general enough to be used to test other commands that accept a single parameter. <br>
+   1. Test valid input values
+      - E.G. `delete INDEX` <br>
+        Test input: `delete 1` when list has more than 1 application <br>
+        Expected output: Successful execution of the command
+   2. Test invalid input values
+      - E.G.  `delete INDEX` <br> 
+        Test input: `delete 0` or `delete -10` <br>
+        Expected output: error message detailing what went wrong
+   3. Test invalid command input
+       - E.G.  `delete INDEX` <br>
+       Test input: `delet 1` or `delete 2 2` <br>
+       Expected output:  error message detailing what went wrong
+   
+2. Feature with multiple parameters
+    
+   The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
+the steps are general enough to be used to test other commands that accept multiple parameters.
+   
+   
+   2. Test valid input values
+      - E.G. `edit INDEX [Optional parameters]` <br>
+        Test input: `edit 1 n/new name` when list has more than 1 application <br>
+        Expected output: Successful change of application 1 name
+   3. Test invalid input values
+      - E.G.  `edit INDEX [Optional parameters]` <br>
+        Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        Expected output: error message detailing what went wrong
+   4. Test invalid command input
+       - E.G.  `edit INDEX [Optional parameters]` <br>
+         Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+         Expected output: error message detailing what went wrong
+   5. Test multiple parameter combinations
+       - E.G. `edit INDEX [optional parameters]` <br>
+         Test input: `edit 1 n/new name n/actual name` <br>
+         Expected output: error message detailing what went wrong
+         Actual output: command executes
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
+consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
+
+</div>
+### Example: Deleting an application
+
+1. Deleting an application while all applications are being shown
+
+   1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting an application while reminder window is open
+   1. Prerequisites: Have the reminder window open using `reminder` and 
+   set the first applications interview date to be within the next 7 days.
+
+   2. Test case: `delete 1`<br>
+      Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
+      Application is also deleted from reminder window
+
+   3. Test case: `delete 0`<br>
+      Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
+      No changes to the reminder window.
+4. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -716,4 +781,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+</div>
 [Go To TOC](#table-of-contents)

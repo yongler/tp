@@ -14,7 +14,7 @@ public class NameComparator implements Comparator<Application> {
      * */
     @Override
     public int compare(Application o1, Application o2) {
-        return o1.getName().toString().compareTo(o2.getName().toString());
+        return o1.getName().toString().toUpperCase().compareTo(o2.getName().toString().toUpperCase());
     }
 
     @Override

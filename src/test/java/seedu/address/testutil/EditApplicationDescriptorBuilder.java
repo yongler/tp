@@ -9,6 +9,7 @@ import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.InterviewSlot;
+import seedu.address.model.application.JobTitle;
 import seedu.address.model.application.Name;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
@@ -34,10 +35,12 @@ public class EditApplicationDescriptorBuilder {
     public EditApplicationDescriptorBuilder(Application application) {
         descriptor = new EditApplicationDescriptor();
         descriptor.setName(application.getName());
+        descriptor.setJobTitle(application.getJobTitle());
         descriptor.setPhone(application.getPhone());
         descriptor.setEmail(application.getEmail());
         descriptor.setInterviewSlot(application.getInterviewSlot());
         descriptor.setAddress(application.getAddress());
+        descriptor.setDetails(application.getDetails());
         descriptor.setTags(application.getTags());
     }
 
@@ -46,6 +49,14 @@ public class EditApplicationDescriptorBuilder {
      */
     public EditApplicationDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
+        return this;
+    }
+
+    /**
+     * Sets the (@code JobTitle} of the {@code EditApplicationDescriptor} that we are building/
+     */
+    public EditApplicationDescriptorBuilder withJobTitle(String jobTitle) {
+        descriptor.setJobTitle(new JobTitle(jobTitle));
         return this;
     }
 
