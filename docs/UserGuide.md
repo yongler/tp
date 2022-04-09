@@ -11,7 +11,7 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 ## Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
@@ -99,25 +99,8 @@ Edit at your own risk of losing data.
 
 
 **:information_source: Notes about the input format:**<br>
-* For `[p/Phone]` a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-* For `[pt/PRIORITY_TAG]` user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
-  e.g. `pt/HIGH` can be used to set priority of an application to `HIGH`
 
-* For `[ast/APPLICATION_STATUS_TAG]` user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
-  e.g. `ast/INTERVIEWED` can be used to set application status of an application to `INTERVIEWED`
-
-* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` the inputs are case-insensitive<br>
-  e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
-
-* For `[t/TAG]...` only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
-  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
-
-* For `[t/TAG]...` user input cannot be any of the inputs for `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` to avoid confusion.<br>
-  e.g. `t/High` or `t/Accepted` is not allowed.
-
-* For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
-  e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 **:information_source: Notes about duplicate applications:**<br>
 
@@ -137,14 +120,69 @@ Edit at your own risk of losing data.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Adding an application: `add`
 
 Adds an application to SoC InternApply.
 
 **Format:** `add n/NAME_OF_COMPANY j/JOB_TITLE p/PHONE_NUMBER a/ADDRESS e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]`
 
-**Note:** `NAME_OF_COMPANY` has to be unique. <br>
-**Note:** `[t/TAG]`, `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` are optional.
+#### Parameters: <br>
+
+  - NAME_OF_COMPANY:
+    - Name of company you're applying for.
+
+
+  - JOB_TITLE:
+    - Title of the job you are applying for.
+
+**Note:** For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+  E.G. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
+
+
+  - PHONE_NUMBER:
+    - Phone number of the company your applying for.<br>
+    
+
+**Note:**  a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+
+
+  - ADDRESS:
+    - Address of the company your applying for.
+  
+
+  - EMAIL:
+    - Email of the company your applying for.
+
+#### Optional Parameters:
+
+  - TAG:
+    - Optional Tag that you can set to separate applications
+    - E.G. t/Application1, t/Application2 <br>
+
+**Notes:** 
+1. Only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9. <br>
+E.G. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed. <br>
+2. User input cannot be any of the inputs for `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` to avoid confusion
+
+
+  - PRIORITY_TAG:
+    - Tag indicating the urgency of the application:
+    - `HIGH`,`MEDIUM`,`LOW`
+    
+
+  - APPLICATION_STATUS_TAG:
+    - Tag indicating the status of the application:
+    - `NOT_APPLIED`,`APPLIED`,`INTERVIEWED`,`REJECTED`,`ACCEPTED`<br>
+    
+**Note:** `PRIORITY_TAG` and `APPLICATION_STATUS_TAG` are not case-sensitive E.G. `pt/high` and `pt/HIGH` are identical in syntax.
+    
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about duplicate applications:**<br>
+
+An application is considered duplicate if, it's `NAME_OF_COMPANY`, `JOB_TITLE` and `TAG` is identical
+</div>
 
 **Example usages and expected outcomes:**
 * `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr, #06-40 t/SoftwareEngineering `
@@ -167,6 +205,8 @@ This application already exists in InternApply
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Clearing all applications: `clear`
 
 Clears all applications from SoC InternApply.
@@ -174,6 +214,8 @@ Clears all applications from SoC InternApply.
 **Format:** `clear`
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Deleting an application: `delete`
 
@@ -195,6 +237,8 @@ The previous 2nd application is removed from the storage and a new list of appli
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Editing an application: `edit`
 
 Edits an existing application in SoC InternApply.
@@ -207,6 +251,10 @@ Edits an existing application in SoC InternApply.
 - At least one of the optional fields must be provided.
 - The index inputted must not exceed 2147483647 and must be a natural number.
 - Existing values will be updated to the input values.
+
+#### Parameters:
+
+- NAME, JOB_TITLE, 
 - You can add an interview slot that includes both date and time by using the `idt/INTERVIEW_DATE_TIME`
 - The interview date time, `INTERVIEW_DATE_TIME`, must be in the follow format `dd-MM-yyyy HH:mm`.
 - You can remove `INTERVIEW_DATE_TIME` by typing `idt/` without specifying any tags after it.
@@ -253,6 +301,8 @@ Removing Tags from existing application.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -260,6 +310,8 @@ Exits the program.
 **Format:** `exit`
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Finding application(s): `find`
 
@@ -282,6 +334,8 @@ Finds existing applications in SoC InternApply.
 
 [Go To TOC](#table-of-contents)
 
+---
+
 ### Viewing help: `help`
 
 This command displays a message explaining how to access the help page.
@@ -298,6 +352,8 @@ A popup window showing a link to the help page, as shown below.
 ![helpMessage](images/helpMessage.png)
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Listing all applications in a sorted manner: `list`
 
@@ -334,6 +390,8 @@ Sorted applications by name order by desc.
 
 [Go To TOC](#table-of-contents)
 
+--
+
 ### Listing applications with upcoming interviews: `reminder`
 
 Shows a list of applications with upcoming interviews, falling within a week from now, in SoC InternApply.
@@ -349,6 +407,8 @@ Shows a list of applications with upcoming interviews, falling within a week fro
 A new window pops up, showing a list of applications with upcoming interviews within a week from now.
 
 [Go To TOC](#table-of-contents)
+
+---
 
 ### Saving the data
 
