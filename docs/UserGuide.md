@@ -347,5 +347,4 @@ Action | Format, Examples
 [**List**](#listing-all-applications-in-a-sorted-manner-list) | `list [sorting paramter] [order by]`
 [**Reminder**](#listing-applications-with-upcoming-interviews-reminder)| `reminder`
 
-
 [Go To TOC](#table-of-contents)

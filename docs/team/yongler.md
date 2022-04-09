@@ -53,7 +53,7 @@ Other than these 2 features which I was involved in creating, I also helped to d
 - Also helped teammates during team meeting about possible bugs in the features as well as provide links that might be useful (issue regarding environment variables and also sorting based on Java enum).  
 
 **Contributions beyond the project team**:
-- Shared Intellij shortcut tip in the forum. [Link](https://github.com/nus-cs2103-AY2122S2/forum/issues/234)
+- Shared Intellij shortcut tip in the forum. [Link](https://github.com/nus-cs2103-AY2122S2/forum/issues?q=author%3Ayongler+)
 - Helped to spot bugs from other teams during the demo PE.
 
 
