@@ -10,8 +10,8 @@ With SoC InternApply, you can easily add an application, edit it later on if the
 Ultimately, with SoC InternApply, you can worry less about the administrative tasks and focus more on preparing for the interviews themselves!
 
 ## Table of Contents
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
