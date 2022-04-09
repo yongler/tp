@@ -10,7 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The Summary bar feature was inspired by a similar feature of the past project [NUS Mod Tracker](https://github.com/AY2122S1-CS2103T-W17-2/tp), although our implementation is entirely new.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
@@ -309,9 +309,9 @@ Below is an example scenario and how the SummaryBar will behave.
 
 Step 1. The user launches the application. The `SummaryBar` will be initialized with statistics related to the current applications loaded from storage.
 
-Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, updating the `SummaryList` with new `SummaryBox` objects with updated values.
 
-Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, updating `SummaryList` again.
 
 <img src="images/SummaryBarExampleScenario.PNG" width="600" />
 
@@ -739,6 +739,19 @@ the steps are general enough to be used to test other commands that accept multi
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
          Actual output: command executes
+       
+
+3. Summary bar feature
+   
+   The following examples are tested on a list containing 1 or more applications.
+    
+   1. Add application <br>
+      Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+      Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+   2. Edit application <br>
+      Assuming application at index 1 is of `LOW` priority. <br>
+      Test input: `edit 1 pt/high` <br>
+      Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
