@@ -261,9 +261,65 @@ Below is an image of the UI after the changes were made:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Sort feature
+### Sort feature (using `list` command)
 
-#### Proposed Implementation
+#### Implementation
+
+The sort feature is an extension of the `list` command. It would be facilitated by the existing command but with additional input parameters to determine the field to sort by and in sorting order.
+
+The usage of the `list` command will be facilitated by using a newly implemented method `Model#sortApplications()` to update the sorting order of `UniqueApplicationList`.
+
+The following comparators are implemented:
+- ApplicationStatusComparator
+  - Compare the applications by the `status` tag
+  - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. NOT_APPLIED
+    3. APPLIED
+    4. INTERVIEWED
+    5. REJECTED
+    6. ACCEPTED
+    ```
+</details>
+    
+- InterviewSlotComparator
+  - Comapres the applications by the `InterviewSlot` field
+  - `InterviewSlot` field is ordered in an ascending order by default starting from the earliest date and time.
+- NameComparator
+  - Compare the applications by the `name` field
+  - `Name` stored as java `String` fields are converted to upper case using `String#UpperCase()` and compared by using java string compare
+- PriorityComparator
+  - Compare the applications by the `priority` tag
+  - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. LOW
+    3. MEDIUM
+    4. HIGH
+    ```
+> 💡 If applications have the same value for the compared field), the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparator except for `NameComparator`.
+
+#### Usage 
+        
+Given below is two possible usage scenario and how the list command behaves at each step.
+
+##### `list` command without parameters 
+Step 1. The user launches the application. All internship applications are showed by default.
+        
+
+
+
+This comparators are used 
+
+
+
+
+#### Implementation
 
 The proposed sort mechanism is facilitated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
 
