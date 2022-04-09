@@ -41,8 +41,9 @@ Given below are my contributions to the project.
     * Added in additional FAQs in the User Guide.
     * Updated some images used in the User Guide.
   * Developer Guide:
-    * Added implementation details of the `reminder` feature.
-    * Added implementation details on the enhancement of the `edit` feature.
+    * Added implementation details of the `reminder` feature [#213](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/213)
+    * Added implementation details on the enhancement of the `edit` feature [#213](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/213)
+    * Added a section in "Appendix:Instructions for manual testing" for readers to test removal of Tags using `edit` command [#213](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/213)
     * Updated the storage component and the relevant UML diagram [#206](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/206)
     * Worked with the team on User Stories, Use Cases and NFR (Pull requests [#20](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/20), [#21](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/21))
 
