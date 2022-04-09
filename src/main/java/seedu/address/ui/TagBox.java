@@ -46,6 +46,9 @@ public class TagBox extends HBox {
      */
     public Label chooseColor(Tag tag) {
         Label returnTag = new Label(tag.tagName);
+        //@@author Th-429B-reused
+        //Reused from https://github.com/Th-429B/tp
+        //with minor modifications
         switch (tag.tagType) {
         case PRIORITY:
             switch (tag.tagName.toUpperCase()) {
@@ -86,6 +89,7 @@ public class TagBox extends HBox {
         default:
             returnTag.setStyle(Colors.GREY);
         }
+        //@@author
         return returnTag;
     }
 }
