@@ -11,17 +11,17 @@ SoC InternApply - SoC InternApply helps CS students to track internship applicat
 
 Given below are my contributions to the project.
 
-###New Feature Developed:
+### New Feature Developed:
 
 Below is a summary of features developed:
 
-####Details field
+#### Details field
 
 An additional field for users to add optional details for the internship application.
 Coded to use existing commands, reducing the application's complexity.
 Respective UI element developed to display the new field.
 
-####Tag UI Component
+#### Tag UI Component
 
 Developed the Ui component to the various Tags, like Priority, application status and Regular tags, differentiating each 
 tag type with a different color. The Ui component takes in the tagset stored in the application
@@ -32,16 +32,16 @@ and sets the tag color respectively based on the tag.
 ###Project management:
 
 
-###Documentation:
+### Documentation:
 
-####Developer Guide
+#### Developer Guide
 
 Introduction section of Developer guide, detailing suggested way to use the developer guide. 
 Method to navigate back to table of contents which is also used in the User Guide. Details field implementation explanation.
 Refactoring the UML diagrams in the logic section, to remove references to AddressBook3. Formatting the User stories into 
 a table.
 
-####User Guide
+#### User Guide
 
 Various edits to the User Guides, such as modifying features list to include features developed such as the details field.
 Added cautions and warnings in the user guide against certain undesirable actions from the user.
