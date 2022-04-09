@@ -99,21 +99,24 @@ Edit at your own risk of losing data.
 
 
 **:information_source: Notes about the input format:**<br>
-* For `[p/Phone]`, a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
+* For `[p/Phone]` a minimum of 3 digits must be inputted but most phone numbers would be at least 8 digits long.
 
-* For `[t/TAG]...`, only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
-  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
+* For `[pt/PRIORITY_TAG]` user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
+  e.g. `pt/HIGH` can be used to set priority of an application to `HIGH`
 
-* For `[pt/PRIORITY_TAG]`, user input can only be any one of these: `HIGH`, `MEDIUM`, `LOW`<br>
-  e.g `pt/HIGH` can be used to set priority of an application to `HIGH`
-
-* For `[ast/APPLICATION_STATUS_TAG]`, user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
+* For `[ast/APPLICATION_STATUS_TAG]` user input can only be any one of these: `NOT_APPLIED`, `APPLIED`, `INTERVIEWED`, `REJECTED`, `ACCEPTED`<br>
   e.g. `ast/INTERVIEWED` can be used to set application status of an application to `INTERVIEWED`
 
-* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]`, the inputs are case-insensitive<br>
+* For `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` the inputs are case-insensitive<br>
   e.g. `pt/HIGH` can be inputted with `pt/high` and `ast/INTERVIEWD` can be inputted with `ast/Interviewed`
 
-* For `[j/JobTitle]`, only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
+* For `[t/TAG]...` only alphanumeric inputs are allowed and cannot be empty. i.e. Only the characters A-Z, a-z, 0-9.<br>
+  e.g. `t/Based In Singapore` or `t/` is not allowed, `t/BasedInSingapore` is allowed.
+
+* For `[t/TAG]...` user input cannot be any of the inputs for `[pt/PRIORITY_TAG]` and `[ast/APPLICATION_STATUS_TAG]` to avoid confusion.<br>
+  e.g. `t/High` or `t/Accepted` is not allowed.
+
+* For `[j/JobTitle]` only alphanumeric inputs are allowed. i.e. Only the characters A-Z, a-z, 0-9. Spaces are also allowed. <br>
   e.g. `j/SoftwareEngineerIntern` is allowed, `t/Software Engineer Intern` is also allowed.
 
 **:information_source: Notes about duplicate applications:**<br>
