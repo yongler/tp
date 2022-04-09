@@ -15,7 +15,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-This project is adapted from `AddressBook3` and makes use of a few of its features. `InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
 
 ### This developer guide is intended for users who:
 - Want to `develop` this project further
@@ -125,7 +125,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -155,35 +155,32 @@ How the parsing works:
 [Go To TOC](#table-of-contents)
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the InternApply data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
+* stores the currently 'selected' `Application` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a filtered list of `Application` objects (e.g., applications with upcoming `InterviewSlot`) as a separate _upcoming_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed'.
+* stores a `SummaryList` object that contains a list of `SummaryBox` objects which is exposed to the outsiders as an unmodifiable `ObservableList<SummaryBox>` that can be 'observed'.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 [Go To TOC](#table-of-contents)
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both SoC InternApply data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `InterApplyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -287,22 +284,26 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Summary bar
+### Summary bar
 
-Proposed implementation
+#### Implementation
 
-The proposed Summary bar is facilitated by `SummaryBar` in the model component. The `SummaryBar` will compose of one
-`StatsBox` per statistic box in the summary bar. The summary bar will take a column on the right of the `ApplicationListPanel` and be populated by `StatsBox`'s.
-Each `StatsBox` will hold its relevant text and statistic. Example look:
+The Summary bar is facilitated by `SummaryList` in the model component. The `SummaryList` will compose of one
+`SummaryBox` per statistic box in the summary bar. The summary bar resides in the `SummaryListPanel` in the UI component. 
+It takes a column on the right of the `ApplicationListPanel` and is populated by `SummaryCard` objects.
+Each `SummaryCard` is associated with a `SummaryBox` that holds its relevant text and statistic. 
 
-![SummaryBarExample](images/SummaryBarExample.png)
+Summary bar UI (highlighted in red):
 
-The `SummaryBar` and `StatsBox` will implement the following operations:
+![SummaryBarExample](images/SummaryBarUI.png)
 
-- `SummaryBar#init()` — Initialises the summary bar with all `StatsBox`.
-- `SummaryBar#update()` — Recalculate and update all `StatsBox`.
+The `SummaryList` implements the following operations:
 
-These operations will be exposed in the `Model` interface as `Model#initSummaryBar()` and `Model#updateSummaryBar()` respectively.
+- `SummaryList#update()` — Recalculate and update the list of `SummaryBox` objects.
+- `SummaryList#getTotalApplications` — Gets the total number of applications.
+- `SummaryList#getTotalTagApplications` — Gets the total number of applications with a specific tag name.
+
+`SummaryList#update()` will be exposed in the `Model` interface as `Model#updateSummaryBoxList()`.
 
 Below is an example scenario and how the SummaryBar will behave.
 
@@ -310,7 +311,7 @@ Step 1. The user launches the application. The `SummaryBar` will be initialized 
 
 Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/hr@shopee.sg a/5 Science Park Dr t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` to add an application. The add command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
-Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' priority tag to `HIGH`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
+Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, causing all `StatsBox` to update with their new values.
 
 <img src="images/SummaryBarExampleScenario.PNG" width="600" />
 
@@ -321,13 +322,13 @@ Step 3. The user executes `edit 1 pt/HIGH` to edit the first applications' prior
 #### Design Considerations:
 **Aspect: How update executes:**
 
-* **Alternative 1 (current choice):** Recalculate and update all `StatsBox` in the summary bar.
+* **Alternative 1 (current choice):** Recalculate and update all `SummaryBox` objects on each command.
     * Pros: Easy to implement.
     * Cons: May have performance issues when handling large number of applications.
 
-* **Alternative 2:** Individual command knows which specific `StatsBox` to update.
-    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `StatsBox` for `HIGH` priority tag count).
-    * Cons: We must ensure that the implementation of each individual command are correct, harder to implement.
+* **Alternative 2:** Individual command knows which specific `SummaryBox` to update.
+    * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `SummaryBox` for `HIGH` priority tag count).
+    * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
 
 ###  Feature to edit Application Status & Priority Tags
@@ -562,7 +563,7 @@ _{more aspects and alternatives to be added}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage internship applications faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -662,8 +663,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 internship applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -686,7 +685,7 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
+   
    1. Double-click the jar file Expected: Shows the GUI with a set of sample applications. The window size is set to launch at a default size that displays all  fields, but can be resized as needed.
 
 1. Saving window preferences

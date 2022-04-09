@@ -10,7 +10,8 @@ With SoC InternApply, you can easily add an application, edit it later on if the
 Ultimately, with SoC InternApply, you can worry less about the administrative tasks and focus more on preparing for the interviews themselves!
 
 ## Table of Contents
-* Table of Contents
+* Table of Contents 
+
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -359,7 +360,6 @@ Finds existing applications in SoC InternApply.
 
 [Go To TOC](#table-of-contents)
 
----
 
 ### Viewing help: `help`
 
@@ -438,6 +438,33 @@ A new window pops up, showing a list of applications with upcoming interviews wi
 ### Saving the data
 
 InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Summary bar
+
+The summary bar is automatically updated on successful execution of any command. 
+
+[Go To TOC](#table-of-contents)
+
+---
+
+### Viewing help: `help`
+
+This command displays a message explaining how to access the help page.
+
+**Format:** `help`
+
+**Example usages:**
+
+`help`
+
+**Expected outcome:**
+
+A popup window showing a link to the help page, as shown below.
+![helpMessage](images/helpMessage.png)
 
 [Go To TOC](#table-of-contents)
 
