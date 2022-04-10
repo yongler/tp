@@ -111,7 +111,7 @@ Edit at your own risk of losing data.
 * Ordering of optional tags do not matter.
   e.g. `tag1`, `tag2`, `tag3` is considered the same as `tag3`, `tag1`, `tag2`.
 
-* Refer to FAQ for adding multiple applications to the same job.
+* Refer to [FAQ](#faq) for adding multiple applications to the same job.
 
 </div>
 
@@ -450,7 +450,8 @@ Shows a list of applications with upcoming interviews, falling within a week fro
 
 **Expected outcome:**
 
-A new window pops up, showing a list of applications with upcoming interviews within a week from now.
+A popup window showing a list of applications with upcoming interviews within a week from now, as shown below.
+![Ui](images/ReminderWindowUi.png)
 
 [Go To TOC](#table-of-contents)
 
@@ -458,7 +459,7 @@ A new window pops up, showing a list of applications with upcoming interviews wi
 
 ### Saving the data
 
-InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SoC InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Go To TOC](#table-of-contents)
 
