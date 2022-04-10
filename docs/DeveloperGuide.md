@@ -693,6 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User adds a specific internship application with details e.g. company name, status, job title etc.
+
 2. SoC InternApply adds the internship application into the existing list
 
     Use case ends.
@@ -712,6 +713,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User clears all internship application.
+
 2. SoC InternApply clears all internship application.
 
    Use case ends.
@@ -729,8 +731,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list internship applications
+
 2.  SoC InternApply shows a list of internship applications
+
 3.  User requests to delete a specific internship application in the list
+
 4.  SoC InternApply deletes the internship applications
 
     Use case ends.
@@ -754,9 +759,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list internship applications
+
 2. SoC InternApply shows a list of internship applications
+
 3. User requests to edit a specific internship application in the list
+
 4. User inputs a chain of changes
+
 5. SoC InternApply edits the internship applications with the provided inputs
 
    Use case ends.
@@ -774,20 +783,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 3.
 
 ---
+
 **Use case: Exit the app**
 
 **MSS**
 
 1. User exits the app.
-2. SIA saves all changes and closes all windows. 
 
-   Use case ends.
+2. SIA saves all changes and closes all windows. <br>Use case ends.
+
 ---
+
 **Use case: Finding internship application(s)**
 
 **MSS**
 
 1. User requests to find internship applications based on either its name, job title or tags.
+
 2. SoC InternApply shows a list of internship applications with the field matching any of the keywords
 
    Use case ends.
@@ -806,56 +818,70 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-* 2a. No internship applications suit the criteria 
-    * 2a1. SoC InternApply tells users there are currently no such internship applications.<br>Use case ends.
+* 2a. No internship applications suit the criteria
+  
+  * 2a1. SoC InternApply tells users there are currently no such internship applications.<br>Use case ends.
+
 ---
+
 **Use case: Seeking help about commands usages in the app**
 
 **MSS**
 
 1. User seeks help from the app.
+
 2. SIA shows a help page or user guide to the user.
 
    Use case ends.
 
 ---
+
 **Use case: List all internship application without any sorting**
 
 **MSS**
 
 1. User requests to list internship applications
+
 2. SoC InternApply shows a list of internship applications based on the previous sorting method. <br>Use case ends.
 
 **Extensions**
+
 * 2a. The list is empty
 
     * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
 
 ---
+
 **Use case: List all internship application with sorting**
 
 **MSS**
 
 1. User requests to list internship applications with sorting criteria.
+
 2. SoC InternApply shows a list of internship applications based on the sorting criteria. <br>Use case ends.
 
 **Extensions**
+
 * 2a. The list is empty
+
   * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
-
-
+  
 ---
+
 **Use case: Getting reminder manually of all internship application with interviews coming soon**
 
 **MSS**
 
 1. User requests to list internship applications with interviews coming soon
+
 2. SoC InternApply shows a list of internship applications with interviews that are within 1 week from now.
 
    Use case ends.
 
 **Extensions**
+
 * 2a. No internship applications with interviews that are within 1 week from now.
+
     * 2a1. SoC InternApply shows an empty application list. <br>Use case ends.
 
 ---
@@ -897,38 +923,66 @@ testers are expected to do more *exploratory* testing.
 
 1. Features with one input <br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
 the steps are general enough to be used to test other commands that accept a single parameter. <br>
+   
    1. Test valid input values
+      
       - E.G. `delete INDEX` <br>
+        
         Test input: `delete 1` when list has more than 1 application <br>
+        
         Expected output: Successful execution of the command
+   
    2. Test invalid input values
+      
       - E.G.  `delete INDEX` <br> 
+        
         Test input: `delete 0` or `delete -10` <br>
+        
         Expected output: error message detailing what went wrong
+   
    3. Test invalid command input
+       
        - E.G.  `delete INDEX` <br>
+       
        Test input: `delet 1` or `delete 2 2` <br>
+       
        Expected output:  error message detailing what went wrong
    
 2. Feature with multiple parameters<br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
 the steps are general enough to be used to test other commands that accept multiple parameters.
 
    1. Test valid input values
+      
       - E.G. `edit INDEX [Optional parameters]` <br>
+        
         Test input: `edit 1 n/new name` when list has more than 1 application <br>
+        
         Expected output: Successful change of application 1 name
+   
    2. Test invalid input values
+      
       - E.G.  `edit INDEX [Optional parameters]` <br>
+        
         Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        
         Expected output: error message detailing what went wrong
+   
    3. Test invalid command input
+      
       - E.G.  `edit INDEX [Optional parameters]` <br>
+        
         Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+        
         Expected output: error message detailing what went wrong
+   
    4. Test multiple parameter combinations
+       
        - E.G. `edit INDEX [optional parameters]` <br>
+         
          Test input: `edit 1 n/new name n/actual name` <br>
+         
          Expected output: error message detailing what went wrong
+         
          Actual output: command executes
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
@@ -941,13 +995,18 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
 The following examples are tested on a list containing 1 or more applications.
     
 1. Add application <br>
+   
    Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   
    Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
 
 
 2. Edit application <br>
+   
    Assuming application at index 1 is of `LOW` priority. <br>
+   
    Test input: `edit 1 pt/high` <br>
+   
    Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
 
 ### Deleting an application
@@ -966,38 +1025,57 @@ The following examples are tested on a list containing 1 or more applications.
       Expected: Similar to previous.
 
 2. Deleting an application while reminder window is open
+   
    1. Prerequisites: Have the reminder window open using `reminder` and 
    set the first applications interview date to be within the next 7 days.
 
    2. Test case: `delete 1`<br>
+      
       Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
+      
       Application is also deleted from reminder window
 
    3. Test case: `delete 0`<br>
+      
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
 
 ### Removal of Tags using `edit`
 
 1. A single application, removal with replacement (no duplicate applications)
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
+   
    2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
+   
    3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
+   
    4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
+   
    5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   
    6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
    7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
    8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
 
 2. Two applications with different `Tag`
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
+   
    2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
 
 3. A Single application, trying to edit and remove different Tags at the same time
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
+   
    2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
+   
    3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   
    4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   
    5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
 ### Example: Finding an application
@@ -1020,15 +1098,21 @@ The following examples are tested on a list containing 1 or more applications.
 1. Dealing with missing data files
 
    1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Open the file in any text editor, delete the contents and input a string of characters e.g., `This file is corrupted.`
+   
    2. Test case: Launch SoC InternApply. The list of applications should be empty and SoC InternApply still functions normally to valid inputs.
 
 2. Making changes to the data files using any text editor
+   
    1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Delete the file. Launch SoC InternApply. The set of sample applications should be loaded up. Close SoC InternApply.
+   
    2. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes are valid in accordance to input constraints. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. The changes made should be reflected in the application list.
+   
    3. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes violate the input constraints e.g., Change the `Name` of the first application from `Shopee` to `-#@$`. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. There should be no applications listed in the `MainWindow`. All the applications, even those that were not modified, should have been deleted.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found,
+feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
+
 [Go To TOC](#table-of-contents)
 
 ---
