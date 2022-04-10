@@ -494,11 +494,11 @@ Option 2: If you are looking to keep the existing application and it's informati
 **A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
 For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
 
-**Q**: Why am I unable to use the `idt/` command to add the interview date when I add an application?
-**A**: The `idt/` is excluded from the `add` command specifically to prevent possible user mistake(s). You should add an application before apply it. Hence, at the point of time when adding the application, you will not have recieve an interview slot.
+**Q**: Why is the `idt/` not recognised by `add` command?<br>
+**A**: `idt/` is intentionally excluded from the `add` command. More often than not, students who apply for an internship do not receive an interview slot from the get go. Taking this into consideration, we decided that users need not include a valid `InterviewSlot` input just as a placeholder value to `add` new applications.
 
-**Q**: How can I retrieve the original(created date and time) sorting order?
-**A**: Unfortunately due to the current limitations of our application, you will not be able to sort by the application by the create date and time. This means that once you have use the sorting feature, the original order will be lost forever. 
+**Q**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
+**A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution. 
 
 [Go To TOC](#table-of-contents)
 
@@ -511,7 +511,7 @@ Action | Format, Examples
 [**Add**](#adding-an-application-add) | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br><br>  e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
 [**Clear**](#clearing-all-applications-clear) | `clear`
 [**Delete**](#deleting-an-application-delete) | `delete INDEX`<br> <br> e.g., `delete 3`
-[**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g, `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`
+[**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g., `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`<br><br>`edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`<br><br>e.g., `edit 1 t/removetags t/removestatus`
 [**Exit**](#exiting-the-program-exit) | `exit`
 [**Find**](#finding-applications-find) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
 [**Help**](#viewing-help-help) | `help`
