@@ -355,12 +355,12 @@ The following comparators are implemented:
         
 Given below is two possible usage scenario and how the list command behaves at each step.
 
-##### 1. `list` command without parameters <br><br>
+##### 1. `list` command without parameters
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
 Step 2. The user uses the find command to find applications with specific values. As a result, only applications matching the find command are shown.<br><br>
 Step 3. The user uses the `list` command without parameters to make all applications visible.<br><br>
         
-##### 2. `list` command with parameters <br><br>
+##### 2. `list` command with parameters 
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
 Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
 Step 3. The user sees all applications sorted in the given specified order. <br>
@@ -596,9 +596,10 @@ More details of how the classes are implemented as follows:
 
 
 
-Given below is an example usage scenario and how the find command behaves at each step.
+Given below is an example usage scenario and how the find command behaves at each step when a user types in `find n/shopee`
 
 ![Interactions Inside the Logic Component for the `find n/shopee` Command](images/FindSequenceDiagram.png)
+
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -994,7 +995,6 @@ The following examples are tested on a list containing 1 or more applications.
    3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
-3. _{ more test cases …​ }_
 
 ### Example: Removal of Tags using `edit`
 
@@ -1036,11 +1036,11 @@ The following examples are tested on a list containing 1 or more applications.
    
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete the json file under the data folder.
+   2. Open SIA again and see that it will load the internship applications based on sample data.
 
-1. _{ more test cases …​ }_
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>

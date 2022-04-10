@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 **Enhancements to existing features**:
 1. Extension of normal `Tag` to `PriorityTag` and `ApplicationStatusTag`. This aids in adding more information for the applications.
 - I made changes in `Tag.java` , `PriorityTag.java` , `PriorityTagType.java`, `ApplicationStatusTag.java` and `ApplicationStatusTagType.java`.
-- It is complete as required by our application as the important information about 1 application is captured by the `ApplicationStatusTag` and `PriorityTag`. If user wants to add more information, they can do so with the normal `Tag`.
+- It is complete as required by our application as the important information about an application is captured by the `ApplicationStatusTag` and `PriorityTag`. If user wants to add more information, they can do so with the normal `Tag`.
 - Changes include inheritance, error messages, enumerations as well as checking of input values based on enum values, which are used in many other places such as the parsers and storage.
 
 
