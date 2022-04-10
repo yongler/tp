@@ -24,8 +24,8 @@ public class ApplicationStatusComparator implements Comparator<Application> {
     /**
      * Compares the two application's status tag field. Returns a negative integer, zero, or a positive integer as
      * the first argument is less than, equal to, or greater than the second base on alphanumeric order.
-     * The default order from ascending to descend is as follows ACCEPTED, REJECTED, INTERVIEWED, APPLIED and
-     * NOT_APPLIED.
+     * The default order from ascending to descending is as follows ACCEPTED, REJECTED, INTERVIEWED, APPLIED,
+     * NOT_APPLIED, (Empty Tag).
      * An empty tag will be considered as the lowest ranking, ranked below NOT_APPLIED.
      * */
     private int getStatusRanking(Optional<Tag> t) {
