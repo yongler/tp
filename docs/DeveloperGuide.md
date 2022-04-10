@@ -61,13 +61,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### System Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+A quick overview of the main components and how they interact with each other is provided below.
 
 **Main components of the architecture**
 
@@ -261,24 +261,119 @@ Below is an image of the UI after the changes were made:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Sort feature
+### Interview Slot field
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed sort mechanism is facilitated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
+The `InterviewSlot` field is introduced to the `Application` model. The `InterviewSlot` is abstracted as its own class as per all fields of the `Application` model. Unlike other field classes, the value is stored as a `LocalDateTime`. This is to ensure the integrity of the date and time values stored. 
 
-- `SortByDefault` — Sorting the list byCreate date and time **(Default)**
-- `SortByInterview` — Sorting the list by Interview Slot (Scheduled interview date and time)
-- `SortByPrioity` — Sorting the list by Priority (High / Mid / Low)
-- `SortByCompnayName` — Sorting the list by Company Name
+The field is added and removed from an application using the `idt/` prefix extending the `EditCommand` feature. The `InterviewSlot#toString()` will default `MAX` values to `Interview date is not set.` for applications with no interview date set.
 
-The operations are exposed in the `Model` interface as `Model#updateFilteredApplicationList()`.
+> 💡 The field can only be edited onto an application. Users creating an application using the `add` command will not be able to include the `InterviewSlot` field. This is built with the logic that a newly added application will not have an interview slot yet.
 
-To enable the logic to know which `comparator` to choose the `InternApplyParser#parseCommand()` will also need to create `ListCommandParser` to enable the `ListCommand` to handle addtional paramters.
+`ParserUtil#parseInterviewSlot()` is use to parse the user input to a `LocalDateTime` value. Instead of using regex to valid the input value, the input is parse directly using `LocalDateTime#parse()` and if an `ParseException()` is thrown the input will be deemed invalid otherwise, valid.
 
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
+The `Interview Slot` class consist of two constructors:
+- `InterviewSlot()`— Value is defaulted to `MAX` value. This is for newly created applications.
+- `InterviewSlot(String interviewDateTime)` — Value is given as a `String` args then parsed and stored as value.
 
-{More to be added}
+It uses two dates and time formats:
+- `dd-MM-uuuu HH:mm` — Users are to input values in this format.
+- `d MMM yyyy HH:mm` — Display output format for users to not mixed up months and dates when values are similar.
+
+#### Design considerations:
+
+Aspect: How to parse date and time values:
+- Alternative 1 (current choice): Use the java method and throw parse exception.
+  - Pros: Easy to implement. Reliable.
+  - Cons: Additional overheads may result in performance issues.
+- Alternative 2: Use regex.
+  - Pros: Consistent with all other parsing styles of other fields.
+  - Cons: We must ensure that the implementation of the regex is correct.
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Sort feature (using `list` command)
+
+#### Implementation
+
+The sort feature is an extension of the `list` command. It would be facilitated by the existing command but with additional input parameters to determine the field to sort by and in sorting order. The `ListCommand` will encapsulate the comparator `sortingComparator` and the ordering `orderBy` as fields. 
+
+The usage of the `list` command will be facilitated by using a newly implemented method `Model#sortApplications()` to update the sorting order of `UniqueApplicationList`.
+
+The command parameter for ascending order is `asc` and descending order is `desc`.
+
+The following comparators are implemented:
+- ApplicationStatusComparator
+  - Compare the applications by the `status` tag
+  - The command parameter to use is `status`
+  - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. NOT_APPLIED
+    3. APPLIED
+    4. INTERVIEWED
+    5. REJECTED
+    6. ACCEPTED
+    ```
+</details>
+    
+- InterviewSlotComparator
+  - Comapres the applications by the `InterviewSlot` field
+  - The command parameter to use is `interview`
+  - `InterviewSlot` field is ordered in an ascending order by default starting from the earliest date and time.
+- NameComparator
+  - Compare the applications by the `name` field
+  - The command parameter to use is `name`
+  - `Name` stored as java `String` fields are converted to upper case using `String#UpperCase()` and compared by using java string compare
+- PriorityComparator
+  - Compare the applications by the `priority` tag
+  - The command parameter to use is `priority`
+  - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. LOW
+    3. MEDIUM
+    4. HIGH
+    ```
+> 💡 If applications have the same value for the compared field, the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparators except for `NameComparator`.
+
+#### Usage 
+        
+Given below is two possible usage scenario and how the list command behaves at each step.
+
+##### 1. `list` command without parameters <br><br>
+Step 1. The user launches the application. All internship applications are shown by default.<br><br>
+Step 2. The user uses the find command to find applications with specific values. As a result, only applications matching the find command are shown.<br><br>
+Step 3. The user uses the `list` command without parameters to make all applications visible.<br><br>
+        
+##### 2. `list` command with parameters <br><br>
+Step 1. The user launches the application. All internship applications are shown by default.<br><br>
+Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
+Step 3. The user sees all applications sorted in the given specified order. <br>
+        
+#### Design considerations 
+<b>Aspect: How the sorting feature called:</b>
+- <b>Alternative 1 (current choice): </b> Implment it as a extension of `list` command
+    - Pros: Easy to implement.
+    - Cons: Users may be confused.
+- <b>Alternative 2: </b> Implment it as sperated command (i.e. `sort` command)
+    - Pros: Seperation of listing and sorting feature.
+    - Cons: Additional command implementation required. In addition, we must ensure that the implementation of the `sort` command is correct.
+        
+<b>Aspect: What is the default sorting order:</b>
+- <b>Alternative 1 (current choice): </b> List will remain as per last sorted order
+    - Pros: Easy to implement.
+    - Cons: Users are unable to return to orignial sorting order.
+- <b>Alternative 2: </b> Implment a sort by `createdDateTime`
+    - Pros: Users are able to sort by the original order.
+    - Cons: Additional fields implementation required. In addition, we must ensure that the implementation of the `createdDateTime` field is correct.
 
 [Go To TOC](#table-of-contents)
 
