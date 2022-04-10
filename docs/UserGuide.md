@@ -111,7 +111,7 @@ Edit at your own risk of losing data.
 * Ordering of optional tags do not matter.
   e.g. `tag1`, `tag2`, `tag3` is considered the same as `tag3`, `tag1`, `tag2`.
 
-* Refer to [FAQ](#faq) for adding multiple applications to the same job.
+* Refer to Q4 in the [FAQ](#faq) for adding multiple applications to the same job.
 
 </div>
 
@@ -474,31 +474,31 @@ The summary bar is automatically updated on successful execution of any command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-**Q**: How do I know where my internship applications data is stored?<br>
+**Q1**: How do I know where my internship applications data is stored?<br>
 **A**: Please locate where SoC InternApply is being stored on your computer. You will see a folder named `data` found in the root folder of the application (the folder containing SoC InternApply) Inside the `data` folder, you can find a data file named `internapplymemory.json`, which stores all the applications.
 
-**Q**: How do I transfer my data to another computer?<br>
+**Q2**: How do I transfer my data to another computer?<br>
 **A**: Refer to the 1st QnA to locate the data file. Install the app in the other computer. Copy the contents of the data file of SoC InternApply from your previous computer and paste it in the empty data file of SoC InternApply of the new computer. <br>
 
-**Q**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
+**Q3**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
 **A**: Refer to the 1st QnA to locate the `data` folder. Delete any existing files in the `data` folder and run SoC InternApply again.
 
-**Q**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
+**Q4**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
 **A**: <br>
 Option 1: Using edit, you can simply reuse the existing application with updated information. <br>
 Option 2: If you are looking to keep the existing application and it's information untouched, then we suggest including an additional "t/NthAttempt" to differentiate your new application and the existing application. This will not violate our duplication clause while also allowing you to keep information on your existing application.
 
-**Q**: How many applications can SIA track?<br>
+**Q5**: How many applications can SIA track?<br>
 **A**: 2147483647 applications can be tracked.
 
-**Q**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
+**Q6**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
 **A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
 For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
 
-**Q**: Why is the `idt/` not recognised by `add` command?<br>
+**Q7**: Why is the `idt/` not recognised by `add` command?<br>
 **A**: `idt/` is intentionally excluded from the `add` command. More often than not, students who apply for an internship do not receive an interview slot from the get go. Taking this into consideration, we decided that users need not include a valid `InterviewSlot` input just as a placeholder value to `add` new applications.
 
-**Q**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
+**Q8**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
 **A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution. 
 
 [Go To TOC](#table-of-contents)
