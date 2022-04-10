@@ -421,7 +421,7 @@ Sorted applications by name order by desc.
 
 <div markdown="block" class="alert alert-info">
 
-**💡 Upper case and lower case name are consider as same ranking**
+**💡 Upper case and lower case name are consider as same ranking.**
 
 i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order.<br>
 
