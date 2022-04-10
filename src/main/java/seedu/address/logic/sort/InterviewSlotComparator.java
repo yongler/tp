@@ -16,7 +16,7 @@ public class InterviewSlotComparator implements Comparator<Application> {
     @Override
     public int compare(Application o1, Application o2) {
         LocalDateTime app1 = o1.getInterviewSlot().getValue();
-        LocalDateTime app2 = o1.getInterviewSlot().getValue();
+        LocalDateTime app2 = o2.getInterviewSlot().getValue();
         NameComparator nameComparator = new NameComparator();
         if (app1.isAfter(app2)) {
             return 1;

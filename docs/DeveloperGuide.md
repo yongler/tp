@@ -45,6 +45,13 @@ bugs and raising them as issues to our team repository.
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+### Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -110,7 +117,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -119,7 +126,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Application` object residing in the `Model`.
 
 [Go To TOC](#table-of-contents)
 
@@ -234,7 +241,7 @@ newline in the details field
 ```
 
 Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
-![Interactions Inside the Logic Component for the `delete 1` Command](images/EditCommandDetailsDiagram.png)
+![Interactions Inside the Logic Component for the `edit 1 d/Line 1 \nLine 2` Command](images/EditCommandDetailsDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 **Note2:** The sequence diagram is similar to the delete command, due to SoC InternApply using the command design pattern
@@ -348,12 +355,12 @@ The following comparators are implemented:
         
 Given below is two possible usage scenario and how the list command behaves at each step.
 
-##### 1. `list` command without parameters <br><br>
+##### 1. `list` command without parameters
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
 Step 2. The user uses the find command to find applications with specific values. As a result, only applications matching the find command are shown.<br><br>
 Step 3. The user uses the `list` command without parameters to make all applications visible.<br><br>
         
-##### 2. `list` command with parameters <br><br>
+##### 2. `list` command with parameters 
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
 Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
 Step 3. The user sees all applications sorted in the given specified order. <br>
@@ -568,37 +575,57 @@ Step 6. Since `CommandResult` has `showReminder` set to `true`, SoC InternApply 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Find/filter feature
+### Find/filter feature
 
-**Proposed Implementation**
+The proposed find/filter mechanism would be similar to the implementation of the existing `find` command. 
 
-The proposed reminder mechanism would be similar to the implementation of the existing `find` command. It would be facilitated by the existing command but with more `Predicate` parameters to find the applications based on different fields such as: name, phone, email, tags.
-
-The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed.
+The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed based on different fields such as: name, job title and tags.
 
 Classes to be implemented are as follows:
 
-* `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input. 
-* `EmailContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Email` contains the numbers typed in user input.
-* `ApplicationStatustagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `ApplicationStatustag` contains the numbers typed in user input.
-* `PrioritytagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Prioritytag` contains the numbers typed in user input.
+<img src="images/FindClassDiagram.png" width="550" />
 
 
-Given below is an example usage scenario and how the find command behaves at each step.
+More details of how the classes are implemented as follows:  
+* `NameContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Name` contains the numbers typed in user input.
 
-Step 1. The user launches the application. All internship applications are showed by default.
+* `JobTitleContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `JobTitle` contains the keywords typed in user input.
 
-Step 2. The user uses the find command to find applications with the `HIGH` priority tag.
+* `TagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Tag` or `PriorityTag` or `ApplicationStatusTag` contains the keywords typed in user input, depending on the input format. For example:  
+  * `find pt/high` will find all applications with the high priority tag using the `TagContainsKeywordsPredicate`
 
-Step 3. The user sees all and only the applications that have the `HIGH` priority tag.  
+
+
+Given below is an example usage scenario and how the find command behaves at each step when a user types in `find n/shopee`
+
+![Interactions Inside the Logic Component for the `find n/shopee` Command](images/FindSequenceDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 
 #### Design considerations:
+**Aspect: What filters (fields) that the users can find:**
 
-**Aspect: How the contents of the find command will be displayed:**
+* **Alternative 1 (current choice):** Users can only find using the application name, job title as well as tags (`PriorityTag` and `ApplicationStatusTag` as well). 
+    * Pros: Simplicity in the product ensures user-friendliness. 
+    * Cons: User might not be able to search for other fields such as phone or email in rare cases. 
 
-* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `UI` with the filtered application list.
-    * Pros: Fit well with the current UI implementation.
-    * Cons: -
+* **Alternative 2:** Users can find using all the fields for each application.
+    * Pros: User has more flexibility to choose what criteria to find for. 
+    * Cons: Too much flexibility will result in complexity and also most people would only search for the application based on its name, job title or tags instead of phone or email (which they do not remember).
+
+**Aspect: How many fields can users find:**
+
+* **Alternative 1 (current choice):** Users can type in one of the fields: `Name`, `JobTitle` and `Tag` only.  
+    * Pros: Users can do a more specific and narrow search, thus knowing what the results are based on.
+    * Cons: Users cannot find based oan multiple fields, might need to do search repeated times.
+
+* **Alternative 2:** Users can only find using more than keyword from  `Name`, `JobTitle` and `Tag`.
+    * Pros: User can do a more general search, showing all results that has those keywords for the particular field.
+    * Cons: User does not know the results is based on which field at a glance and has to spend more time looking through it and spending more time as compared to doing multiple separate searches. 
 
 [Go To TOC](#table-of-contents)
 
@@ -677,7 +704,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. SoC InternApply shows an error message.
 
       Use case resumes at step 2.
-  
+    
+---
+    
+**Use case: Clearing all internship application**
+
+**MSS**
+
+1. User clears all internship application.
+2. SoC InternApply clears all internship application.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No internship applications available. 
+
+  Use case ends.
+
+---
+
 **Use case: Delete an internship application**
 
 **MSS**
@@ -698,23 +744,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. SoC InternApply shows an error message.
-
+    
       Use case resumes at step 3.
 
-**Use case: List all internship application**
-
-**MSS**
-
-1. User requests to list internship applications
-2. SoC InternApply shows a list of internship applications
-
-   Use case ends.
-
-**Extensions**
-* 2a. The list is empty
-
-    * 2a1. SoC InternApply tells users there are currently no internship applications.
-      Use case ends.
+---
 
 **Use case: Edit an internship application**
 
@@ -723,10 +756,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list internship applications
 2. SoC InternApply shows a list of internship applications
 3. User requests to edit a specific internship application in the list
-4. User inputs a chain of changes 
+4. User inputs a chain of changes
 5. SoC InternApply edits the internship applications with the provided inputs
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -736,21 +769,103 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. SoC InternApply shows an error message.
+  * 3a1. SoC InternApply shows an error message.
 
-      Use case resumes at step 3.
+    Use case resumes at step 3.
 
+---
+**Use case: Exit the app**
+
+**MSS**
+
+1. User exits the app.
+2. SIA saves all changes and closes all windows. 
+
+   Use case ends.
+---
+**Use case: Finding internship application(s)**
+
+**MSS**
+
+1. User requests to find internship applications based on either its name, job title or tags.
+2. SoC InternApply shows a list of internship applications with the field matching any of the keywords
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+  * 1a1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. The given command format is invalid.
+
+  * 1b1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+
+* 2a. No internship applications suit the criteria 
+    * 2a1. SoC InternApply tells users there are currently no such internship applications.<br>Use case ends.
+---
+**Use case: Seeking help about commands usages in the app**
+
+**MSS**
+
+1. User seeks help from the app.
+2. SIA shows a help page or user guide to the user.
+
+   Use case ends.
+
+---
+**Use case: List all internship application without any sorting**
+
+**MSS**
+
+1. User requests to list internship applications
+2. SoC InternApply shows a list of internship applications based on the previous sorting method. <br>Use case ends.
+
+**Extensions**
+* 2a. The list is empty
+
+    * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
+
+---
+**Use case: List all internship application with sorting**
+
+**MSS**
+
+1. User requests to list internship applications with sorting criteria.
+2. SoC InternApply shows a list of internship applications based on the sorting criteria. <br>Use case ends.
+
+**Extensions**
+* 2a. The list is empty
+  * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
+
+
+---
+**Use case: Getting reminder manually of all internship application with interviews coming soon**
+
+**MSS**
+
+1. User requests to list internship applications with interviews coming soon
+2. SoC InternApply shows a list of internship applications with interviews that are within 1 week from now.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No internship applications with interviews that are within 1 week from now.
+    * 2a1. SoC InternApply shows an empty application list. <br>Use case ends.
+
+---
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 internship applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-
-[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -777,12 +892,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
+   
 ### General Guideline for testing features
 
-1. Features with one input
-
-  The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
+1. Features with one input <br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
 the steps are general enough to be used to test other commands that accept a single parameter. <br>
    1. Test valid input values
       - E.G. `delete INDEX` <br>
@@ -797,25 +910,22 @@ the steps are general enough to be used to test other commands that accept a sin
        Test input: `delet 1` or `delete 2 2` <br>
        Expected output:  error message detailing what went wrong
    
-2. Feature with multiple parameters
-    
-   The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
+2. Feature with multiple parameters<br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
 the steps are general enough to be used to test other commands that accept multiple parameters.
-   
-   
-   2. Test valid input values
+
+   1. Test valid input values
       - E.G. `edit INDEX [Optional parameters]` <br>
         Test input: `edit 1 n/new name` when list has more than 1 application <br>
         Expected output: Successful change of application 1 name
-   3. Test invalid input values
+   2. Test invalid input values
       - E.G.  `edit INDEX [Optional parameters]` <br>
         Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
         Expected output: error message detailing what went wrong
-   4. Test invalid command input
-       - E.G.  `edit INDEX [Optional parameters]` <br>
-         Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
-         Expected output: error message detailing what went wrong
-   5. Test multiple parameter combinations
+   3. Test invalid command input
+      - E.G.  `edit INDEX [Optional parameters]` <br>
+        Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+        Expected output: error message detailing what went wrong
+   4. Test multiple parameter combinations
        - E.G. `edit INDEX [optional parameters]` <br>
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
@@ -826,7 +936,7 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
 
 </div>
 
-### Example: Summary bar feature
+### Summary bar feature
    
 The following examples are tested on a list containing 1 or more applications.
     
@@ -840,7 +950,7 @@ The following examples are tested on a list containing 1 or more applications.
    Test input: `edit 1 pt/high` <br>
    Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
 
-### Example: Deleting an application
+### Deleting an application
 
 1. Deleting an application while all applications are being shown
 
@@ -867,7 +977,7 @@ The following examples are tested on a list containing 1 or more applications.
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
 
-### Example: Removal of Tags using `edit`
+### Removal of Tags using `edit`
 
 1. A single application, removal with replacement (no duplicate applications)
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
@@ -890,12 +1000,28 @@ The following examples are tested on a list containing 1 or more applications.
    4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
    5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
+### Example: Finding an application
+
+1. Finding an application while all applications are being shown
+
+    1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
+
+    2. Test case: `find pt/high`<br>
+       Expected: All applications in the list with a high priority tag will be shown. Details of the number of results will be shown in the status message.
+
+    3. Test case: `find pt/notaprioritytag`<br>
+       Expected: No changes. Error details shown in the status message that the keywords is incorrect for searching `PriorityTag`.
+
+    4. Other incorrect find commands to try: `find`, `find high` (without the `pt`), `find n/`(empty keyword) <br>
+       Expected: Respective error details shown in the status message
+   
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
    1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Open the file in any text editor, delete the contents and input a string of characters e.g., `This file is corrupted.`
    2. Test case: Launch SoC InternApply. The list of applications should be empty and SoC InternApply still functions normally to valid inputs.
+
 2. Making changes to the data files using any text editor
    1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Delete the file. Launch SoC InternApply. The set of sample applications should be loaded up. Close SoC InternApply.
    2. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes are valid in accordance to input constraints. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. The changes made should be reflected in the application list.
