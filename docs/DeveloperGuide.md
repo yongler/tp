@@ -15,7 +15,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SoC students` who are applying for internships and are looking to keep track of all their `applications`.
 
 ### This developer guide is intended for users who:
 - Want to `develop` this project further
@@ -28,19 +28,21 @@ to your own `github` repository for referencing.
 
 - Users who want to develop the project further
 
-1. You can start with reading through the implementation of the features to get familiar with the code base.
+  1. You can start with reading through the implementation of the features to get familiar with the code base.
 
-2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
-3. You can alternatively help in cleaning up the code base by spotting
-bugs and raising them as issues to our team repository. 
+  2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
 
-4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
+  3. You can alternatively help in cleaning up the code base by spotting
+  bugs and raising them as issues to our team repository. 
+
+  4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
 
 
 - Users who want to adapt this project or are interested in the features
 
-1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
-2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
+  1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
+
+  2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
 
 [Go To TOC](#table-of-contents)
 
@@ -48,6 +50,8 @@ bugs and raising them as issues to our team repository.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **SoC**: School of Computing
+* **SIA**: SoC InternApply
 
 [Go To TOC](#table-of-contents)
 
@@ -174,7 +178,7 @@ The `Model` component,
 * stores a filtered list of `Application` objects (e.g., applications with upcoming `InterviewSlot`) as a separate _upcoming_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed'.
 * stores a `SummaryList` object that contains a list of `SummaryBox` objects which is exposed to the outsiders as an unmodifiable `ObservableList<SummaryBox>` that can be 'observed'.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 [Go To TOC](#table-of-contents)
@@ -245,7 +249,7 @@ Sequence Diagram illustrating interaction with `Logic` components for `execute("
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. <br>
 **Note2:** The sequence diagram is similar to the delete command, due to SoC InternApply using the command design pattern
 </div>
 
@@ -417,7 +421,7 @@ Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/
 
 Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, updating `SummaryList` again.
 
-<img src="images/SummaryBarExampleScenario.PNG" width="600" />
+<img src="images/SummaryBarExampleScenario.PNG" width="700" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
 
@@ -585,7 +589,7 @@ The usage of the `find` command will be facilitated by using a newly implemented
 
 Classes to be implemented are as follows:
 
-<img src="images/FindClassDiagram.png" width="550" />
+<img src="images/FindClassDiagram.png" width="650" />
 
 
 More details of how the classes are implemented as follows:  
@@ -930,7 +934,7 @@ the steps are general enough to be used to test other commands that accept a sin
       
       - E.G. `delete INDEX` <br>
         
-        Test input: `delete 1` when list has more than 1 application <br>
+        Test case: `delete 1` when list has more than 1 application <br>
         
         Expected output: Successful execution of the command
    
@@ -938,7 +942,7 @@ the steps are general enough to be used to test other commands that accept a sin
       
       - E.G.  `delete INDEX` <br> 
         
-        Test input: `delete 0` or `delete -10` <br>
+        Test case: `delete 0` or `delete -10` <br>
         
         Expected output: error message detailing what went wrong
    
@@ -946,7 +950,7 @@ the steps are general enough to be used to test other commands that accept a sin
        
        - E.G.  `delete INDEX` <br>
        
-       Test input: `delet 1` or `delete 2 2` <br>
+       Test case: `delet 1` or `delete 2 2` <br>
        
        Expected output:  error message detailing what went wrong
    
@@ -957,7 +961,7 @@ the steps are general enough to be used to test other commands that accept multi
    
       - E.G. `edit INDEX [Optional parameters]` <br>
         
-        Test input: `edit 1 n/new name` when list has more than 1 application <br>
+        Test case: `edit 1 n/new name` when list has more than 1 application <br>
         
         Expected output: Successful change of application 1 name
    
@@ -965,7 +969,7 @@ the steps are general enough to be used to test other commands that accept multi
    
       - E.G.  `edit INDEX [Optional parameters]` <br>
         
-        Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        Test case: `edit 0 n/new name` or `edit -10 n/new name` <br>
         
         Expected output: error message detailing what went wrong
    
@@ -973,7 +977,7 @@ the steps are general enough to be used to test other commands that accept multi
       
       - E.G.  `edit INDEX [Optional parameters]` <br>
         
-        Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+        Test case: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
         
         Expected output: error message detailing what went wrong
    
@@ -981,7 +985,7 @@ the steps are general enough to be used to test other commands that accept multi
    
        - E.G. `edit INDEX [optional parameters]` <br>
          
-         Test input: `edit 1 n/new name n/actual name` <br>
+         Test case: `edit 1 n/new name n/actual name` <br>
          
          Expected output: error message detailing what went wrong
          
@@ -1000,18 +1004,18 @@ The following examples are tested on a list containing 1 or more applications.
     
 1. Add application <br>
    
-   Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   Test case: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
    
-   Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+   Expected output: Summary box for `Total Applications`, `High Priority Applications` and `Not Applied Applications` have one more application and all summary boxes update the total number of applications. <br>
 
 
 2. Edit application <br>
    
-   Assuming application at index 1 is of `LOW` priority. <br>
+   Prerequisite: Application at index 1 is of `LOW` priority. <br>
    
-   Test input: `edit 1 pt/high` <br>
+   Test case: `edit 1 pt/high` <br>
    
-   Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
+   Expected output: Summary box for `Low Priority Applications` decreases by one and Summary box for `High Priority Applications` increases by one.
 
 ### Deleting an application
 
