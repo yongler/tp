@@ -236,7 +236,9 @@ newline in the details field
 Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/EditCommandDetailsDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 **Note2:** The sequence diagram is similar to the delete command, due to InternApply using the command design pattern
 </div>
 
@@ -1022,3 +1024,5 @@ meeting the requirements for the submission.
 ### Achievements of the Project
 
 Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project.
+    
+[Go To TOC](#table-of-contents)
