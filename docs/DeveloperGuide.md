@@ -312,14 +312,12 @@ The following comparators are implemented:
   - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
-    2. NOT_APPLIED
-    3. APPLIED
-    4. INTERVIEWED
-    5. REJECTED
-    6. ACCEPTED
-    ```
+    1. ACCEPTED
+    2. REJECTED
+    3. INTERVIEWED
+    4. APPLIED
+    5. NOT_APPLIED
+    6. (Empty Tag)
 </details>
     
 - InterviewSlotComparator
@@ -336,12 +334,10 @@ The following comparators are implemented:
   - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
+    1. (Empty Tag)
     2. LOW
-    3. MEDIUM
+    3. MEDIU
     4. HIGH
-    ```
 > 💡 If applications have the same value for the compared field, the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparators except for `NameComparator`.
 
 #### Usage 
