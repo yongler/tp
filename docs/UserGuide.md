@@ -11,7 +11,6 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
 ## Table of Contents
 * Table of Contents 
-
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
