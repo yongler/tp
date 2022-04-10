@@ -409,14 +409,29 @@ Examples:
 Sorted applications by name order by desc.
 ```
 
-> 💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.
-> - `list status desc` — Valid, sorted by `status` in descending order
-> - `list abc status asc` — Invalid
-> - `list status asc name desc` — Valid, sorted by `status` in ascending order
+<div markdown="block" class="alert alert-info">
 
-> 💡 Upper case and lower case name are consider as same ranking (i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order).
+**💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.**<br>
 
-> ⚠️ Applications are originally sorted in a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
+- `list status desc` — Valid, sorted by `status` in descending order
+- `list abc status asc` — Invalid
+- `list status asc name desc` — Valid, sorted by `status` in ascending order
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**💡 Upper case and lower case name are consider as same ranking**
+
+i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order.<br>
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**⚠️ Applications are originally sorted in a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.**<br>
+
+</div>
 
 #### List all applications (without sorting)
 
@@ -429,10 +444,19 @@ Example:
 Listed all application(s).
 ```
 
-> 💡 `list` command without parameters only works if and only if you do not provide parameters.
+<div markdown="block" class="alert alert-info">
 
-> ❗ Sorting will not apply to newly added or newly edited applications. Please re-run the `list` command with the respective parameters to sort as you like.
+**💡 `list` command without parameters only works if and only if you do not provide parameters.**<br>
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**❗ Sorting will not apply to newly added or newly edited applications.**
+
+Please re-run the `list` command with the respective parameters to sort as you like.<br>
+
+</div>
 
 [Go To TOC](#table-of-contents)
 

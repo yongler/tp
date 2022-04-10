@@ -1115,40 +1115,33 @@ The following examples are tested on a list containing 1 or more applications.
    Expected: The updated order is displayed such as the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc`.<br>
         
    3. Test case: `list interview desc name asc`<br>
-   Expected: Similar to `case 2`<br>
-
-  > 💡 Consider adding an application with no interview slot set. There are now 3 applications.
-
-   4. Test case: `list interview desc`<br>
-   Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications.
-     
-3. Sorting by `Status` tag in `ascending` order
+      Expected: Similar to `case 2`<br>
    
+   4. Consider adding an additional application with no interview slot set. There are now 3 applications.<br>
+      Test case: `list interview desc`<br>
+      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications. 
+   
+4. Sorting by `Status` tag in `ascending` order
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Status` tag. For ease of explanation, we consider that there are only 2 applications with the following `Status` tag `NOT_APPLIED` and `ACCEPTED`.
         
    2. Test case: `list status asc`<br>
-   Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
-
-  > 💡 Consider adding an application with no status set. There are now 3 applications.
-
-   3. Test case: `list status asc`<br>
-   Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications.
-       
-4. Sorting by `Priority` tag in `descending` order
-   
+      Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
+        
+   3. Consider adding an additional application with no status set. There are now 3 applications.
+      Test case: `list status asc`<br>
+      Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+        
+5. Sorting by `Priority` tag in `descending` order
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Priority` tag. For ease of explanation, we consider that there are only 2 applications with the following `Priority` tag `HIGH` and `LOW`.
         
    2. Test case: `list priority desc`<br>
-     
-      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`. 
-
-   > 💡 Consider adding an additional application with no priority set. There are now 3 applications.
-   
-   3. Test case: `list priority desc`<br>
-      
-      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications.
-
-5. Invalid sort command(s)
+      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`.
+        
+   3. Consider adding an additional application with no priority set. There are now 3 applications.
+      Test case: `list priority desc`<br>
+      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+ 
+6. Invalid sort command(s)
     
    1. Test case: `list address asc`<br>
    
