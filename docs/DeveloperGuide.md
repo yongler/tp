@@ -353,8 +353,12 @@ Step 3. The user uses the `list` command without parameters to make all applicat
         
 ##### 2. `list` command with parameters <br><br>
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
-Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
+Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list name asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
 Step 3. The user sees all applications sorted in the given specified order. <br>
+
+Below is a Sequence Diagram illustrating interaction with Logic components for `execute("list name asc")`:
+
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
         
 #### Design considerations 
 <b>Aspect: How the sorting feature called:</b>
@@ -986,6 +990,7 @@ The following examples are tested on a list containing 1 or more applications.
 <div markdown="span" class="alert alert-info">
     
 :information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+
 </div>
     
 [Go To TOC](#table-of-contents)
