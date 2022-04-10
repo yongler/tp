@@ -894,7 +894,7 @@ The following examples are tested on a list containing 1 or more applications.
         
 1. Adding or editing a interview slot to an application
         
-   1. Prerequisite: List all applications using the `list` command. There should at least 1 application. The first application can have an existing interview slot or no interview slot, it will not affect the outcome.
+   1. Prerequisite: List all applications using the `list` command. There must at least be 1 application. The first application can have an existing interview slot or no interview slot, it will not affect the outcome.
         
    2. Test case: `edit 1 idt/10-04-2022 13:00`
       Expected: The first application now has the given interview slot set. Details of the updated application that include the interview slot should be shown in the status message.
@@ -907,7 +907,7 @@ The following examples are tested on a list containing 1 or more applications.
      
 2. Removing a interview slot of an application
         
-   1. Prerequisite: List all applications using the `list` command. There should at least 1 application and at most 98 applications. The first application must have an existing interview slot.
+   1. Prerequisite: List all applications using the `list` command. There must have at least be 1 application and at most 98 applications. The first application must have an existing interview slot.
         
    2. Test case: `edit 1 idt/`
       Expected: The first application now has its interview slot removed. Details of the updated application that include the interview slot should be shown in the status message.
@@ -919,8 +919,49 @@ The following examples are tested on a list containing 1 or more applications.
       Expected: Similar to `case 3`.
 
 ### Example: Sorting of applications using `list`
+        
+1. Sorting by company `name` field in `ascending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct company `name`. For ease of explanation, we consider that there are only 2 applications named `Alpha` and `Beta`.
+        
+   2. Test case: `list name asc`
+      Expected: The updated order is displayed such that `Alpha` will be the first application and `Beta` will be the second and last item listed. The status message will show `Sorted applications by name order by asc.`.
+   
+   3. Test case: `list name asc help`
+      Expected: Similar to `case 2`
+        
+2. Sorting by `Interview Slot` field in `descending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `interview slot`. For ease of explanation, we consider that there are only 2 applications with the following interview slots `10-04-2022 13:00` and `10-05-2022 13:00`.
+        
+   2. Test case: `list interview desc`<br>
+      Expected: The updated order is displayed such the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc.`.
+        
+   3. Test case: `list interview desc name asc`
+      Expected: Similar to `case 2`
+        
+     > 💡 Consider adding an addtional application with no interview slot set. There are now 3 applications.
+        
+   4. Test case: `list interview desc`<br>
+      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original application remain consistent as the second and third application. 
 
-
+3. Sorting by `Status` tag in `ascending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Status` tag. For ease of explanation, we consider that there are only 2 applications with the following `Status` tag `NOT_APPLIED` and `ACCEPETED`.
+        
+   2. Test case: `list status asc`<br>
+      Expected: The updated order is displayed such the application with status `` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc.`.
+        
+   3. Test case: `list interview desc name asc`
+      Expected: Similar to `case 2`
+        
+     > 💡 Consider adding an addtional application with no interview slot set. There are now 3 applications.
+        
+   4. Test case: `list interview desc`<br>
+      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original application remain consistent as the second and third application. 
+        
+4. Sorting by `Priority` tag in `descending` order
+ 
+5. Invalid sort command
+   1. Test case: `list name&address asc`<br>
+   Expected: Applications remain in current order. The error message is shown in the status message.
         
 ### Saving data
 
