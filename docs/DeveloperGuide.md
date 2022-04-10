@@ -61,13 +61,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### System Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+A quick overview of the main components and how they interact with each other is provided below.
 
 **Main components of the architecture**
 
@@ -246,7 +246,7 @@ To display the new `details` field, modifications to the `applicationCard.java` 
 
 Below is an image of the UI after the changes were made:
 
-![Ui-after-details-update](images/Ui.png)
+![Ui-after-details-update](images/DetailsUI.png)
 
 #### Proposed improvements
 1. As the colour of each `application card` alternates between each index, changes to the `Ui` have to be made as well to match the alternating colours. To achieve this change, implementing the css style in `DarkTheme.css` file, in particular `List-view` css should be made when implementing changes to the `applicationCard.fxml`
@@ -261,24 +261,119 @@ Below is an image of the UI after the changes were made:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Sort feature
+### Interview Slot field
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed sort mechanism is facilitated by `ListCommand`. It modifies the `updateFilteredApplicationList` function with additional paramter and elimate the default `PREDICATE_SHOW_ALL_APPLICATIONS`. The additional paramter, a `Comparator<Application>` will allow sorting in the following ways:
+The `InterviewSlot` field is introduced to the `Application` model. The `InterviewSlot` is abstracted as its own class as per all fields of the `Application` model. Unlike other field classes, the value is stored as a `LocalDateTime`. This is to ensure the integrity of the date and time values stored. 
 
-- `SortByDefault` — Sorting the list byCreate date and time **(Default)**
-- `SortByInterview` — Sorting the list by Interview Slot (Scheduled interview date and time)
-- `SortByPrioity` — Sorting the list by Priority (High / Mid / Low)
-- `SortByCompnayName` — Sorting the list by Company Name
+The field is added and removed from an application using the `idt/` prefix extending the `EditCommand` feature. The `InterviewSlot#toString()` will default `MAX` values to `Interview date is not set.` for applications with no interview date set.
 
-The operations are exposed in the `Model` interface as `Model#updateFilteredApplicationList()`.
+> 💡 The field can only be edited onto an application. Users creating an application using the `add` command will not be able to include the `InterviewSlot` field. This is built with the logic that a newly added application will not have an interview slot yet.
 
-To enable the logic to know which `comparator` to choose the `InternApplyParser#parseCommand()` will also need to create `ListCommandParser` to enable the `ListCommand` to handle addtional paramters.
+`ParserUtil#parseInterviewSlot()` is use to parse the user input to a `LocalDateTime` value. Instead of using regex to valid the input value, the input is parse directly using `LocalDateTime#parse()` and if an `ParseException()` is thrown the input will be deemed invalid otherwise, valid.
 
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
+The `Interview Slot` class consist of two constructors:
+- `InterviewSlot()`— Value is defaulted to `MAX` value. This is for newly created applications.
+- `InterviewSlot(String interviewDateTime)` — Value is given as a `String` args then parsed and stored as value.
 
-{More to be added}
+It uses two dates and time formats:
+- `dd-MM-uuuu HH:mm` — Users are to input values in this format.
+- `d MMM yyyy HH:mm` — Display output format for users to not mixed up months and dates when values are similar.
+
+#### Design considerations:
+
+Aspect: How to parse date and time values:
+- Alternative 1 (current choice): Use the java method and throw parse exception.
+  - Pros: Easy to implement. Reliable.
+  - Cons: Additional overheads may result in performance issues.
+- Alternative 2: Use regex.
+  - Pros: Consistent with all other parsing styles of other fields.
+  - Cons: We must ensure that the implementation of the regex is correct.
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Sort feature (using `list` command)
+
+#### Implementation
+
+The sort feature is an extension of the `list` command. It would be facilitated by the existing command but with additional input parameters to determine the field to sort by and in sorting order. The `ListCommand` will encapsulate the comparator `sortingComparator` and the ordering `orderBy` as fields. 
+
+The usage of the `list` command will be facilitated by using a newly implemented method `Model#sortApplications()` to update the sorting order of `UniqueApplicationList`.
+
+The command parameter for ascending order is `asc` and descending order is `desc`.
+
+The following comparators are implemented:
+- ApplicationStatusComparator
+  - Compare the applications by the `status` tag
+  - The command parameter to use is `status`
+  - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. NOT_APPLIED
+    3. APPLIED
+    4. INTERVIEWED
+    5. REJECTED
+    6. ACCEPTED
+    ```
+</details>
+    
+- InterviewSlotComparator
+  - Comapres the applications by the `InterviewSlot` field
+  - The command parameter to use is `interview`
+  - `InterviewSlot` field is ordered in an ascending order by default starting from the earliest date and time.
+- NameComparator
+  - Compare the applications by the `name` field
+  - The command parameter to use is `name`
+  - `Name` stored as java `String` fields are converted to upper case using `String#UpperCase()` and compared by using java string compare
+- PriorityComparator
+  - Compare the applications by the `priority` tag
+  - The command parameter to use is `priority`
+  - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
+    <details><summary><b>Click to view ordering</b></summary>
+    
+    ```
+    1. <empty_tag>
+    2. LOW
+    3. MEDIUM
+    4. HIGH
+    ```
+> 💡 If applications have the same value for the compared field, the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparators except for `NameComparator`.
+
+#### Usage 
+        
+Given below is two possible usage scenario and how the list command behaves at each step.
+
+##### 1. `list` command without parameters <br><br>
+Step 1. The user launches the application. All internship applications are shown by default.<br><br>
+Step 2. The user uses the find command to find applications with specific values. As a result, only applications matching the find command are shown.<br><br>
+Step 3. The user uses the `list` command without parameters to make all applications visible.<br><br>
+        
+##### 2. `list` command with parameters <br><br>
+Step 1. The user launches the application. All internship applications are shown by default.<br><br>
+Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
+Step 3. The user sees all applications sorted in the given specified order. <br>
+        
+#### Design considerations 
+<b>Aspect: How the sorting feature called:</b>
+- <b>Alternative 1 (current choice): </b> Implment it as a extension of `list` command
+    - Pros: Easy to implement.
+    - Cons: Users may be confused.
+- <b>Alternative 2: </b> Implment it as sperated command (i.e. `sort` command)
+    - Pros: Seperation of listing and sorting feature.
+    - Cons: Additional command implementation required. In addition, we must ensure that the implementation of the `sort` command is correct.
+        
+<b>Aspect: What is the default sorting order:</b>
+- <b>Alternative 1 (current choice): </b> List will remain as per last sorted order
+    - Pros: Easy to implement.
+    - Cons: Users are unable to return to orignial sorting order.
+- <b>Alternative 2: </b> Implment a sort by `createdDateTime`
+    - Pros: Users are able to sort by the original order.
+    - Cons: Additional fields implementation required. In addition, we must ensure that the implementation of the `createdDateTime` field is correct.
 
 [Go To TOC](#table-of-contents)
 
@@ -331,7 +426,7 @@ Step 3. The user executes `edit 1 pt/low` to edit the first applications' priori
     * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
 
-###  Feature to edit Application Status & Priority Tags
+###  Enhancement of `edit` to allow editing of Priority Tag and Application Status Tag
 
 #### Implementation
 
@@ -352,15 +447,31 @@ Given below is an example usage scenario and how the edit mechanism behaves at e
 
 Step 1. The user launches the application. The application list contains 1 application that has the `Tag` "India", `ApplicationStatusTag` "NOT_APPLIED" and `PriorityTag` "LOW".
 
-Step 2. The user executes `edit 1 t/Singapore ast/APPLIED` to edit the 1st application in the list. The `edit` command calls `EditCommandParser#parse()`, parsing the user inputs.
+Step 2. The user executes `edit 1 ast/APPLIED` to edit the 1st application in the list. 
 
-Step 3. `EditCommandParser#parseTagsForEdit()` is then called to construct a Tag Set containing the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED".
+Step 3. The `EditCommandParser#parse()` is called, parsing the user inputs.
 
-Step 4. `EditCommandParser#parse()` then instantiates a new `EditCommand` with a new `EditApplicationDescriptor` object using the constructed Tag Set.
+Step 4. A new `EditApplicationDescriptor` is instantiated. `EditCommandParser#parseTagsForEdit()` is then called to construct a Tag Set containing the `ApplicationStatusTag` "APPLIED".
 
-Step 5. `EditCommand#execute()` is called which calls `EditCommand#createEditedPerson()` to create a new `Application`. While creating the new `Application`, `EditCommand#getTags()` will be called which will construct a new Tag Set by comparing the edited Tag Set and existing Tag Set. Since only the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED" exists in the edited Tag Set, the newly constructed Tag Set will retain the `PriorityTag` "LOW" of the existing Tag Set. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED" and `PriorityTag` "LOW" is created.
+Step 5. `EditApplicationDescriptor#setTags()` is called using the constructed Tag Set as input.
 
-Step 6. The created `Application` will then replace the 1st `Application` in the list.
+Step 6. `EditCommandParser#parse()` returns a new `EditCommand` instantiated with the parsed `INDEX` "1" and previously instantiated `EditApplicationDescriptor`
+
+Step 7. `EditCommand#execute()` is called by the `LogicManager`. `EditCommand#createEditedPerson()` is called  to instantiate a new `editedApplication`. 
+
+Step 8. `EditCommand#getTags()` is called which will construct a new Tag Set by comparing the edited Tag Set and existing Tag Set. Since only the `ApplicationStatusTag` "APPLIED" exists in the edited Tag Set, the newly constructed Tag Set will retain the `Tag` "India" and `PriorityTag` "LOW" of the existing Tag Set. A
+
+Step 9. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED" and `PriorityTag` "LOW" is instantiated and is the Tag Set for `editedApplication`
+
+Step 10. `editedApplication` will then replace the 1st `Application` in the list of applications.
+
+The following sequence diagram shows how the edit operation works:
+![EditPTSequenceDiagram](images/EditPTSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 
 #### Design considerations:
 
@@ -378,42 +489,80 @@ Step 6. The created `Application` will then replace the 1st `Application` in the
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Reminder feature
+### Reminder feature
 
-**Proposed Implementation**
+**Implementation**
 
-The proposed reminder mechanism would be similar to the implementation of the existing `help` command. It would be facilitated by a `ReminderWindow` that extends `UiPart`. An `ApplicationListPanel` will be used to fill the inner parts of the `ReminderWindow`.
+The reminder mechanism is similar to the implementation of the existing `help` command. It is facilitated by a `ReminderWindow` that extends `UiPart`. An `ApplicationListPanel` is used to fill the inner parts of the `ReminderWindow`.
 
-The creation of the reminder list will be facilitated by `Model` using a newly implemented `PREDICATE_SHOW_UPCOMING_APPLICATIONS` to update the application list.
+`CommandResult` facilitates this command by maintaining a new field `showReminder` that determines if the `ReminderWindow` gets generated as a result of a `Command`<br>
+A separate application list `UpcomingApplicationList` is being maintained in the `LogicManager`.<br>
+In addition, the `ModelManager` implements a new method `updateUpcomingApplicationList` that will cause the list to be updated. <br> 
+`InternApplyParser` facilitates this command by now checking for the keyword `reminder`<br>
+`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when InternApply is first launched.
 
-Classes to be implemented are as follows:
+Methods that were implemented in existing classes:
+* `Logic#getApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `LogicManager#getUpcomingApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `CommandResult#showReminder` — A boolean that is used to determine if the CommandResult should cause the `ReminderWindow` to be generated and shown.
+* `CommandResult#isShowReminder()` — Method that returns the value of `showReminder`
+* `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY` — Predicate will only return `true` if the `Application` has a valid upcoming `InterviewSlot`
+* `Model#getUpcomingApplicationsList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `Model#updateUpcomingApplicationsList()` — Method that updates the `UpcomingApplicationList`
+* `ModelManager#PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY` — Predicate will only return `true` if the `Application` has a valid upcoming `InterviewSlot`
+* `ModelManager#getUpcomingApplicationsList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `ModelManager#updateUpcomingApplicationsList()` — Method that updates the `UpcomingApplicationList`
+* `Application#isUpcomingInterview()` — Method that calls `InterviewSlot#isUpcoming()`
+* `InterviewSlot#isUpcoming()` — Method that checks if the `InterviewSlot` is within a week of the local devices date and time.
+* `InterviewSlot#getInterviewSlot()` — Method that returns the `InterviewSlot` as a `LocalDateTime`
+* `MainWindow#handleReminder()` — Method that gets called if this feature is called by the user. It triggers the opening of the `ReminderWindow`
+* `MainWindow#init()` — Method that handles any method that needs to be called when the InternApply first launches. Currently, the `reminder` command will get executed.
 
-* `ReminderCommand` — Extends `Command` class and filters the application list based on the `Application` whose `InterviewSlot` falls within a week of the current local date.
+Existing classes that were modified:
+* `CommandResult` — Constructor has been modified to include `showReminder` as a required parameter. For all other `Command` types, the default value of `showReminder` is set to `false`
+* `CommandResult#equals()` — Method has been updated to also check for `showReminder`
+* `CommandResult#hashcode()` — Method has been updated to also include `showReminder`
+* `InternApplyParser#parseCommand()` — Method has been updated to also check for `reminder` as a valid case.
+* `UiManager#start()` — Method has been updated to also call `MainWindow#init()`
+
+New classes that were implemented:
+
+* `ReminderCommand` — Extends `Command` class and opens the "ReminderWindow" that contains a list based on the `Application` whose `InterviewSlot` falls within a week of the current local date.
 * `ReminderWindow` — Provides a pop-up window for users to view the upcoming Interviews that they have.
 
-Additionally, the following will be implemented:
+Given below is an example usage scenario and how the reminder mechanism behaves at each step.
 
-* `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS` — Filters the application list such that it only contains applications that have a valid `InterviewSlot` that falls within a week of the current local date.
+Context: The user currently has a session of SoC Internapply open and accidentally closed the `ReminderWindow` that was opened when he/she launched SoC InternApply.
 
-Given below is an example usage scenario and how the edit mechanism behaves at each step.
+Step 1. The user enters the input `reminder`. The `LogicManager` will react to this and call `InternApplyParser#parseCommand()`
 
-Step 1. The user launches the application. The `ReminderCommand` created and executed automatically which causes a `ReminderWindow` to pop-up with any upcoming Interviews.
+Step 2. `InternApplyParser` will parse the input then instantiate and return a new `ReminderCommand`
 
-Step 2. The user updates an existing application with an `InterviewSlot` that will happen on the next day with respect to the current local date.
+Step 3. `LogicManger` will execute the returned `Command` by calling `ReminderCommand#execute()`
 
-Step 3. The user executes `reminder` manually which will create a new `ReminderCommand` that once executed opens up a `ReminderWindow`. Now the application list contained within the `ReminderWindow` will also include the application with the newly updated `InterviewSlot`.
+Step 4. `ReminderCommand` will then call `Model#updateUpcomingApplicationList()` which will filter the `UpcomingApplicationList` stored in the `ModelManager` using `PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY`
+
+Step 5. `ReminderCommand#execute()` instantiates and returns a new `CommandResult` that has `showReminder` set to `true`.
+
+Step 6. Since `CommandResult` has `showReminder` set to `true`, SoC InternApply will know to call `MainWindow#handlReminder()` which will open a `ReminderWindow` that is populated by the updated `UpcomingApplicationList`
+
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
 
 #### Design considerations:
 
 **Aspect: How the contents of the `ReminderWindow` will be displayed:**
 
-* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
+* **Alternative 1:** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
     * Pros: Fit well with the current UI implementation.
     * Cons: Much more complex to implement.
 
 * **Alternative 2:** A simple text indicating the applications that are upcoming.
     * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
     * Cons: Would not communicate the information as easily as a UI implementation.
+
+* **Alternative 3 (current choice)** Create a copy of the `FilteredApplicationList` called `UpcomingApplicationList` that gets filtered with a custom predicate
+  * Pros: Fit well with the current UI implementation. Also allows for the application list on the `MainWindow` and `ReminderWindow` to exist separately which makes the `reminder` command more meaningful.
+  * Cons: There is now 2 copies of the same application list at the beginning of each session.
 
 [Go To TOC](#table-of-contents)
 
@@ -758,6 +907,7 @@ the steps are general enough to be used to test other commands that accept multi
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+
 ### Example: Deleting an application
 
 1. Deleting an application while all applications are being shown
@@ -784,7 +934,30 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
    3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
-4. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Example: Removal of Tags using `edit`
+
+1. A single application, removal with replacement (no duplicate applications)
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
+   2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
+   3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
+   4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
+   5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
+
+2. Two applications with different `Tag`
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
+   2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
+
+3. A Single application, trying to edit and remove different Tags at the same time
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
+   2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
+   3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
 ### Saving data
 
