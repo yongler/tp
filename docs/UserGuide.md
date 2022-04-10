@@ -429,7 +429,9 @@ i.e. Application 1 with company name `aaa` will be ranked above Application 2 wi
 
 <div markdown="block" class="alert alert-info">
 
-**⚠️ Applications are originally sorted in a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.**<br>
+**⚠️ Applications are originally sorted in a chronological order base on create date and time.**
+
+Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.<br>
 
 </div>
 
