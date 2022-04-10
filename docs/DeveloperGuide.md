@@ -243,7 +243,9 @@ newline in the details field
 Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
 ![Interactions Inside the Logic Component for the `edit 1 d/Line 1 \nLine 2` Command](images/EditCommandDetailsDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 **Note2:** The sequence diagram is similar to the delete command, due to SoC InternApply using the command design pattern
 </div>
 
@@ -319,14 +321,12 @@ The following comparators are implemented:
   - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
-    2. NOT_APPLIED
-    3. APPLIED
-    4. INTERVIEWED
-    5. REJECTED
-    6. ACCEPTED
-    ```
+    1. ACCEPTED
+    2. REJECTED
+    3. INTERVIEWED
+    4. APPLIED
+    5. NOT_APPLIED
+    6. (Empty Tag)
 </details>
     
 - InterviewSlotComparator
@@ -343,12 +343,10 @@ The following comparators are implemented:
   - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
+    1. (Empty Tag)
     2. LOW
-    3. MEDIUM
+    3. MEDIU
     4. HIGH
-    ```
 > 💡 If applications have the same value for the compared field, the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparators except for `NameComparator`.
 
 #### Usage 
@@ -362,8 +360,12 @@ Step 3. The user uses the `list` command without parameters to make all applicat
         
 ##### 2. `list` command with parameters 
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
-Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
+Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list name asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
 Step 3. The user sees all applications sorted in the given specified order. <br>
+
+Below is a Sequence Diagram illustrating interaction with Logic components for `execute("list name asc")`:
+
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
         
 #### Design considerations 
 <b>Aspect: How the sorting feature called:</b>
@@ -952,7 +954,7 @@ the steps are general enough to be used to test other commands that accept a sin
 the steps are general enough to be used to test other commands that accept multiple parameters.
 
    1. Test valid input values
-      
+   
       - E.G. `edit INDEX [Optional parameters]` <br>
         
         Test input: `edit 1 n/new name` when list has more than 1 application <br>
@@ -960,7 +962,7 @@ the steps are general enough to be used to test other commands that accept multi
         Expected output: Successful change of application 1 name
    
    2. Test invalid input values
-      
+   
       - E.G.  `edit INDEX [Optional parameters]` <br>
         
         Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
@@ -976,7 +978,7 @@ the steps are general enough to be used to test other commands that accept multi
         Expected output: error message detailing what went wrong
    
    4. Test multiple parameter combinations
-       
+   
        - E.G. `edit INDEX [optional parameters]` <br>
          
          Test input: `edit 1 n/new name n/actual name` <br>
@@ -985,7 +987,9 @@ the steps are general enough to be used to test other commands that accept multi
          
          Actual output: command executes
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
@@ -1015,17 +1019,17 @@ The following examples are tested on a list containing 1 or more applications.
 
    1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting an application while reminder window is open
-   
+
    1. Prerequisites: Have the reminder window open using `reminder` and 
    set the first applications interview date to be within the next 7 days.
 
@@ -1102,6 +1106,62 @@ The following examples are tested on a list containing 1 or more applications.
    
    Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
+
+### Example: Sorting of applications using `list`
+        
+1. Sorting by company `name` field in `ascending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct company `name`. For ease of explanation, we consider that there are only 2 applications named `Alpha` and `Beta`.
+        
+   2. Test case: `list name asc`<br>
+      Expected: The updated order is displayed such that `Alpha` will be the first application and `Beta` will be the second and last item listed. The status message will show `Sorted applications by name order by asc`.<br>
+   
+   3. Test case: `list name asc help`<br>
+      Expected: Similar to `case 2`<br>
+        
+2. Sorting by `Interview Slot` field in `descending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `interview slot`. For ease of explanation, we consider that there are only 2 applications with the following interview slots `10-04-2022 13:00` and `10-05-2022 13:00`.
+        
+   2. Test case: `list interview desc`<br>
+      Expected: The updated order is displayed such as the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc`.<br>
+        
+   3. Test case: `list interview desc name asc`<br>
+      Expected: Similar to `case 2`<br>
+        
+     > 💡 Consider adding an additional application with no interview slot set. There are now 3 applications.
+        
+   4. Test case: `list interview desc`<br>
+      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications. 
+   
+3. Sorting by `Status` tag in `ascending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Status` tag. For ease of explanation, we consider that there are only 2 applications with the following `Status` tag `NOT_APPLIED` and `ACCEPTED`.
+        
+   2. Test case: `list status asc`<br>
+      Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
+        
+     > 💡 Consider adding an additional application with no status set. There are now 3 applications.
+        
+   4. Test case: `list status asc`<br>
+      Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+        
+4. Sorting by `Priority` tag in `descending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Priority` tag. For ease of explanation, we consider that there are only 2 applications with the following `Priority` tag `HIGH` and `LOW`.
+        
+   2. Test case: `list priority desc`<br>
+      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`.
+        
+     > 💡 Consider adding an additional application with no priority set. There are now 3 applications.
+        
+   4. Test case: `list priority desc`<br>
+      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+ 
+5. Invalid sort command(s)
+    
+   1. Test case: `list address asc`<br>
+   Expected: Applications remain in current order. The error message is shown in the status message.
+   
+   2. Test case: `list address`<br>
+   Expected: Applications remain in current order. The error message is shown in the status message.
+   
 ### Example: Finding an application
 
 1. Finding an application while all applications are being shown
@@ -1120,6 +1180,7 @@ The following examples are tested on a list containing 1 or more applications.
        
        Expected: Respective error details shown in the status message
    
+
 ### Saving data
 
 1. Dealing with missing data files
@@ -1136,7 +1197,9 @@ The following examples are tested on a list containing 1 or more applications.
    
    3. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes violate the input constraints e.g., Change the `Name` of the first application from `Shopee` to `-#@$`. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. There should be no applications listed in the `MainWindow`. All the applications, even those that were not modified, should have been deleted.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found,
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** For any bugs found,
 feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
 
@@ -1151,29 +1214,30 @@ Below is a short summary of the difficulties, challenges faced and achievements 
 ### Difficulty Level
 _Difficulty: `Medium`_
 
-Much of the difficulty of our project stemmed at the start of it. Organizing and deciding on the direction of our project
-as well as dividing and agreeing on our initial work flow was difficult and really strained our teamwork. Once the initial
-phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy  to
+Much of the difficulty of our project stemmed from its start of it. Organizing and deciding on the direction of our project
+as well as dividing and agreeing on our initial workflow was difficult and really strained our teamwork. Once the initial
+phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy to
 implement.
 
 ### Challenges
 
 1. Morphing the project from AB3 was the biggest challenge faced, as most of the file structure and naming would need to be modified.
-One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts
-2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing
-any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features
+One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts.
+2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing.
+any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features.
 behaving incorrectly. However, once we were comfortable with the codebase, adding features was smooth and easy.
 3. Collaborating with a team of 5 people that had not met before, was challenging at the start, as the team dynamic was not established yet.
-this contributed to the initial challenge of deciding on the project direction and work flow.
+this contributed to the initial challenge of deciding on the project direction and workflow.
 
 ### Effort Required
 
-1. Meeting every sunday 10am, to discuss on the weeks agenda and overall progress of the project.
+1. Meeting every Sunday 10 am, to discuss the week's agenda and overall progress of the project.
 Meetings were increased to twice a week during busy periods such as near the end of V1.3 and V1.4, to ensure that we were
 meeting the requirements for the submission.
-2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond
-and implement bug fixes and changes raised by the group
+2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond and implement bug fixes and changes raised by the group.
 
 ### Achievements of the Project
 
-Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project 
+Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project.
+    
+[Go To TOC](#table-of-contents)

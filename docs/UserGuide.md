@@ -392,10 +392,10 @@ Sorts the list of all applications in SoC InternApply based on the provided para
 Sorting parameters:
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
-- `priority` : Sort by priority in the following ascending order - <NO_TAG>, LOW, MEDIUM, HIGH.
-- `status` : Sort by status in the following ascending order - <NO_TAG>, ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
+- `priority` : Sort by priority in the following ascending order - (NO_TAG), LOW, MEDIUM, HIGH.
+- `status` : Sort by status in the following ascending order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED, (NO_TAG).
 
-* If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be considered at the bottom of the sorting order. If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
+* If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
 
 Order by:
 - `asc` : Order by ascending.
@@ -499,7 +499,7 @@ For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st app
 **A**: `idt/` is intentionally excluded from the `add` command. More often than not, students who apply for an internship do not receive an interview slot from the get go. Taking this into consideration, we decided that users need not include a valid `InterviewSlot` input just as a placeholder value to `add` new applications.
 
 **Q8**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
-**A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution. 
+**A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution.
 
 [Go To TOC](#table-of-contents)
 
