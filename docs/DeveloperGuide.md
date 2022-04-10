@@ -786,19 +786,19 @@ the steps are general enough to be used to test other commands that accept a sin
 the steps are general enough to be used to test other commands that accept multiple parameters.
    
    
-   2. Test valid input values
+   1. Test valid input values
       - E.G. `edit INDEX [Optional parameters]` <br>
         Test input: `edit 1 n/new name` when list has more than 1 application <br>
         Expected output: Successful change of application 1 name
-   3. Test invalid input values
+   2. Test invalid input values
       - E.G.  `edit INDEX [Optional parameters]` <br>
         Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
         Expected output: error message detailing what went wrong
-   4. Test invalid command input
+   3. Test invalid command input
        - E.G.  `edit INDEX [Optional parameters]` <br>
          Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
          Expected output: error message detailing what went wrong
-   5. Test multiple parameter combinations
+   4. Test multiple parameter combinations
        - E.G. `edit INDEX [optional parameters]` <br>
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
@@ -830,16 +830,17 @@ The following examples are tested on a list containing 1 or more applications.
 
    1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting an application while reminder window is open
+        
    1. Prerequisites: Have the reminder window open using `reminder` and 
    set the first applications interview date to be within the next 7 days.
 
@@ -855,26 +856,72 @@ The following examples are tested on a list containing 1 or more applications.
 ### Example: Removal of Tags using `edit`
 
 1. A single application, removal with replacement (no duplicate applications)
+        
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
+        
    2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
+        
    3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
+        
    4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
+        
    5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+        
    6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+        
    7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+        
    8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
 
 2. Two applications with different `Tag`
+        
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
+        
    2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
 
 3. A Single application, trying to edit and remove different Tags at the same time
+        
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
+        
    2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
    3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+        
    4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+        
    5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
+        
+### Example: Adding and removal of Interview Slot using `edit`
+        
+1. Adding or editing a interview slot to an application
+        
+   1. Prerequisite: List all applications using the `list` command. There should at least 1 application. The first application can have an existing interview slot or no interview slot, it will not affect the outcome.
+        
+   2. Test case: `edit 1 idt/10-04-2022 13:00`
+      Expected: The first application now has the given interview slot set. Details of the updated application that include the interview slot should be shown in the status message.
+        
+   3. Test case: `edit 1 idt/29-02-2022 13:00`
+      Expected: No application is updated. Error message shown in the status message.
+        
+   4. Other incorrect command to try: `edit 1`, `edit 1 idt/dd-MM-uuuu HH:mm`, `...` (where `dd-MM-uuuu HH:mm` is an invalid date time).
+      Expected: Similar to `case 3`.
+     
+2. Removing a interview slot of an application
+        
+   1. Prerequisite: List all applications using the `list` command. There should at least 1 application and at most 98 applications. The first application must have an existing interview slot.
+        
+   2. Test case: `edit 1 idt/`
+      Expected: The first application now has its interview slot removed. Details of the updated application that include the interview slot should be shown in the status message.
+        
+   3. Test case: `edit 99 idt/`
+      Expected: No application is updated. Error message (`The application index provided is invalid`) shown in the status message.
+        
+   4. Other incorrect command to try: `edit 0 idt/`, `edit x idt/`, `...` (where x is larger than the list size).
+      Expected: Similar to `case 3`.
 
+### Example: Sorting of applications using `list`
+
+
+        
 ### Saving data
 
 1. Dealing with missing/corrupted data files
