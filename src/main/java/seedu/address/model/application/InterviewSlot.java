@@ -111,6 +111,10 @@ public class InterviewSlot {
         return value.hashCode();
     }
 
+    /**
+     * Solution below adapted from https://stackoverflow.com/questions/65325084/datetimeformatter-parse-corrects-
+     * date-information-instead-of-throwing-exceptio
+     */
     private static LocalDateTime toLocalDateTime(String input) {
         return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATETIME_INPUT)
                 .withResolverStyle(ResolverStyle.STRICT));
