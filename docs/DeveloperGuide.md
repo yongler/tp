@@ -164,7 +164,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="700" />
 
 
 The `Model` component,
@@ -253,7 +253,7 @@ To display the new `details` field, modifications to the `applicationCard.java` 
 
 Below is an image of the UI after the changes were made:
 
-![Ui-after-details-update](images/Ui.png)
+![Ui-after-details-update](images/DetailsUI.png)
 
 #### Proposed improvements
 1. As the colour of each `application card` alternates between each index, changes to the `Ui` have to be made as well to match the alternating colours. To achieve this change, implementing the css style in `DarkTheme.css` file, in particular `List-view` css should be made when implementing changes to the `applicationCard.fxml`
@@ -433,7 +433,7 @@ Step 3. The user executes `edit 1 pt/low` to edit the first applications' priori
     * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
 
-###  Feature to edit Application Status & Priority Tags
+###  Enhancement of `edit` to allow editing of Priority Tag and Application Status Tag
 
 #### Implementation
 
@@ -454,15 +454,31 @@ Given below is an example usage scenario and how the edit mechanism behaves at e
 
 Step 1. The user launches the application. The application list contains 1 application that has the `Tag` "India", `ApplicationStatusTag` "NOT_APPLIED" and `PriorityTag` "LOW".
 
-Step 2. The user executes `edit 1 t/Singapore ast/APPLIED` to edit the 1st application in the list. The `edit` command calls `EditCommandParser#parse()`, parsing the user inputs.
+Step 2. The user executes `edit 1 ast/APPLIED` to edit the 1st application in the list. 
 
-Step 3. `EditCommandParser#parseTagsForEdit()` is then called to construct a Tag Set containing the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED".
+Step 3. The `EditCommandParser#parse()` is called, parsing the user inputs.
 
-Step 4. `EditCommandParser#parse()` then instantiates a new `EditCommand` with a new `EditApplicationDescriptor` object using the constructed Tag Set.
+Step 4. A new `EditApplicationDescriptor` is instantiated. `EditCommandParser#parseTagsForEdit()` is then called to construct a Tag Set containing the `ApplicationStatusTag` "APPLIED".
 
-Step 5. `EditCommand#execute()` is called which calls `EditCommand#createEditedPerson()` to create a new `Application`. While creating the new `Application`, `EditCommand#getTags()` will be called which will construct a new Tag Set by comparing the edited Tag Set and existing Tag Set. Since only the `Tag` "Singapore" and `ApplicationStatusTag` "APPLIED" exists in the edited Tag Set, the newly constructed Tag Set will retain the `PriorityTag` "LOW" of the existing Tag Set. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED" and `PriorityTag` "LOW" is created.
+Step 5. `EditApplicationDescriptor#setTags()` is called using the constructed Tag Set as input.
 
-Step 6. The created `Application` will then replace the 1st `Application` in the list.
+Step 6. `EditCommandParser#parse()` returns a new `EditCommand` instantiated with the parsed `INDEX` "1" and previously instantiated `EditApplicationDescriptor`
+
+Step 7. `EditCommand#execute()` is called by the `LogicManager`. `EditCommand#createEditedPerson()` is called  to instantiate a new `editedApplication`. 
+
+Step 8. `EditCommand#getTags()` is called which will construct a new Tag Set by comparing the edited Tag Set and existing Tag Set. Since only the `ApplicationStatusTag` "APPLIED" exists in the edited Tag Set, the newly constructed Tag Set will retain the `Tag` "India" and `PriorityTag` "LOW" of the existing Tag Set. A
+
+Step 9. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED" and `PriorityTag` "LOW" is instantiated and is the Tag Set for `editedApplication`
+
+Step 10. `editedApplication` will then replace the 1st `Application` in the list of applications.
+
+The following sequence diagram shows how the edit operation works:
+![EditPTSequenceDiagram](images/EditPTSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 
 #### Design considerations:
 
@@ -480,42 +496,80 @@ Step 6. The created `Application` will then replace the 1st `Application` in the
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Reminder feature
+### Reminder feature
 
-**Proposed Implementation**
+**Implementation**
 
-The proposed reminder mechanism would be similar to the implementation of the existing `help` command. It would be facilitated by a `ReminderWindow` that extends `UiPart`. An `ApplicationListPanel` will be used to fill the inner parts of the `ReminderWindow`.
+The reminder mechanism is similar to the implementation of the existing `help` command. It is facilitated by a `ReminderWindow` that extends `UiPart`. An `ApplicationListPanel` is used to fill the inner parts of the `ReminderWindow`.
 
-The creation of the reminder list will be facilitated by `Model` using a newly implemented `PREDICATE_SHOW_UPCOMING_APPLICATIONS` to update the application list.
+`CommandResult` facilitates this command by maintaining a new field `showReminder` that determines if the `ReminderWindow` gets generated as a result of a `Command`<br>
+A separate application list `UpcomingApplicationList` is being maintained in the `LogicManager`.<br>
+In addition, the `ModelManager` implements a new method `updateUpcomingApplicationList` that will cause the list to be updated. <br> 
+`InternApplyParser` facilitates this command by now checking for the keyword `reminder`<br>
+`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when InternApply is first launched.
 
-Classes to be implemented are as follows:
+Methods that were implemented in existing classes:
+* `Logic#getApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `LogicManager#getUpcomingApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `CommandResult#showReminder` — A boolean that is used to determine if the CommandResult should cause the `ReminderWindow` to be generated and shown.
+* `CommandResult#isShowReminder()` — Method that returns the value of `showReminder`
+* `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY` — Predicate will only return `true` if the `Application` has a valid upcoming `InterviewSlot`
+* `Model#getUpcomingApplicationsList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `Model#updateUpcomingApplicationsList()` — Method that updates the `UpcomingApplicationList`
+* `ModelManager#PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY` — Predicate will only return `true` if the `Application` has a valid upcoming `InterviewSlot`
+* `ModelManager#getUpcomingApplicationsList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
+* `ModelManager#updateUpcomingApplicationsList()` — Method that updates the `UpcomingApplicationList`
+* `Application#isUpcomingInterview()` — Method that calls `InterviewSlot#isUpcoming()`
+* `InterviewSlot#isUpcoming()` — Method that checks if the `InterviewSlot` is within a week of the local devices date and time.
+* `InterviewSlot#getInterviewSlot()` — Method that returns the `InterviewSlot` as a `LocalDateTime`
+* `MainWindow#handleReminder()` — Method that gets called if this feature is called by the user. It triggers the opening of the `ReminderWindow`
+* `MainWindow#init()` — Method that handles any method that needs to be called when the InternApply first launches. Currently, the `reminder` command will get executed.
 
-* `ReminderCommand` — Extends `Command` class and filters the application list based on the `Application` whose `InterviewSlot` falls within a week of the current local date.
+Existing classes that were modified:
+* `CommandResult` — Constructor has been modified to include `showReminder` as a required parameter. For all other `Command` types, the default value of `showReminder` is set to `false`
+* `CommandResult#equals()` — Method has been updated to also check for `showReminder`
+* `CommandResult#hashcode()` — Method has been updated to also include `showReminder`
+* `InternApplyParser#parseCommand()` — Method has been updated to also check for `reminder` as a valid case.
+* `UiManager#start()` — Method has been updated to also call `MainWindow#init()`
+
+New classes that were implemented:
+
+* `ReminderCommand` — Extends `Command` class and opens the "ReminderWindow" that contains a list based on the `Application` whose `InterviewSlot` falls within a week of the current local date.
 * `ReminderWindow` — Provides a pop-up window for users to view the upcoming Interviews that they have.
 
-Additionally, the following will be implemented:
+Given below is an example usage scenario and how the reminder mechanism behaves at each step.
 
-* `Model#PREDICATE_SHOW_UPCOMING_APPLICATIONS` — Filters the application list such that it only contains applications that have a valid `InterviewSlot` that falls within a week of the current local date.
+Context: The user currently has a session of SoC Internapply open and accidentally closed the `ReminderWindow` that was opened when he/she launched SoC InternApply.
 
-Given below is an example usage scenario and how the edit mechanism behaves at each step.
+Step 1. The user enters the input `reminder`. The `LogicManager` will react to this and call `InternApplyParser#parseCommand()`
 
-Step 1. The user launches the application. The `ReminderCommand` created and executed automatically which causes a `ReminderWindow` to pop-up with any upcoming Interviews.
+Step 2. `InternApplyParser` will parse the input then instantiate and return a new `ReminderCommand`
 
-Step 2. The user updates an existing application with an `InterviewSlot` that will happen on the next day with respect to the current local date.
+Step 3. `LogicManger` will execute the returned `Command` by calling `ReminderCommand#execute()`
 
-Step 3. The user executes `reminder` manually which will create a new `ReminderCommand` that once executed opens up a `ReminderWindow`. Now the application list contained within the `ReminderWindow` will also include the application with the newly updated `InterviewSlot`.
+Step 4. `ReminderCommand` will then call `Model#updateUpcomingApplicationList()` which will filter the `UpcomingApplicationList` stored in the `ModelManager` using `PREDICATE_SHOW_UPCOMING_APPLICATIONS_ONLY`
+
+Step 5. `ReminderCommand#execute()` instantiates and returns a new `CommandResult` that has `showReminder` set to `true`.
+
+Step 6. Since `CommandResult` has `showReminder` set to `true`, SoC InternApply will know to call `MainWindow#handlReminder()` which will open a `ReminderWindow` that is populated by the updated `UpcomingApplicationList`
+
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
 
 #### Design considerations:
 
 **Aspect: How the contents of the `ReminderWindow` will be displayed:**
 
-* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
+* **Alternative 1:** Create a predicate that filters the application list and fill the `ReminderWindow` with the filtered application list.
     * Pros: Fit well with the current UI implementation.
     * Cons: Much more complex to implement.
 
 * **Alternative 2:** A simple text indicating the applications that are upcoming.
     * Pros: Simple implementation that can be done by referencing the implementation of `HelpWindow`.
     * Cons: Would not communicate the information as easily as a UI implementation.
+
+* **Alternative 3 (current choice)** Create a copy of the `FilteredApplicationList` called `UpcomingApplicationList` that gets filtered with a custom predicate
+  * Pros: Fit well with the current UI implementation. Also allows for the application list on the `MainWindow` and `ReminderWindow` to exist separately which makes the `reminder` command more meaningful.
+  * Cons: There is now 2 copies of the same application list at the beginning of each session.
 
 [Go To TOC](#table-of-contents)
 
@@ -571,91 +625,6 @@ Given below is an example usage scenario and how the find command behaves at eac
 * **Alternative 2:** Users can only find using more than keyword from  `Name`, `JobTitle` and `Tag`.
     * Pros: User can do a more general search, showing all results that has those keywords for the particular field.
     * Cons: User does not know the results is based on which field at a glance and has to spend more time looking through it and spending more time as compared to doing multiple separate searches. 
-
-[Go To TOC](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 [Go To TOC](#table-of-contents)
 
@@ -912,7 +881,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. It is recommended to have the UserGuide open while doing manual testing.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -936,7 +905,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Testing features
+### General Guideline for testing features
 
 1. Features with one input
 
@@ -978,25 +947,27 @@ the steps are general enough to be used to test other commands that accept multi
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
          Actual output: command executes
-       
-
-3. Summary bar feature
-   
-   The following examples are tested on a list containing 1 or more applications.
-    
-   1. Add application <br>
-      Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
-      Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
-   2. Edit application <br>
-      Assuming application at index 1 is of `LOW` priority. <br>
-      Test input: `edit 1 pt/high` <br>
-      Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+
+### Example: Summary bar feature
+   
+The following examples are tested on a list containing 1 or more applications.
+    
+1. Add application <br>
+   Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+
+
+2. Edit application <br>
+   Assuming application at index 1 is of `LOW` priority. <br>
+   Test input: `edit 1 pt/high` <br>
+   Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
+
+
 ### Example: Deleting an application
 
 1. Deleting an application while all applications are being shown
@@ -1023,7 +994,30 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
    3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
-4. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
+
+### Example: Removal of Tags using `edit`
+
+1. A single application, removal with replacement (no duplicate applications)
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
+   2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
+   3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
+   4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
+   5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
+
+2. Two applications with different `Tag`
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
+   2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
+
+3. A Single application, trying to edit and remove different Tags at the same time
+   1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
+   2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
+   3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
 ### Example: Finding an application
 
@@ -1051,3 +1045,39 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
 <div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
 [Go To TOC](#table-of-contents)
+
+---
+
+## **Appendix: Effort**
+
+Below is a short summary of the difficulties, challenges faced and achievements of the project
+
+### Difficulty Level
+_Difficulty: `Medium`_
+
+Much of the difficulty of our project stemmed at the start of it. Organizing and deciding on the direction of our project
+as well as dividing and agreeing on our initial work flow was difficult and really strained our teamwork. Once the initial
+phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy  to
+implement.
+
+### Challenges
+
+1. Morphing the project from AB3 was the biggest challenge faced, as most of the file structure and naming would need to be modified.
+One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts
+2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing
+any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features
+behaving incorrectly. However, once we were comfortable with the codebase, adding features was smooth and easy.
+3. Collaborating with a team of 5 people that had not met before, was challenging at the start, as the team dynamic was not established yet.
+this contributed to the initial challenge of deciding on the project direction and work flow.
+
+### Effort Required
+
+1. Meeting every sunday 10am, to discuss on the weeks agenda and overall progress of the project.
+Meetings were increased to twice a week during busy periods such as near the end of V1.3 and V1.4, to ensure that we were
+meeting the requirements for the submission.
+2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond
+and implement bug fixes and changes raised by the group
+
+### Achievements of the Project
+
+Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project 
