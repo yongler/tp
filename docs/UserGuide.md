@@ -470,25 +470,6 @@ The summary bar is automatically updated on successful execution of any command.
 
 [Go To TOC](#table-of-contents)
 
----
-
-### Viewing help: `help`
-
-This command displays a message explaining how to access the help page.
-
-**Format:** `help`
-
-**Example usages:**
-
-`help`
-
-**Expected outcome:**
-
-A popup window showing a link to the help page, as shown below.
-![helpMessage](images/helpMessage.png)
-
-[Go To TOC](#table-of-contents)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
