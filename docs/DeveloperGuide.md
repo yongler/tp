@@ -45,6 +45,13 @@ bugs and raising them as issues to our team repository.
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+### Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -110,7 +117,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -119,7 +126,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Application` object residing in the `Model`.
 
 [Go To TOC](#table-of-contents)
 
@@ -419,20 +426,20 @@ Step 3. The user executes `reminder` manually which will create a new `ReminderC
 
 --------------------------------------------------------------------------------------------------------------------
 
-### \[Proposed\] Find/filter feature
+### Find/filter feature
 
 **Proposed Implementation**
 
-The proposed reminder mechanism would be similar to the implementation of the existing `find` command. It would be facilitated by the existing command but with more `Predicate` parameters to find the applications based on different fields such as: name, phone, email, tags.
+The proposed reminder mechanism would be similar to the implementation of the existing `find` command. It would be facilitated by the existing command but with more `Predicate` parameters to find the applications based on different fields such as: name, job title and tags.
 
 The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed.
 
 Classes to be implemented are as follows:
 
-* `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input. 
-* `EmailContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Email` contains the numbers typed in user input.
-* `ApplicationStatustagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `ApplicationStatustag` contains the numbers typed in user input.
-* `PrioritytagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Prioritytag` contains the numbers typed in user input.
+* `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input.
+* `JobTitleContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `JobTitle` contains the keywords typed in user input.
+* `TagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Tag` or `PriorityTag` or `ApplicationStatusTag` contains the keywords typed in user input, depending on the input format.
+
 
 
 Given below is an example usage scenario and how the find command behaves at each step.
@@ -444,6 +451,13 @@ Step 2. The user uses the find command to find applications with the `HIGH` prio
 Step 3. The user sees all and only the applications that have the `HIGH` priority tag.  
 
 #### Design considerations:
+**Aspect: What filters (fields) that the users can find:**
+
+* **Alternative 1 (current choice):** Users can only find using the application name, job title as well as tags (`PriorityTag` and `ApplicationStatusTag` as well). 
+    * Pros: Fit well with the current UI implementation.
+    * Cons: -
+
+* **Alternative 2:**
 
 **Aspect: How the contents of the find command will be displayed:**
 
@@ -589,7 +603,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | Learn what is the skillset and/or knowledge expected of a CS intern | I can plan my learning to be a capable intern                                  |
 | `*`      | user     | maintain a journal of my internship                                 | Users who are curious can read and get an idea of what the internship is like  |
 
-*{More to be added}*
 
 [Go To TOC](#table-of-contents)
 
@@ -663,11 +676,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 internship applications without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-
-[Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
