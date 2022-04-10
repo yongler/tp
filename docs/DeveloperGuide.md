@@ -800,10 +800,14 @@ the steps are general enough to be used to test other commands that accept multi
          Expected output: error message detailing what went wrong
          Actual output: command executes
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+    
+    
 
 ### Example: Summary bar feature
    
@@ -976,9 +980,12 @@ The following examples are tested on a list containing 1 or more applications.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+    
+<div markdown="span" class="alert alert-info">
+    
+:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
+    
 [Go To TOC](#table-of-contents)
 
 ---
