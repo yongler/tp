@@ -888,25 +888,26 @@ the steps are general enough to be used to test other commands that accept multi
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
          Actual output: command executes
-       
-
-3. Summary bar feature
-   
-   The following examples are tested on a list containing 1 or more applications.
-    
-   1. Add application <br>
-      Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
-      Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
-   2. Edit application <br>
-      Assuming application at index 1 is of `LOW` priority. <br>
-      Test input: `edit 1 pt/high` <br>
-      Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+
+### Example: Summary bar feature
+   
+The following examples are tested on a list containing 1 or more applications.
+    
+1. Add application <br>
+   Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+
+
+2. Edit application <br>
+   Assuming application at index 1 is of `LOW` priority. <br>
+   Test input: `edit 1 pt/high` <br>
+   Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
+
 
 ### Example: Deleting an application
 
