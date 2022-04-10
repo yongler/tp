@@ -997,29 +997,28 @@ Below is a short summary of the difficulties, challenges faced and achievements 
 ### Difficulty Level
 _Difficulty: `Medium`_
 
-Much of the difficulty of our project stemmed at the start of it. Organizing and deciding on the direction of our project
-as well as dividing and agreeing on our initial work flow was difficult and really strained our teamwork. Once the initial
-phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy  to
+Much of the difficulty of our project stemmed from its start of it. Organizing and deciding on the direction of our project
+as well as dividing and agreeing on our initial workflow was difficult and really strained our teamwork. Once the initial
+phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy to
 implement.
 
 ### Challenges
 
 1. Morphing the project from AB3 was the biggest challenge faced, as most of the file structure and naming would need to be modified.
-One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts
-2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing
-any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features
+One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts.
+2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing.
+any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features.
 behaving incorrectly. However, once we were comfortable with the codebase, adding features was smooth and easy.
 3. Collaborating with a team of 5 people that had not met before, was challenging at the start, as the team dynamic was not established yet.
-this contributed to the initial challenge of deciding on the project direction and work flow.
+this contributed to the initial challenge of deciding on the project direction and workflow.
 
 ### Effort Required
 
-1. Meeting every sunday 10am, to discuss on the weeks agenda and overall progress of the project.
+1. Meeting every Sunday 10 am, to discuss the week's agenda and overall progress of the project.
 Meetings were increased to twice a week during busy periods such as near the end of V1.3 and V1.4, to ensure that we were
 meeting the requirements for the submission.
-2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond
-and implement bug fixes and changes raised by the group
+2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond and implement bug fixes and changes raised by the group.
 
 ### Achievements of the Project
 
-Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project 
+Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project.
