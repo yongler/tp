@@ -516,7 +516,7 @@ Action | Format, Examples
 [**Exit**](#exiting-the-program-exit) | `exit`
 [**Find**](#finding-applications-find) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
 [**Help**](#viewing-help-help) | `help`
-[**List**](#listing-all-applications-(with-/-without-sorting)-list) | `list [sorting paramter] [order by]`
+[**List**](#listing-all-applications-with--without-sorting-list) | `list [sorting paramter] [order by]`
 [**Reminder**](#listing-applications-with-upcoming-interviews-reminder)| `reminder`
 
 [Go To TOC](#table-of-contents)
