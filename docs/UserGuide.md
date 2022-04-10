@@ -393,10 +393,10 @@ Sorts the list of all applications in SoC InternApply based on the provided para
 Sorting parameters:
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
-- `priority` : Sort by priority in the following ascending order - <NO_TAG>, LOW, MEDIUM, HIGH.
-- `status` : Sort by status in the following ascending order - <NO_TAG>, ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
+- `priority` : Sort by priority in the following ascending order - (NO_TAG), LOW, MEDIUM, HIGH.
+- `status` : Sort by status in the following ascending order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED, (NO_TAG).
 
-* If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be considered at the bottom of the sorting order. If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
+* If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
 
 Order by:
 - `asc` : Order by ascending.
@@ -517,7 +517,7 @@ For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st app
 **Q**: Why am I unable to use the `idt/` command to add the interview date when I add an application?
 **A**: The `idt/` is excluded from the `add` command specifically to prevent possible user mistake(s). You should add an application before apply it. Hence, at the point of time when adding the application, you will not have recieve an interview slot.
 
-**Q**: How can I retrieve the original(created date and time) sorting order?
+**Q**: How can I retrieve the original (created date and time) sorting order?
 **A**: Unfortunately due to the current limitations of our application, you will not be able to sort by the application by the create date and time. This means that once you have use the sorting feature, the original order will be lost forever. 
 
 [Go To TOC](#table-of-contents)
