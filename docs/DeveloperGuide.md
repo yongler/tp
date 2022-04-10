@@ -162,7 +162,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the InternApply data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
+* stores SoC InternApply's data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
 * stores the currently 'selected' `Application` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a filtered list of `Application` objects (e.g., applications with upcoming `InterviewSlot`) as a separate _upcoming_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed'.
 * stores a `SummaryList` object that contains a list of `SummaryBox` objects which is exposed to the outsiders as an unmodifiable `ObservableList<SummaryBox>` that can be 'observed'.
@@ -237,7 +237,7 @@ Sequence Diagram illustrating interaction with `Logic` components for `execute("
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/EditCommandDetailsDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-**Note2:** The sequence diagram is similar to the delete command, due to InternApply using the command design pattern
+**Note2:** The sequence diagram is similar to the delete command, due to SoC InternApply using the command design pattern
 </div>
 
 ##### UI
@@ -499,7 +499,7 @@ The reminder mechanism is similar to the implementation of the existing `help` c
 A separate application list `UpcomingApplicationList` is being maintained in the `LogicManager`.<br>
 In addition, the `ModelManager` implements a new method `updateUpcomingApplicationList` that will cause the list to be updated. <br> 
 `InternApplyParser` facilitates this command by now checking for the keyword `reminder`<br>
-`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when InternApply is first launched.
+`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when SoC InternApply is first launched.
 
 Methods that were implemented in existing classes:
 * `Logic#getApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
@@ -516,7 +516,7 @@ Methods that were implemented in existing classes:
 * `InterviewSlot#isUpcoming()` — Method that checks if the `InterviewSlot` is within a week of the local devices date and time.
 * `InterviewSlot#getInterviewSlot()` — Method that returns the `InterviewSlot` as a `LocalDateTime`
 * `MainWindow#handleReminder()` — Method that gets called if this feature is called by the user. It triggers the opening of the `ReminderWindow`
-* `MainWindow#init()` — Method that handles any method that needs to be called when the InternApply first launches. Currently, the `reminder` command will get executed.
+* `MainWindow#init()` — Method that handles any method that needs to be called when SoC InternApply first launches. Currently, the `reminder` command will get executed.
 
 Existing classes that were modified:
 * `CommandResult` — Constructor has been modified to include `showReminder` as a required parameter. For all other `Command` types, the default value of `showReminder` is set to `false`
@@ -716,7 +716,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. SoC InternApply tells users there are currently no internship applications.
       Use case ends.
 
-
 **Use case: Edit an internship application**
 
 **MSS**
@@ -778,8 +777,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### General Guideline for testing features
 
@@ -843,7 +840,6 @@ The following examples are tested on a list containing 1 or more applications.
    Test input: `edit 1 pt/high` <br>
    Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
 
-
 ### Example: Deleting an application
 
 1. Deleting an application while all applications are being shown
@@ -870,7 +866,6 @@ The following examples are tested on a list containing 1 or more applications.
    3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
-3. _{ more test cases …​ }_
 
 ### Example: Removal of Tags using `edit`
 
@@ -899,9 +894,12 @@ The following examples are tested on a list containing 1 or more applications.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Open the file in any text editor, delete the contents and input a string of characters e.g., `This file is corrupted.`
+   2. Test case: Launch SoC InternApply. The list of applications should be empty and SoC InternApply still functions normally to valid inputs.
+2. Making changes to the data files using any text editor
+   1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Delete the file. Launch SoC InternApply. The set of sample applications should be loaded up. Close SoC InternApply.
+   2. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes are valid in accordance to input constraints. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. The changes made should be reflected in the application list.
+   3. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes violate the input constraints e.g., Change the `Name` of the first application from `Shopee` to `-#@$`. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. There should be no applications listed in the `MainWindow`. All the applications, even those that were not modified, should have been deleted.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
