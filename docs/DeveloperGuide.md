@@ -653,8 +653,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | Learn what is the skillset and/or knowledge expected of a CS intern | I can plan my learning to be a capable intern                                  |
 | `*`      | user     | maintain a journal of my internship                                 | Users who are curious can read and get an idea of what the internship is like  |
 
-*{More to be added}*
-
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -680,7 +678,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
   
-**Use case: Delete a internship application**
+**Use case: Delete an internship application**
 
 **MSS**
 
@@ -701,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. SoC InternApply shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case: List all internship application**
 
@@ -714,12 +712,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. The list is empty
+
     * 2a1. SoC InternApply tells users there are currently no internship applications.
       Use case ends.
 
 
-*{More to be added}*
+**Use case: Edit an internship application**
 
+**MSS**
+
+1. User requests to list internship applications
+2. SoC InternApply shows a list of internship applications
+3. User requests to edit a specific internship application in the list
+4. User inputs a chain of changes 
+5. SoC InternApply edits the internship applications with the provided inputs
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SoC InternApply shows an error message.
+
+      Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
