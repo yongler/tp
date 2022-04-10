@@ -241,7 +241,7 @@ newline in the details field
 ```
 
 Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
-![Interactions Inside the Logic Component for the `delete 1` Command](images/EditCommandDetailsDiagram.png)
+![Interactions Inside the Logic Component for the `edit 1 d/Line 1 \nLine 2` Command](images/EditCommandDetailsDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 **Note2:** The sequence diagram is similar to the delete command, due to InternApply using the command design pattern
@@ -523,42 +523,54 @@ Step 3. The user executes `reminder` manually which will create a new `ReminderC
 
 ### Find/filter feature
 
-**Proposed Implementation**
+The proposed find/filter mechanism would be similar to the implementation of the existing `find` command. 
 
-The proposed reminder mechanism would be similar to the implementation of the existing `find` command. It would be facilitated by the existing command but with more `Predicate` parameters to find the applications based on different fields such as: name, job title and tags.
-
-The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed.
+The usage of the `find` command will be facilitated by using a newly implemented Predicate subclass inheriting from `Predicate<Application>` to update the application list displayed based on different fields such as: name, job title and tags.
 
 Classes to be implemented are as follows:
 
-* `PhoneContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Phone` contains the numbers typed in user input.
+<img src="images/FindClassDiagram.png" width="550" />
+
+
+More details of how the classes are implemented as follows:  
+* `NameContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Name` contains the numbers typed in user input.
+
 * `JobTitleContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `JobTitle` contains the keywords typed in user input.
-* `TagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Tag` or `PriorityTag` or `ApplicationStatusTag` contains the keywords typed in user input, depending on the input format.
+
+* `TagContainsKeywordsPredicate` — Extends `Predicate<Application>` class and filters the application list based on the `Application` whose `Tag` or `PriorityTag` or `ApplicationStatusTag` contains the keywords typed in user input, depending on the input format. For example:  
+  * `find pt/high` will find all applications with the high priority tag using the `TagContainsKeywordsPredicate`
 
 
 
 Given below is an example usage scenario and how the find command behaves at each step.
 
-Step 1. The user launches the application. All internship applications are showed by default.
+![Interactions Inside the Logic Component for the `find n/shopee` Command](images/FindSequenceDiagram.png)
 
-Step 2. The user uses the find command to find applications with the `HIGH` priority tag.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-Step 3. The user sees all and only the applications that have the `HIGH` priority tag.  
+</div>
+
 
 #### Design considerations:
 **Aspect: What filters (fields) that the users can find:**
 
 * **Alternative 1 (current choice):** Users can only find using the application name, job title as well as tags (`PriorityTag` and `ApplicationStatusTag` as well). 
-    * Pros: Fit well with the current UI implementation.
-    * Cons: -
+    * Pros: Simplicity in the product ensures user-friendliness. 
+    * Cons: User might not be able to search for other fields such as phone or email in rare cases. 
 
-* **Alternative 2:**
+* **Alternative 2:** Users can find using all the fields for each application.
+    * Pros: User has more flexibility to choose what criteria to find for. 
+    * Cons: Too much flexibility will result in complexity and also most people would only search for the application based on its name, job title or tags instead of phone or email (which they do not remember).
 
-**Aspect: How the contents of the find command will be displayed:**
+**Aspect: How many fields can users find:**
 
-* **Alternative 1 (current choice):** Create a predicate that filters the application list and fill the `UI` with the filtered application list.
-    * Pros: Fit well with the current UI implementation.
-    * Cons: -
+* **Alternative 1 (current choice):** Users can type in one of the fields: `Name`, `JobTitle` and `Tag` only.  
+    * Pros: Users can do a more specific and narrow search, thus knowing what the results are based on.
+    * Cons: Users cannot find based oan multiple fields, might need to do search repeated times.
+
+* **Alternative 2:** Users can only find using more than keyword from  `Name`, `JobTitle` and `Tag`.
+    * Pros: User can do a more general search, showing all results that has those keywords for the particular field.
+    * Cons: User does not know the results is based on which field at a glance and has to spend more time looking through it and spending more time as compared to doing multiple separate searches. 
 
 [Go To TOC](#table-of-contents)
 
@@ -723,8 +735,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. SoC InternApply shows an error message.
 
       Use case resumes at step 2.
-  
-**Use case: Delete a internship application**
+---
+    
+**Use case: Clearing all internship application**
+
+**MSS**
+
+1. User clears all internship application.
+2. SoC InternApply clears all internship application.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No internship applications available. 
+
+  Use case ends.
+
+---
+**Use case: Delete an internship application**
 
 **MSS**
 
@@ -746,25 +775,131 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SoC InternApply shows an error message.
 
       Use case resumes at step 2.
+---
+**Use case: Edit an internship application**
 
-**Use case: List all internship application**
+**MSS**
+
+1. User requests to edit a specific internship application in the list with the new data to edit.
+2. SoC InternApply edits the application and shows the new list containing the edited application.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. No internship applications available.
+
+  Use case ends.
+
+* 1b. The given index is invalid.
+
+  * 1b1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+
+* 1c. The given command format is invalid.
+
+  * 1c1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+  
+---
+**Use case: Exit the app**
+
+**MSS**
+
+1. User exits the app.
+2. SIA saves all changes and closes all windows. 
+
+   Use case ends.
+---
+**Use case: Finding internship application(s)**
+
+**MSS**
+
+1. User requests to find internship applications based on either its name, job title or tags.
+2. SoC InternApply shows a list of internship applications with the field matching any of the keywords
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+  * 1a1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. The given command format is invalid.
+
+  * 1b1. SoC InternApply shows an error message.
+
+    Use case resumes at step 1.
+
+* 2a. No internship applications suit the criteria 
+    * 2a1. SoC InternApply tells users there are currently no such internship applications.
+  
+    Use case ends.
+---
+**Use case: Seeking help about commands usages in the app**
+
+**MSS**
+
+1. User seeks help from the app.
+2. SIA shows a help page or user guide to the user.
+
+   Use case ends.
+
+---
+**Use case: List all internship application without any sorting**
 
 **MSS**
 
 1. User requests to list internship applications
-2. SoC InternApply shows a list of internship applications
+2. SoC InternApply shows a list of internship applications based on the previous sorting method.
 
    Use case ends.
 
 **Extensions**
 * 2a. The list is empty
-    * 2a1. SoC InternApply tells users there are currently no internship applications.
+    * 2a1. SoC InternApply shows a blank list.
       Use case ends.
 
+---
+**Use case: List all internship application with sorting**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to list internship applications with sorting criteria.
+2. SoC InternApply shows a list of internship applications based on the sorting criteria.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The list is empty
+  * 2a1. SoC InternApply shows a blank list.
+    Use case ends.
 
 
+---
+**Use case: Getting reminder manually of all internship application with interviews coming soon**
+
+**MSS**
+
+1. User requests to list internship applications with interviews coming soon
+2. SoC InternApply shows a list of internship applications with interviews that are within 1 week from now.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No internship applications with interviews that are within 1 week from now.
+    * 2a1. SoC InternApply tells users there are currently no such internship applications.
+  
+    Use case ends.
+
+
+
+---
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -799,7 +934,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Testing features
 
@@ -890,6 +1025,21 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
       No changes to the reminder window.
 4. _{ more test cases …​ }_
 
+### Example: Finding an application
+
+1. Finding an application while all applications are being shown
+
+    1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
+
+    2. Test case: `find pt/high`<br>
+       Expected: All applications in the list with a high priority tag will be shown. Details of the number of results will be shown in the status message.
+
+    3. Test case: `find pt/notaprioritytag`<br>
+       Expected: No changes. Error details shown in the status message that the keywords is incorrect for searching `PriorityTag`.
+
+    4. Other incorrect find commands to try: `find`, `find high` (without the `pt`), `find n/`(empty keyword) <br>
+       Expected: Respective error details shown in the status message
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files

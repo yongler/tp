@@ -38,16 +38,22 @@ Other than these 2 features which I was involved in creating, I also helped to d
 - Added notes and cautions for the user so that they know it is an intended behaviour
 
 **Contributions to the DG**:
+- Updated UI component to suit our product
+- `Find` command details, design considerations, uml diagrams and manual testing section
+- Added use cases of the product for all features 
+- Drafted the effort section
+- Fixed typos and grammar error across whole DG
 
 **Contributions to team-based tasks**:
 1. Setting up the GitHub team org/repo
 2. Setting up tools e.g., GitHub, Gradle 
 3. Maintaining the issue tracker
 4. Release management
-5. Updating user/developer docs that are not specific to a feature e.g. making it more user-friendly 
-6. Guide the team through project deliverables and give working suggestions during team meetings
+5. Updating user/developer docs that are not specific to a feature e.g. making it more user-friendly and bug-free
+6. Guide the team through project deliverables and give working suggestions during team meetings (more towards first half of tp when the team is still unsure of what to do)
+7. Lead the initial project draft submission and direction 
 
-
+    
 **Review/mentoring contributions**:
 - [Link to reviewed PRs](https://github.com/AY2122S2-CS2103T-T11-3/tp/issues?q=reviewed-by%3Ayongler)
 - Also helped teammates during team meeting about possible bugs in the features as well as provide links that might be useful (issue regarding environment variables and also sorting based on Java enum).  
