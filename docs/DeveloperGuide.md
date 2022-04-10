@@ -1050,117 +1050,113 @@ The following examples are tested on a list containing 1 or more applications.
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
    
-   2. Test case: `edit 1 t/removetags`
-   
+   2. Test case: `edit 1 t/removetags`<br>
    Expected: Only the `Tag` of the application is removed.
    
-   3. Test case: `edit 1 t/removepriority`
-   
+   3. Test case: `edit 1 t/removepriority`<br>
    Expected: Only the `PriorityTag` of the application is removed.
    
-   4. Test case: `edit 1 t/removestatus`
-   
+   4. Test case: `edit 1 t/removestatus`<br>
    Expected: Only the `ApplicationStatusTag` of the application is removed.
    
-   5. Test case: `edit 1 t/removetags t/removepriority`
-   
+   5. Test case: `edit 1 t/removetags t/removepriority`<br>
    Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
    
-   6. Test case: `edit 1 t/removetags t/removestatus`
-   
+   6. Test case: `edit 1 t/removetags t/removestatus`<br>
    Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
    
-   7. Test case: `edit 1 t/removepriority t/removestatus`
-   
+   7. Test case: `edit 1 t/removepriority t/removestatus`<br>
    Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
    
-   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`
-   
+   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>
    Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
 
 2. Two applications with different `Tag`
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
    
-   2. Test case: `edit 2 t/removetags`
-   
+   2. Test case: `edit 2 t/removetags`<br>
    Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
 
 3. A Single application, trying to edit and remove different Tags at the same time
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
    
-   2. Test case: `edit t/removetags pt/high ast/applied`
-   
+   2. Test case: `edit t/removetags pt/high ast/applied`<br>
    Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
    
-   3. Test case: `edit t/removepriority t/test`
-   
+   3. Test case: `edit t/removepriority t/test`<br>
    Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
    
-   4. Test case: `edit t/removepriority pt/high`
-   
+   4. Test case: `edit t/removepriority pt/high`<br>
    Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
    
-   5. Test case: `edit t/removestatus ast/applied`
-   
+   5. Test case: `edit t/removestatus ast/applied`<br>
    Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
 
 ### Example: Sorting of applications using `list`
         
 1. Sorting by company `name` field in `ascending` order
+   
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct company `name`. For ease of explanation, we consider that there are only 2 applications named `Alpha` and `Beta`.
         
    2. Test case: `list name asc`<br>
-      Expected: The updated order is displayed such that `Alpha` will be the first application and `Beta` will be the second and last item listed. The status message will show `Sorted applications by name order by asc`.<br>
+   Expected: The updated order is displayed such that `Alpha` will be the first application and `Beta` will be the second and last item listed. The status message will show `Sorted applications by name order by asc`.<br>
    
    3. Test case: `list name asc help`<br>
-      Expected: Similar to `case 2`<br>
+   Expected: Similar to `case 2`<br>
         
 2. Sorting by `Interview Slot` field in `descending` order
+   
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `interview slot`. For ease of explanation, we consider that there are only 2 applications with the following interview slots `10-04-2022 13:00` and `10-05-2022 13:00`.
         
    2. Test case: `list interview desc`<br>
-      Expected: The updated order is displayed such as the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc`.<br>
+   Expected: The updated order is displayed such as the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc`.<br>
         
    3. Test case: `list interview desc name asc`<br>
-      Expected: Similar to `case 2`<br>
-        
-     > 💡 Consider adding an additional application with no interview slot set. There are now 3 applications.
-        
+   Expected: Similar to `case 2`<br>
+
+  > 💡 Consider adding an application with no interview slot set. There are now 3 applications.
+
    4. Test case: `list interview desc`<br>
-      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications. 
-   
+   Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications.
+     
 3. Sorting by `Status` tag in `ascending` order
+   
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Status` tag. For ease of explanation, we consider that there are only 2 applications with the following `Status` tag `NOT_APPLIED` and `ACCEPTED`.
         
    2. Test case: `list status asc`<br>
-      Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
-        
-     > 💡 Consider adding an additional application with no status set. There are now 3 applications.
-        
-   4. Test case: `list status asc`<br>
-      Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
-        
+   Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
+
+  > 💡 Consider adding an application with no status set. There are now 3 applications.
+
+   3. Test case: `list status asc`<br>
+   Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications.
+       
 4. Sorting by `Priority` tag in `descending` order
+   
    1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Priority` tag. For ease of explanation, we consider that there are only 2 applications with the following `Priority` tag `HIGH` and `LOW`.
         
    2. Test case: `list priority desc`<br>
-      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`.
-        
-     > 💡 Consider adding an additional application with no priority set. There are now 3 applications.
-        
-   4. Test case: `list priority desc`<br>
-      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
- 
+     
+      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`. 
+
+   > 💡 Consider adding an additional application with no priority set. There are now 3 applications.
+   
+   3. Test case: `list priority desc`<br>
+      
+      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications.
+
 5. Invalid sort command(s)
     
    1. Test case: `list address asc`<br>
+   
    Expected: Applications remain in current order. The error message is shown in the status message.
    
    2. Test case: `list address`<br>
-   Expected: Applications remain in current order. The error message is shown in the status message.
+   
+      Expected: Applications remain in current order. The error message is shown in the status message.
    
 ### Example: Finding an application
 
