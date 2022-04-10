@@ -49,15 +49,17 @@ Ultimately, with SoC InternApply, you can worry less about the administrative ta
 
     * **`edit`**`1 idt/17-03-2022 16:00` : Update the interview slot to `17 Mar 2022 16:00` for the first application on the list.
 
-    * **`exit`** : Exits the app.
-
     * **`find`**`n/shopee` : Find all applications that contain the word "Shopee" in its name.
 
-    * **`help`** : Shows a message explaining how to access the help page.
-
+    * **`list`** : List all applications — used after `find` command to show all application.
+    
     * **`list`**`name desc` : Sort all applications base on company name in descending order.
 
     * **`reminder`** : Lists all applications with upcoming interviews within a week from now.
+
+    * **`help`** : Shows a message explaining how to access the help page.
+    
+    * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -380,19 +382,21 @@ A popup window showing a link to the help page, as shown below.
 
 ---
 
-### Listing all applications in a sorted manner: `list`
+### Listing all applications (with / without sorting): `list`
 
-Sorts the list of all application in SoC InternApply base on the provided parameters.
+#### List all applications (with sorting)
+
+Sorts the list of all applications in SoC InternApply based on the provided parameters.
 
 **Format:** `list [sorting paramter] [order by]`
 
 Sorting parameters:
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
-- `priority` : Sort by priority in the following order - HIGH, MEDIUM, LOW.
-- `status` : Sort by status in the following order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
+- `priority` : Sort by priority in the following ascending order - <NO_TAG>, LOW, MEDIUM, HIGH.
+- `status` : Sort by status in the following ascending order - <NO_TAG>, ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
 
-* If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be moved to the bottom of the sorting order. If there is more than one of such application, it will be sorted alphabetically.
+* If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be considered at the bottom of the sorting order. If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
 
 Order by:
 - `asc` : Order by ascending.
@@ -406,11 +410,29 @@ Examples:
 Sorted applications by name order by desc.
 ```
 
-> 💡 The `list` command also works without parameters. It will be reverted to the last sorted parameter and order used by the user. This is used after using the `find` feature to list out all applications.
+> 💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.
+> - `list status desc` — Valid, sorted by `status` in descending order
+> - `list abc status asc` — Invalid
+> - `list status asc name desc` — Valid, sorted by `status` in ascending order
 
-> ⚠️ Applications are originally sorted in  a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
+> 💡 Upper case and lower case name are consider as same ranking (i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order).
 
-> ❗ Sorting will not apply to newly added or newly edited applications. Please re-run the `list` command with the respective parameters to sort as per you like.
+> ⚠️ Applications are originally sorted in a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
+
+#### List all applications (without sorting)
+
+The `list` command also works without parameters. It will show the list in the last sorted order used by the user. This is used after using the `find` feature to list out all applications.
+
+Example:
+* `list`
+
+```
+Listed all application(s).
+```
+
+> 💡 `list` command without parameters only works if and only if you do not provide parameters.
+
+> ❗ Sorting will not apply to newly added or newly edited applications. Please re-run the `list` command with the respective parameters to sort as you like.
 
 
 [Go To TOC](#table-of-contents)
@@ -491,6 +513,12 @@ Option 2: If you are looking to keep the existing application and it's informati
 **Q**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
 **A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
 For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
+
+**Q**: Why am I unable to use the `idt/` command to add the interview date when I add an application?
+**A**: The `idt/` is excluded from the `add` command specifically to prevent possible user mistake(s). You should add an application before apply it. Hence, at the point of time when adding the application, you will not have recieve an interview slot.
+
+**Q**: How can I retrieve the original(created date and time) sorting order?
+**A**: Unfortunately due to the current limitations of our application, you will not be able to sort by the application by the create date and time. This means that once you have use the sorting feature, the original order will be lost forever. 
 
 [Go To TOC](#table-of-contents)
 
