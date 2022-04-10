@@ -39,11 +39,11 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide: 
-    * Updated documentation for list function to include sorting function and interview date field. [#89](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/89), [#197](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/197), [#215](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/215)
+    * Updated documentation for list function to include sorting function and interview date field. [#89](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/89), [#197](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/197), [#215](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/215), [#224](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/224)
 
   * Developer Guide:
     * Updated documentation for the architecture section. [#215](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/215)
-    * Added documentation on the implementation of the sorting feature and interview date field. [#113](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/113), [#215](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/215)
+    * Added documentation on the implementation of the sorting feature and interview date field. [#113](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/113), [#215](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/215), [#224](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/224)
 
 * **Community**:
   * PRs reviewed. See [PRs reviewed](https://github.com/AY2122S2-CS2103T-T11-3/tp/issues?q=reviewed-by%3Alaughingkid-sg) and [comments on PRs](https://nus-cs2103-ay2122s2.github.io/dashboards/contents/tp-comments.html#195-goh-teck-laughingkid-sg-6-comments).
