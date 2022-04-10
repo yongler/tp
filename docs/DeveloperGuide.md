@@ -1046,37 +1046,61 @@ The following examples are tested on a list containing 1 or more applications.
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
    
-   2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
+   2. Test case: `edit 1 t/removetags`
    
-   3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
+   Expected: Only the `Tag` of the application is removed.
    
-   4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
+   3. Test case: `edit 1 t/removepriority`
    
-   5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   Expected: Only the `PriorityTag` of the application is removed.
    
-   6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   4. Test case: `edit 1 t/removestatus`
    
-   7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   Expected: Only the `ApplicationStatusTag` of the application is removed.
    
-   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
+   5. Test case: `edit 1 t/removetags t/removepriority`
+   
+   Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   
+   6. Test case: `edit 1 t/removetags t/removestatus`
+   
+   Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
+   7. Test case: `edit 1 t/removepriority t/removestatus`
+   
+   Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
+   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`
+   
+   Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
 
 2. Two applications with different `Tag`
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
    
-   2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
+   2. Test case: `edit 2 t/removetags`
+   
+   Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
 
 3. A Single application, trying to edit and remove different Tags at the same time
    
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
    
-   2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
+   2. Test case: `edit t/removetags pt/high ast/applied`
    
-   3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
    
-   4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   3. Test case: `edit t/removepriority t/test`
    
-   5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
+   Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   
+   4. Test case: `edit t/removepriority pt/high`
+   
+   Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   
+   5. Test case: `edit t/removestatus ast/applied`
+   
+   Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
 ### Example: Finding an application
 
@@ -1085,12 +1109,15 @@ The following examples are tested on a list containing 1 or more applications.
     1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
     2. Test case: `find pt/high`<br>
+       
        Expected: All applications in the list with a high priority tag will be shown. Details of the number of results will be shown in the status message.
 
     3. Test case: `find pt/notaprioritytag`<br>
+       
        Expected: No changes. Error details shown in the status message that the keywords is incorrect for searching `PriorityTag`.
 
     4. Other incorrect find commands to try: `find`, `find high` (without the `pt`), `find n/`(empty keyword) <br>
+       
        Expected: Respective error details shown in the status message
    
 ### Saving data
