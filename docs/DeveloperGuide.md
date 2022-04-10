@@ -157,7 +157,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="700" />
 
 
 The `Model` component,
@@ -604,91 +604,6 @@ Step 3. The user sees all and only the applications that have the `HIGH` priorit
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-[Go To TOC](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -822,7 +737,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. It is recommended to have the UserGuide open while doing manual testing.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -846,7 +761,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Testing features
+### General Guideline for testing features
 
 1. Features with one input
 
@@ -888,25 +803,26 @@ the steps are general enough to be used to test other commands that accept multi
          Test input: `edit 1 n/new name n/actual name` <br>
          Expected output: error message detailing what went wrong
          Actual output: command executes
-       
-
-3. Summary bar feature
-   
-   The following examples are tested on a list containing 1 or more applications.
-    
-   1. Add application <br>
-      Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
-      Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
-   2. Edit application <br>
-      Assuming application at index 1 is of `LOW` priority. <br>
-      Test input: `edit 1 pt/high` <br>
-      Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
+
+### Example: Summary bar feature
+   
+The following examples are tested on a list containing 1 or more applications.
+    
+1. Add application <br>
+   Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+
+
+2. Edit application <br>
+   Assuming application at index 1 is of `LOW` priority. <br>
+   Test input: `edit 1 pt/high` <br>
+   Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
+
 
 ### Example: Deleting an application
 
@@ -970,3 +886,39 @@ consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.h
 <div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
 [Go To TOC](#table-of-contents)
+
+---
+
+## **Appendix: Effort**
+
+Below is a short summary of the difficulties, challenges faced and achievements of the project
+
+### Difficulty Level
+_Difficulty: `Medium`_
+
+Much of the difficulty of our project stemmed at the start of it. Organizing and deciding on the direction of our project
+as well as dividing and agreeing on our initial work flow was difficult and really strained our teamwork. Once the initial
+phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy  to
+implement.
+
+### Challenges
+
+1. Morphing the project from AB3 was the biggest challenge faced, as most of the file structure and naming would need to be modified.
+One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts
+2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing
+any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features
+behaving incorrectly. However, once we were comfortable with the codebase, adding features was smooth and easy.
+3. Collaborating with a team of 5 people that had not met before, was challenging at the start, as the team dynamic was not established yet.
+this contributed to the initial challenge of deciding on the project direction and work flow.
+
+### Effort Required
+
+1. Meeting every sunday 10am, to discuss on the weeks agenda and overall progress of the project.
+Meetings were increased to twice a week during busy periods such as near the end of V1.3 and V1.4, to ensure that we were
+meeting the requirements for the submission.
+2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond
+and implement bug fixes and changes raised by the group
+
+### Achievements of the Project
+
+Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project 
