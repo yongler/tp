@@ -2,17 +2,13 @@
 layout: page
 title: Lee Yong Ler's Project Portfolio Page
 ---
-
 ### Project: SoC InternApply
-
 SoC InternApply - SoC InternApply helps CS students to track internship applications they are interested in. It is optimised for users who prefer CLI and have a lot of company applications and their associated tasks to keep track of. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
 **Code contributed**: 
 [Link to my code contribution](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=yongler&breakdown=true)
-
-
 
 **Enhancements to existing features**:
 1. Extension of normal `Tag` to `PriorityTag` and `ApplicationStatusTag`. This aids in adding more information for the applications.
@@ -25,6 +21,8 @@ Given below are my contributions to the project.
 - Most of the changes is in `FindCommandParser.java` , `StringUtil.java` and `FindCommand.java`.
 - The feature is complete in a way that it offers users great flexibility in filtering applications based on the important criteria.
 - Initially it was hard to implement as the mechanism of the original `Find` command was hard to trace, I looked through the code all the way to `LogicManager`. After understanding it, I had to code additional checks for the parser since it is different based on the ones used in the `Add` command.
+
+<div style="page-break-after: always;"></div>
 
 **Contributions to the UG**:
 - `Add` command for the new `PriorityTag` and `ApplicationStatusTag`.
