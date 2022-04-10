@@ -469,6 +469,9 @@ SoC InternApply data are saved in the hard disk automatically after any command 
 
 The summary bar is automatically updated on successful execution of any command. 
 
+Example summary bar (highlighted in red):
+![SummaryBarExample](images/SummaryBarUI.png)
+
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
