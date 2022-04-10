@@ -5,8 +5,6 @@ title: Goh Zheng Teck's Project Portfolio Page
 
 ### Project: SoC InternApply
 
-`to be added soon`
-
 SoC InternApply - SoC InternApply helps CS students to track internship applications they are interested in. It is optimised for users who prefer CLI and have a lot of company applications and their associated tasks to keep track of. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -25,7 +23,7 @@ Given below are my contributions to the project.
   * Build test cases for sorting function and interview dates field. [#90](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/90), [#199](https://github.com/AY2122S2-CS2103T-T11-3/tp/pull/199)
 
 * **Project management**:
-  * Managed releases `v1.2` - `v1.3` (2 releases) on GitHub. See [releases](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
+  * Managed releases `v1.2` - `v1.3` and `v1.4` (3 releases) on GitHub. See [releases](https://github.com/AY2122S2-CS2103T-T11-3/tp/releases).
   * Setup weekly zoom meetings and set the agenda of meetings.
   * Frequently clarified minor details such as implementation and raise possible conflicts.
   * Suggested standards for naming and documentation details for branching, issues and pull requests. 
