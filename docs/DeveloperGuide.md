@@ -598,7 +598,9 @@ More details of how the classes are implemented as follows:
 
 Given below is an example usage scenario and how the find command behaves at each step when a user types in `find n/shopee`
 
-![Interactions Inside the Logic Component for the `find n/shopee` Command](images/FindSequenceDiagram.png)
+<img src="images/FindSequenceDiagram.png" width="900" />
+
+[//]: # (![Interactions Inside the Logic Component for the `find n/shopee` Command]&#40;images/FindSequenceDiagram.png&#41;)
 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
