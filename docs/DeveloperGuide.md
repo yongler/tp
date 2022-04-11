@@ -421,7 +421,7 @@ Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/
 
 Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, updating `SummaryList` again.
 
-<img src="images/SummaryBarExampleScenario.PNG" width="700" />
+<img src="images/SummaryBarExampleScenario.png" width="700" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
 
