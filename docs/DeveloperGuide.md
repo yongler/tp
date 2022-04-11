@@ -438,6 +438,9 @@ Step 3. The user executes `edit 1 pt/low` to edit the first applications' priori
     * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `SummaryBox` for `HIGH` priority tag count).
     * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ###  Enhancement of `edit` to allow editing of Priority Tag and Application Status Tag
 
@@ -479,12 +482,11 @@ Step 9. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED"
 Step 10. `editedApplication` will then replace the 1st `Application` in the list of applications.
 
 The following sequence diagram shows how the edit operation works:
-<img src="images/EditPTSequenceDiagram.png" width="700" />
+<img src="images/EditPTSequenceDiagram.png" width="1200" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
 
 #### Design considerations:
 
