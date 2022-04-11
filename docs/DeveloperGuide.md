@@ -15,7 +15,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Introduction**
 
-This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SOC students` who are applying for internships and are looking to keep track of all their `applications`.
+This project is adapted from `AddressBook3` and makes use of a few of its features. `SoC InternApply` is a project intended for `SoC students` who are applying for internships and are looking to keep track of all their `applications`.
 
 ### This developer guide is intended for users who:
 - Want to `develop` this project further
@@ -28,19 +28,21 @@ to your own `github` repository for referencing.
 
 - Users who want to develop the project further
 
-1. You can start with reading through the implementation of the features to get familiar with the code base.
+  1. You can start with reading through the implementation of the features to get familiar with the code base.
 
-2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
-3. You can alternatively help in cleaning up the code base by spotting
-bugs and raising them as issues to our team repository. 
+  2. After which you can look into any proposed implementations and start coding your own proposed implementation of it, or read through the  user stories to come up with any features that you believe would be useful.
 
-4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
+  3. You can alternatively help in cleaning up the code base by spotting
+  bugs and raising them as issues to our team repository. 
+
+  4. If you have your own proposed implementation, you can make a pull request to our team repository with a summary of the changes made.
 
 
 - Users who want to adapt this project or are interested in the features
 
-1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
-2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
+  1. You can start with reading through the implementation of the features and looking at the architecture design to get a better understanding of the code base.
+
+  2. You can then move on to adapting the codebase by removing all references to InternApply and modifying methods to suit your needs.
 
 [Go To TOC](#table-of-contents)
 
@@ -48,6 +50,8 @@ bugs and raising them as issues to our team repository.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **SoC**: School of Computing
+* **SIA**: SoC InternApply
 
 [Go To TOC](#table-of-contents)
 
@@ -78,7 +82,7 @@ A quick overview of the main components and how they interact with each other is
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -113,13 +117,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -169,12 +173,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the InternApply data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
+* stores SoC InternApply's data i.e., all `Application` objects (which are contained in a `UniqueApplicationList` object).
 * stores the currently 'selected' `Application` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a filtered list of `Application` objects (e.g., applications with upcoming `InterviewSlot`) as a separate _upcoming_ list which is exposed to outsiders as an unmodifiable `ObservableList<Application>` that can be 'observed'.
 * stores a `SummaryList` object that contains a list of `SummaryBox` objects which is exposed to the outsiders as an unmodifiable `ObservableList<SummaryBox>` that can be 'observed'.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 [Go To TOC](#table-of-contents)
@@ -243,8 +247,10 @@ newline in the details field
 Sequence Diagram illustrating interaction with `Logic` components for `execute("edit 1 d/Line 1 \nLine 2")`:
 ![Interactions Inside the Logic Component for the `edit 1 d/Line 1 \nLine 2` Command](images/EditCommandDetailsDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-**Note2:** The sequence diagram is similar to the delete command, due to InternApply using the command design pattern
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note1:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. <br>
+**Note2:** The sequence diagram is similar to the delete command, due to SoC InternApply using the command design pattern
 </div>
 
 ##### UI
@@ -319,14 +325,12 @@ The following comparators are implemented:
   - `Status` tags are sorted by ascending order by default as per enum value in `ApplicationStatusTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
-    2. NOT_APPLIED
-    3. APPLIED
-    4. INTERVIEWED
-    5. REJECTED
-    6. ACCEPTED
-    ```
+    1. ACCEPTED
+    2. REJECTED
+    3. INTERVIEWED
+    4. APPLIED
+    5. NOT_APPLIED
+    6. (Empty Tag)
 </details>
     
 - InterviewSlotComparator
@@ -343,12 +347,10 @@ The following comparators are implemented:
   - `Priority` tags are sorted by ascending order by default as per enum value in `PriorityTagType`
     <details><summary><b>Click to view ordering</b></summary>
     
-    ```
-    1. <empty_tag>
+    1. (Empty Tag)
     2. LOW
-    3. MEDIUM
+    3. MEDIU
     4. HIGH
-    ```
 > 💡 If applications have the same value for the compared field, the comparator will use the `NameComparator` as a tie break to order the applications. This applies to all comparators except for `NameComparator`.
 
 #### Usage 
@@ -362,8 +364,12 @@ Step 3. The user uses the `list` command without parameters to make all applicat
         
 ##### 2. `list` command with parameters 
 Step 1. The user launches the application. All internship applications are shown by default.<br><br>
-Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list interview asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
+Step 2. The user uses the `list` command with field and order by to sort applications. i.e. `list name asc`. The `list` command then calls `model#sortApplications()`, causing the `UniqueApplicationList` to sort its `internalList`. In addition, the `list` command calls `model#updateFilteredApplicationList()` to display all applications. <br><br>
 Step 3. The user sees all applications sorted in the given specified order. <br>
+
+Below is a Sequence Diagram illustrating interaction with Logic components for `execute("list name asc")`:
+
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
         
 #### Design considerations 
 <b>Aspect: How the sorting feature called:</b>
@@ -415,7 +421,7 @@ Step 2. The user executes `add n/Shopee j/Software Engineer Intern p/87438807 e/
 
 Step 3. The user executes `edit 1 pt/low` to edit the first applications' priority tag to `LOW`. The edit command calls `Model#updateSummaryBar()`, updating `SummaryList` again.
 
-<img src="images/SummaryBarExampleScenario.PNG" width="600" />
+<img src="images/SummaryBarExampleScenario.PNG" width="700" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateSummaryBar()`, so the summary bar will not be updated.
 
@@ -432,6 +438,9 @@ Step 3. The user executes `edit 1 pt/low` to edit the first applications' priori
     * Pros: Will use less computing (e.g. for `edit pt/HIGH`, just update the `SummaryBox` for `HIGH` priority tag count).
     * Cons: We must ensure that the implementation of each individual command is correct, harder to implement.
 
+[Go To TOC](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ###  Enhancement of `edit` to allow editing of Priority Tag and Application Status Tag
 
@@ -473,12 +482,11 @@ Step 9. A Tag Set containing `Tag` "Singapore", `ApplicationStatusTag` "APPLIED"
 Step 10. `editedApplication` will then replace the 1st `Application` in the list of applications.
 
 The following sequence diagram shows how the edit operation works:
-![EditPTSequenceDiagram](images/EditPTSequenceDiagram.png)
+<img src="images/EditPTSequenceDiagram.png" width="2000" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
-
 
 #### Design considerations:
 
@@ -506,7 +514,7 @@ The reminder mechanism is similar to the implementation of the existing `help` c
 A separate application list `UpcomingApplicationList` is being maintained in the `LogicManager`.<br>
 In addition, the `ModelManager` implements a new method `updateUpcomingApplicationList` that will cause the list to be updated. <br> 
 `InternApplyParser` facilitates this command by now checking for the keyword `reminder`<br>
-`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when InternApply is first launched.
+`MainWindow` facilitates this feature by handling the opening of the `ReminderWindow` and also supports the initial opening of the `ReminderWindow` when SoC InternApply is first launched.
 
 Methods that were implemented in existing classes:
 * `Logic#getApplicationList()` — Method that gets the `UpcomingApplicationList` to populate the `ReminderWindow`
@@ -523,7 +531,7 @@ Methods that were implemented in existing classes:
 * `InterviewSlot#isUpcoming()` — Method that checks if the `InterviewSlot` is within a week of the local devices date and time.
 * `InterviewSlot#getInterviewSlot()` — Method that returns the `InterviewSlot` as a `LocalDateTime`
 * `MainWindow#handleReminder()` — Method that gets called if this feature is called by the user. It triggers the opening of the `ReminderWindow`
-* `MainWindow#init()` — Method that handles any method that needs to be called when the InternApply first launches. Currently, the `reminder` command will get executed.
+* `MainWindow#init()` — Method that handles any method that needs to be called when SoC InternApply first launches. Currently, the `reminder` command will get executed.
 
 Existing classes that were modified:
 * `CommandResult` — Constructor has been modified to include `showReminder` as a required parameter. For all other `Command` types, the default value of `showReminder` is set to `false`
@@ -583,7 +591,7 @@ The usage of the `find` command will be facilitated by using a newly implemented
 
 Classes to be implemented are as follows:
 
-<img src="images/FindClassDiagram.png" width="550" />
+<img src="images/FindClassDiagram.png" width="650" />
 
 
 More details of how the classes are implemented as follows:  
@@ -682,7 +690,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user     | Learn what is the skillset and/or knowledge expected of a CS intern | I can plan my learning to be a capable intern                                  |
 | `*`      | user     | maintain a journal of my internship                                 | Users who are curious can read and get an idea of what the internship is like  |
 
-
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -696,6 +703,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User adds a specific internship application with details e.g. company name, status, job title etc.
+
 2. SoC InternApply adds the internship application into the existing list
 
     Use case ends.
@@ -707,6 +715,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. SoC InternApply shows an error message.
 
       Use case resumes at step 2.
+    
 ---
     
 **Use case: Clearing all internship application**
@@ -714,6 +723,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User clears all internship application.
+
 2. SoC InternApply clears all internship application.
 
    Use case ends.
@@ -725,13 +735,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 ---
+
 **Use case: Delete an internship application**
 
 **MSS**
 
 1.  User requests to list internship applications
+
 2.  SoC InternApply shows a list of internship applications
+
 3.  User requests to delete a specific internship application in the list
+
 4.  SoC InternApply deletes the internship applications
 
     Use case ends.
@@ -745,51 +759,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. SoC InternApply shows an error message.
+    
+      Use case resumes at step 3.
 
-      Use case resumes at step 2.
 ---
+
 **Use case: Edit an internship application**
 
 **MSS**
 
-1. User requests to edit a specific internship application in the list with the new data to edit.
-2. SoC InternApply edits the application and shows the new list containing the edited application.
+1. User requests to list internship applications
+
+2. SoC InternApply shows a list of internship applications
+
+3. User requests to edit a specific internship application in the list
+
+4. User inputs a chain of changes
+
+5. SoC InternApply edits the internship applications with the provided inputs
 
    Use case ends.
 
 **Extensions**
 
-* 1a. No internship applications available.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 1b. The given index is invalid.
+* 3a. The given index is invalid.
 
-  * 1b1. SoC InternApply shows an error message.
+  * 3a1. SoC InternApply shows an error message.
 
-    Use case resumes at step 1.
+    Use case resumes at step 3.
 
-* 1c. The given command format is invalid.
-
-  * 1c1. SoC InternApply shows an error message.
-
-    Use case resumes at step 1.
-  
 ---
+
 **Use case: Exit the app**
 
 **MSS**
 
 1. User exits the app.
-2. SIA saves all changes and closes all windows. 
 
-   Use case ends.
+2. SIA saves all changes and closes all windows. <br>Use case ends.
+
 ---
+
 **Use case: Finding internship application(s)**
 
 **MSS**
 
 1. User requests to find internship applications based on either its name, job title or tags.
+
 2. SoC InternApply shows a list of internship applications with the field matching any of the keywords
 
    Use case ends.
@@ -808,68 +828,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-* 2a. No internship applications suit the criteria 
-    * 2a1. SoC InternApply tells users there are currently no such internship applications.
+* 2a. No internship applications suit the criteria
   
-    Use case ends.
+  * 2a1. SoC InternApply tells users there are currently no such internship applications.<br>Use case ends.
+
 ---
+
 **Use case: Seeking help about commands usages in the app**
 
 **MSS**
 
 1. User seeks help from the app.
+
 2. SIA shows a help page or user guide to the user.
 
    Use case ends.
 
 ---
+
 **Use case: List all internship application without any sorting**
 
 **MSS**
 
 1. User requests to list internship applications
-2. SoC InternApply shows a list of internship applications based on the previous sorting method.
 
-   Use case ends.
+2. SoC InternApply shows a list of internship applications based on the previous sorting method. <br>Use case ends.
 
 **Extensions**
+
 * 2a. The list is empty
-    * 2a1. SoC InternApply shows a blank list.
-      Use case ends.
+
+    * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
 
 ---
+
 **Use case: List all internship application with sorting**
 
 **MSS**
 
 1. User requests to list internship applications with sorting criteria.
-2. SoC InternApply shows a list of internship applications based on the sorting criteria.
 
-   Use case ends.
+2. SoC InternApply shows a list of internship applications based on the sorting criteria. <br>Use case ends.
 
 **Extensions**
+
 * 2a. The list is empty
-  * 2a1. SoC InternApply shows a blank list.
-    Use case ends.
 
-
+  * 2a1. SoC InternApply shows a blank list. <br>Use case ends.
+  
 ---
+
 **Use case: Getting reminder manually of all internship application with interviews coming soon**
 
 **MSS**
 
 1. User requests to list internship applications with interviews coming soon
+
 2. SoC InternApply shows a list of internship applications with interviews that are within 1 week from now.
 
    Use case ends.
 
 **Extensions**
+
 * 2a. No internship applications with interviews that are within 1 week from now.
-    * 2a1. SoC InternApply tells users there are currently no such internship applications.
-  
-    Use case ends.
 
-
+    * 2a1. SoC InternApply shows an empty application list. <br>Use case ends.
 
 ---
 ### Non-Functional Requirements
@@ -905,122 +928,237 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-
-
+   
 ### General Guideline for testing features
 
-1. Features with one input
-
-  The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
+1. Features with one input <br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the delete command,
 the steps are general enough to be used to test other commands that accept a single parameter. <br>
+   
    1. Test valid input values
+      
       - E.G. `delete INDEX` <br>
-        Test input: `delete 1` when list has more than 1 application <br>
+        
+        Test case: `delete 1` when list has more than 1 application <br>
+        
         Expected output: Successful execution of the command
+   
    2. Test invalid input values
+      
       - E.G.  `delete INDEX` <br> 
-        Test input: `delete 0` or `delete -10` <br>
+        
+        Test case: `delete 0` or `delete -10` <br>
+        
         Expected output: error message detailing what went wrong
+   
    3. Test invalid command input
+       
        - E.G.  `delete INDEX` <br>
-       Test input: `delet 1` or `delete 2 2` <br>
+       
+       Test case: `delet 1` or `delete 2 2` <br>
+       
        Expected output:  error message detailing what went wrong
    
-2. Feature with multiple parameters
-    
-   The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
+2. Feature with multiple parameters<br>The following examples are tested on a list containing 1 or more applications and is targeted towards testing the edit command,
 the steps are general enough to be used to test other commands that accept multiple parameters.
+
+   1. Test valid input values
    
-   
-   2. Test valid input values
       - E.G. `edit INDEX [Optional parameters]` <br>
-        Test input: `edit 1 n/new name` when list has more than 1 application <br>
+        
+        Test case: `edit 1 n/new name` when list has more than 1 application <br>
+        
         Expected output: Successful change of application 1 name
-   3. Test invalid input values
+   
+   2. Test invalid input values
+   
       - E.G.  `edit INDEX [Optional parameters]` <br>
-        Test input: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        
+        Test case: `edit 0 n/new name` or `edit -10 n/new name` <br>
+        
         Expected output: error message detailing what went wrong
-   4. Test invalid command input
-       - E.G.  `edit INDEX [Optional parameters]` <br>
-         Test input: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
-         Expected output: error message detailing what went wrong
-   5. Test multiple parameter combinations
+   
+   3. Test invalid command input
+      
+      - E.G.  `edit INDEX [Optional parameters]` <br>
+        
+        Test case: `edi 1 n/new name` or `edit 2 2 n/new name` <br>
+        
+        Expected output: error message detailing what went wrong
+   
+   4. Test multiple parameter combinations
+   
        - E.G. `edit INDEX [optional parameters]` <br>
-         Test input: `edit 1 n/new name n/actual name` <br>
+         
+         Test case: `edit 1 n/new name n/actual name` <br>
+         
          Expected output: error message detailing what went wrong
+         
          Actual output: command executes
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Whenever unsure if a behaviour is intended or not,
 consult the [User Guide](https://ay2122s2-cs2103t-t11-3.github.io/tp/UserGuide.html) first. If not documented there, feel free to raise the issue.
 
 </div>
 
-### Example: Summary bar feature
+### Summary bar feature
    
 The following examples are tested on a list containing 1 or more applications.
     
 1. Add application <br>
-   Test input: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
-   Expected output: Summary box for Total Applications, High Priority Applications and Not Applied Applications have one more application and all Summary boxes update the total number of applications. <br>
+   
+   Test case: `add n/Google j/Intern p/65218000 e/google@yahoo.sg a/70 Pasir Panjang Rd t/SoftwareEngineering pt/HIGH ast/NOT_APPLIED` <br>
+   
+   Expected output: Summary box for `Total Applications`, `High Priority Applications` and `Not Applied Applications` have one more application and all summary boxes update the total number of applications. <br>
 
 
 2. Edit application <br>
-   Assuming application at index 1 is of `LOW` priority. <br>
-   Test input: `edit 1 pt/high` <br>
-   Expected output: Summary box for Low Priority Applications decreases by one and Summary box for High Priority Applications increases by one.
+   
+   Prerequisite: Application at index 1 is of `LOW` priority. <br>
+   
+   Test case: `edit 1 pt/high` <br>
+   
+   Expected output: Summary box for `Low Priority Applications` decreases by one and Summary box for `High Priority Applications` increases by one.
 
-
-### Example: Deleting an application
+### Deleting an application
 
 1. Deleting an application while all applications are being shown
 
    1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting an application while reminder window is open
+
    1. Prerequisites: Have the reminder window open using `reminder` and 
    set the first applications interview date to be within the next 7 days.
 
    2. Test case: `delete 1`<br>
+      
       Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
+      
       Application is also deleted from reminder window
 
    3. Test case: `delete 0`<br>
+      
       Expected: No application is deleted. Error details shown in the status message. Status bar remains the same.
       No changes to the reminder window.
 
-### Example: Removal of Tags using `edit`
+### Removal of Tags using `edit`
 
 1. A single application, removal with replacement (no duplicate applications)
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. After each test, add the removed Tags back into the application.
-   2. Test case: `edit 1 t/removetags`<br>Expected: Only the `Tag` of the application is removed.
-   3. Test case: `edit 1 t/removepriority`<br>Expected: Only the `PriorityTag` of the application is removed.
-   4. Test case: `edit 1 t/removestatus`<br>Expected: Only the `ApplicationStatusTag` of the application is removed.
-   5. Test case: `edit 1 t/removetags t/removepriority`<br>Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
-   6. Test case: `edit 1 t/removetags t/removestatus`<br>Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
-   7. Test case: `edit 1 t/removepriority t/removestatus`<br>Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
-   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
+   
+   2. Test case: `edit 1 t/removetags`<br>
+   Expected: Only the `Tag` of the application is removed.
+   
+   3. Test case: `edit 1 t/removepriority`<br>
+   Expected: Only the `PriorityTag` of the application is removed.
+   
+   4. Test case: `edit 1 t/removestatus`<br>
+   Expected: Only the `ApplicationStatusTag` of the application is removed.
+   
+   5. Test case: `edit 1 t/removetags t/removepriority`<br>
+   Expected: Only the `Tag` and `PriorityTag` of the application is removed. (inputs can be in any order)
+   
+   6. Test case: `edit 1 t/removetags t/removestatus`<br>
+   Expected: Only the `Tag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
+   7. Test case: `edit 1 t/removepriority t/removestatus`<br>
+   Expected: Only the `PriorityTag` and `ApplicationStatusTag` of the application is removed. (inputs can be in any order)
+   
+   8. Test case: `edit 1 t/removetags t/removepriority t/removestatus`<br>
+   Expected: All the Tags of the application is removed. This will still work on an application with no Tags but nothing will change. (inputs can be in any order)
 
 2. Two applications with different `Tag`
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add two new application with the same information except application 1 has no `Tag` and application 2 has a `Tag`
-   2. Test case: `edit 2 t/removetags`<br>Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
+   
+   2. Test case: `edit 2 t/removetags`<br>
+   Expected: Error occurs, duplicate application exists. Since application 1 has no `Tag` and has the same information as application 2, removing all the `Tag` from application 2 will make it a duplicate of application 1.
 
 3. A Single application, trying to edit and remove different Tags at the same time
+   
    1. Prerequisite: Use `clear` to delete all applications. Use `add` to add a new application with a `Tag`, `PriorityTag` and `ApplicationStatusTag`. Make sure these Tags are different from what you input for the test cases.
-   2. Test case: `edit t/removetags pt/high ast/applied`<br>Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
-   3. Test case: `edit t/removepriority t/test`<br>Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
-   4. Test case: `edit t/removepriority pt/high`<br>Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
-   5. Test case: `edit t/removestatus ast/applied`<br>Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
+   
+   2. Test case: `edit t/removetags pt/high ast/applied`<br>
+   Expected: All `Tag` are removed. `PriorityTag` and `ApplicationStatusTag` changed to `HIGH` and `APPLIED` respectively.
+   
+   3. Test case: `edit t/removepriority t/test`<br>
+   Expected: All `PriorityTag` are removed. `t/test` is ignored, no changes to `Tag` (`t/removepriority` can be replaced with any of the other 2 special inputs, same behavior is expected)
+   
+   4. Test case: `edit t/removepriority pt/high`<br>
+   Expected: All `PriorityTag` are removed. `pt/high` is ignored, no `PriorityTag` is added.
+   
+   5. Test case: `edit t/removestatus ast/applied`<br>
+   Expected: All `ApplicationStatusTag` are removed. `ast/applied` is ignored, no `ApplicationStatusTag` is added.
 
+
+### Example: Sorting of applications using `list`
+        
+1. Sorting by company `name` field in `ascending` order
+   
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct company `name`. For ease of explanation, we consider that there are only 2 applications named `Alpha` and `Beta`.
+        
+   2. Test case: `list name asc`<br>
+   Expected: The updated order is displayed such that `Alpha` will be the first application and `Beta` will be the second and last item listed. The status message will show `Sorted applications by name order by asc`.<br>
+   
+   3. Test case: `list name asc help`<br>
+   Expected: Similar to `case 2`<br>
+        
+2. Sorting by `Interview Slot` field in `descending` order
+   
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `interview slot`. For ease of explanation, we consider that there are only 2 applications with the following interview slots `10-04-2022 13:00` and `10-05-2022 13:00`.
+        
+   2. Test case: `list interview desc`<br>
+   Expected: The updated order is displayed such as the application with interview slot `10-05-2022 13:00` will be the first application and the interview with the `10-04-2022 13:00` interview slot will be the second and last item listed. The status message will show `Sorted applications by interview order by desc`.<br>
+        
+   3. Test case: `list interview desc name asc`<br>
+      Expected: Similar to `case 2`<br>
+   
+   4. Consider adding an additional application with no interview slot set. There are now 3 applications.<br>
+      Test case: `list interview desc`<br>
+      Expected: The application without an interview slot will now be the first item. The ordering of the 2 original applications remains consistent with the second and third applications. 
+   
+4. Sorting by `Status` tag in `ascending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Status` tag. For ease of explanation, we consider that there are only 2 applications with the following `Status` tag `NOT_APPLIED` and `ACCEPTED`.
+        
+   2. Test case: `list status asc`<br>
+      Expected: The updated order is displayed such as the application with the status `ACCEPTED` will be the first application and the interview with the status `NOT_APPLIED` interview slot will be the second and last item listed. The status message will show `Sorted applications by status order by asc`.<br>
+        
+   3. Consider adding an additional application with no status set. There are now 3 applications.
+      Test case: `list status asc`<br>
+      Expected: The application without status will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+        
+5. Sorting by `Priority` tag in `descending` order
+   1. Prerequisite: There should at least be 2 applications. The applications must have a distinct `Priority` tag. For ease of explanation, we consider that there are only 2 applications with the following `Priority` tag `HIGH` and `LOW`.
+        
+   2. Test case: `list priority desc`<br>
+      Expected: The updated order is displayed such as the application with priority `HIGH` will be the first application and the interview with the priority `LOW` interview slot will be the second and last item listed. The status message will show `Sorted applications by priority order by desc`.
+        
+   3. Consider adding an additional application with no priority set. There are now 3 applications.
+      Test case: `list priority desc`<br>
+      Expected: The application without a priority will now be the last item. The ordering of the 2 original applications remains consistent with the first and second applications. 
+ 
+6. Invalid sort command(s)
+    
+   1. Test case: `list address asc`<br>
+   
+   Expected: Applications remain in current order. The error message is shown in the status message.
+   
+   2. Test case: `list address`<br>
+   
+      Expected: Applications remain in current order. The error message is shown in the status message.
+   
 ### Example: Finding an application
 
 1. Finding an application while all applications are being shown
@@ -1028,24 +1166,40 @@ The following examples are tested on a list containing 1 or more applications.
     1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
 
     2. Test case: `find pt/high`<br>
+       
        Expected: All applications in the list with a high priority tag will be shown. Details of the number of results will be shown in the status message.
 
     3. Test case: `find pt/notaprioritytag`<br>
+       
        Expected: No changes. Error details shown in the status message that the keywords is incorrect for searching `PriorityTag`.
 
     4. Other incorrect find commands to try: `find`, `find high` (without the `pt`), `find n/`(empty keyword) <br>
+       
        Expected: Respective error details shown in the status message
    
+
 ### Saving data
 
 1. Dealing with missing data files
 
-   1. Delete the json file under the data folder.
-   2. Open SIA again and see that it will load the internship applications based on sample data.
+   1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Open the file in any text editor, delete the contents and input a string of characters e.g., `This file is corrupted.`
+   
+   2. Test case: Launch SoC InternApply. The list of applications should be empty and SoC InternApply still functions normally to valid inputs.
 
+2. Making changes to the data files using any text editor
+   
+   1. Prerequisite: Locate the `internapply.json` file in the `data` folder. Delete the file. Launch SoC InternApply. The set of sample applications should be loaded up. Close SoC InternApply.
+   
+   2. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes are valid in accordance to input constraints. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. The changes made should be reflected in the application list.
+   
+   3. Test case: Open the `internapply.json` file. Modify the contents in the file while making sure the changes violate the input constraints e.g., Change the `Name` of the first application from `Shopee` to `-#@$`. Refer to our [User Guide](UserGuide.md) to ensure this part is done correctly. Save the changes made to `internapply.json` and launch SoC InternApply again. There should be no applications listed in the `MainWindow`. All the applications, even those that were not modified, should have been deleted.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** For any bugs found, feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** For any bugs found,
+feel free to raise an issue at our team [repo](https://github.com/AY2122S2-CS2103T-T11-3/tp).
 </div>
+
 [Go To TOC](#table-of-contents)
 
 ---
@@ -1057,29 +1211,30 @@ Below is a short summary of the difficulties, challenges faced and achievements 
 ### Difficulty Level
 _Difficulty: `Medium`_
 
-Much of the difficulty of our project stemmed at the start of it. Organizing and deciding on the direction of our project
-as well as dividing and agreeing on our initial work flow was difficult and really strained our teamwork. Once the initial
-phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy  to
+Much of the difficulty of our project stemmed from its start of it. Organizing and deciding on the direction of our project
+as well as dividing and agreeing on our initial workflow was difficult and really strained our teamwork. Once the initial
+phase of morphing the base project, and its basic fields were done,  the rest of the new features were relatively easy to
 implement.
 
 ### Challenges
 
 1. Morphing the project from AB3 was the biggest challenge faced, as most of the file structure and naming would need to be modified.
-One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts
-2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing
-any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features
+One person would have had to handle the morphing first, so that the others could pull and implement their changes, to avoid handling multiple merge conflicts.
+2. Initially, familiarizing ourselves with the codebase was a large hurdle we needed to overcome before we could start implementing.
+any new features. There were many instances initially where making one change would result in multiple test cases failing or certain features.
 behaving incorrectly. However, once we were comfortable with the codebase, adding features was smooth and easy.
 3. Collaborating with a team of 5 people that had not met before, was challenging at the start, as the team dynamic was not established yet.
-this contributed to the initial challenge of deciding on the project direction and work flow.
+this contributed to the initial challenge of deciding on the project direction and workflow.
 
 ### Effort Required
 
-1. Meeting every sunday 10am, to discuss on the weeks agenda and overall progress of the project.
+1. Meeting every Sunday 10 am, to discuss the week's agenda and overall progress of the project.
 Meetings were increased to twice a week during busy periods such as near the end of V1.3 and V1.4, to ensure that we were
 meeting the requirements for the submission.
-2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond
-and implement bug fixes and changes raised by the group
+2. Setting aside time every week to code and implement new features agreed on and staying available throughout the week to respond and implement bug fixes and changes raised by the group.
 
 ### Achievements of the Project
 
-Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project 
+Brownfield project completed in a team of 5, completed within 6 weeks during the semester, morphing of an existing project instead of creating a new one or extending an old project.
+    
+[Go To TOC](#table-of-contents)

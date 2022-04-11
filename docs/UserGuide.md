@@ -111,7 +111,7 @@ Edit at your own risk of losing data.
 * Ordering of optional tags do not matter.
   e.g. `tag1`, `tag2`, `tag3` is considered the same as `tag3`, `tag1`, `tag2`.
 
-* Refer to FAQ for adding multiple applications to the same job.
+* Refer to Q4 in the [FAQ](#faq) for adding multiple applications to the same job.
 
 </div>
 
@@ -392,10 +392,10 @@ Sorts the list of all applications in SoC InternApply based on the provided para
 Sorting parameters:
 - `name` : Sort by name of the company in alphabetical order starting with A in ascending order.
 - `interview` : Sort by interview date of applications starting with the latest earliest date.
-- `priority` : Sort by priority in the following ascending order - <NO_TAG>, LOW, MEDIUM, HIGH.
-- `status` : Sort by status in the following ascending order - <NO_TAG>, ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED.
+- `priority` : Sort by priority in the following ascending order - (NO_TAG), LOW, MEDIUM, HIGH.
+- `status` : Sort by status in the following ascending order - ACCEPTED, REJECTED, INTERVIEWED, APPLIED and NOT_APPLIED, (NO_TAG).
 
-* If optional fields (i.e. interview date and time, priority, status) do not exist in that certain application, that application will be considered at the bottom of the sorting order. If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
+* If there is more than one application have similar fields, the company `name` of the application will be used as tiebreak to sort alphabetically (i.e. Application 1 with company name `AAA` and `HIGH` priority and Application 2 with company name `BBB` and `HIGH` priority are sorted by priority in ascending order — Application 1 will be ranked higher than Application 2).
 
 Order by:
 - `asc` : Order by ascending.
@@ -409,14 +409,31 @@ Examples:
 Sorted applications by name order by desc.
 ```
 
-> 💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.
-> - `list status desc` — Valid, sorted by `status` in descending order
-> - `list abc status asc` — Invalid
-> - `list status asc name desc` — Valid, sorted by `status` in ascending order
+<div markdown="block" class="alert alert-info">
 
-> 💡 Upper case and lower case name are consider as same ranking (i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order).
+**💡 `list` command with parameters only considers the first two parameters if and only if the first two parameters are valid.**<br>
 
-> ⚠️ Applications are originally sorted in a chronological order base on create date and time. Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.
+- `list status desc` — Valid, sorted by `status` in descending order
+- `list abc status asc` — Invalid
+- `list status asc name desc` — Valid, sorted by `status` in ascending order
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**💡 Upper case and lower case name are consider as same ranking.**
+
+i.e. Application 1 with company name `aaa` will be ranked above Application 2 with company name `BBB` when sorted by `name` in ascending order.<br>
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**⚠️ Applications are originally sorted in a chronological order base on create date and time.**
+
+Do take note that after using the `list` feature to sort, you will not be able to sort the applications in chronological order.<br>
+
+</div>
 
 #### List all applications (without sorting)
 
@@ -429,10 +446,19 @@ Example:
 Listed all application(s).
 ```
 
-> 💡 `list` command without parameters only works if and only if you do not provide parameters.
+<div markdown="block" class="alert alert-info">
 
-> ❗ Sorting will not apply to newly added or newly edited applications. Please re-run the `list` command with the respective parameters to sort as you like.
+**💡 `list` command without parameters only works if and only if you do not provide parameters.**<br>
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**❗ Sorting will not apply to newly added or newly edited applications.**
+
+Please re-run the `list` command with the respective parameters to sort as you like.<br>
+
+</div>
 
 [Go To TOC](#table-of-contents)
 
@@ -450,7 +476,8 @@ Shows a list of applications with upcoming interviews, falling within a week fro
 
 **Expected outcome:**
 
-A new window pops up, showing a list of applications with upcoming interviews within a week from now.
+A popup window showing a list of applications with upcoming interviews within a week from now, as shown below.
+![Ui](images/ReminderWindowUi.png)
 
 [Go To TOC](#table-of-contents)
 
@@ -458,7 +485,7 @@ A new window pops up, showing a list of applications with upcoming interviews wi
 
 ### Saving the data
 
-InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SoC InternApply data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Go To TOC](#table-of-contents)
 
@@ -468,56 +495,40 @@ InternApply data are saved in the hard disk automatically after any command that
 
 The summary bar is automatically updated on successful execution of any command. 
 
-[Go To TOC](#table-of-contents)
-
----
-
-### Viewing help: `help`
-
-This command displays a message explaining how to access the help page.
-
-**Format:** `help`
-
-**Example usages:**
-
-`help`
-
-**Expected outcome:**
-
-A popup window showing a link to the help page, as shown below.
-![helpMessage](images/helpMessage.png)
+Example summary bar (highlighted in red):
+![SummaryBarExample](images/SummaryBarUI.png)
 
 [Go To TOC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-**Q**: How do I know where my internship applications data is stored?<br>
+**Q1**: How do I know where my internship applications data is stored?<br>
 **A**: Please locate where SoC InternApply is being stored on your computer. You will see a folder named `data` found in the root folder of the application (the folder containing SoC InternApply) Inside the `data` folder, you can find a data file named `internapplymemory.json`, which stores all the applications.
 
-**Q**: How do I transfer my data to another computer?<br>
+**Q2**: How do I transfer my data to another computer?<br>
 **A**: Refer to the 1st QnA to locate the data file. Install the app in the other computer. Copy the contents of the data file of SoC InternApply from your previous computer and paste it in the empty data file of SoC InternApply of the new computer. <br>
 
-**Q**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
+**Q3**: When I run SIA for the first time, I do not see any of the sample application. How can I get the sample applications to appear in SIA? <br>
 **A**: Refer to the 1st QnA to locate the `data` folder. Delete any existing files in the `data` folder and run SoC InternApply again.
 
-**Q**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
+**Q4**: I have an existing application to a company that I applied to where I got rejected and I am trying to reapply to the same company with the exact same details. Since SIA cannot have duplicate applications, what should I do? <br>
 **A**: <br>
 Option 1: Using edit, you can simply reuse the existing application with updated information. <br>
 Option 2: If you are looking to keep the existing application and it's information untouched, then we suggest including an additional "t/NthAttempt" to differentiate your new application and the existing application. This will not violate our duplication clause while also allowing you to keep information on your existing application.
 
-**Q**: How many applications can SIA track?<br>
+**Q5**: How many applications can SIA track?<br>
 **A**: 2147483647 applications can be tracked.
 
-**Q**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
+**Q6**: When I use `find` followed by `edit` sometimes the application that I edited disappears form the main window. Am I doing something wrong?<br>
 **A**: This can happen when you `find` applications with a specific field like `NAME` and then `edit` the `NAME` of an application that you found to something that no longer meets the criteria of the `find` command.<br>
 For example, if you call `find n/Grab` followed by `edit 1 n/Shopee` the 1st application will disappear since it is no longer an application with a `NAME` containing `Grab`
 
-**Q**: Why am I unable to use the `idt/` command to add the interview date when I add an application?
-**A**: The `idt/` is excluded from the `add` command specifically to prevent possible user mistake(s). You should add an application before apply it. Hence, at the point of time when adding the application, you will not have recieve an interview slot.
+**Q7**: Why is the `idt/` not recognised by `add` command?<br>
+**A**: `idt/` is intentionally excluded from the `add` command. More often than not, students who apply for an internship do not receive an interview slot from the get go. Taking this into consideration, we decided that users need not include a valid `InterviewSlot` input just as a placeholder value to `add` new applications.
 
-**Q**: How can I retrieve the original(created date and time) sorting order?
-**A**: Unfortunately due to the current limitations of our application, you will not be able to sort by the application by the create date and time. This means that once you have use the sorting feature, the original order will be lost forever. 
+**Q8**: I just used the `list` command to sort my applications. Is it possible to revert sorting order?<br>
+**A**: Unfortunately due to the current limitations of our application, you will not be able to revert the sorting order after using `list`. This includes the order in which applications were added into SIA so please do your sorting with caution.
 
 [Go To TOC](#table-of-contents)
 
@@ -530,11 +541,11 @@ Action | Format, Examples
 [**Add**](#adding-an-application-add) | `add n/NAME_OF_COMPANY p/PHONE_NUMBER a/ADDRESS j/JOB_TITLE e/EMAIL [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br><br>  e.g., `add n/Singtel j/UIUX Intern p/62527525 e/singtel@sg.com a/Singtel Group Strategic Communications and Brand, 31 Exeter Road, Comcentre #19-00 ast/APPLIED`
 [**Clear**](#clearing-all-applications-clear) | `clear`
 [**Delete**](#deleting-an-application-delete) | `delete INDEX`<br> <br> e.g., `delete 3`
-[**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g, `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`
+[**Edit**](#editing-an-application-edit) | `edit INDEX [n/NAME] [j/JOB_TITLE] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [idt/INTERVIEW_DATE_TIME] [t/TAG]... [pt/PRIORITY_TAG] [ast/APPLICATION_STATUS_TAG]` <br> <br> e.g., `edit 1 n/Grab SG p/65358292 idt/17-03-2022 13:30`<br><br>`edit INDEX [t/removetags] [t/removepriority] [t/removestatus]`<br><br>e.g., `edit 1 t/removetags t/removestatus`
 [**Exit**](#exiting-the-program-exit) | `exit`
 [**Find**](#finding-applications-find) | `find [n/NAME] or find [j/JOB_TITLE] or find [t/TAG]... or find [pt/PRIORITY_TAG] or find [ast/APPLICATION_STATUS_TAG]`<br> <br> e.g., `find n/shopee`
 [**Help**](#viewing-help-help) | `help`
-[**List**](#listing-all-applications-in-a-sorted-manner-list) | `list [sorting paramter] [order by]`
+[**List**](#listing-all-applications-with--without-sorting-list) | `list [sorting paramter] [order by]`
 [**Reminder**](#listing-applications-with-upcoming-interviews-reminder)| `reminder`
 
 [Go To TOC](#table-of-contents)
